@@ -1,0 +1,371 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================
+   CSS Variables (Color & Fonts)
+   ============================ */
+:root {
+  --color-background: rgb(246,244,239);
+  /* --color-highlight: #227a73; */
+   --color-highlight: #c57104;
+  --color-higherlight: #43dacd;
+  --color-accent: #F4A336;
+  --color-white: #ffffff;
+  /* --color-purple: #8C2AA3; */
+  --color-purple: #1ea100;
+  --color-blue: #264BB4;
+  --bg-purple:#2b1031;
+  --bg-dark: #1c1c1c;
+}
+
+/* ============================
+   Base Styles
+   ============================ */
+body {
+  @apply bg-[rgb(246,244,239)] text-black font-sans leading-relaxed text-base antialiased;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  @apply font-serif font-bold leading-tight text-white;
+}
+
+p {
+  @apply text-white text-lg max-w-[720px] mx-auto mb-4 font-normal;
+}
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 15px; /* wider scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(107, 33, 168, 0.6); /* purple thumb */
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  cursor: grab;
+  background-color: rgba(107, 33, 168, 0.9); /* yellow hover */
+}
+/* ============================
+   Hero Section
+   ============================ */
+.hero-section {
+  @apply relative h-screen bg-cover bg-center flex items-center justify-center text-center;
+}
+.section-half-height{
+  @apply h-fit min-h-[50vh];
+}
+
+.hero-section::before {
+  content: '';
+  @apply absolute inset-0 bg-cover bg-center opacity-80;
+}
+
+.hero-content {
+  @apply relative z-10 text-white;
+}
+
+.hero-content h1 {
+  @apply text-[color:var(--color-highlight)];
+}
+
+.hero-content p {
+  @apply text-muted;
+}
+.form_progress-fill {
+    height: 26px;
+    width: 80%;
+      background-image: linear-gradient(
+        to right,
+        var(--color-purple) 0%,
+        var(--color-highlight) 40%,
+        var(--color-purple) 100%
+    );
+    border-radius: 30px;
+    background-size: 200% 100%; /* Bigger than container for scroll effect */
+    background-position: 0% 0%;
+    animation: loading 2.6s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 0% 0%;
+        background-size: 200% 100%;
+    }
+    50% {
+        background-position: -100% 0%;
+        background-size: 220% 100%; /* Expand as it moves */
+    }
+    100% {
+        background-position: -200% 0%; /* Keep moving right */
+        background-size: 200% 100%; /* Reset size for seamless loop */
+    }
+}
+
+.form_progress-bar {
+    background-color: #373B5D;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.form_progress-container {
+    width: 85%;
+    margin-left: auto;
+}
+
+/* ============================
+   Responsive Typography
+   ============================ */
+@media (max-width: 768px) {
+  .hero-title {
+    @apply text-3xl;
+  }
+  .hero-subtitle {
+    @apply text-base;
+  }
+  .btn-gold {
+    @apply px-4 py-2 text-sm;
+  }
+  body {
+    @apply text-sm;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    @apply text-3xl;
+  }
+  .hero-subtitle {
+    @apply text-sm;
+  }
+  .btn-gold {
+    @apply px-3 py-2 text-xs;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-subtitle {
+    @apply text-xs;
+  }
+  .btn-gold {
+    @apply px-2 py-1 text-xs;
+  }
+}
+
+/* ============================
+   Accessibility
+   ============================ */
+.btn-gradient:focus, .btn-gradient:focus-visible {
+  @apply outline outline-2 outline-[color:var(--color-accent)] outline-offset-2;
+}
+
+/* ============================
+   Print Styles
+   ============================ */
+@media print {
+  body {
+    @apply bg-white text-black;
+  }
+  .btn-gold {
+    display: none;
+  }
+  .hero-section {
+    @apply h-auto bg-none;
+  }
+  h1, h2, h3, p {
+    @apply text-black;
+  }
+}
+
+/* ============================
+   Custom Utility Classes
+   ============================ */
+@layer utilities {
+  .person-social-link{
+    @apply inline-block rounded-full focus:outline-none mx-[15px];
+    /* margin-bottom:-5px; */
+  }
+  
+  .bg-gradient-purple-black {
+    background: linear-gradient(to bottom, var(--bg-dark) 60%, var(--bg-purple) 60%, var(--bg-dark) 60%);
+  }
+  .bg-gradient-black-purple {
+    background: linear-gradient(to bottom, black 2%, var(--bg-dark) 80%);
+    /* background: linear-gradient(to top, var(--color-purple) 10%, black 90%); */
+  }
+  .bg-gradient-black-dark {
+    background: linear-gradient(to bottom, var(--bg-dark) 5%, black 100%);
+    /* background: linear-gradient(to top, var(--color-purple) 10%, black 90%); */
+  }
+  .bg-gradient-white-gray {
+    background: linear-gradient(to bottom, white 5%, rgb(220, 220, 220) 100%);
+    /* background: linear-gradient(to top, var(--color-purple) 10%, black 90%); */
+  }
+  .bg-events {
+     background: linear-gradient(to bottom, black 5%, var(--bg-purple) 100%);
+  }
+  .bg-connect {
+     background: linear-gradient(to bottom, var(--bg-purple) 5%, var(--bg-dark) 100%);
+  }
+  .text-muted {
+    @apply text-neutral-500;
+  }
+  .text-muted {
+    @apply text-neutral-500;
+  }
+
+  .text-highlight {
+    color: var(--color-highlight) !important;
+  }
+
+  .text-accent {
+    color: var(--color-accent) !important;
+  }
+
+  .text-white-custom {
+    color: var(--color-white) !important;
+  }
+
+  .text-purple {
+    color: var(--color-purple) !important;
+  }
+
+  .text-blue {
+    color: var(--color-blue) !important;
+  }
+  .btn-gradient {
+    @apply inline-block px-8 py-4  font-bold text-white uppercase tracking-wide rounded-full transition duration-300;
+    /* background-image: linear-gradient(to right, var(--color-purple), var(--color-highlight)); */
+    background-image: linear-gradient(
+        to right,
+        var(--color-purple) 0%,
+        var(--color-highlight) 40%,
+        var(--color-purple) 100%
+    );
+    background-size: calc(200% + 4px) calc(100% + 4px);
+    border:2px solid transparent;
+    outline:2px solid transparent;
+    background-position: 0% 0%;
+    animation: btnunhover 2s ;
+    animation-play-state: paused;
+}
+@keyframes btnunhover {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 0% 0%;
+        /* background-size: 300% 100%; Expand as it moves */
+    }
+}
+@keyframes btnhover {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: -100% 0%;
+        /* background-size: 300% 100%; Expand as it moves */
+    }
+}
+  .btn-gradient-language {
+     background-image: linear-gradient(to right, var(--color-purple), var(--color-highlight));
+    background-size: calc(100% + 4px) calc(100% + 4px);
+    background-position: center;
+    border:2px solid transparent;
+    outline:2px solid transparent;
+  }
+  .nav-btn{
+    outline:none !important;
+    outline-color: transparent !important;
+     border-bottom: 2px solid transparent ;
+     transition: border-color 0.3s ease, margin-top 0.3s ease;
+  }
+  .nav-btn:hover, .nav-btn:focus {
+    border-bottom: 2px solid var(--color-accent) !important;
+  }
+  .nav-btn:focus, .nav-btn:active{
+    border-bottom-width: 5px !important;
+  }
+
+  .btn-gradient:hover {
+      border-color: var(--color-accent);
+      cursor: pointer;
+       animation: btnhover 2s forwards;
+  }
+
+  .btn-gold {
+    @apply inline-block px-6 py-3 text-sm font-bold text-white uppercase tracking-wide rounded-full bg-[color:var(--color-accent)] transition duration-300 hover:bg-[#a87e25];
+  }
+
+  .btn-purple {
+    @apply inline-block px-6 py-3 text-sm font-bold text-white uppercase tracking-wide rounded-full bg-[color:var(--color-purple)] transition duration-300 hover:bg-[color:var(--color-blue)];
+  }
+
+
+  .btn-gold {
+    @apply inline-block px-6 py-3 text-sm font-bold text-white uppercase tracking-wide rounded-full bg-[color:var(--color-accent)] transition duration-300 hover:bg-[#a87e25];
+  }
+
+  .btn-purple {
+    @apply inline-block px-6 py-3 text-sm font-bold text-white uppercase tracking-wide rounded-full bg-[color:var(--color-purple)] transition duration-300 hover:bg-[color:var(--color-blue)];
+  }
+
+  .bg-darkish {
+    @apply bg-black/70;
+  }
+
+  .hero-title {
+    @apply text-4xl sm:text-6xl font-bold leading-tight -tracking-tight;
+  }
+
+  .hero-subtitle {
+    @apply text-base sm:text-lg font-normal text-white opacity-95 mt-6;
+  }
+
+  .hero-highlight {
+    @apply text-[color:var(--color-accent)];
+  }
+  .hero-underline {
+  @apply w-fit mx-auto border-b border-b-[2px] border-b-[var(--color-accent)] pb-1;
+}
+.email-connect{
+  @apply w-fit mx-auto
+}
+  .hero-overlay {
+    @apply absolute inset-0 bg-black/55;
+  }
+
+  .above {
+    @apply relative z-[2];
+  }
+  .bg-selected-totransparent {
+    background-image: transparent !important;
+    background: transparent !important;
+  }
+  .bg-language-hover {
+    border: 2px solid var(--color-accent) !important;
+  }
+  .bg-claim-hover {
+    border: 2px solid var(--color-accent) !important;
+    color: var(--bg-purple) !important;
+    cursor: pointer;
+  }
+  .event-date{
+    @apply text-[color:var(--color-accent)] font-semibold w-[200px] text-left;
+  }
+  /* .event-register{
+    @apply ml-auto
+  } */
+  .event-title{
+    @apply w-auto min-w-[300px] flex flex-col text-left;
+  }
+} 
