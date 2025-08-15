@@ -228,14 +228,20 @@ export function UpgradeCTAModal({
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
           >
             <div className="flex items-start justify-between">
-              <h2 className="text-2xl font-bold">{headline}</h2>
+              
+              <div className="form_progress-container">
+              <div className="form_progress-bar bg-gradient-purple-black">
+                  <div className="form_progress-fill form_progress-fill-2"></div>
+                </div>
+              </div>
               <button
                 onClick={onClose}
-                className="rounded-xl px-3 py-1 text-sm text-gray-600 hover:bg-gray-100"
+                 className={`rounded-xl px-3 py-1 text-sm text-gray-600 hover:bg-gray-100`}
               >
                 ✕
               </button>
             </div>
+            <h4 className="text-4xl font-bold text-black text-center flex-1 mt-4 mb-8" >{headline}</h4>
             <p className="mt-1 text-gray-600">
               You’ve got the free pack. Ready to go deeper and get results faster?
             </p>

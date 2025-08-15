@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { Check, Crown, Shield, Zap } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Check, Crown, Shield, X, Mail, Zap } from "lucide-react";
 
 export type Plan = {
   name: string;
@@ -22,7 +22,7 @@ type Props = {
   plans?: Plan[];
   /** Called when user clicks a plan CTA. */
   onSelect?: (planName: string) => void;
-  /** CTA target. You can also handle onSelect to open a modal/checkout. */
+  /** CTA fallback href if modal disabled. */
   ctaHref?: string;
   /** Show the Add‑Ons section */
   showAddOns?: boolean;
@@ -32,6 +32,10 @@ type Props = {
   heading?: string;
   /** Optional subheading override */
   subheading?: string;
+  /** Enable built‑in contact modal on CTA (default: true) */
+  enableContactModal?: boolean;
+  /** Optional endpoint to POST contact submissions as JSON */
+  contactEndpoint?: string; // e.g. "/api/contact"
 };
 
 const defaultPlans: Plan[] = [
@@ -86,10 +90,13 @@ const defaultAddOns: AddOn[] = [
 ];
 
 /**
- * PricingPlans — A polished, responsive pricing section for Next.js + Tailwind.
+ * PricingPlans — Next.js + TypeScript + Tailwind pricing with a built‑in CTA Contact modal.
  *
- * Usage:
- *   <PricingPlans onSelect={(name) => console.log(name)} ctaHref="/contact" />
+ * Usage (default modal enabled):
+ *   <PricingPlans contactEndpoint="/api/contact" />
+ *
+ * If you want to intercept the CTA click too:
+ *   <PricingPlans onSelect={(name) => console.log(name)} />
  */
 export default function PricingPlans({
   plans = defaultPlans,
@@ -99,7 +106,25 @@ export default function PricingPlans({
   showAddOns = true,
   heading = "Website Care & Growth Plans",
   subheading = "Keep your website fast, secure, and working for your business — every month.",
+  enableContactModal = true,
+  contactEndpoint,
 }: Props) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+
+  const handleCta = (planName: string) => {
+    // Let consumers hook in.
+    onSelect?.(planName);
+
+    if (enableContactModal) {
+      setSelectedPlan(planName);
+      setIsOpen(true);
+    } else if (ctaHref) {
+      // Fallback: navigate to CTA href
+      window.location.href = ctaHref;
+    }
+  };
+
   return (
     <section className="relative w-full py-16 sm:py-20">
       {/* Subtle gradient background */}
@@ -116,12 +141,7 @@ export default function PricingPlans({
         {/* Plans grid */}
         <div className="mt-10 grid gap-6 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
           {plans.map((plan) => (
-            <PlanCard
-              key={plan.name}
-              plan={plan}
-              ctaHref={ctaHref}
-              onSelect={onSelect}
-            />
+            <PlanCard key={plan.name} plan={plan} onCta={handleCta} />
           ))}
         </div>
 
@@ -146,19 +166,19 @@ export default function PricingPlans({
           </div>
         )}
       </div>
+
+      {/* Contact Modal */}
+      <ContactModal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        plan={selectedPlan}
+        endpoint={contactEndpoint}
+      />
     </section>
   );
 }
 
-function PlanCard({
-  plan,
-  ctaHref,
-  onSelect,
-}: {
-  plan: Plan;
-  ctaHref: string;
-  onSelect?: (planName: string) => void;
-}) {
+function PlanCard({ plan, onCta }: { plan: Plan; onCta: (planName: string) => void }) {
   const Icon = plan.highlight ? Crown : plan.name.includes("Essential") ? Shield : Zap;
   const ring = plan.highlight
     ? "ring-2 ring-violet-600/70 dark:ring-violet-400/70"
@@ -183,9 +203,7 @@ function PlanCard({
 
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50">
-            {plan.name}
-          </h3>
+          <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50">{plan.name}</h3>
           <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-300">{plan.tagline}</p>
         </div>
         <div className="shrink-0 rounded-full bg-neutral-100 p-2 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
@@ -194,9 +212,7 @@ function PlanCard({
       </div>
 
       <div className="mt-4 flex items-baseline gap-2">
-        <span className="text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50">
-          {plan.price}
-        </span>
+        <span className="text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50">{plan.price}</span>
         {plan.badge && (
           <span className="rounded-full bg-violet-600/10 px-2.5 py-0.5 text-xs font-medium text-violet-700 dark:bg-violet-500/15 dark:text-violet-300">
             {plan.badge}
@@ -215,23 +231,19 @@ function PlanCard({
 
       <div className="mt-8" />
 
-      <a
-        href={ctaHref}
-        onClick={(e) => {
-          if (onSelect) {
-            e.preventDefault();
-            onSelect(plan.name);
-          }
-        }}
+      <button
+        type="button"
+        onClick={() => onCta(plan.name)}
         className={[
           "group mt-auto inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition",
           plan.highlight
             ? "bg-violet-600 text-white hover:bg-violet-700"
             : "bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200",
         ].join(" ")}
-        aria-label={`Select the ${plan.name}`}
+        aria-label={`Contact about the ${plan.name}`}
       >
-        <span>Get Started</span>
+        <Mail className="h-4 w-4" aria-hidden="true" />
+        <span>Contact</span>
         <svg
           className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
           viewBox="0 0 20 20"
@@ -240,7 +252,219 @@ function PlanCard({
         >
           <path d="M10.293 3.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 11-1.414-1.414L13.586 10H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 010-1.414z" />
         </svg>
-      </a>
+      </button>
+    </div>
+  );
+}
+
+// -----------------------
+// Contact Modal
+// -----------------------
+
+type ContactFormData = {
+  name: string;
+  email: string;
+  company?: string;
+  website?: string;
+  message: string;
+  plan?: string | null;
+};
+
+function ContactModal({
+  open,
+  onClose,
+  plan,
+  endpoint,
+}: {
+  open: boolean;
+  onClose: () => void;
+  plan: string | null;
+  endpoint?: string;
+}) {
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const firstFieldRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (open) {
+      setStatus("idle");
+      const t = setTimeout(() => firstFieldRef.current?.focus(), 0);
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === "Escape") onClose();
+      };
+      window.addEventListener("keydown", onKey);
+      return () => {
+        window.removeEventListener("keydown", onKey);
+        clearTimeout(t);
+      };
+    }
+  }, [open, onClose]);
+
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+    setStatus("idle");
+
+    const fd = new FormData(e.currentTarget);
+    const data: ContactFormData = {
+      name: String(fd.get("name") || ""),
+      email: String(fd.get("email") || ""),
+      company: String(fd.get("company") || ""),
+      website: String(fd.get("website") || ""),
+      message: String(fd.get("message") || ""),
+      plan: plan || undefined,
+    };
+
+    try {
+      if (endpoint) {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error("Request failed");
+      } else {
+        // No endpoint provided — log to console for devs.
+        // eslint-disable-next-line no-console
+        console.log("Contact submission", data);
+      }
+      setStatus("success");
+      (e.target as HTMLFormElement).reset();
+      // Auto-close after a moment
+      setTimeout(onClose, 900);
+    } catch (err) {
+      setStatus("error");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Overlay */}
+      <div
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Panel */}
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Contact form"
+        className="relative z-10 w-full max-w-lg rounded-2xl border border-neutral-200 bg-white p-6 shadow-xl dark:border-neutral-800 dark:bg-neutral-900"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50">Contact</h3>
+            <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
+              {plan ? (
+                <>
+                  Interested in <span className="font-medium">{plan}</span>? Fill this out and I'll get back to you.
+                </>
+              ) : (
+                <>Tell me about your project and goals.</>
+              )}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-lg p-1 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-neutral-300"
+            aria-label="Close"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <form ref={formRef} onSubmit={submit} className="mt-5 space-y-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <label className="flex flex-col gap-1 text-sm">
+              <span className="text-neutral-700 dark:text-neutral-300">Name</span>
+              <input
+                ref={firstFieldRef}
+                name="name"
+                type="text"
+                required
+                className="rounded-xl border border-neutral-300 bg-white px-3 py-2 outline-none ring-0 placeholder:text-neutral-400 focus:border-violet-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900"
+              />
+            </label>
+            <label className="flex flex-col gap-1 text-sm">
+              <span className="text-neutral-700 dark:text-neutral-300">Email</span>
+              <input
+                name="email"
+                type="email"
+                required
+                className="rounded-xl border border-neutral-300 bg-white px-3 py-2 outline-none ring-0 placeholder:text-neutral-400 focus:border-violet-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900"
+              />
+            </label>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <label className="flex flex-col gap-1 text-sm">
+              <span className="text-neutral-700 dark:text-neutral-300">Company (optional)</span>
+              <input
+                name="company"
+                type="text"
+                className="rounded-xl border border-neutral-300 bg-white px-3 py-2 outline-none ring-0 placeholder:text-neutral-400 focus:border-violet-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900"
+              />
+            </label>
+            <label className="flex flex-col gap-1 text-sm">
+              <span className="text-neutral-700 dark:text-neutral-300">Website (optional)</span>
+              <input
+                name="website"
+                type="url"
+                placeholder="https://"
+                className="rounded-xl border border-neutral-300 bg-white px-3 py-2 outline-none ring-0 placeholder:text-neutral-400 focus:border-violet-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900"
+              />
+            </label>
+          </div>
+
+          {plan && (
+            <div className="text-sm text-neutral-600 dark:text-neutral-300">
+              <span className="font-medium">Selected plan:</span> {plan}
+            </div>
+          )}
+
+          <label className="flex flex-col gap-1 text-sm">
+            <span className="text-neutral-700 dark:text-neutral-300">Message</span>
+            <textarea
+              name="message"
+              rows={4}
+              placeholder="Tell me about your goals, timeline, and budget..."
+              className="rounded-xl border border-neutral-300 bg-white px-3 py-2 outline-none ring-0 placeholder:text-neutral-400 focus:border-violet-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900"
+              required
+            />
+          </label>
+
+          <div className="flex items-center justify-between gap-3 pt-1">
+            <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              I’ll get back to you within one business day.
+            </p>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-violet-700 disabled:opacity-60"
+            >
+              <Mail className="h-4 w-4" />
+              {submitting ? "Sending..." : "Send"}
+            </button>
+          </div>
+
+          {status === "success" && (
+            <p className="text-sm text-emerald-600">Thanks! Your message was sent.</p>
+          )}
+          {status === "error" && (
+            <p className="text-sm text-rose-600">Something went wrong. Please try again.</p>
+          )}
+        </form>
+      </div>
     </div>
   );
 }

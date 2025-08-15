@@ -26,13 +26,14 @@ export default function About() {
           visible: { opacity: 1, x: 0 },
         }}>
       <h1 className="hero-title text-white drop-shadow-md mb-4">
-       {language === 'es' ? 'Nuestra Misión' : 'Our Mission'}
+       {language === 'es' ? 'Para quién es esto' : 'Who this is for'}
       </h1>
       <p className="hero-subtitle text-green-200 max-w-xl">
-       {language === 'es'
-              ? 'Elevar a los profesionales Latinx fomentando la comunidad, celebrando la identidad y creando oportunidades inclusivas para el liderazgo y el crecimiento.'
-              : 'To elevate Latinx professionals by fostering community, celebrating identity, and creating inclusive opportunities for leadership and growth.'}
-          </p>
+  {language === 'es'
+    ? 'Para freelancers, fundadores y pequeñas empresas que necesitan una landing page moderna que convierta y una breve asesoría para afinar su estrategia—sin aprender diseño ni código.'
+    : 'For Coaches, freelancers, founders, and event organizers who need a modern, high-converting landing page and a quick strategy tune-up—without learning design or code.'}
+</p>
+
           
     </motion.div>
     <motion.div className="w-full md:w-1/2 max-w-[500px] mt-2 flex justify-center flex-row flex-nowrap"
@@ -86,13 +87,14 @@ export default function About() {
           visible: { opacity: 1, x: 0 },
         }}>
           <h1 className="hero-title text-white drop-shadow-md mb-4">
-       {language === 'es' ? 'Nuestra Misión' : 'Our Mission'}
+       {language === 'es' ? 'La solución que necesitas' : 'The Solution you need'}
       </h1>
       <p className="hero-subtitle text-green-200 max-w-xl">
-       {language === 'es'
-              ? 'Elevar a los profesionales Latinx fomentando la comunidad, celebrando la identidad y creando oportunidades inclusivas para el liderazgo y el crecimiento.'
-              : 'To elevate Latinx professionals by fostering community, celebrating identity, and creating inclusive opportunities for leadership and growth.'}
-          </p>
+  {language === 'es'
+    ? 'Te entrego una landing page gratuita lista para personalizar con tu oferta y una consultoría gratuita de 20 minutos para mapear tu embudo y tus quick wins. Sin letra pequeña: si te gusta mi enfoque, podemos hablar del proyecto completo después.'
+    : 'You’ll get a free landing page you can plug your offer into, plus a free 20-minute consult to map your funnel and quick wins. No fine print—if you like my approach, we can talk about the full build afterward.'}
+</p>
+
     </motion.div>
     
   </section>
@@ -112,13 +114,14 @@ export default function About() {
           }}
         >
           <h2 className="text-3xl font-bold text-green-300 mb-4">
-            {language === 'es' ? 'Nuestra Historia' : 'Our Story'}
+            {language === 'es' ? 'Quiénes somos' : 'Who We Are'}
           </h2>
           <p className="text-lg">
-            {language === 'es'
-              ? 'Creemos en el poder de la narración. Nuestro viaje nace de la comunidad, impulsado por la representación, y basado en la idea de que cada conexión puede inspirar. Nos apropiamos de nuestra historia y la compartimos con orgullo — porque nos pertenece a todos.'
-              : 'We believe in the power of storytelling. Our journey is one rooted in community, driven by representation, and built on the idea that every connection has the power to inspire. We own our story and share it proudly — because it belongs to all of us.'}
-          </p>
+  {language === 'es'
+    ? 'Soy Nick, desarrollador full-stack que lanza sitios y embudos de marketing rápido. Me enfoco en velocidad y valor: hosting ágil, UX fluida y analítica integrada para que sepas qué funciona desde el día uno.'
+    : 'I’m Nick—a full-stack developer who ships marketing sites and funnels fast. I focus on speed-to-value: fast hosting, snappy UX, and built-in analytics so you know what’s working from day one.'}
+</p>
+
         </motion.div>
 
         {/* Why We Started */}
@@ -133,13 +136,14 @@ export default function About() {
           }}
         >
           <h2 className="text-3xl font-bold text-green-300 mb-4">
-            {language === 'es' ? 'Por Qué Comenzamos' : 'Why We Started'}
+            {language === 'es' ? '¿Por qué es gratis?' : 'Why is it free?'}
           </h2>
           <p className="text-lg">
-            {language === 'es'
-              ? 'Comenzamos este trabajo porque vimos una brecha: falta de representación, acceso y mentoría para los profesionales Latinx. Nuestro objetivo es cambiar eso. Al crear espacios para la conexión significativa y el desarrollo del liderazgo, esperamos elevar a otros como deseamos haber sido elevados nosotros.'
-              : 'We started this work because we saw a gap — a lack of representation, access, and mentorship for Latinx professionals. Our goal is to change that. By creating spaces for meaningful connection and leadership development, we hope to uplift others the way we wished to be uplifted ourselves.'}
-          </p>
+  {language === 'es'
+    ? 'Tú recibes valor real desde el inicio; yo gano tu confianza. Algunos clientes luego eligen una mejora de pago—diseño a medida, copy, integraciones y soporte continuo—pero no hay presión.'
+    : 'You get real value upfront; I earn your trust. Some clients choose a paid upgrade—custom design, copy polish, integrations, and ongoing support—but there’s never any pressure.'}
+</p>
+
         </motion.div>
 
 

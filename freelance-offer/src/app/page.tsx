@@ -79,15 +79,16 @@ export default function Home2() {
       animate={{ opacity: 1.2, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 1, ease: "easeInOut" }}>
-        <Image src={CTAImage} alt="LinkedIn" className="w-100 h-100 transition-all duration-300 ease-in-out absolute top-0 left-0" height={150} width={150} />
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 ml-[0] sm:ml-[230px] ">“This guy is so good, he should be illegal”</h1>
+       
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 ml-[0] sm:ml-[230px] ">“Rooted in resilience and creativity, his work speaks for it's self”</h1>
       </motion.div>
+       <Image src={CTAImage} alt="LinkedIn" className="w-100 h-100 ease-in-out absolute top-0 left-0" height={150} width={150} />
     </section>
       
 <ClaimBtnModal />
 <About />
 <ClaimBtnModal />
-<Tiers />
+{/* <Tiers /> */}
 <Footer />
     </main>
   );

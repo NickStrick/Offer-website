@@ -22,20 +22,21 @@ export default function Footer() {
 
         {/* Navigation Links */}
         <div className="flex flex-wrap justify-center gap-6 text-sm font-medium">
-          <Link href="/" className="hover:text-purple-600 transition">
+          <Link href="/" className="hover:text-green-600 transition">
             {language === 'es' ? 'Inicio' : 'Home'}
           </Link>
-          <Link href="/#About" className="hover:text-purple-600 transition">
+          <Link href="/#About" className="hover:text-green-600 transition">
             {language === 'es' ? 'Acerca de' : 'About'}
           </Link>
-          <Link href="/founders" className="hover:text-purple-600 transition">
+          {/* <Link href="/founders" className="hover:text-green-600 transition">
             {language === 'es' ? `Conéctate` : `Contact`}
-          </Link>
+          </Link> */}
           
         </div>
 
         {/* Social Media */}
-        <div className="flex items-center gap-6">
+        <div className="flex min-w-[12%] text-transparent opacity-0 overflow-hidden">NS </div>
+        {/* <div className="flex items-center gap-6">
           <a
             href="https://www.instagram.com/connectingdotsforlatinx"
             target="_blank"
@@ -76,11 +77,11 @@ export default function Footer() {
             />
           </a>
           
-        </div>
+        </div> */}
       </div>
 
       {/* Bottom Text */}
-      <div className="mt-8 text-center text-sm text-purple-1000">
+      <div className="mt-8 text-center text-sm text-green-1000">
         &copy; {new Date().getFullYear()} 
             {` Nick Stricker Digital. All rights reserved.`}
       </div>

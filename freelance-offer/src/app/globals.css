@@ -88,12 +88,16 @@ p {
         to right,
         var(--color-purple) 0%,
         var(--color-highlight) 40%,
+        var(--color-highlight) 50%,
         var(--color-purple) 100%
     );
     border-radius: 30px;
     background-size: 200% 100%; /* Bigger than container for scroll effect */
     background-position: 0% 0%;
     animation: loading 2.6s linear infinite;
+}
+.form_progress-fill-2 {
+  width: 93%;
 }
 
 @keyframes loading {
@@ -120,6 +124,8 @@ p {
 .form_progress-container {
     width: 85%;
     margin-left: auto;
+    margin-right: auto;
+    transform: translateX(15px);
 }
 
 /* ============================
@@ -249,6 +255,7 @@ p {
         to right,
         var(--color-purple) 0%,
         var(--color-highlight) 40%,
+        var(--color-highlight) 50%,
         var(--color-purple) 100%
     );
     background-size: calc(200% + 4px) calc(100% + 4px);
