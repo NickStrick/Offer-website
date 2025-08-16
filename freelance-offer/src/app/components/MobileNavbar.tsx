@@ -51,7 +51,7 @@ const MobileNavbar = () => {
         <nav className="hidden md:flex gap-8 text-base font-medium text-black">
           <Link className="hover:text-purple-700 transition-all nav-btn" href="/">{language === 'en' ? `Home` : `Inicio`}</Link>
           <Link className="hover:text-purple-700 transition-all nav-btn" href="/#About">{language === 'en' ? `About` : `Acerca de`}</Link>
-          <Link className="hover:text-purple-700 transition-all nav-btn" href="/founders">{language === 'en' ? `Contact` : `Conéctate`}</Link>
+          <Link className="hover:text-purple-700 transition-all nav-btn" href="/contact">{language === 'en' ? `Contact` : `Conéctate`}</Link>
         </nav>
 
         {/* Hamburger Icon (Mobile Only) */}
@@ -80,7 +80,7 @@ const MobileNavbar = () => {
             </li>
             
             <li>
-              <Link className="nav-btn" href="/founders" onClick={() => setOpen(false)}>
+              <Link className="nav-btn" href="/contact" onClick={() => setOpen(false)}>
                 {language === 'es' ? 'Conéctate' : 'Contact'}
               </Link>
             </li>

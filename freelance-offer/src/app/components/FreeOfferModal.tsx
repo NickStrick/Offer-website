@@ -10,10 +10,6 @@ import { motion, AnimatePresence } from "framer-motion";
  * - <UpgradeCTAModal />: follow-up funnel from free offer (lead magnet)
  *   to paid offer (core offer).
  *
- * A small demo wrapper <LeadFlowDemo /> is provided so you can see the
- * end-to-end flow immediately. Replace your existing AdminModal export with
- * LeadFlowDemo or wire the modals into your app however you like.
- *
  * Styling: TailwindCSS. Animations: framer-motion. No external UI deps.
  */
 
@@ -241,9 +237,10 @@ export function UpgradeCTAModal({
                 ✕
               </button>
             </div>
-            <h4 className="text-4xl font-bold text-black text-center flex-1 mt-4 mb-8" >{headline}</h4>
+            <h4 className="text-4xl font-bold text-black text-center flex-1 mt-4 mb-2" >{headline}</h4>
+            <h4 className="text-4xl font-bold text-black text-center flex-1 mt-1 mb-8" >Want more?</h4>
             <p className="mt-1 text-gray-600">
-              You’ve got the free pack. Ready to go deeper and get results faster?
+              You’ve got the free pack! Now join our community of  take the next step to unlock the full potential of your professional website.
             </p>
 
             <ul className="mt-4 grid list-disc gap-2 pl-5 text-gray-800">
@@ -257,13 +254,13 @@ export function UpgradeCTAModal({
                 href={coreOfferUrl}
                 className={`btn-gradient w-full transition-all duration-300 ease-in-out  px-16 py-3 text-xs rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover `}
               >
-                See the full program →
+                Join the Community →
               </a>
               <button
                 onClick={onClose}
-                className="rounded-full border border-gray-300 px-4 py-3 font-medium text-gray-800 hover:bg-gray-50"
+                className={`btn-gradient w-full transition-all duration-300 ease-in-out  px-16 py-3 text-xs rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover `}
               >
-                Maybe later
+                See the full program →
               </button>
             </div>
 
@@ -272,7 +269,7 @@ export function UpgradeCTAModal({
                 href={bookCallUrl}
                 className="mt-3 block text-center text-sm font-medium text-gray-600 underline hover:text-gray-800"
               >
-                Prefer to talk it through? Book a quick call.
+                Need more help or want to talk it through? Book a quick call.
               </a>
             )}
           </motion.div>
@@ -283,8 +280,6 @@ export function UpgradeCTAModal({
 }
 
 // ---------------------------- Demo Flow ----------------------------
-// Optional wrapper so you can mount a single component and have the full flow.
-// Replace AdminModal export with this component or bring these modals into your own state.
 
 export default function LeadFlowDemo() {
   const [showLead, setShowLead] = useState(false);
@@ -304,11 +299,11 @@ export default function LeadFlowDemo() {
   return (
     <div className="flex min-h-[50vh] items-center justify-center p-6 bg-gradient-black-purple ">
       <div className="max-w-2xl text-center">
-        <h1 className="text-3xl font-extrabold tracking-tight">Free Site, Free Call</h1>
-        <p className="mt-2 text-gray-300">Get Your free landing page, or a free consultation.</p>
+        <h1 className="text-3xl font-extrabold tracking-tight">Free landing page, Free call and consultation</h1>
+        <p className="mt-2 text-gray-300">Get Your free landing page, or a free call plus an ROI & conversion assessment.</p>
         <button
           onClick={() => setShowLead(true)}
-          className={`btn-gradient w-full transition-all duration-300 ease-in-out text-xl  px-16 py-3  rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover `}
+          className={`btn-gradient w-full transition-all duration-300 ease-in-out text-3xl  px-16 py-3  rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover `}
         >
           Claim your free stuff
         </button>
@@ -330,7 +325,7 @@ export default function LeadFlowDemo() {
         onClose={() => setShowCTA(false)}
         coreOfferUrl="/core-offer"
         bookCallUrl="/book-a-call"
-        headline="Unlock the Core Offer"
+        headline="Enjoy your free stuff!"
         bullets={[
           "Step-by-step system to implement fast",
           "Pro templates and checklists",

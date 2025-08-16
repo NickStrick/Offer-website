@@ -28,7 +28,7 @@ export default function Footer() {
           <Link href="/#About" className="hover:text-green-600 transition">
             {language === 'es' ? 'Acerca de' : 'About'}
           </Link>
-          {/* <Link href="/founders" className="hover:text-green-600 transition">
+          {/* <Link href="/contact" className="hover:text-green-600 transition">
             {language === 'es' ? `Conéctate` : `Contact`}
           </Link> */}
           
