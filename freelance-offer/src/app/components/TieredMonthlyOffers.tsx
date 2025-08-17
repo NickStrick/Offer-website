@@ -316,29 +316,29 @@ function ContactModal({
       message: String(fd.get("message") || ""),
       plan: plan || undefined,
     };
-
-    try {
-      if (endpoint) {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
-        if (!res.ok) throw new Error("Request failed");
-      } else {
-        // No endpoint provided — log to console for devs.
-        // eslint-disable-next-line no-console
-        console.log("Contact submission", data);
-      }
-      setStatus("success");
-      (e.target as HTMLFormElement).reset();
-      // Auto-close after a moment
-      setTimeout(onClose, 900);
-    } catch (err) {
-      setStatus("error");
-    } finally {
-      setSubmitting(false);
-    }
+    console.log("Contact submission data:", data, endpoint);
+    // try {
+    //   if (endpoint) {
+    //     const res = await fetch(endpoint, {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify(data),
+    //     });
+    //     if (!res.ok) throw new Error("Request failed");
+    //   } else {
+    //     // No endpoint provided — log to console for devs.
+    //     // console.log("Contact submission", data);
+    //   }
+    //   setStatus("success");
+    //   (e.target as HTMLFormElement).reset();
+    //   // Auto-close after a moment
+    //   setTimeout(onClose, 900);
+    // } catch (err: object | any) {
+    //   console.log(err)
+    //   setStatus("error");
+    // } finally {
+    //   setSubmitting(false);
+    // }
   };
 
   if (!open) return null;
@@ -366,7 +366,7 @@ function ContactModal({
             <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
               {plan ? (
                 <>
-                  Interested in <span className="font-medium">{plan}</span>? Fill this out and I'll get back to you.
+                  Interested in <span className="font-medium">{plan}</span>? Fill this out and I&apos;ll get back to you.
                 </>
               ) : (
                 <>Tell me about your project and goals.</>

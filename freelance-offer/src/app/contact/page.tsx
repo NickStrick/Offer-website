@@ -1,19 +1,12 @@
 'use client';
-import Link from "next/link";
+// import Link from "next/link";
 import Image from "next/image";
 
-import joseImage from "../../../public/founders/omar.jpg";
-import fernandoImage from "../../../public/founders/fernando.jpg";
 import instaImg from "../../../public/Instagram.png";
 import LIImg from "../../../public/linkedin.png";
 import facebookImg from "../../../public/facebook.png";
 
 import locImg from "../../../public/location.png";
-
-import foundersImg1 from "../../../public/founders/fernando&omar.png";
-import foundersImg2 from "../../../public/founders/omar&fernando2.jpg";
-import foundersImg3 from "../../../public/founders/fernando&omar3.jpg";
-
 import Footer from "../components/Footer";
 import { useLanguage } from "../context/LanguageContext";
 

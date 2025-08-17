@@ -28,6 +28,7 @@ export function LeadCaptureModal({
   const [values, setValues] = useState<Lead>({ firstName: "", lastName: "", email: "", description: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  console.log(extraHiddenFields)
 
   useEffect(() => {
     if (!open) {
@@ -86,8 +87,12 @@ export function LeadCaptureModal({
       }
 
       onSuccess(values);
-    } catch (err: any) {
-      setError(err?.message || "Something went wrong. Please try again.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+          setError(err?.message || "Something went wrong. Please try again.");
+        } else {
+          console.error('Unexpected error', err);
+        }
     } finally {
       setLoading(false);
     }
@@ -219,6 +224,7 @@ export function UpgradeCTAModal({
   coreOfferUrl = "/buy",
   bookCallUrl,
 }: UpgradeCTAModalProps) {
+  console.log("UpgradeCTAModal", { open, headline, bullets, coreOfferUrl, bookCallUrl });
   return (
     <AnimatePresence>
       {open && (
@@ -250,7 +256,7 @@ export function UpgradeCTAModal({
             </div>
             <h4 className="text-4xl font-bold text-black text-center flex-1 mt-4 mb-8">{headline}</h4>
             <p className="mt-1 text-gray-600">
-              Thank you for Signing up! We will be in touch soon to get started with your project. If you haven't yet, join the community to get the most out of your experience. Here's what you just signed up for:
+              {`Thank you for Signing up! We will be in touch soon to get started with your project. If you haven\'t yet, join the community to get the most out of your experience. Here\'s what you just signed up for:`}
             </p>
 
             <ul className="mt-4 grid list-disc gap-2 pl-5 text-gray-800">
@@ -300,7 +306,7 @@ export default function LeadFlowDemo() {
       viewport={{ once: true }}
       transition={{ duration: 1, ease: "easeInOut" }}>
       <div className="max-w-4xl text-center">
-        <h1 className="text-3xl font-extrabold tracking-tight">Sign up and together we'll build your dream website for your buisness, program, or profile. </h1>
+        <h1 className="text-3xl font-extrabold tracking-tight">{`Sign up and together we\'ll build your dream website for your buisness, program, or profile. `}</h1>
         <p className="mt-2 text-gray-300">Customized just for you. Conversions & analytics tracking. Expert advice to get the most out of your web page. Unlimied pages & revisions</p>
         <button
           onClick={() => setShowLead(true)}

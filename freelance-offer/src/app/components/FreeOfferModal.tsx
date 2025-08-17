@@ -14,7 +14,6 @@ type LeadCaptureModalProps = {
   onClose: () => void;
   onSuccess: (lead: Lead) => void;
   submitUrl?: string; // Google Forms formResponse URL
-  extraHiddenFields?: Record<string, string>;
 };
 
 export function LeadCaptureModal({
@@ -22,7 +21,6 @@ export function LeadCaptureModal({
   onClose,
   onSuccess,
   submitUrl,
-  extraHiddenFields,
 }: LeadCaptureModalProps) {
   const [values, setValues] = useState<Lead>({ firstName: "", lastName: "", email: "" });
   const [loading, setLoading] = useState(false);
@@ -83,8 +81,13 @@ export function LeadCaptureModal({
       }
 
       onSuccess(values);
-    } catch (err: any) {
-      setError(err?.message || "Something went wrong. Please try again.");
+    } catch (err: unknown) {
+       if (err instanceof Error) {
+          setError(err?.message || "Something went wrong. Please try again.");
+        } else {
+          console.error('Unexpected error', err);
+        }
+      
     } finally {
       setLoading(false);
     }
@@ -316,7 +319,6 @@ export default function LeadFlowDemo() {
           setShowCTA(true);
         }}
         submitUrl="https://docs.google.com/forms/d/e/1FAIpQLSei5MW9D_2R8OzjDQdy78j_x7Z3Hx0NXO1ohwoljdZ6xHQg9Q/formResponse"
-        extraHiddenFields={{ campaign: "lead-magnet" }}
       />
 
       <UpgradeCTAModal

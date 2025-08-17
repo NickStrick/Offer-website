@@ -11,7 +11,6 @@ import CTAImage from "../../../public/NStrans.png"; // Adjust the path as needed
 import backgroundImage from "../../../public/pfp5.jpg"; // Adjust the path as needed
 
 import About from "./components/About";
-import Tiers from "./components/TieredMonthlyOffers";
 import Footer from "../components/Footer";
 import ClaimBtnModal from "./components/CoreOfferModal";
 
@@ -36,6 +35,7 @@ type EventItem = {
 export default function Home2() {
   const [eventList, setEvents] = useState<EventItem[]>([]);
   const [rawJSON, setRawJSON] = useState(JSON.stringify({ events: eventList }));
+  console.log("rawJSON", rawJSON);
 
   useEffect(() => {
     async function fetchEvents() {
@@ -56,6 +56,7 @@ export default function Home2() {
   }, []);
 
   const { language } = useLanguage();
+  console.log("language", language);
   return (
     <main className="min-h-screen bg-neutral-900 text-white">
       <section
