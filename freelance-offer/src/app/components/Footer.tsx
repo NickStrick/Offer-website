@@ -23,10 +23,13 @@ export default function Footer() {
         {/* Navigation Links */}
         <div className="flex flex-wrap justify-center gap-6 text-sm font-medium">
           <Link href="/" className="hover:text-green-600 transition">
-            {language === 'es' ? 'Inicio' : 'Home'}
+            {language === 'es' ? 'Inicio' : 'Free Stuff'}
           </Link>
-          <Link href="/#About" className="hover:text-green-600 transition">
-            {language === 'es' ? 'Acerca de' : 'About'}
+          <Link href="/core" className="hover:text-green-600 transition">
+            {language === 'es' ? 'Acerca de' : 'Full Package'}
+          </Link>
+          <Link href="https://www.nickolasstricker.com" className="hover:text-green-600 transition">
+            {language === 'es' ? 'Acerca de' : 'Portfolio'}
           </Link>
           {/* <Link href="/contact" className="hover:text-green-600 transition">
             {language === 'es' ? `Conéctate` : `Contact`}
@@ -83,7 +86,7 @@ export default function Footer() {
       {/* Bottom Text */}
       <div className="mt-8 text-center text-sm text-green-1000">
         &copy; {new Date().getFullYear()} 
-            {` Nick Stricker Digital. All rights reserved.`}
+            {`Stricker Digital. All rights reserved.`}
       </div>
       <div className="text-center text-xs text-gray-500">
         {`The information contained within this website is the property of nickolasstricker.com. Any use of the images, content, or ideas expressed herein without the express written consent of nickolasstricker.com is prohibited.`}

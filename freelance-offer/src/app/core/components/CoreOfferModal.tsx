@@ -7,6 +7,7 @@ export type Lead = {
   firstName: string;
   lastName: string;
   email: string;
+  description?: string; // Optional field for additional info
 };
 
 type LeadCaptureModalProps = {
@@ -24,7 +25,7 @@ export function LeadCaptureModal({
   submitUrl,
   extraHiddenFields,
 }: LeadCaptureModalProps) {
-  const [values, setValues] = useState<Lead>({ firstName: "", lastName: "", email: "" });
+  const [values, setValues] = useState<Lead>({ firstName: "", lastName: "", email: "", description: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -119,9 +120,9 @@ export function LeadCaptureModal({
                 ✕
               </button>
             </div>
-            <h4 className="text-4xl font-bold text-black text-center flex-1 mt-4 mb-8">REGISTER NOW</h4>
+            <h4 className="text-4xl font-bold text-black text-center flex-1 mt-4 mb-8 uppercase">Sign Up now</h4>
             <p className="mt-1 text-gray-600">
-              Enter your details. We will contact you & schedule your free stuff.
+              Enter your details. We will contact you & schedule a meeting to discuss your fully customizable website or phone app.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-5 space-y-4">
@@ -158,6 +159,16 @@ export function LeadCaptureModal({
                 />
               </label>
 
+               <label className="block text-sm font-medium text-gray-700">
+                <textarea
+                  value={values.description}
+                  rows={3}
+                  onChange={(e) => setValues({ ...values, description: e.target.value })}
+                  className="mt-1 w-full rounded-xl border p-2 pt-4 pb-4 border-orange-500 focus:outline-none shadow-md"
+                  placeholder="Tell us about your buisness, your dream website or app, and what your goals are."
+                />
+              </label>
+
               {error && (
                 <div className="rounded-xl bg-red-50 p-3 text-sm text-red-700">
                   {error}
@@ -169,7 +180,7 @@ export function LeadCaptureModal({
                 disabled={isDisabled}
                 className="btn-gradient text-3xl w-full transition-all duration-300 ease-in-out px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-claim-hover hover:text-[var(--color-accent)]"
               >
-                {loading ? "Claiming…" : "YES! Claim my stuff"}
+                {loading ? "Loading…" : "YES! Schedule my call"}
               </button>
 
               <p className="text-center text-xs text-gray-500">
@@ -235,10 +246,9 @@ export function UpgradeCTAModal({
                 ✕
               </button>
             </div>
-            <h4 className="text-4xl font-bold text-black text-center flex-1 mt-4 mb-2">{headline}</h4>
-            <h4 className="text-4xl font-bold text-black text-center flex-1 mt-1 mb-8">Want more?</h4>
+            <h4 className="text-4xl font-bold text-black text-center flex-1 mt-4 mb-8">{headline}</h4>
             <p className="mt-1 text-gray-600">
-              You’ve got the free pack! Now take the next step to unlock the full potential of your professional website.
+              Thank you for Signing up! We will be in touch soon to get started with your project. If you haven't yet, join the community to get the most out of your experience. Here's what you just signed up for:
             </p>
 
             <ul className="mt-4 grid list-disc gap-2 pl-5 text-gray-800">
@@ -254,22 +264,14 @@ export function UpgradeCTAModal({
               >
                 Join the Community →
               </a>
-               <a
-                href={coreOfferUrl}
-                className="btn-gradient w-full transition-all duration-300 ease-in-out px-16 py-3 text-xs rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
+              <button
+                onClick={onClose}
+                className="rounded-full px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 border-gray-300 border"
               >
-                See the full program →
-              </a>
+                Maybe later
+              </button>
             </div>
 
-            {bookCallUrl && (
-              <a
-                href={bookCallUrl}
-                className="mt-3 block text-center text-sm font-medium text-gray-600 underline hover:text-gray-800"
-              >
-                Need more help or want to talk it through? Book a quick call.
-              </a>
-            )}
           </motion.div>
         </motion.div>
       )}
@@ -289,24 +291,22 @@ export default function LeadFlowDemo() {
   }, []);
 
   return (
-    
     <div className="flex min-h-[50vh] items-center justify-center p-6 bg-gradient-black-purple ">
       <motion.div className=" z-10 px-4 max-w-3xl mx-auto text-center"
       initial={{ opacity: 0, y: 70 }}
       animate={{ opacity: 1.2, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 1, ease: "easeInOut" }}>
-      <div className="max-w-2xl text-center">
-        <h1 className="text-3xl font-extrabold tracking-tight">Free landing page, Free call and consultation</h1>
-        <p className="mt-2 text-gray-300">Get your free landing page, or a free call plus an ROI & conversion assessment.</p>
+      <div className="max-w-4xl text-center">
+        <h1 className="text-3xl font-extrabold tracking-tight">Sign up and together we'll build your dream website for your buisness, program, or profile. </h1>
+        <p className="mt-2 text-gray-300">Customized just for you. Conversions & analytics tracking. Expert advice to get the most out of your web page. Unlimied pages & revisions</p>
         <button
           onClick={() => setShowLead(true)}
           className="btn-gradient w-full transition-all duration-300 ease-in-out text-3xl px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
         >
-          Claim your free stuff
+          Grab your spot
         </button>
       </div>
-      
 
       <LeadCaptureModal
         open={showLead}
@@ -322,16 +322,20 @@ export default function LeadFlowDemo() {
       <UpgradeCTAModal
         open={showCTA}
         onClose={() => setShowCTA(false)}
-        coreOfferUrl="/core"
+        coreOfferUrl="/core-offer"
         bookCallUrl="/book-a-call"
-        headline="Enjoy your free stuff!"
+        headline="Great, we're excited to get started!"
         bullets={[
-          "Step-by-step system to implement fast",
-          "Pro templates and checklists",
-          "Office hours + private community",
+          "Features specific to you and your buisness",
+          "Customized design and professional branding",
+          "Advanced analytics and tracking setup",
+          "Prime SEO and performance optimization",
+          "Unlimited pages and revisions",
+          "Ongoing support and updates",
+          "And much more!",
         ]}
-      /></motion.div>
+      />
+    </motion.div>
     </div>
-    
   );
 }
