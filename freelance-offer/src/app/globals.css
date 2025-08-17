@@ -62,7 +62,7 @@ p {
   @apply relative h-screen bg-cover bg-center flex items-center justify-center text-center;
 }
 .section-half-height{
-  @apply h-fit min-h-[50vh];
+  @apply h-fit min-h-[45vh];
 }
 
 .hero-section::before {

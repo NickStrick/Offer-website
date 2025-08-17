@@ -300,20 +300,21 @@ export default function LeadFlowDemo() {
 
   return (
     <div className="flex min-h-[50vh] items-center justify-center p-6 bg-gradient-black-purple ">
-      <motion.div className=" z-10 px-4 max-w-3xl mx-auto text-center"
+      <motion.div className=" z-10  max-w-3xl mx-auto text-center"
       initial={{ opacity: 0, y: 70 }}
       animate={{ opacity: 1.2, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 1, ease: "easeInOut" }}>
       <div className="max-w-4xl text-center">
-        <h1 className="text-3xl font-extrabold tracking-tight">{`Sign up and together we\'ll build your dream website for your buisness, program, or profile. `}</h1>
-        <p className="mt-2 text-gray-300">Customized just for you. Conversions & analytics tracking. Expert advice to get the most out of your web page. Unlimied pages & revisions</p>
+        <h1 className=" text-1xl md:text-3xl font-extrabold tracking-tight">{`Sign up and together we\'ll build your dream website for your buisness, program, or profile. `}</h1>
         <button
           onClick={() => setShowLead(true)}
-          className="btn-gradient w-full transition-all duration-300 ease-in-out text-3xl px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
+          className="btn-gradient mt-6 mb-3 w-full transition-all duration-300 ease-in-out text-2xl md:text-3xl  px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
         >
           Grab your spot
         </button>
+        <div className="mt-14 text-gray-300 text-1xl md:text-2xl">Customized just for you. Conversions & analytics tracking. Expert advice to get the most out of your web page. Unlimied pages & revisions</div>
+        
       </div>
 
       <LeadCaptureModal

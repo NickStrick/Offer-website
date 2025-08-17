@@ -59,7 +59,7 @@ export default function Home2() {
   return (
     <main className="min-h-screen bg-neutral-900 text-white">
       <section
-      className="hero-section bg-fixed section-half-height sm:bg-[length:135%] sm:bg-[100%_calc(50%-10px)] bg-cover bg-center"
+      className="hero-section bg-fixed section-half-height min-h-[40vh] max-h-[40vh] sm:bg-[length:135%] sm:bg-[100%_calc(50%-10px)] bg-cover bg-center"
       style={{
         backgroundImage: `url(${backgroundImage.src})`,
         // backgroundSize: "cover",
@@ -77,9 +77,9 @@ export default function Home2() {
       viewport={{ once: true }}
       transition={{ duration: 1, ease: "easeInOut" }}>
        
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 ml-[0] sm:ml-[230px] mt-[80px] sm:mt-[0px]">“{`Rooted in resilience and creativity, his work speaks for it\'s self`}”</h1>
+        <h1 className="text-2xl md:text-4xl font-bold mb-4 ml-[0] sm:ml-[230px] mt-[80px] sm:mt-[0px]">“{`Rooted in resilience and creativity, his work speaks for it\'s self`}”</h1>
       </motion.div>
-       <Image src={CTAImage} alt="LinkedIn" className="w-100 h-100 ease-in-out absolute top-0 left-0" height={150} width={150} />
+       <Image src={CTAImage} alt="LinkedIn" className="w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} />
     </section>
       
 <ClaimBtnModal />
