@@ -7,7 +7,7 @@ export type Lead = {
   firstName: string;
   lastName: string;
   email: string;
-  description?: string; // Optional field for additional info
+  description: string; // Optional field for additional info
 };
 
 type LeadCaptureModalProps = {
@@ -31,7 +31,7 @@ export function LeadCaptureModal({
 
   useEffect(() => {
     if (!open) {
-      setValues({ firstName: "", lastName: "", email: "" });
+      setValues({ firstName: "", lastName: "", email: "", description: "" });
       setError(null);
       setLoading(false);
     }
@@ -54,14 +54,16 @@ export function LeadCaptureModal({
 
       if (submitUrl) {
         // Google Forms entry IDs from your prefilled link
-        const ENTRY_FIRST = "entry.1511831625";
-        const ENTRY_LAST  = "entry.659719382";
-        const ENTRY_EMAIL = "entry.1036202572";
+        const ENTRY_FIRST = "entry.1014156153";
+        const ENTRY_LAST  = "entry.413817933";
+        const ENTRY_EMAIL = "entry.184621400";
+        const ENTRY_DESCRIPTION = "entry.159152006";
 
         const formData = new FormData();
         formData.append(ENTRY_FIRST, values.firstName);
         formData.append(ENTRY_LAST,  values.lastName);
         formData.append(ENTRY_EMAIL, values.email);
+        formData.append(ENTRY_DESCRIPTION, values.description);
 
         // Optional extras if you later add hidden fields to your form:
         // const ENTRY_CAMPAIGN = "entry.xxxxxxxx"; // create field in Form first
@@ -315,15 +317,15 @@ export default function LeadFlowDemo() {
           setShowLead(false);
           setShowCTA(true);
         }}
-        submitUrl="https://docs.google.com/forms/d/e/1FAIpQLSei5MW9D_2R8OzjDQdy78j_x7Z3Hx0NXO1ohwoljdZ6xHQg9Q/formResponse"
+        submitUrl="https://docs.google.com/forms/d/e/1FAIpQLSfFZEJzqhphtlVS4EIUS54DoHzH3UyhfABSWKFs_3Ih0lQlkg/formResponse"
         extraHiddenFields={{ campaign: "lead-magnet" }}
       />
 
       <UpgradeCTAModal
         open={showCTA}
         onClose={() => setShowCTA(false)}
-        coreOfferUrl="/core-offer"
-        bookCallUrl="/book-a-call"
+        coreOfferUrl="/"
+        bookCallUrl=""
         headline="Great, we're excited to get started!"
         bullets={[
           "Features specific to you and your buisness",
