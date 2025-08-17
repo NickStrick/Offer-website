@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { useLanguage } from "../../context/LanguageContext";
 import Image from "next/image";
 
-import aboutImg1 from "../../../../public/handsSmall.jpg";
-import aboutImg2 from "../../../../public/smallGroup.jpg";
+import aboutImg1 from "../../../../public/cafe-group.jpg";
+import aboutImg2 from "../../../../public/features.png";
 // import aboutAwards from "../../../public/awards.png";
 
 export default function About() {
@@ -31,7 +31,7 @@ export default function About() {
       <p className="hero-subtitle text-green-200 max-w-xl">
   {language === 'es'
     ? 'Para freelancers, fundadores y pequeñas empresas que necesitan una landing page moderna que convierta y una breve asesoría para afinar su estrategia—sin aprender diseño ni código.'
-    : 'For Coaches, freelancers, founders, and event organizers who need a modern, high-converting landing page and a quick strategy tune-up—without learning design or code.'}
+    : 'For Coaches, founders, and event organizers who need more bookings, on-going analytics and conversion tracking, a vision for their brand, and a partner that will stop at nothing to make that vision a reality.'}
 </p>
 
           
@@ -47,8 +47,8 @@ export default function About() {
         }}>
       <Image
       priority={true}
-      width={500}
-      height={500}
+      width={600}
+      height={600}
         src={aboutImg1.src}
         alt="Connecting the Dots"
         className="w-auto rounded-lg shadow-lg max-h-[80vh] object-cover"
@@ -92,7 +92,7 @@ export default function About() {
       <p className="hero-subtitle text-green-200 max-w-xl">
   {language === 'es'
     ? 'Te entrego una landing page gratuita lista para personalizar con tu oferta y una consultoría gratuita de 20 minutos para mapear tu embudo y tus quick wins. Sin letra pequeña: si te gusta mi enfoque, podemos hablar del proyecto completo después.'
-    : 'You’ll get a free landing page you can plug your offer into, plus a free 20-minute consult to map your funnel and quick wins. No fine print—if you like my approach, we can talk about the full build afterward.'}
+    : 'Your go to consultant for building high-converting websites and funnels that get results. I deliver fast, custom sites with built-in analytics and conversion tracking, plus expert advice to help you get the most out of your web presence. Feature rich, conversion focused, and built to grow with you.'}
 </p>
 
     </motion.div>
@@ -119,7 +119,7 @@ export default function About() {
           <p className="text-lg">
   {language === 'es'
     ? 'Soy Nick, desarrollador full-stack que lanza sitios y embudos de marketing rápido. Me enfoco en velocidad y valor: hosting ágil, UX fluida y analítica integrada para que sepas qué funciona desde el día uno.'
-    : 'I’m Nick—a full-stack developer who ships marketing sites and funnels fast. I focus on speed-to-value: fast hosting, snappy UX, and built-in analytics so you know what’s working from day one.'}
+    : 'I\’m Nick—a full-stack developer who ships booking sites, marketing sites and funnels for coaches, founders, and event organziers. In my 7 years of event industry experience as a website lead, I\'ve built projects focused on converting traffic to clients, and improving conversion based on monthly analytics.'}
 </p>
 
         </motion.div>
@@ -139,10 +139,10 @@ export default function About() {
             {language === 'es' ? '¿Por qué es gratis?' : 'Why is it free?'}
           </h2>
           <p className="text-lg">
-  {language === 'es'
-    ? 'Tú recibes valor real desde el inicio; yo gano tu confianza. Algunos clientes luego eligen una mejora de pago—diseño a medida, copy, integraciones y soporte continuo—pero no hay presión.'
-    : 'You get real value upfront; I earn your trust. Some clients choose a paid upgrade—custom design, copy polish, integrations, and ongoing support—but there’s never any pressure.'}
-</p>
+            {language === 'es'
+              ? 'Tú recibes valor real desde el inicio; yo gano tu confianza. Algunos clientes luego eligen una mejora de pago—diseño a medida, copy, integraciones y soporte continuo—pero no hay presión.'
+              : 'I want to bring your vision to life as your partner, and help you make informed descisions based on data. I will use my experience to guide the project towards what works for you and your buisness, while staying true to your vision.'}
+          </p>
 
         </motion.div>
 

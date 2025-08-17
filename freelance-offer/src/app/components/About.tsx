@@ -4,7 +4,7 @@ import { useLanguage } from "../context/LanguageContext";
 import Image from "next/image";
 
 import aboutImg1 from "../../../public/handsSmall.jpg";
-import aboutImg2 from "../../../public/smallGroup.jpg";
+import aboutImg2 from "../../../public/features.png";
 // import aboutAwards from "../../../public/awards.png";
 
 export default function About() {
