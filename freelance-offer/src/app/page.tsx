@@ -71,7 +71,7 @@ export default function Home2() {
       <div className="hero-overlay absolute inset-0 z-0" />
 
       {/* Hero content */}
-      <motion.div className=" z-10 px-4 max-w-3xl mx-auto text-center"
+      <motion.div className=" z-[0] relative px-4 max-w-3xl mx-auto text-center"
       initial={{ opacity: 0, y: -70 }}
       animate={{ opacity: 1.2, y: 0 }}
       viewport={{ once: true }}

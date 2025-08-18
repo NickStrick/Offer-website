@@ -16,7 +16,7 @@ export default function About() {
     
   
     {/* Right: Text */}
-    <motion.div className="w-full md:w-1/2 relative z-10"
+    <motion.div className="w-full md:w-1/2 relative z-1"
       initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
@@ -77,7 +77,7 @@ export default function About() {
     </motion.div>
   
     {/* Right: Text */}
-    <motion.div className="w-full md:w-1/2 relative z-10"
+    <motion.div className="w-full md:w-1/2 relative z-1"
       initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}

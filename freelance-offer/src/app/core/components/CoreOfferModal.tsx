@@ -102,13 +102,13 @@ export function LeadCaptureModal({
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+          className="fixed inset-0 z-[550] flex items-center justify-center bg-black/70 p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="w-full max-w-xl rounded-2xl bg-white p-6 shadow-2xl"
+            className="w-[99vw] sm:w-full max-h-[96vh] overflow-y-auto max-w-[99vw] sm:max-w-[700px] rounded-2xl bg-white p-6 shadow-2xl"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 10, opacity: 0 }}
@@ -229,13 +229,13 @@ export function UpgradeCTAModal({
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+          className="fixed inset-0 z-[550] flex items-center justify-center bg-black/70 p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-2xl"
+            className="w-[99vw] sm:w-full max-h-[96vh] overflow-y-auto max-w-[99vw] sm:max-w-[700px] rounded-2xl bg-white p-6 shadow-2xl"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 10, opacity: 0 }}
@@ -259,7 +259,7 @@ export function UpgradeCTAModal({
               {`Thank you for Signing up! We will be in touch soon to get started with your project. If you haven\'t yet, join the community to get the most out of your experience. Here\'s what you just signed up for:`}
             </p>
 
-            <ul className="mt-4 grid list-disc gap-2 pl-5 text-gray-800">
+            <ul className="mt-4 grid list-disc gap-2 pl-5 text-gray-800 text-left">
               {bullets.map((b, i) => (
                 <li key={i}>{b}</li>
               ))}
@@ -270,7 +270,7 @@ export function UpgradeCTAModal({
                 href={coreOfferUrl}
                 className="btn-gradient w-full transition-all duration-300 ease-in-out px-16 py-3 text-xs rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
               >
-                Join the Community →
+                Learn more about Us →
               </a>
               <button
                 onClick={onClose}
@@ -300,7 +300,7 @@ export default function LeadFlowDemo() {
 
   return (
     <div className="flex min-h-[50vh] items-center justify-center p-6 bg-gradient-black-purple ">
-      <motion.div className=" z-10  max-w-3xl mx-auto text-center"
+      <motion.div className=" z-1  max-w-3xl mx-auto text-center"
       initial={{ opacity: 0, y: 70 }}
       animate={{ opacity: 1.2, y: 0 }}
       viewport={{ once: true }}
@@ -309,11 +309,11 @@ export default function LeadFlowDemo() {
         <h1 className=" text-1xl md:text-3xl font-extrabold tracking-tight">{`Sign up and together we\'ll build your dream website for your buisness, program, or profile. `}</h1>
         <button
           onClick={() => setShowLead(true)}
-          className="btn-gradient mt-6 mb-3 w-full transition-all duration-300 ease-in-out text-2xl md:text-3xl  px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
+          className="btn-gradient mt-10 mb-3 w-full transition-all duration-300 ease-in-out text-2xl md:text-3xl  px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
         >
           Grab your spot
         </button>
-        <div className="mt-14 text-gray-300 text-1xl md:text-2xl">Customized just for you. Conversions & analytics tracking. Expert advice to get the most out of your web page. Unlimied pages & revisions</div>
+        <div className="mt-10 text-gray-300 text-1xl md:text-2xl">Customized just for you. Conversions & analytics tracking. Expert advice to get the most out of your web page. Unlimied pages & revisions</div>
         
       </div>
 
@@ -331,7 +331,7 @@ export default function LeadFlowDemo() {
       <UpgradeCTAModal
         open={showCTA}
         onClose={() => setShowCTA(false)}
-        coreOfferUrl="/"
+        coreOfferUrl="https://www.nickolasstricker.com"
         bookCallUrl=""
         headline="Great, we're excited to get started!"
         bullets={[
