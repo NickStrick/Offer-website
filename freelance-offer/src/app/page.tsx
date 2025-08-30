@@ -1,8 +1,4 @@
 'use client';
-import Image from "next/image";
-
-// import dynamic from 'next/dynamic';
-import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import AboutMe from "./components/AboutMe";
 import FloatingText from "./components/FloatingText";

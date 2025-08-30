@@ -1,6 +1,5 @@
 'use client';
 import { motion } from "framer-motion";
-import { useLanguage } from "../context/LanguageContext";
 import Image from "next/image";
 
 import aboutImg1 from "../../../public/citysquare.jpg";
@@ -9,7 +8,6 @@ import Pfp from "../../../public/face.jpg";
 // import aboutAwards from "../../../public/awards.png";
 
 export default function About() {
-  const { language } = useLanguage();
 
   return (<>
   <section id="About"  className="bg-gradient-purple-black  hero-section section-half-height pt-4 flex flex-col md:flex-row items-center justify-center h-screen text-center md:text-left px-2 md:px-6 gap-8">
@@ -31,8 +29,8 @@ export default function About() {
       </h1>
       <p className="hero-subtitle text-green-200 max-w-xl break-words">
         Event Organizers, Coaches, and Professionals who need a modern sign-up website or landing page and a way to get traffic.
-        <span className="flex mt-2">We're based in Chicago, and we work with anyone who wants a system to get clients, attenddees, or just eye balls on you and your business.</span>
-        <span className="flex mt-2">Whether you're a independent, a small business, or part of a larger organization, we tailor our services to meet your unique needs and goals.</span>
+        <span className="flex mt-2">We&apos;re based in Chicago, and we work with anyone who wants a system to get clients, attenddees, or just eye balls on you and your business.</span>
+        <span className="flex mt-2">Whether you&apos;re a independent, a small business, or part of a larger organization, we tailor our services to meet your unique needs and goals.</span>
     </p>
 
           
@@ -102,7 +100,7 @@ export default function About() {
           Systems to track data, allowing us to determine what’s holding you back and make improvements.
         </span> */}
         <span className="flex mt-2">
-          Completely done for you and at no risk with a money back guarantee. The end result being something that lives on it’s own and customization for you or your team to edit the content completely to your liking.
+          Completely done for you and at no risk with a money back guarantee. The end result being something that lives on it&apos;s own and customization for you or your team to edit the content completely to your liking.
         </span>
       </p>
 
@@ -128,14 +126,14 @@ export default function About() {
         Nice to meet you!
       </h1>
       <p className="hero-subtitle text-green-200 max-w-xl">
-        Hi, I'm Nick Stricker, a full-stack developer and buisness student based in Chicago. I deliver digital solutions for coaches, professionals, and event organizers.
-        <span className="flex mt-2">I've spent the last 8 years building websites professionally with a variety of clients. 5 of those years have been in the event industry, optimizing attendee sign ups and engagement.
-        I've worked with non-profits, coaches, trainers, professionals and small buisnesses.
+        Hi, I&apos;m Nick Stricker, a full-stack developer and buisness student based in Chicago. I deliver digital solutions for coaches, professionals, and event organizers.
+        <span className="flex mt-2">I&apos;ve spent the last 8 years building websites professionally with a variety of clients. 5 of those years have been in the event industry, optimizing attendee sign ups and engagement.
+        I&apos;ve worked with non-profits, coaches, trainers, professionals and small buisnesses.
         </span>
         <span className="flex mt-2">
         I Have 6 web developer cetifications granted by Google, Amazon Web Services, Meta, and Bloomtech.</span>
         <span className="flex mt-2">
-        I'm here to help you launch quickly and start seeing results from day one.</span>
+        I&apos;m here to help you launch quickly and start seeing results from day one.</span>
         </p>    
 
           

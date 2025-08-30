@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
 // ----------------------------- Types -----------------------------

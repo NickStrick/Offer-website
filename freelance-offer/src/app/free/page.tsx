@@ -14,7 +14,6 @@ import About from "./components/About";
 import Footer from "../components/Footer";
 import ClaimBtnModal from "./components/FreeOfferModal";
 
-import { useLanguage } from "../context/LanguageContext";
 import { useRouter } from "next/navigation";
 
 type EventItem = {
@@ -36,6 +35,7 @@ type EventItem = {
 export default function Home2() {
   const [eventList, setEvents] = useState<EventItem[]>([]);
   const [rawJSON, setRawJSON] = useState(JSON.stringify({ events: eventList }));
+  console.log("rawJSON", rawJSON);
 
   useEffect(() => {
     async function fetchEvents() {
@@ -54,8 +54,6 @@ export default function Home2() {
 
     fetchEvents();
   }, []);
-
-  const { language } = useLanguage();
   const router = useRouter();
   return (
     <main className="min-h-screen bg-neutral-900 text-white">

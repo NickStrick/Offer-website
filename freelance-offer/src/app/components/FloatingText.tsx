@@ -1,8 +1,7 @@
 
 "use client";
-import { useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 import backgroundImage2 from "../../../public/colorsky.jpg"; // Adjust the path as needed
 

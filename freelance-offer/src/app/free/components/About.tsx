@@ -129,7 +129,7 @@ export default function About() {
           </h2>
           <p className="text-lg">I’m Nick—a full-stack developer who builds booking sites, professional profile sites and funnels for coaches, professionals, and event organziers. 
             <span className="flex mt-2">
-            In my 8 years of event industry experience as a website lead, I\'ve built projects focused on converting traffic to clients, and improving conversion based on monthly analytics.
+            In my 8 years of event industry experience as a website lead, I&apos;ve built projects focused on converting traffic to clients, and improving conversion based on monthly analytics.
             </span>
           </p>
 

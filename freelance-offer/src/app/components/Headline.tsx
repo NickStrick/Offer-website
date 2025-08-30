@@ -1,20 +1,15 @@
 'use client';
 import { motion } from "framer-motion";
-import { useLanguage } from "../context/LanguageContext";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import ClaimBtnModal from "./OfferBtnGroup";
 
-import aboutImg1 from "../../../public/handsSmall.jpg";
 import CTAImage from "../../../public/NStrans.png";
-import Pfp from "../../../public/face.jpg";
 import headBackgorundImage from "../../../public/conserve.jpg";
-// import aboutAwards from "../../../public/awards.png";
 
 export default function Headline() {
   const router = useRouter();
-  const { language } = useLanguage();
 
   return (<>
   <section
