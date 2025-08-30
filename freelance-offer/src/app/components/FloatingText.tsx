@@ -43,7 +43,7 @@ export default function LeadFlowDemo() {
         <h1 className="hero-title text-white above">
         Dedicated to Helping You Get Clients and Attendees
         </h1>
-        <p className="hero-subtitle mt-6">
+        <p className="hero-subtitle mt-6 text-lg">
         Elevate your brand and get your stuff booked with a stunning website and effective digital marketing strategies.
         </p>
       </motion.div>

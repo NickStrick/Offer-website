@@ -29,7 +29,7 @@ export default function About() {
       <h1 className="hero-title text-white drop-shadow-md mb-4">
        {language === 'es' ? 'Para quién es esto' : 'Who this is for'}
       </h1>
-      <p className="hero-subtitle text-green-200 max-w-xl">
+      <p className="hero-subtitle text-green-200 max-w-xl text-lg">
   {language === 'es'
     ? 'Para freelancers, fundadores y pequeñas empresas que necesitan una landing page moderna que convierta y una breve asesoría para afinar su estrategia—sin aprender diseño ni código.'
     : 'For Coaches, founders, and event organizers who need more bookings, on-going analytics and conversion tracking, system to get consistent traffic to your site, a vision for their brand, and a partner that will stop at nothing to make that vision a reality.'}
@@ -90,7 +90,7 @@ export default function About() {
           <h1 className="hero-title text-white drop-shadow-md mb-4">
        {language === 'es' ? 'La solución que necesitas' : 'The Solution you need'}
       </h1>
-      <p className="hero-subtitle text-green-200 max-w-xl">
+      <p className="hero-subtitle text-green-200 max-w-xl text-lg">
         I deliver fast, custom sites with built-in analytics and conversion tracking, plus expert advice to help you get the most out of your web presence. Feature rich, conversion focused, and built to grow with you.
          <span className="flex mt-2">Using our 3 step process:</span>
         <span className="flex mt-2">1. We generate and execute a plan to get traffic flowing to your website.</span>

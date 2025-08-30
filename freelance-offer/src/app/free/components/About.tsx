@@ -29,7 +29,7 @@ export default function About() {
       <h1 className="hero-title text-white drop-shadow-md mb-4">
        {language === 'es' ? 'Para quién es esto' : 'Who this is for'}
       </h1>
-      <p className="hero-subtitle text-green-200 max-w-xl">
+      <p className="hero-subtitle text-green-200 max-w-xl text-lg">
   {language === 'es'
     ? 'Para freelancers, fundadores y pequeñas empresas que necesitan una landing page moderna que convierta y una breve asesoría para afinar su estrategia—sin aprender diseño ni código.'
     : 'For Coaches, freelancers, founders, and event organizers who need a modern, high-converting landing page and a quick strategy tune-up—without learning design or code.'}
@@ -90,7 +90,7 @@ export default function About() {
           <h1 className="hero-title text-white drop-shadow-md mb-4">
        {language === 'es' ? 'La solución que necesitas' : 'The Solution you need'}
       </h1>
-      <p className="hero-subtitle text-green-200 max-w-xl">
+      <p className="hero-subtitle text-green-200 max-w-xl text-lg">
  You’ll get a free landing page you can plug your offer into, plus a free 20-minute consult to map your funnel and quick wins. 
     <span className="flex mt-2">No fine print—if you think i did an awesome job, we can talk next steps and what would improve your existing process afterward.</span>
 </p>

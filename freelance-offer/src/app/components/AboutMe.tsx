@@ -27,7 +27,7 @@ export default function About() {
       <h1 className="hero-title text-white drop-shadow-md mb-4">
        Who we work with
       </h1>
-      <p className="hero-subtitle text-green-200 max-w-xl break-words">
+      <p className="hero-subtitle text-green-200 max-w-xl break-words text-lg">
         Event Organizers, Coaches, and Professionals who need a modern sign-up website or landing page and a way to get traffic.
         <span className="flex mt-2">We&apos;re based in Chicago, and we work with anyone who wants a system to get clients, attenddees, or just eye balls on you and your business.</span>
         <span className="flex mt-2">Whether you&apos;re a independent, a small business, or part of a larger organization, we tailor our services to meet your unique needs and goals.</span>
@@ -89,7 +89,7 @@ export default function About() {
           <h1 className="hero-title text-white drop-shadow-md mb-4">
        What we do
       </h1>
-      <p className="hero-subtitle text-[var(--color-purple)] max-w-xl">
+      <p className="hero-subtitle text-[var(--color-purple)] max-w-xl text-lg">
         We build websites for you with a simple 3-step system to attract, sign up, and keep attendees and clients. 
         Our websites are used for centralized info, and our systems create scalable, reliable ways to get more attendees or clients for you.
 
@@ -125,7 +125,7 @@ export default function About() {
       <h1 className="hero-title text-white drop-shadow-md mb-4">
         Nice to meet you!
       </h1>
-      <p className="hero-subtitle text-green-200 max-w-xl">
+      <p className="hero-subtitle text-green-200 max-w-xl text-lg">
         Hi, I&apos;m Nick Stricker, a full-stack developer and buisness student based in Chicago. I deliver digital solutions for coaches, professionals, and event organizers.
         <span className="flex mt-2">I&apos;ve spent the last 8 years building websites professionally with a variety of clients. 5 of those years have been in the event industry, optimizing attendee sign ups and engagement.
         I&apos;ve worked with non-profits, coaches, trainers, professionals and small buisnesses.
