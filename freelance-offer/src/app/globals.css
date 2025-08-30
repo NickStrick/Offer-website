@@ -183,18 +183,12 @@ p {
   .hero-title {
     @apply text-3xl;
   }
-  .hero-subtitle {
-    @apply text-sm;
-  }
   .btn-gold {
     @apply px-3 py-2 text-xs;
   }
 }
 
 @media (max-width: 360px) {
-  .hero-subtitle {
-    @apply text-xs;
-  }
   .btn-gold {
     @apply px-2 py-1 text-xs;
   }
