@@ -5,13 +5,7 @@ import { motion } from "framer-motion";
 
 import backgroundImage2 from "../../../public/colorsky.jpg"; // Adjust the path as needed
 
-// ----------------------------- Types -----------------------------
-export type Lead = {
-  firstName: string;
-  lastName: string;
-  email: string;
-};
-export default function LeadFlowDemo() {
+export default function FloatingText() {
 
   // Removed keyboard shortcut; open by button only
   useEffect(() => {

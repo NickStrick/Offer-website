@@ -37,7 +37,7 @@ export default function About() {
 
           
     </motion.div>
-    <motion.div className="md:w-1/2 max-w-[500px] mt-2 flex justify-center flex-row flex-nowrap px-2 gradient-border-right"
+    <motion.div className="max-w-[500px] mt-2 flex justify-center flex-row flex-nowrap px-2 gradient-border-right"
       initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
@@ -58,7 +58,7 @@ export default function About() {
   </section>
   <section className="bg-gradient-black-dark pb-10 hero-section section-half-height pt-4 flex flex-col md:flex-row items-center justify-center h-screen text-center md:text-left px-2 md:px-6 gap-8">
     {/* Left: Image */}
-    <motion.div className="md:w-1/2 max-w-[500px] mt-2 flex justify-center flex-row flex-nowrap px-2 gradient-border-left"
+    <motion.div className="max-w-[500px] mt-2 flex justify-center flex-row flex-nowrap px-2 gradient-border-left"
       initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
