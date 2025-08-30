@@ -155,7 +155,7 @@ export default function About() {
           <p className="text-lg">
             Chicago is our base of operations, I like to meet my clients in person and get to know them before we work together. 
             <span className="flex mt-2">As partners, we bring your vision to life, and help you make informed descisions based on data. 
-            </span><span className="flex mt-2">I will use my experience to guide the project towards what works for you and your buisness, while staying true to your vision.  </span>
+            </span><span className="flex mt-2">I will use my experience to guide the project towards what works for you and your business, while staying true to your vision.  </span>
           </p>
 
         </motion.div>

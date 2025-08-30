@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Stricker Digital",
-  description: "Free website created by a seasoned professional.",
+  description: "Websites & Business strategies created by a seasoned professional.",
 };
 
 export default function RootLayout({

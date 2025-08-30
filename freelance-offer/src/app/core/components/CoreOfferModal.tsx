@@ -172,7 +172,7 @@ export function LeadCaptureModal({
                   rows={3}
                   onChange={(e) => setValues({ ...values, description: e.target.value })}
                   className="mt-1 w-full rounded-xl border p-2 pt-4 pb-4 border-orange-500 focus:outline-none shadow-md"
-                  placeholder="Tell us about your buisness, your dream website or app, and what your goals are."
+                  placeholder="Tell us about your business, your dream website or app, and what your goals are."
                 />
               </label>
 
@@ -335,7 +335,7 @@ export default function LeadFlowDemo() {
         bookCallUrl=""
         headline="Great, we're excited to get started!"
         bullets={[
-          "Features specific to you and your buisness",
+          "Features specific to you and your business",
           "Customized design and professional branding",
           "Advanced analytics and tracking setup",
           "Prime SEO and performance optimization",
