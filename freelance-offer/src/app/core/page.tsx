@@ -15,6 +15,7 @@ import Footer from "../components/Footer";
 import ClaimBtnModal from "./components/CoreOfferModal";
 
 import { useLanguage } from "../context/LanguageContext";
+import { useRouter } from "next/navigation";
 
 type EventItem = {
   date: string;
@@ -56,11 +57,12 @@ export default function Home2() {
   }, []);
 
   const { language } = useLanguage();
+  const router = useRouter();
   console.log("language", language);
   return (
     <main className="min-h-screen bg-neutral-900 text-white">
       <section
-      className="hero-section bg-fixed section-half-height min-h-[30vh] max-h-[30vh] md:min-h-[40vh] md:max-h-[40vh] sm:bg-[length:135%] bg-[100%_calc(50%-60px)] sm:bg-[100%_calc(50%-40px)] bg-cover "
+      className="hero-section offer-headline bg-fixed section-half-height min-h-[40vh] max-h-[40vh] sm:bg-[length:135%] sm:bg-[100%_calc(50%-20px)] bg-cover bg-[50%_calc(50%-45px)]"
       style={{
         backgroundImage: `url(${backgroundImage.src})`,
         // backgroundSize: "cover",
@@ -80,7 +82,7 @@ export default function Home2() {
        
         <h1 className="text-2xl md:text-4xl font-bold mb-4 ml-[0] sm:ml-[230px] mt-[80px] sm:mt-[0px]">I Deliver Fully Custom, Feature Rich, Conversion focused websites.</h1>
       </motion.div>
-       <Image src={CTAImage} alt="LinkedIn" className="w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} />
+        <Image src={CTAImage} alt="stricker Ditial" className="z-2 cursor-pointer w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} onClick={() => router.push("/")}/>
     </section>
       
 <ClaimBtnModal />

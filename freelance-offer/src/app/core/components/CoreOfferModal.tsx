@@ -141,7 +141,7 @@ export function LeadCaptureModal({
                     onChange={(e) => setValues({ ...values, firstName: e.target.value })}
                     className="mt-1 w-full rounded-xl border p-2 pt-4 pb-4 border-orange-500 focus:outline-none shadow-lg"
                     placeholder="First name"
-                    autoFocus
+                    
                   />
                 </label>
 
@@ -306,14 +306,14 @@ export default function LeadFlowDemo() {
       viewport={{ once: true }}
       transition={{ duration: 1, ease: "easeInOut" }}>
       <div className="max-w-4xl text-center">
-        <h1 className=" text-1xl md:text-3xl font-extrabold tracking-tight">{`Sign up and together we\'ll build your dream website for your buisness, program, or profile. `}</h1>
+        <h1 className=" text-2xl md:text-3xl font-extrabold tracking-tight">{`We build your dream website for you`}</h1>
         <button
           onClick={() => setShowLead(true)}
           className="btn-gradient mt-10 mb-3 w-full transition-all duration-300 ease-in-out text-2xl md:text-3xl  px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
         >
           Grab your spot
         </button>
-        <div className="mt-10 text-gray-300 text-1xl md:text-2xl">Customized just for you. Conversions & analytics tracking. Expert advice to get the most out of your web page. Unlimied pages & revisions</div>
+        <div className="mt-2 text-gray-300 text-md md:text-xl">Customized just for you. Processes to garuntee success. Traffic & click tracking. Expert advice to get the most out of your web page. Unlimied pages & revisions</div>
         
       </div>
 

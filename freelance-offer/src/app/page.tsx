@@ -4,15 +4,12 @@ import Image from "next/image";
 // import dynamic from 'next/dynamic';
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-// const InstagramEmbed = dynamic(() => import('./components/InstagramEmbed'), {
-//   ssr: false,
-// });
-import CTAImage from "../../public/NStrans.png"; // Adjust the path as needed
-import backgroundImage from "../../public/pfp5.jpg"; // Adjust the path as needed
-import About from "./components/About";
+import AboutMe from "./components/AboutMe";
+import FloatingText from "./components/FloatingText";
 // import Tiers from "./components/TieredMonthlyOffers";
 import Footer from "./components/Footer";
-import ClaimBtnModal from "./components/FreeOfferModal";
+import ClaimBtnModal from "./components/OfferBtnGroup";
+import Headline from "./components/Headline";
 
 import { useLanguage } from "./context/LanguageContext";
 
@@ -58,35 +55,11 @@ export default function Home2() {
   console.log("language", language, rawJSON);
   return (
     <main className="min-h-screen bg-neutral-900 text-white">
-      <section
-      className="hero-section bg-fixed section-half-height min-h-[40vh] max-h-[40vh] sm:bg-[length:135%] sm:bg-[100%_calc(50%-10px)] bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${backgroundImage.src})`,
-        // backgroundSize: "cover",
-        // backgroundPosition: "calc(50% - 70px) calc(50% - 20px)",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      {/* Overlay tint for contrast */}
-      <div className="hero-overlay absolute inset-0 z-0" />
-
-      {/* Hero content */}
-      <motion.div className=" z-[0] relative px-4 max-w-3xl mx-auto text-center"
-      initial={{ opacity: 0, y: -70 }}
-      animate={{ opacity: 1.2, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1, ease: "easeInOut" }}>
-       
-        <h1 className="text-2xl md:text-4xl font-bold mb-4 ml-[0] sm:ml-[230px] mt-[80px] sm:mt-[0px]">“{`Rooted in resilience and creativity, his work speaks for it\'s self`}”</h1>
-      </motion.div>
-       <Image src={CTAImage} alt="LinkedIn" className="w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} />
-    </section>
-      
-<ClaimBtnModal />
-<About />
-<ClaimBtnModal />
-{/* <Tiers /> */}
-<Footer />
+      <Headline />
+      <AboutMe />
+      <FloatingText />
+      <ClaimBtnModal />
+      <Footer />
     </main>
   );
 }

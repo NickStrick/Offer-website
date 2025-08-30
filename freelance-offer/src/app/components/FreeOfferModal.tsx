@@ -136,7 +136,7 @@ export function LeadCaptureModal({
                     onChange={(e) => setValues({ ...values, firstName: e.target.value })}
                     className="mt-1 w-full rounded-xl border p-2 pt-4 pb-4 border-orange-500 focus:outline-none shadow-lg"
                     placeholder="First name"
-                    autoFocus
+                    
                   />
                 </label>
 
@@ -301,8 +301,8 @@ export default function LeadFlowDemo() {
       viewport={{ once: true }}
       transition={{ duration: 1, ease: "easeInOut" }}>
       <div className="max-w-2xl text-center">
-        <h1 className="ttext-1xl md:text-3xl font-extrabold tracking-tight">Free landing page, Free call and consultation</h1>
-        <div className="mt-2 text-gray-300 text-1xl md:text-2xl">Get your free landing page, or a free call plus an ROI & conversion assessment.</div>
+         <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">Free landing page, Free call and consultation</h1>
+        <div className="mt-2 text-gray-300 text-xl md:text-2xl">Get your free landing page, plus a free call and project assessment.</div>
         <button
           onClick={() => setShowLead(true)}
           className="btn-gradient mt-10 w-full transition-all duration-300 ease-in-out text-2xl md:text-3xl px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"

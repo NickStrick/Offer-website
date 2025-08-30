@@ -55,11 +55,41 @@ p {
   cursor: grab;
   background-color: rgba(107, 33, 168, 0.9); /* yellow hover */
 }
+.gradient-text {
+  /* font-size: 3rem; */
+  font-weight: bold;
+  background: linear-gradient(180deg, var(--color-purple), var(--color-purple),var(--color-highlight), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* for Firefox */
+}
+.gradient-border-right {
+  padding: 4px; /* thickness of border */
+  padding-bottom:0;
+  padding-left: 0;
+  border-radius: 12px; /* rounded corners */
+  background: linear-gradient(90deg, var(--color-purple), var(--color-purple),var(--color-highlight), var(--color-accent));
+}
+.gradient-border-left {
+  padding: 4px; /* thickness of border */
+  padding-top:0;
+  padding-right: 0;
+  border-radius: 12px; /* rounded corners */
+  background: linear-gradient(-90deg, var(--color-purple), var(--color-purple),var(--color-highlight), var(--color-accent));
+}
+
+.gradient-border-inner {
+  border-radius: 10px; /* slightly smaller than parent */
+  padding: 0px;
+}
 /* ============================
    Hero Section
    ============================ */
+.hero-section:not(.offer-headline) {
+  @apply bg-center ;
+}
 .hero-section {
-  @apply relative h-screen bg-cover bg-center flex items-center justify-center text-center;
+  @apply relative h-screen bg-cover flex items-center justify-center text-center;
 }
 .section-half-height{
   @apply h-fit min-h-[45vh];
