@@ -6,6 +6,7 @@ import FloatingText from "./components/FloatingText";
 import Footer from "./components/Footer";
 import ClaimBtnModal from "./components/OfferBtnGroup";
 import Headline from "./components/Headline";
+import Share from "./components/Share";
 
 import { useLanguage } from "./context/LanguageContext";
 
@@ -55,6 +56,7 @@ export default function Home2() {
       <AboutMe />
       <FloatingText />
       <ClaimBtnModal />
+      <Share />
       <Footer />
     </main>
   );
