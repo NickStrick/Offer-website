@@ -11,7 +11,6 @@ import { QRCodeCanvas } from "qrcode.react";
 
 export type ShareProps = {
   id?: string;
-  title?: string;
   subtitle?: string;
   /** If not provided, we use window.location.href on mount */
   value?: string;
@@ -23,7 +22,6 @@ export type ShareProps = {
 
 export default function Share({
   id = "share",
-  title = "Share this page",
   subtitle = "Scan the QR code or use the buttons below to share.",
   value,
   size = 220,
@@ -78,8 +76,6 @@ export default function Share({
     <section id={id} className="section bg-gradient-purple-black pt-2">
       <div className="mx-auto max-w-4xl px-4">
         <header className="mb-8 text-center">
-          {/* <span className="h-eyebrow inline-block">Share</span>
-          <h2 className="h-display mt-2">{title}</h2> */}
           {subtitle && (
             <p className="mt-3 h-hero-p opacity-80 max-w-2xl mx-auto">{subtitle}</p>
           )}
