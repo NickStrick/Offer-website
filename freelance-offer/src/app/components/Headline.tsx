@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import ClaimBtnModal from "./OfferBtnGroup";
 
-import CTAImage from "../../../public/NStrans.png";
+import CTAImage from "../../../public/SDLogoTrans.png";
 import headBackgorundImage from "../../../public/conserve.jpg";
 
 export default function Headline() {
@@ -36,7 +36,7 @@ export default function Headline() {
         </h1>
       </motion.div>
       
-       <Image src={CTAImage} alt="stricker Ditial" className="z-2 w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} onClick={() => router.push("/")}/>
+       <Image src={CTAImage} alt="stricker Ditial" className="p-6 z-2 w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} onClick={() => router.push("/")}/>
     </section>
     <ClaimBtnModal />
   

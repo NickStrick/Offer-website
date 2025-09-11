@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 // const InstagramEmbed = dynamic(() => import('./components/InstagramEmbed'), {
 //   ssr: false,
 // });
-import CTAImage from "../../../public/NStrans.png"; // Adjust the path as needed
+import CTAImage from "../../../public/SDLogoTrans.png"; // Adjust the path as needed
 import backgroundImage from "../../../public/pfp5.jpg"; // Adjust the path as needed
 
 import About from "./components/About";
@@ -82,7 +82,7 @@ export default function Home2() {
        
         <h1 className="text-2xl md:text-4xl font-bold mb-4 ml-[0] sm:ml-[230px] mt-[80px] sm:mt-[0px]">I Deliver Fully Custom, Feature Rich, Conversion focused websites.</h1>
       </motion.div>
-        <Image src={CTAImage} alt="stricker Ditial" className="z-2 cursor-pointer w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} onClick={() => router.push("/")}/>
+        <Image src={CTAImage} alt="stricker Ditial" className="p-6 z-2 cursor-pointer w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} onClick={() => router.push("/")}/>
     </section>
       
 <ClaimBtnModal />

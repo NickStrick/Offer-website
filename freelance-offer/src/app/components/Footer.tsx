@@ -1,7 +1,7 @@
 'use client';
 import Link from "next/link";
 import Image from "next/image";
-import CTAImage from "../../../public/NStrans.png";
+import CTAImage from "../../../public/SDLogoTrans.png";
 
 import { useLanguage } from "../context/LanguageContext";
 
