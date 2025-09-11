@@ -22,7 +22,7 @@ export type ShareProps = {
 
 export default function Share({
   id = "share",
-  subtitle = "Scan the QR code or use the buttons below to share.",
+  subtitle = "Scan the QR code below to share this website in person",
   value,
   size = 220,
   showOpen = false,
@@ -84,8 +84,9 @@ export default function Share({
         <div className="grid gap-2 sm:grid-cols-2 items-center">
           <div className="card p-6 sm:p-8 text-center">
             {/* The QRCodeCanvas renders a <canvas>; capture it for download */}
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center ">
               <QRCodeCanvas
+              className="rounded-[10px]"
                 value={url || ""}
                 size={size}
                 includeMargin

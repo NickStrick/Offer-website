@@ -17,6 +17,7 @@
   --color-blue: #264BB4;
   --bg-purple:#2b1031;
   --bg-dark: #1c1c1c;
+   --bg-accent: #744100;
 }
 
 /* ============================
@@ -292,6 +293,24 @@ p {
     animation: btnunhover 2s ;
     animation-play-state: paused;
 }
+.btn-inverted {
+    @apply inline-block px-8 py-4  font-bold text-white uppercase tracking-wide rounded-full transition duration-300;
+    /* background-image: linear-gradient(to right, var(--color-purple), var(--color-highlight)); */
+    background-image: linear-gradient(
+        to right,
+        var(--bg-dark) 0%,
+        var(--bg-accent) 40%,
+        var(--bg-accent) 50%,
+        var(--bg-dark) 100%
+    );
+    background-size: calc(200% + 4px) calc(100% + 4px);
+    border:2px solid var(--bg-accent);
+    outline:2px solid transparent;
+    background-position: 0% 0%;
+    animation: btnunhover 2s ;
+    animation-play-state: paused;
+    
+}
 @keyframes btnunhover {
     0% {
         background-position: 0% 0%;
@@ -331,6 +350,11 @@ p {
   }
 
   .btn-gradient:hover {
+      border-color: var(--color-accent);
+      cursor: pointer;
+       animation: btnhover 2s forwards;
+  }
+  .btn-inverted:hover {
       border-color: var(--color-accent);
       cursor: pointer;
        animation: btnhover 2s forwards;
