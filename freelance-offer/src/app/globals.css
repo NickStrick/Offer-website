@@ -18,7 +18,13 @@
   --bg-purple:#2b1031;
   --bg-dark: #1c1c1c;
    --bg-accent: #744100;
+   --primary:#F4A336;
+   --text-1:white;
+   --fg: rgb(115 115 115 / var(--tw-text-opacity, 1));
+   --bg: #1c1c1c;
 }
+.hide-scrollbar { scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
 
 /* ============================
    Base Styles
@@ -158,6 +164,7 @@ p {
     margin-right: auto;
     transform: translateX(15px);
 }
+.test-section { padding: clamp(3.2rem, 6.2vw, 6rem) 1rem; color:var(--text-1)}
 
 /* ============================
    Responsive Typography
@@ -276,6 +283,25 @@ p {
   .text-blue {
     color: var(--color-blue) !important;
   }
+.card-green {
+    @apply inline-block px-8 py-4  font-bold text-white  tracking-wide transition duration-300;
+    /* background-image: linear-gradient(to right, var(--color-purple), var(--color-highlight)); */
+    background-image: linear-gradient(
+        to right,
+        var(--bg-dark) 0%,
+        var(--color-purple) 70%,
+        var(--color-purple) 80%,
+        var(--bg-dark) 100%
+    );
+    background-size: calc(200% + 4px) calc(100% + 4px);
+    border:2px solid var(--color-purple);
+    outline:2px solid transparent;
+    background-position: 0% 100%;
+    animation: btnunhover 2s ;
+    animation-play-state: paused;
+    
+}
+
   .btn-gradient {
     @apply inline-block px-8 py-4  font-bold text-white uppercase tracking-wide rounded-full transition duration-300;
     /* background-image: linear-gradient(to right, var(--color-purple), var(--color-highlight)); */

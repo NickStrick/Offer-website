@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import ClaimBtnModal from "./components/OfferBtnGroup";
 import Headline from "./components/Headline";
 import Share from "./components/Share";
+import Testimonals from "./components/Testimonials";
 
 import { useLanguage } from "./context/LanguageContext";
 
@@ -25,7 +26,11 @@ type EventItem = {
     featuring: ["Angelica Saavedra", "Sian Duprey", "Rudy Lozano Jr."]
   }
 ]); */
-
+let myTestimonialList = [
+  {quote:'Nick does an amazing job', name:'Jose Ortiz'},
+  {quote:'Nick does an amazing job', name:'Jose Ortiz'},
+  {quote:'Nick does an amazing job', name:'Jose Ortiz'}
+]
 export default function Home2() {
   const [eventList, setEvents] = useState<EventItem[]>([]);
   const [rawJSON, setRawJSON] = useState(JSON.stringify({ events: eventList }));
@@ -55,6 +60,19 @@ export default function Home2() {
       <Headline />
       <AboutMe />
       <FloatingText />
+      <Testimonals {...{
+  type:"testimonials",
+  title : 'Reviews & Testimonials',
+  subtitle : 'This is what our previous clients had to say about us.',
+  items : myTestimonialList,
+  style : {
+variant: "carousel",
+columns: 3,
+showQuoteIcon: true,
+rounded: "xl",
+background: "default",
+},
+}} />
       <ClaimBtnModal />
       <Share />
       <Footer />

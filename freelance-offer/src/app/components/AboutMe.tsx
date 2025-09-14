@@ -126,7 +126,7 @@ export default function About() {
         Nice to meet you!
       </h1>
       <p className="hero-subtitle text-green-200 max-w-xl text-lg">
-        Hi, I&apos;m Nick Stricker, a full-stack developer and business student based in Chicago. I deliver digital solutions for coaches, professionals, and event organizers.
+        Hi, I&apos;m Nick Stricker, a full-stack developer, digital marketer and business student based in Chicago. I deliver digital solutions for coaches, professionals, and event organizers.
         <span className="flex mt-2">I&apos;ve spent the last 8 years building websites professionally with a variety of clients. 5 of those years have been in the event industry, optimizing attendee sign ups and engagement.
         I&apos;ve worked with non-profits, coaches, trainers, professionals and small businesses.
         </span>
