@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { useLanguage } from "../../context/LanguageContext";
 import Image from "next/image";
 
+import HelperBtnGroup from "../../components/HelperBtnGroup";
+
 import aboutImg1 from "../../../../public/meetingbox.jpg";
 import aboutImg2 from "../../../../public/features.png";
 import backgroundImage2 from "../../../../public/city.jpg";
@@ -100,6 +102,7 @@ export default function About() {
     </motion.div>
     
   </section>
+   <HelperBtnGroup />
     <section
       className="hero-section bg-fixed"
       style={{
