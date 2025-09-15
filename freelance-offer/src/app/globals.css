@@ -11,6 +11,7 @@
    --color-highlight: #c57104;
   --color-higherlight: #43dacd;
   --color-accent: #F4A336;
+   --color-extra-accent: #ffbb29;
   --color-white: #ffffff;
   /* --color-purple: #8C2AA3; */
   --color-purple: #1ea100;
@@ -65,10 +66,30 @@ p {
 .gradient-text {
   /* font-size: 3rem; */
   font-weight: bold;
-  background: linear-gradient(180deg, var(--color-purple), var(--color-purple),var(--color-highlight), var(--color-accent));
-  -webkit-background-clip: text;
+  /* background: linear-gradient(180deg, var(--color-accent), var(--color-accent), var(--color-extra-accent), var(--color-extra-accent)); */
+  color: white;
+  /* -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text; /* for Firefox */
+  background-clip: text; for Firefox */
+   text-shadow:
+    -2px -2px 0 black,
+     2px -2px 0 black,
+    -2px  2px 0 black,
+     2px  2px 0 black,
+     0   -2px 0 black,
+     0    2px 0 black,
+    -2px  0   0 black,
+     2px  0   0 black;
+}
+.leaf{
+  top: -97px;
+  left:90px;
+}
+@media (max-width: 768px) {
+.leaf{
+  top: -42px;
+  left:25%;
+}
 }
 .gradient-border-right {
   padding: 4px; /* thickness of border */
@@ -258,10 +279,11 @@ p {
      background: linear-gradient(to bottom, var(--bg-purple) 5%, var(--bg-dark) 100%);
   }
   .text-muted {
-    @apply text-neutral-500;
+    /* @apply text-neutral-500; */
+    color:rgb(215 115 15 / var(--tw-text-opacity, 1));
   }
   .text-muted {
-    @apply text-neutral-500;
+     color:rgb(215 115 15 / var(--tw-text-opacity, 1));
   }
 
   .text-highlight {
@@ -299,6 +321,25 @@ p {
     background-position: 0% 100%;
     animation: btnunhover 2s ;
     animation-play-state: paused;
+    
+}
+.card-white {
+    @apply inline-block px-8 py-4  font-bold text-black  tracking-wide transition duration-300 rounded-2xl;
+    /* background-image: linear-gradient(to right, var(--color-purple), var(--color-highlight)); */
+    background-image: linear-gradient(
+        to right,
+        rgba(225,225,225,0.565) 0%,
+        whitesmoke 70%,
+        whitesmoke 80%,
+        rgba(225,225,225,0.565) 100%
+    );
+    background-size: calc(200% + 4px) calc(100% + 4px);
+    border:2px solid white;
+    outline:2px solid transparent;
+    background-position: 0% 100%;
+    animation: btnunhover 2s ;
+    animation-play-state: paused;
+    font-weight: bold
     
 }
 
@@ -414,6 +455,11 @@ p {
   .hero-subtitle {
     @apply text-base sm:text-lg font-normal text-white opacity-95 mt-6;
   }
+  .floating-text{
+    position: relative;
+    -webkit-text-stroke: 4px black;
+paint-order: stroke fill;
+  }
 
   .hero-highlight {
     @apply text-[color:var(--color-accent)];
@@ -425,7 +471,7 @@ p {
   @apply w-fit mx-auto
 }
   .hero-overlay {
-    @apply absolute inset-0 bg-black/55;
+    @apply absolute inset-0 bg-black/25;
   }
 
   .above {

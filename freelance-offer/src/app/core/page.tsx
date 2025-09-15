@@ -80,7 +80,9 @@ export default function Home2() {
       viewport={{ once: true }}
       transition={{ duration: 1, ease: "easeInOut" }}>
        
-        <h1 className="text-2xl md:text-4xl font-bold mb-4 ml-[0] sm:ml-[230px] mt-[80px] sm:mt-[0px]">I Deliver Fully Custom, Feature Rich, Conversion focused websites.</h1>
+        <h1 className="floating-text text-2xl md:text-4xl font-bold mb-4 ml-[0] sm:ml-[230px] mt-[80px] sm:mt-[0px]"
+        data-text={`I Deliver Fully Custom, Conversion focused websites. With marketing strategies that leave lasting results.`}>
+          I Deliver Fully Custom, Conversion focused websites. With marketing strategies that leave lasting results.</h1>
       </motion.div>
         <Image src={CTAImage} alt="stricker Ditial" className="p-6 z-2 cursor-pointer w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} onClick={() => router.push("/")}/>
     </section>

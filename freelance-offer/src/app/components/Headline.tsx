@@ -6,7 +6,9 @@ import { useRouter } from "next/navigation";
 import ClaimBtnModal from "./OfferBtnGroup";
 
 import CTAImage from "../../../public/SDLogoTrans.png";
-import headBackgorundImage from "../../../public/conserve.jpg";
+import BannerImg from "../../../public/SDText.png";
+import Leafs from "../../../public/SDLogoLeafs.png";
+import headBackgorundImage from "../../../public/colorsky.jpg";
 
 export default function Headline() {
   const router = useRouter();
@@ -30,13 +32,16 @@ export default function Headline() {
       animate={{ opacity: 1.2, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 1, ease: "easeInOut" }}>
-       
-        <h1 className="text-3xl md:text-5xl font-bold mb-4 mr-[0]  mt-[80px] sm:mt-[0px]">Stricker Digital  
+        <div className="relative mx-auto mt-10">
+        <Image src={BannerImg} alt="stricker Ditial Banner" className="border-2 border-solid border-[var(--color-purple)] z-2 w-[300px] md:w-[600px] h-auto rounded-full ease-in-out mx-auto" height={520} width={1840}  priority={true}/>
+        <Image src={Leafs} alt="stricker Ditial Logo leafs" className="md:p-6 z-1 w-[60px] md:w-[150px] h-100 ease-in-out absolute leaf" height={150} width={150} />
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold mb-4 mr-[0]  mt-[80px] sm:mt-[0px]">
           <span className="flex text-3xl md:text-5xl pb-[5px] mt-[20px] gradient-text">Your Web & Business Partner</span>
         </h1>
       </motion.div>
       
-       <Image src={CTAImage} alt="stricker Ditial" className="md:p-6 z-2 w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} onClick={() => router.push("/")}/>
+       <Image src={CTAImage} alt="stricker Ditial Logo" className="md:p-6 z-2 w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} onClick={() => router.push("/")}/>
     </section>
     <ClaimBtnModal />
   

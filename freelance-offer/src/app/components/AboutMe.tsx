@@ -1,6 +1,7 @@
 'use client';
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 import aboutImg1 from "../../../public/citysquare.jpg";
 import aboutImg2 from "../../../public/smallGroup.jpg";
@@ -54,7 +55,7 @@ export default function About() {
       /></div>
     </motion.div>
   </section>
-  <section className="bg-gradient-purple-black hero-section section-half-height pt-4  flex flex-col md:flex-row items-center justify-center h-screen text-center md:text-left px-2 md:px-6 gap-8">
+  <section className="bg-gradient-purple-black hero-section section-half-height py-4  flex flex-col md:flex-row items-center justify-center h-screen text-center md:text-left px-2 md:px-6 gap-8">
     {/* Left: Image */}
     <motion.div className="max-w-[500px] mt-2 flex justify-center flex-row flex-nowrap px-2 gradient-border-left"
       initial="hidden"
@@ -108,7 +109,7 @@ export default function About() {
     
   </section>
   
-  <section id="Headline"  className="bg-gradient-black-dark hero-section pt-4 pb-10 section-half-height flex flex-col md:flex-row items-center justify-center h-screen text-center md:text-left px-2 md:px-6 gap-8">
+  <section id="Headline"  className="bg-gradient-black-dark hero-section py-4 -mt-2 pt-10 pb-10 section-half-height flex flex-col md:flex-row items-center justify-center h-screen text-center md:text-left px-2 md:px-6 gap-8">
     {/* Left: Image */}
     
   
@@ -138,7 +139,7 @@ export default function About() {
 
           
     </motion.div>
-    <motion.div className=" max-w-[500px] mt-2 flex justify-center flex-row flex-nowrap px-2 gradient-border"
+    <motion.div className=" max-w-[500px] mt-2 flex justify-center flex-col flex-nowrap px-2 gradient-border"
       initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
@@ -155,6 +156,14 @@ export default function About() {
         alt="Connecting the Dots"
         className="w-auto shadow-lg max-h-[80vh] object-cover rounded-full"
       /></div>
+      <div className="card p-6 z-10">
+              {/* <h3 className="text-xl font-semibold">Quick actions</h3> */}
+              <div className=" flex justify-center flex-wrap gap-3 flex-col">
+                <Link href="https://www.nickolasstricker.com/projects" target="_blank" className="btn btn-inverted">Previous Projects</Link>
+                <Link href="https://www.nickolasstricker.com/skills#certificate" target="_blank" className="btn btn-inverted">Certifications</Link>
+                <Link href="/#testimonials" className="btn btn-inverted">Reviews</Link>
+              </div>
+            </div>
     </motion.div>
   </section>
     </>

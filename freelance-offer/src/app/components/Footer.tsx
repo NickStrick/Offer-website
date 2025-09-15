@@ -26,7 +26,7 @@ export default function Footer() {
             {language === 'es' ? 'Inicio' : 'Free Stuff'}
           </Link>
           <Link href="/core" className="hover:text-green-600 transition">
-            {language === 'es' ? 'Acerca de' : 'Full Package'}
+            {language === 'es' ? 'Acerca de' : 'Traffic System'}
           </Link>
           <Link href="https://www.nickolasstricker.com" className="hover:text-green-600 transition">
             {language === 'es' ? 'Acerca de' : 'Portfolio'}

@@ -11,6 +11,13 @@ import Testimonals from "./components/Testimonials";
 
 import { useLanguage } from "./context/LanguageContext";
 
+import josePhoto from "../../public/testimonials/jose-headshot.jpg"
+import connorPhoto from "../../public/testimonials/connor-headshot.png"
+import lukePhoto from "../../public/testimonials/luke-headshot.jpg"
+import fernandoPhoto from "../../public/testimonials/fernando-headshot.jpg"
+import carolePhoto from "../../public/testimonials/carole-headshot.png"
+import amandaPhoto from "../../public/testimonials/amanda-headshot.jpg"
+
 type EventItem = {
   date: string;
   title: { en: string; es: string };
@@ -26,10 +33,43 @@ type EventItem = {
     featuring: ["Angelica Saavedra", "Sian Duprey", "Rudy Lozano Jr."]
   }
 ]); */
-let myTestimonialList = [
-  {quote:'Nick does an amazing job', name:'Jose Ortiz'},
-  {quote:'Nick does an amazing job', name:'Jose Ortiz'},
-  {quote:'Nick does an amazing job', name:'Jose Ortiz'}
+const myTestimonialList = [
+  {
+    quote:'Nick is a great web developer who takes his job seriously and is willing to meet his clients where they are at. He makes the working relationship enjoyable and provides great recommendations and feedback. He has tremendous attention to detail and has a creative mind. I highly recommend reaching to Nick for anything related to web development and assistance with other related services.', 
+    name:'Jose Ortiz', 
+    role:'Co-Founder of Connecting Dots for Latinx Professionals',
+    avatarUrl:josePhoto.src
+  },
+    {
+      quote:'Nick is an outstanding professional. He is knowledge, skillful, responsible, detailed oriented, and all around a supportive and very cool guy. I highly recommend reaching out to Nick if you need a dynamic website that addresses your company\'s need.', 
+      name:'Fernando Rayas', 
+      role:'Co-Founder of Connecting Dots for Latinx Professionals',
+      avatarUrl:fernandoPhoto.src
+    },
+  {
+    quote:'Took an idea a created what I imagined just by him understanding what my business needed through our conversations. I loved the visual accents, instant awareness to the Customer of toggles and info points that he included.', 
+    name:'Carole Murray', 
+    role: 'Founder of CM Florals',
+    avatarUrl:carolePhoto.src
+  },
+   {
+    quote:'Nick had my professional profile website running in 2 days, in time for my book release! Outstanding communication, delivery, and expertise.', 
+    role:'Board Certified Behavior Analyst', 
+    name:'Amanda Grau',
+    avatarUrl:amandaPhoto.src
+  },
+  {
+    quote:'Perfect For all my coaching needs, Nick knew exactly what i needed for my private coaching business and gave me the most perfect personalized website for me.', 
+    role:'Private Baseball Hitting Coach', 
+    name:'Luke Stricker',
+    avatarUrl:lukePhoto.src
+  },
+  {
+    role:'Stage Guitarist, Music Teacher', 
+    quote:'Nick nailed my vision from the get go. I highly reccomend him. The perfect solution to market my music teaching, and promote my bands.', 
+    name:'Connor M',
+    avatarUrl:connorPhoto.src
+  }
 ]
 export default function Home2() {
   const [eventList, setEvents] = useState<EventItem[]>([]);
@@ -52,7 +92,11 @@ export default function Home2() {
 
     fetchEvents();
   }, []);
-
+  const btnGroup2Props = {
+  customClass: 'bg-gradient-purple-black',
+  title: 'Built in days, not weeks.',
+  subtext: 'What takes others months to build, we build for you in mere days!'
+}
   const { language } = useLanguage();
   console.log("language", language, rawJSON);
   return (
@@ -67,13 +111,13 @@ export default function Home2() {
   items : myTestimonialList,
   style : {
 variant: "carousel",
-columns: 3,
+columns: 2,
 showQuoteIcon: true,
 rounded: "xl",
 background: "default",
 },
 }} />
-      <ClaimBtnModal />
+      <ClaimBtnModal  {...btnGroup2Props}/>
       <Share />
       <Footer />
     </main>

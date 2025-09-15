@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 
-import backgroundImage2 from "../../../public/colorsky.jpg"; // Adjust the path as needed
+import backgroundImage2 from "../../../public/conserve.jpg"; // Adjust the path as needed
 
 export default function FloatingText() {
 
@@ -34,10 +34,10 @@ export default function FloatingText() {
         hidden: { opacity: 0, x: 70 },
         visible: { opacity: 1, x: 0 },
       }}>
-        <h1 className="hero-title text-white above">
+        <h1 className="hero-title text-white above floating-text">
         Dedicated to Helping You Get Clients and Attendees
         </h1>
-        <p className="hero-subtitle mt-6 text-lg">
+        <p className="hero-subtitle mt-6 text-lg floating-text">
         Elevate your brand and get your stuff booked with a stunning website and effective digital marketing strategies.
         </p>
       </motion.div>

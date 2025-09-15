@@ -42,16 +42,12 @@ return (
 );
 }
 
-let myTestimonialList = [
-  {quote:'Nick does an amazing job', name:'Jose Ortiz'},
-  {quote:'Nick does an amazing job', name:'Jose Ortiz'},
-  {quote:'Nick does an amazing job', name:'Jose Ortiz'}
-]
+
 
 export default function Testimonials({
   title = 'Reviews & Testimonials',
   subtitle = 'This is what our previous clients had to say about us.',
-  items = myTestimonialList,
+  items = [],
   style = {},
 }: TestimonialsSection) {
   const {
@@ -59,13 +55,12 @@ export default function Testimonials({
     columns = 3,
     showQuoteIcon = true,
     rounded = 'xl',
-    background = 'default',
   } = style || {};
 
   const cardBase =
-    'p-6 md:p-7 bg-accent-1 shadow-md card-green';
+    'p-6 pb-8 md:p-7 md:pb-9 bg-accent-1 shadow-md card-green';
   const cardInk =
-    'p-6 md:p-7 text-[var(--text-1)] bg-[var(--primary)] shadow-lg';
+    'p-6 pb-8 md:p-7 md:pb-9 text-[var(--text-1)] bg-[var(--primary)] shadow-lg';
   const radius =
     rounded === '2xl' ? 'rounded-3xl' : rounded === 'lg' ? 'rounded-xl' : 'rounded-2xl';
 
@@ -93,11 +88,10 @@ export default function Testimonials({
 
   return (
     <section
+    id="testimonials"
       className={[
-        'test-section !pb-[6rem]',
-        background === 'band'
-          ? 'bg-[color-mix(in_srgb,var(--primary)_8%,transparent)]'
-          : '',
+        'bg-gradient-black-purple  test-section !pb-[6rem]',
+        '',
       ].join(' ')}
     >
       <AnimatedSection className="mx-auto max-w-6xl">
