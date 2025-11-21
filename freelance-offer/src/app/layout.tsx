@@ -17,8 +17,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.strickerdigital.com"),
   title: "Stricker Digital",
-  description: "Websites & Business strategies created by a seasoned professional.",
+  description: "Website & Marketing strategies tailored to you by a seasoned professional.",
+  openGraph: {
+    title: "Stricker Digital",
+    description: "Website & Marketing strategies tailored to you by a seasoned professional.",
+    url: "https://www.strickerdigital.com",
+    siteName: "Stricker Digital",
+    images: [
+      {
+        url: "/SDLogocircle.png",   // your image in /public
+        width: 1200,
+        height: 1200,
+        alt: "Stricker Digital Logo",
+      },
+    ],
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Stricker Digital",
+    description: "Website & Marketing strategies tailored to you by a seasoned professional.",
+    images: ["/SDLogocircle.png"],
+  },
 };
 
 export default function RootLayout({
