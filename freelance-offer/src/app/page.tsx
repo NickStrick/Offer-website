@@ -15,6 +15,7 @@ import josePhoto from "../../public/testimonials/jose-headshot.jpg"
 import connorPhoto from "../../public/testimonials/connor-headshot.png"
 import lukePhoto from "../../public/testimonials/luke-headshot.jpg"
 import fernandoPhoto from "../../public/testimonials/fernando-headshot.jpg"
+import lukeRottaPhoto from "../../public/testimonials/lukerotta.jpg"
 import carolePhoto from "../../public/testimonials/carole-headshot.png"
 import amandaPhoto from "../../public/testimonials/amanda-headshot.jpg"
 
@@ -40,18 +41,25 @@ const myTestimonialList = [
     role:'Co-Founder of Connecting Dots for Latinx Professionals',
     avatarUrl:josePhoto.src
   },
-    {
-      quote:'Nick is an outstanding professional. He is knowledge, skillful, responsible, detailed oriented, and all around a supportive and very cool guy. I highly recommend reaching out to Nick if you need a dynamic website that addresses your company\'s need.', 
-      name:'Fernando Rayas', 
-      role:'Co-Founder of Connecting Dots for Latinx Professionals',
-      avatarUrl:fernandoPhoto.src
-    },
+    
   {
     quote:'Took an idea a created what I imagined just by him understanding what my business needed through our conversations. I loved the visual accents, instant awareness to the Customer of toggles and info points that he included.', 
     name:'Carole Murray', 
     role: 'Founder of CM Florals',
     avatarUrl:carolePhoto.src
   },
+  {
+      quote:'Nick provided expert advice for my web design and digital marketing strategy. He was professional, efficient, and delivered high-quality work on time. I highly recommend his services to anyone looking to enhance their online presence.', 
+      name:'Luke Rotta', 
+      role:'Founder of Redtail Luxe',
+      avatarUrl:lukeRottaPhoto.src
+    },
+  {
+      quote:'Nick is an outstanding professional. He is knowledge, skillful, responsible, detailed oriented, and all around a supportive and very cool guy. I highly recommend reaching out to Nick if you need a dynamic website that addresses your company\'s need.', 
+      name:'Fernando Rayas', 
+      role:'Co-Founder of Connecting Dots for Latinx Professionals',
+      avatarUrl:fernandoPhoto.src
+    },
    {
     quote:'Nick had my professional profile website running in 2 days, in time for my book release! Outstanding communication, delivery, and expertise.', 
     role:'Board Certified Behavior Analyst', 

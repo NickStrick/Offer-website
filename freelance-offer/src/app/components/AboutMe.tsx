@@ -101,7 +101,7 @@ export default function About() {
           Systems to track data, allowing us to determine what’s holding you back and make improvements.
         </span> */}
         <span className="flex mt-2">
-          Completely done for you and at no risk with a money back guarantee. The end result being something that lives on it&apos;s own and customization for you or your team to edit the content completely to your liking.
+          Completely done for you first time setup, and fully customizable afterwards. First month free and at no risk with a money back guarantee. The end result being something that lives on it&apos;s own and customization for you or your team to edit the content completely to your liking.
         </span>
       </p>
 
