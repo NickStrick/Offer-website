@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from 'next/script'
@@ -61,8 +62,10 @@ export default function RootLayout({
       ><LanguageProvider>
         <main className="overflow-hidden">{children}</main>
       </LanguageProvider>
-      {/* Google ANalytics  */}
-      <AnalyticsListener />
+      {/* Google Analytics */}
+      <Suspense fallback={null}>
+        <AnalyticsListener />
+      </Suspense>
         {GA_ID ? (
           <>
             <Script

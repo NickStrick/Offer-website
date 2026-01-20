@@ -1,10 +1,10 @@
 'use client';
 import { motion } from "framer-motion";
-import { useLanguage } from "../../context/LanguageContext";
+// import { useLanguage } from "../../context/LanguageContext";
 // import Image from "next/image";
 
 export default function ClaimButton() {
-    const { language } = useLanguage();
+    // const { language } = useLanguage();
 
     const handleClick = () => {
         console.log("Claim button clicked");

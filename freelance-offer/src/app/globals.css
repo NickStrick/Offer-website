@@ -15,6 +15,8 @@
   --color-white: #ffffff;
   /* --color-purple: #8C2AA3; */
   --color-purple: #1ea100;
+  --color-green: #1ea100;
+  --color-green-neon: #4fff28;
   --color-blue: #264BB4;
   --bg-purple:#2b1031;
   --bg-dark: #1c1c1c;
@@ -82,8 +84,8 @@ p {
      2px  0   0 black;
 }
 .leaf{
-  top: -97px;
-  left:90px;
+  top: -37px;
+  right:-20px;
 }
 @media (max-width: 768px) {
 .leaf{
@@ -499,3 +501,28 @@ paint-order: stroke fill;
     @apply w-auto min-w-[300px] flex flex-col text-left;
   }
 } 
+
+.gradient-text-color {
+  /* gradient “paint” */
+  background-image: linear-gradient(
+        to right,
+        white 0%,
+        var(--color-green-neon) 40%,
+        var(--color-green-neon) 50%,
+        white 100%
+    );
+  background-size: 200% 100%;
+
+  /* apply background to text */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-bottom: 15px;
+
+  /* animation */
+}
+
+@keyframes gradient-move {
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
+}
