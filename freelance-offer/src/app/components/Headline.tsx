@@ -32,7 +32,7 @@ export default function Headline() {
       viewport={{ once: true }}
       transition={{ duration: 1, ease: "easeInOut" }}>
         <div className="relative mx-auto mt-10">
-          <h1 className="text-6xl md:text-7xl font-bold mb-4 mr-[0]  mt-[80px] sm:mt-[0px] gradient-text-color ml-[-60px]">
+          <h1 className="text-6xl md:text-7xl font-bold mb-4 mr-[0]  mt-[80px] sm:mt-[0px] gradient-text-color md:ml-[-60px]">
               Stricker Digital
             </h1>
         {/* <Image src={BannerImg} alt="stricker Ditial Banner" className="border-2 border-solid border-[var(--color-purple)] z-2 w-[300px] md:w-[600px] h-auto rounded-full ease-in-out mx-auto" height={520} width={1840}  priority={true}/> */}
