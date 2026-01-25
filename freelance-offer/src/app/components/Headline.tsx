@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import ClaimBtnModal from "./OfferBtnGroup";
-
 import CTAImage from "../../../public/SDLogoTrans.png";
 import Leafs from "../../../public/SDLogoLeafs.png";
 import headBackgorundImage from "../../../public/colorsky.jpg";

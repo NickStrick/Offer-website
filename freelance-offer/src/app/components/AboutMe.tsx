@@ -7,6 +7,7 @@ import aboutImg1 from "../../../public/citysquare.jpg";
 import aboutImg2 from "../../../public/smallGroup.jpg";
 import Pfp from "../../../public/face.jpg";
 // import aboutAwards from "../../../public/awards.png";
+import Socials from "./Socials";
 
 export default function About() {
 
@@ -147,7 +148,7 @@ export default function About() {
         variants={{
           hidden: { opacity: 0, x: 70 },
           visible: { opacity: 1, x: 0 },
-        }}><div className="gradient-border-inner">
+        }}><div className="gradient-border-inner flex justify-center">
       <Image
       priority={true}
       width={300}
@@ -158,12 +159,14 @@ export default function About() {
       /></div>
       <div className="card p-6 z-10">
               {/* <h3 className="text-xl font-semibold">Quick actions</h3> */}
+              <Socials />
               <div className=" flex justify-center flex-wrap gap-3 flex-col">
                 <Link href="https://www.nickolasstricker.com/projects" target="_blank" className="btn btn-inverted">Previous Projects</Link>
                 <Link href="https://www.nickolasstricker.com/skills#certificate" target="_blank" className="btn btn-inverted">Certifications</Link>
                 <Link href="/#testimonials" className="btn btn-inverted">Reviews</Link>
               </div>
             </div>
+            
     </motion.div>
   </section>
     </>

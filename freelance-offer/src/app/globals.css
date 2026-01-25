@@ -334,9 +334,10 @@ p {
         rgba(225,225,225,0.565) 0%,
         whitesmoke 70%,
         whitesmoke 80%,
-        rgba(225,225,225,0.565) 100%
+        /* rgba(225,225,225,0.565) 100% */
+        whitesmoke 100%
     );
-    background-size: calc(200% + 4px) calc(100% + 4px);
+    background-size: calc(115% + 4px) calc(100% + 4px);
     border:2px solid white;
     outline:2px solid transparent;
     background-position: 0% 100%;
@@ -369,12 +370,12 @@ p {
     background-image: linear-gradient(
         to right,
         var(--bg-dark) 0%,
-        var(--bg-accent) 40%,
-        var(--bg-accent) 50%,
+        var(--color-purple) 40%,
+        var(--color-purple) 50%,
         var(--bg-dark) 100%
     );
     background-size: calc(200% + 4px) calc(100% + 4px);
-    border:2px solid var(--bg-accent);
+    border:2px solid var(--color-purple);
     outline:2px solid transparent;
     background-position: 0% 0%;
     animation: btnunhover 2s ;

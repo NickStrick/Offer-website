@@ -3,6 +3,13 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+
+import Pfp from "../../../public/face.jpg";
+
+import Socails from "./Socials"
+
+
 
 export default function FloatingText() {
 
@@ -22,6 +29,7 @@ export default function FloatingText() {
           hidden: { opacity: 0, x: 70 },
           visible: { opacity: 1, x: 0 },
         }}>
+          
         <div className="card p-6 z-2 text-center">
             <h1 className=" text-2xl md:text-3xl font-extrabold tracking-tight mb-8">Learn more about us</h1>
             <div className=" flex justify-center flex-wrap gap-3 flex-row">
@@ -30,6 +38,16 @@ export default function FloatingText() {
                 <Link href="/#testimonials" className="btn min-w-[245px]  btn-inverted">Reviews</Link>
             </div>
         </div>
+        <div className="gradient-border-inner flex justify-center">
+      <Image
+      priority={true}
+      width={120}
+      height={120}
+        src={Pfp.src}
+        alt="Connecting the Dots"
+        className="w-auto shadow-lg max-h-[80vh] object-cover rounded-full"
+      /></div>
+      <Socails />
     </motion.div>
     </section>
     )

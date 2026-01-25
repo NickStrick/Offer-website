@@ -19,7 +19,6 @@ import { useRouter } from "next/navigation";
 
 import {SeperatorWave} from '../components/SeperatorWave';
 const topWaveType = '1-hill'
-const bottomWaveType = '1-hill'
 
 type EventItem = {
   date: string;
