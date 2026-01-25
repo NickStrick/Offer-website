@@ -37,7 +37,8 @@ export default function Headline() {
         <Image src={Leafs} alt="stricker Ditial Logo leafs" className="md:p-6 z-1 w-[60px] md:w-[150px] h-100 ease-in-out absolute leaf" height={150} width={150} />
         </div>
         <h1 className="text-3xl md:text-5xl font-bold mb-4 mr-[0]  mt-[80px] sm:mt-[0px]">
-          <span className="flex text-3xl md:text-5xl pb-[5px] mt-[20px] gradient-text">Your Web & Business Partner</span>
+          <span className="flex text-3xl md:text-5xl pb-[5px] mt-[20px] gradient-text">
+            Grow the right way. Your Web & Marketing Partner</span>
         </h1>
       </motion.div>
       
