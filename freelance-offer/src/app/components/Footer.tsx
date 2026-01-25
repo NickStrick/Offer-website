@@ -22,8 +22,11 @@ export default function Footer() {
           <Link href="/" className="hover:text-green-600 transition">
             {language === 'es' ? 'Inicio' : 'Home'}
           </Link>
-          <Link href="/free" className="hover:text-green-600 transition">
+          {/* <Link href="/free" className="hover:text-green-600 transition">
             {language === 'es' ? 'Inicio' : 'Free Stuff'}
+          </Link> */}
+          <Link href="/custom-website" className="hover:text-green-600 transition">
+            {language === 'es' ? '' : 'Custom Site'}
           </Link>
           <Link href="/core" className="hover:text-green-600 transition">
             {language === 'es' ? 'Acerca de' : 'Traffic System'}
