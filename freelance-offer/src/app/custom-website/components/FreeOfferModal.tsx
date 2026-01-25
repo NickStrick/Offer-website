@@ -302,7 +302,7 @@ export default function LeadFlowDemo() {
       transition={{ duration: 1, ease: "easeInOut" }}>
       <div className="max-w-2xl text-center">
         <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">Webstie setup and customization, First month free!</h1>
-        <div className="mt-2 text-gray-300 text-xl md:text-2xl">$5 a month, or $50 a year. First time setup done for you, fully customizable 24/7 </div>
+        <div className="mt-2 text-gray-300 text-xl md:text-2xl">after first month, $5 a month, or $50 a year. First time setup done for you, fully customizable 24/7 </div>
         <button
           onClick={() => setShowLead(true)}
           className="btn-gradient mt-10 w-full transition-all duration-300 ease-in-out text-2xl md:text-3xl px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"

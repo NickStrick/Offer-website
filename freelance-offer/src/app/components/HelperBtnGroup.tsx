@@ -12,7 +12,7 @@ export default function FloatingText() {
   }, []);
 
   return (
-    <section className="bg-gradient-black-purple text-white px-6 py-20">
+    <section className="bg-gradient-black-purple text-white px-6 py-20 mt-[-2px]">
    <motion.div className=" mt-2 flex justify-center flex-col flex-nowrap px-2 gradient-border"
       initial="hidden"
         whileInView="visible"

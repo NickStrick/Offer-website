@@ -16,6 +16,10 @@ import ClaimBtnModal from "./components/FreeOfferModal";
 
 import { useRouter } from "next/navigation";
 
+import {SeperatorWave} from '../components/SeperatorWave';
+const topWaveType = '1-hill'
+const bottomWaveType = '1-hill'
+
 type EventItem = {
   date: string;
   title: { en: string; es: string };
@@ -80,6 +84,7 @@ export default function Home2() {
       </motion.div>
        <Image src={CTAImage} alt="stricker Ditial" className="p-6 z-2 cursor-pointer w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} onClick={() => router.push("/")}/>
     </section>
+    <SeperatorWave type={topWaveType} flip={false} color={'var(--bg-wave)'} />
       
 <ClaimBtnModal />
 <About />

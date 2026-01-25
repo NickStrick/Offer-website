@@ -25,6 +25,7 @@
    --text-1:white;
    --fg: rgb(115 115 115 / var(--tw-text-opacity, 1));
    --bg: #1c1c1c;
+   --bg-wave: black;
 }
 .hide-scrollbar { scrollbar-width: none; }
 .hide-scrollbar::-webkit-scrollbar { display: none; }
@@ -525,4 +526,28 @@ paint-order: stroke fill;
 @keyframes gradient-move {
   from { background-position: 0% 50%; }
   to   { background-position: 100% 50%; }
+}
+
+.bottom-wave{
+  position: absolute;
+    width: 100vw;
+    z-index: 3;
+    margin-top: -5px;
+}
+.bg-solid-primary .bottom-wave{
+    margin-top: 1.3rem;
+}
+
+.top-wave{
+  position: absolute;
+    width: 100vw;
+    z-index: 2;
+   bottom: calc(100% - 5px);
+}
+.bottom-wave svg, .top-wave svg{
+    width: 100%;
+}
+#About{
+  padding-bottom: 20px;
+  margin-bottom: -4px;
 }

@@ -8,6 +8,7 @@ import ClaimBtnModal from "./components/OfferBtnGroup";
 import Headline from "./components/Headline";
 import Share from "./components/Share";
 import Testimonals from "./components/Testimonials";
+import {SeperatorWave} from './components/SeperatorWave';
 
 import { useLanguage } from "./context/LanguageContext";
 
@@ -34,6 +35,8 @@ type EventItem = {
     featuring: ["Angelica Saavedra", "Sian Duprey", "Rudy Lozano Jr."]
   }
 ]); */
+const topWaveType = '1-hill'
+const bottomWaveType = '1-hill'
 const myTestimonialList = [
   {
     quote:'Nick is a great web developer who takes his job seriously and is willing to meet his clients where they are at. He makes the working relationship enjoyable and provides great recommendations and feedback. He has tremendous attention to detail and has a creative mind. I highly recommend reaching to Nick for anything related to web development and assistance with other related services.', 
@@ -110,8 +113,12 @@ export default function Home2() {
   return (
     <main className="min-h-screen bg-neutral-900 text-white">
       <Headline />
+      <SeperatorWave type={topWaveType} flip={false} color={'var(--bg-wave)'} />
+      <ClaimBtnModal />
       <AboutMe />
+      <SeperatorWave type={bottomWaveType} flip={true} color={'var(--bg-wave)'} />
       <FloatingText />
+      <SeperatorWave type={topWaveType} flip={false} color={'var(--bg-wave)'} />
       <Testimonals {...{
   type:"testimonials",
   title : 'Reviews & Testimonials',

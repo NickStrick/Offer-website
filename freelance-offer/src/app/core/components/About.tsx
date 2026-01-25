@@ -9,6 +9,9 @@ import aboutImg1 from "../../../../public/meetingbox.jpg";
 import aboutImg2 from "../../../../public/features.png";
 import backgroundImage2 from "../../../../public/city.jpg";
 // import aboutAwards from "../../../public/awards.png";
+import {SeperatorWave} from '../../components/SeperatorWave';
+const topWaveType = '1-hill'
+const bottomWaveType = '1-hill'
 
 export default function About() {
   const { language } = useLanguage();
@@ -103,13 +106,14 @@ export default function About() {
     
   </section>
    <HelperBtnGroup />
+   <SeperatorWave type={bottomWaveType} flip={true} color={'var(--bg)'} />
     <section
       className="hero-section bg-fixed"
       style={{
         backgroundImage: `url(${backgroundImage2.src})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        minHeight: "400px",
+        minHeight: "600px",
         height: "fit-content",
       }}
     >
@@ -168,6 +172,7 @@ export default function About() {
 
       </div>
     </section>
+    <SeperatorWave type={topWaveType} flip={false} color={'var(--bg-wave)'} />
     </>
   );
 }
