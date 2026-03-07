@@ -38,18 +38,24 @@ export default function LeadFlowDemo({customClass='bg-gradient-black-purple', ti
           >
             Free Website
           </Link> */}
-          <Link href="/custom-website"
+          {/* <Link href="/custom-website"
             className="min-w-[100%] sm:min-w-[385px] btn-gradient  w-full transition-all duration-300 ease-in-out text-2xl md:text-2xl px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
           >
            Customizable Website
-          </Link>
-          <Link href="/core"
-            className="min-w-[100%] sm:min-w-[385px] btn-gradient w-full transition-all duration-300 ease-in-out text-2xl md:text-2xl px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
-          >
-            Traffic System
-          </Link>
-        </div>
-      </div>
+           </Link>
+           <Link href="/core"
+             className="min-w-[100%] sm:min-w-[385px] btn-gradient w-full transition-all duration-300 ease-in-out text-2xl md:text-2xl px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
+           >
+             Traffic System
+           </Link> */}
+           <Link
+             href="/FloristOffer"
+             className="min-w-[100%] sm:min-w-[385px] btn-gradient w-full transition-all duration-300 ease-in-out text-2xl md:text-2xl px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
+           >
+             Florist Offer
+           </Link>
+         </div>
+       </div>
       </motion.div>
     </div>
     

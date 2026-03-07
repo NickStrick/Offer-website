@@ -18,6 +18,7 @@ export type ShareProps = {
   size?: number; // default 220
   /** Add a CTA button to open the link (useful on desktop for preview) */
   showOpen?: boolean;
+  className?: string;
 };
 
 export default function Share({
@@ -26,6 +27,7 @@ export default function Share({
   value,
   size = 220,
   showOpen = false,
+  className = 'bg-gradient-purple-black'
 }: ShareProps) {
   const [url, setUrl] = useState<string>(value ?? "");
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -73,7 +75,7 @@ export default function Share({
   };
 
   return (
-    <section id={id} className="section bg-gradient-purple-black pt-2">
+    <section id={id} className={`section pt-2 ${className}`}>
       <div className="mx-auto max-w-4xl px-4">
         <header className="mb-8 text-center">
           {subtitle && (

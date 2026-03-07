@@ -7,7 +7,13 @@ import CTAImage from "../../../public/SDLogoTrans.png";
 import Leafs from "../../../public/SDLogoLeafs.png";
 import headBackgorundImage from "../../../public/colorsky.jpg";
 
-export default function Headline() {
+type HeadlineProps = {
+  headlineText?: string;
+};
+
+export default function Headline({
+  headlineText = "Grow the right way. Your Web & Business Partner",
+}: HeadlineProps) {
   const router = useRouter();
 
   return (<>
@@ -35,12 +41,12 @@ export default function Headline() {
             </h1>
         {/* <Image src={BannerImg} alt="stricker Ditial Banner" className="border-2 border-solid border-[var(--color-purple)] z-2 w-[300px] md:w-[600px] h-auto rounded-full ease-in-out mx-auto" height={520} width={1840}  priority={true}/> */}
         <Image src={Leafs} alt="stricker Ditial Logo leafs" className="md:p-6 z-1 w-[60px] md:w-[150px] h-100 ease-in-out absolute leaf" height={150} width={150} />
-        </div>
-        <h1 className="text-3xl md:text-5xl font-bold mb-4 mr-[0]  mt-[80px] sm:mt-[0px]">
-          <span className="flex text-3xl md:text-5xl pb-[5px] mt-[20px] gradient-text">
-            Grow the right way. Your Web & Marketing Partner</span>
-        </h1>
-      </motion.div>
+         </div>
+         <h1 className="text-3xl md:text-5xl font-bold mb-4 mr-[0]  mb-[20px] sm:mt-[0px]">
+           <span className="flex text-3xl md:text-5xl pb-[5px] mt-[20px] gradient-text">
+            {headlineText}</span>
+         </h1>
+       </motion.div>
       
        <Image src={CTAImage} alt="stricker Ditial Logo" className="md:p-6 z-2 w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} onClick={() => router.push("/")}/>
     </section>

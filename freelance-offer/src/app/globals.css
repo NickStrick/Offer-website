@@ -587,3 +587,21 @@ paint-order: stroke fill;
   padding-bottom: 20px;
   margin-bottom: -4px;
 }
+.bg-blurred{
+  backdrop-filter:blur(8px);
+}
+.bg-sky{
+      background-image: url(/_next/static/media/colorsky.11502f4a.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.price-card{
+  display:flex;
+  flex-direction: column;
+  
+}
+.price-card .btn-container{
+  padding-top:30px;
+  margin-top:auto;
+}
