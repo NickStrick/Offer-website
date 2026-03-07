@@ -3,7 +3,6 @@ import Headline from "../components/Headline";
 import Footer from "../components/Footer";
 import Share from "../components/Share";
 import Testimonials from "../components/Testimonials";
-import HelperBtnGroup from "../components/HelperBtnGroup";
 import { SeperatorWave } from "../components/SeperatorWave";
 import RevenueReviewCTA from "./components/RevenueReviewCTA";
 import FAQ, { type FAQItem } from "./components/FAQ";
@@ -16,7 +15,6 @@ import josePhoto from "../../../public/testimonials/jose-headshot.jpg";
 import lukeRottaPhoto from "../../../public/testimonials/lukerotta.jpg";
 
 const topWaveType = "1-hill";
-const bottomWaveType = "1-hill";
 
 const BOOK_REVIEW_URL = "https://calendly.com/nickstrickerbiz/30min";
 
