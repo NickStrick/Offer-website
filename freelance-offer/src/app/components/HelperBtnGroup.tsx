@@ -9,9 +9,15 @@ import Pfp from "../../../public/face.jpg";
 
 import Socails from "./Socials"
 
+type HelperBtnGroupProps = {
+  reviewsHref?: string;
+};
 
 
-export default function FloatingText() {
+
+export default function HelperBtnGroup({
+  reviewsHref = "/#testimonials",
+}: HelperBtnGroupProps) {
 
   // Removed keyboard shortcut; open by button only
   useEffect(() => {
@@ -35,7 +41,7 @@ export default function FloatingText() {
             <div className=" flex justify-center flex-wrap gap-3 flex-row">
                 <Link href="https://www.nickolasstricker.com/projects" target="_blank" className="btn min-w-[245px]  btn-inverted">Previous Projects</Link>
                 <Link href="https://www.nickolasstricker.com/skills#certificate" target="_blank" className="btn min-w-[245px]  btn-inverted">Certifications</Link>
-                <Link href="/#testimonials" className="btn min-w-[245px]  btn-inverted">Reviews</Link>
+                <Link href={reviewsHref} className="btn min-w-[245px]  btn-inverted">Reviews</Link>
             </div>
         </div>
         <div className="gradient-border-inner flex justify-center">

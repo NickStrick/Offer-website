@@ -3,9 +3,11 @@ import Headline from "../components/Headline";
 import Footer from "../components/Footer";
 import Share from "../components/Share";
 import Testimonials from "../components/Testimonials";
+import HelperBtnGroup from "../components/HelperBtnGroup";
 import { SeperatorWave } from "../components/SeperatorWave";
 import RevenueReviewCTA from "./components/RevenueReviewCTA";
 import FAQ, { type FAQItem } from "./components/FAQ";
+import About from "./components/About";
 
 import headBackgorundImage from "../../../public/colorsky.jpg";
 
@@ -382,6 +384,9 @@ export default function FloristOfferPage() {
         secondaryHref="#tiers"
       />
 
+      {/* <HelperBtnGroup reviewsHref="#testimonials" /> */}
+      <About />
+
       <Testimonials
         {...{
           type: "testimonials",
@@ -413,4 +418,3 @@ export default function FloristOfferPage() {
     </main>
   );
 }
-
