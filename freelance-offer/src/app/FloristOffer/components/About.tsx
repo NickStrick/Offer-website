@@ -48,7 +48,7 @@ export default function About() {
           <h2 className="text-3xl font-bold text-black mb-4">
             {language === 'es' ? 'Quiénes somos' : 'Who We Are'}
           </h2>
-          <p className="text-lg text-black">I’m Nick—a full-stack developer who builds booking sites, professional profile sites and funnels for coaches, professionals, and event organziers. 
+          <p className="text-lg text-black">I’m Nick—a full-stack developer who builds websites and online business solutions for local Flower and gift shops. 
             <span className="flex mt-2">
             In my 8 years of event industry experience as a website lead, I&apos;ve built projects focused on converting traffic to clients, and improving conversion based on monthly analytics.
             </span>

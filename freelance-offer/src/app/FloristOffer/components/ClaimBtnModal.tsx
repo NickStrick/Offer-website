@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // ----------------------------- Types -----------------------------
@@ -14,6 +14,7 @@ type LeadCaptureModalProps = {
   onClose: () => void;
   onSuccess: (lead: Lead) => void;
   submitUrl?: string; // Google Forms formResponse URL
+  bookCallUrl?: string;
 };
 
 export function LeadCaptureModal({
@@ -21,6 +22,7 @@ export function LeadCaptureModal({
   onClose,
   onSuccess,
   submitUrl,
+  bookCallUrl,
 }: LeadCaptureModalProps) {
   const [values, setValues] = useState<Lead>({ firstName: "", lastName: "", email: "" });
   const [loading, setLoading] = useState(false);
@@ -44,7 +46,6 @@ export function LeadCaptureModal({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (isDisabled) return;
-
     try {
       setLoading(true);
       setError(null);
@@ -81,6 +82,11 @@ export function LeadCaptureModal({
       }
 
       onSuccess(values);
+      console.log(bookCallUrl)
+      if (bookCallUrl && typeof window !== "undefined") {
+        // window.open(bookCallUrl, "_blank", "noopener");
+        window.location.href = bookCallUrl
+      }
     } catch (err: unknown) {
        if (err instanceof Error) {
           setError(err?.message || "Something went wrong. Please try again.");
@@ -122,9 +128,12 @@ export function LeadCaptureModal({
                 ✕
               </button>
             </div>
-            <h4 className="text-4xl font-bold text-black text-center flex-1 mt-4 mb-8">REGISTER NOW</h4>
+            <h4 className="text-4xl font-bold text-black text-center flex-1 mt-4 mb-6">
+              Book Your Free 10-Minute Revenue Review
+            </h4>
             <p className="mt-1 text-gray-600">
-              Enter your details. We will contact you & schedule your free stuff.
+              Enter your info so I can confirm your slot. After you submit, you&apos;ll be taken to the
+              scheduling page.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-5 space-y-4">
@@ -135,7 +144,7 @@ export function LeadCaptureModal({
                     value={values.firstName}
                     onChange={(e) => setValues({ ...values, firstName: e.target.value })}
                     className="mt-1 w-full rounded-xl border p-2 pt-4 pb-4 border-orange-500 focus:outline-none shadow-lg"
-                    placeholder="First name"
+                    placeholder="Company Name"
                     
                   />
                 </label>
@@ -146,7 +155,7 @@ export function LeadCaptureModal({
                     value={values.lastName}
                     onChange={(e) => setValues({ ...values, lastName: e.target.value })}
                     className="mt-1 w-full rounded-xl border p-2 pt-4 pb-4 border-orange-500 focus:outline-none shadow-lg"
-                    placeholder="Last name"
+                    placeholder="Current Website"
                   />
                 </label>
               </div>
@@ -157,7 +166,7 @@ export function LeadCaptureModal({
                   value={values.email}
                   onChange={(e) => setValues({ ...values, email: e.target.value })}
                   className="mt-1 w-full rounded-xl border p-2 pt-4 pb-4 border-orange-500 focus:outline-none shadow-md"
-                  placeholder="Your Best Email"
+                  placeholder="Your Best Business Email"
                 />
               </label>
 
@@ -172,7 +181,7 @@ export function LeadCaptureModal({
                 disabled={isDisabled}
                 className="btn-gradient text-3xl w-full transition-all duration-300 ease-in-out px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-claim-hover hover:text-[var(--color-accent)]"
               >
-                {loading ? "Claiming…" : "YES! Claim my stuff"}
+                {loading ? "Submitting…" : "Continue to scheduling →"}
               </button>
 
               <p className="text-center text-xs text-gray-500">
@@ -193,21 +202,19 @@ type UpgradeCTAModalProps = {
   onClose: () => void;
   headline?: string;
   bullets?: string[];
-  coreOfferUrl?: string;
   bookCallUrl?: string;
 };
 
 export function UpgradeCTAModal({
   open,
   onClose,
-  headline = "Level up with the full program",
+  headline = "Thanks — now pick a time",
   bullets = [
-    "Everything in the free pack, expanded and structured",
-    "Templates, walkthroughs, and lifetime updates",
-    "Community Q&A and support",
+    "A quick look at what’s costing you orders",
+    "2–3 fast improvements you can implement",
+    "Clear recommendation for your next step",
   ],
-  coreOfferUrl = "/buy",
-  bookCallUrl,
+  bookCallUrl = "https://calendly.com/strickerdigital/30-min-website-consult",
 }: UpgradeCTAModalProps) {
   return (
     <AnimatePresence>
@@ -239,9 +246,8 @@ export function UpgradeCTAModal({
               </button>
             </div>
             <h4 className="text-4xl font-bold text-black text-center flex-1 mt-4 mb-2">{headline}</h4>
-            <h4 className="text-4xl font-bold text-black text-center flex-1 mt-1 mb-8">Want more?</h4>
             <p className="mt-1 text-gray-600">
-              You’ve got the free pack! Now take the next step to unlock the full potential of your professional website.
+              If a new tab didn’t open automatically, use the button below to pick a time.
             </p>
 
             <ul className="mt-4 grid list-disc gap-2 pl-5 text-gray-800 text-left">
@@ -253,8 +259,8 @@ export function UpgradeCTAModal({
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               
                <a
-                href={coreOfferUrl}
-                className="btn-gradient w-full transition-all duration-300 ease-in-out px-16 py-3 text-xs rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
+                href={bookCallUrl}
+                className="hidden btn-gradient w-full transition-all duration-300 ease-in-out px-16 py-3 text-xs rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
               >
                 See the full program →
               </a>
@@ -269,9 +275,11 @@ export function UpgradeCTAModal({
             {bookCallUrl && (
               <a
                 href={bookCallUrl}
-                className="mt-3 block text-center text-sm font-medium text-gray-600 underline hover:text-gray-800"
+                target="_blank"
+                rel="noreferrer"
+                className="btn-gradient mt-3 block w-full rounded-full px-6 py-3 text-center text-sm font-semibold"
               >
-                Need more help or want to talk it through? Book a quick call.
+                Schedule my free review â†’
               </a>
             )}
           </motion.div>
@@ -283,33 +291,28 @@ export function UpgradeCTAModal({
 
 // ---------------------------- Demo Flow ----------------------------
 
-export default function LeadFlowDemo() {
+export type ClaimBtnModalHandle = {
+  openLead: () => void;
+};
+
+const ClaimBtnModal = forwardRef<ClaimBtnModalHandle>(function ClaimBtnModal(_props, ref) {
   const [showLead, setShowLead] = useState(false);
   const [showCTA, setShowCTA] = useState(false);
+  const bookCallUrl = "https://calendly.com/strickerdigital/30-min-website-consult";
 
   // Removed keyboard shortcut; open by button only
   useEffect(() => {
     return () => {};
   }, []);
 
+  useImperativeHandle(ref, () => ({
+    openLead: () => setShowLead(true),
+  }));
+
   return (
-    
-    <div className="flex min-h-[50vh] items-center justify-center p-6 bg-gradient-black-purple ">
-      <motion.div className=" z-1  max-w-3xl mx-auto text-center"
-      initial={{ opacity: 0, y: 70 }}
-      animate={{ opacity: 1.2, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1, ease: "easeInOut" }}>
-      <div className="max-w-2xl text-center">
-         <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">Free landing page, Free call and consultation</h1>
-        <div className="mt-2 text-gray-300 text-xl md:text-2xl">Get your free landing page, plus a free call and project assessment.</div>
-        <button
-          onClick={() => setShowLead(true)}
-          className="btn-gradient mt-10 w-full transition-all duration-300 ease-in-out text-2xl md:text-3xl px-16 py-3 rounded-full focus:outline-none bg-purple-custom text-white hover:bg-language-hover"
-        >
-          Claim your free stuff
-        </button>
-      </div>
+     
+     <>
+       
       
 
       <LeadCaptureModal
@@ -317,24 +320,26 @@ export default function LeadFlowDemo() {
         onClose={() => setShowLead(false)}
         onSuccess={() => {
           setShowLead(false);
-          setShowCTA(true);
+          // setShowCTA(true);
         }}
         submitUrl="https://docs.google.com/forms/d/e/1FAIpQLSei5MW9D_2R8OzjDQdy78j_x7Z3Hx0NXO1ohwoljdZ6xHQg9Q/formResponse"
+        bookCallUrl={bookCallUrl}
       />
 
       <UpgradeCTAModal
         open={showCTA}
         onClose={() => setShowCTA(false)}
-        coreOfferUrl="/core"
-        bookCallUrl="https://calendly.com/strickerdigital/30-min-website-consult"
-        headline="Enjoy your free stuff!"
+        bookCallUrl={bookCallUrl}
+        headline="Thanks — now pick a time"
         bullets={[
-          "Step-by-step system to implement fast",
-          "Pro templates and checklists",
-          "Office hours + private community",
+          "A quick look at what’s costing you orders",
+          "2–3 fast improvements you can implement",
+          "Clear recommendation for your next step",
         ]}
-      /></motion.div>
-    </div>
-    
-  );
-}
+       />
+     </>
+     
+   );
+});
+
+export default ClaimBtnModal;

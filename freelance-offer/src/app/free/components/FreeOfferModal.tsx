@@ -326,7 +326,7 @@ export default function LeadFlowDemo() {
         open={showCTA}
         onClose={() => setShowCTA(false)}
         coreOfferUrl="/core"
-        bookCallUrl="https://calendly.com/nickstrickerbiz/30min"
+        bookCallUrl="https://calendly.com/strickerdigital/30-min-website-consult"
         headline="Enjoy your free stuff!"
         bullets={[
           "Step-by-step system to implement fast",

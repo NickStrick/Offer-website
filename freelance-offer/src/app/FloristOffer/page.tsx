@@ -1,4 +1,5 @@
 'use client';
+import { useRef } from "react";
 import Headline from "../components/Headline";
 import Footer from "../components/Footer";
 import Share from "../components/Share";
@@ -7,6 +8,7 @@ import { SeperatorWave } from "../components/SeperatorWave";
 import RevenueReviewCTA from "./components/RevenueReviewCTA";
 import FAQ, { type FAQItem } from "./components/FAQ";
 import About from "./components/About";
+import ClaimBtnModal, { type ClaimBtnModalHandle } from "./components/ClaimBtnModal";
 
 import headBackgorundImage from "../../../public/colorsky.jpg";
 
@@ -15,8 +17,6 @@ import josePhoto from "../../../public/testimonials/jose-headshot.jpg";
 import lukeRottaPhoto from "../../../public/testimonials/lukerotta.jpg";
 
 const topWaveType = "1-hill";
-
-const BOOK_REVIEW_URL = "https://calendly.com/nickstrickerbiz/30min";
 
 const faqItems: FAQItem[] = [
   {
@@ -91,7 +91,8 @@ const myTestimonialList = [
 ];
 
 export default function FloristOfferPage() {
-
+  const claimBtnModalRef = useRef<ClaimBtnModalHandle>(null);
+  const openLead = () => claimBtnModalRef.current?.openLead();
 
   return (
     <main className="min-h-screen bg-neutral-900 text-white">
@@ -129,9 +130,11 @@ export default function FloristOfferPage() {
           </div>
         </div>
       </section>
+      <ClaimBtnModal ref={claimBtnModalRef} />
 
       <RevenueReviewCTA
-        ctaHref={BOOK_REVIEW_URL}
+        ctaHref="#book"
+        onCtaClick={openLead}
         title="Book a Free 10-Minute Revenue Review"
         subtitle="In 10 minutes I will show you what may be costing you online orders and share 2-3 quick fixes."
         
@@ -207,14 +210,13 @@ export default function FloristOfferPage() {
                 <li>Leave with a simple next step</li>
               </ul>
               <div className="btn-container">
-                <a
-                  href={BOOK_REVIEW_URL}
-                  target="_blank"
-                  rel="noreferrer"
+                <button
+                  type="button"
+                  onClick={openLead}
                   className="btn-gradient w-full text-center px-8 py-4 rounded-full"
                 >
                   Book the Free Review
-                </a>
+                </button>
               </div>
             </div>
 
@@ -236,14 +238,13 @@ export default function FloristOfferPage() {
                 <li>Simple style refresh</li>
               </ul>
               <div className="btn-container">
-                <a
-                  href={BOOK_REVIEW_URL}
-                  target="_blank"
-                  rel="noreferrer"
+                <button
+                  type="button"
+                  onClick={openLead}
                   className="btn-inverted w-full text-center px-8 py-4 rounded-full"
                 >
                   Start with the free review
-                </a>
+                </button>
               </div>
             </div>
 
@@ -266,14 +267,13 @@ export default function FloristOfferPage() {
                 <li>Training so you can manage the site</li>
               </ul>
               <div className="btn-container">
-                <a
-                  href={BOOK_REVIEW_URL}
-                  target="_blank"
-                  rel="noreferrer"
+                <button
+                  type="button"
+                  onClick={openLead}
                   className="btn-inverted w-full text-center px-8 py-4 rounded-full"
                 >
                   Start with the free review
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -308,14 +308,13 @@ export default function FloristOfferPage() {
                 <li>Monthly performance report</li>
               </ul>
               <div className="btn-container">
-                <a
-                  href={BOOK_REVIEW_URL}
-                  target="_blank"
-                  rel="noreferrer"
+                <button
+                  type="button"
+                  onClick={openLead}
                   className="btn-inverted w-full text-center px-8 py-4 rounded-full"
                 >
                   Ask about add-ons on the review
-                </a>
+                </button>
               </div>
             </div>
 
@@ -337,14 +336,13 @@ export default function FloristOfferPage() {
                 <li>Capture leads or order requests</li>
               </ul>
               <div className="btn-container">
-                <a
-                  href={BOOK_REVIEW_URL}
-                  target="_blank"
-                  rel="noreferrer"
+                <button
+                  type="button"
+                  onClick={openLead}
                   className="btn-inverted w-full text-center px-8 py-4 rounded-full"
                 >
                   Ask about add-ons on the review
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -375,7 +373,8 @@ export default function FloristOfferPage() {
 
       <RevenueReviewCTA
         id="book"
-        ctaHref={BOOK_REVIEW_URL}
+        ctaHref="#book"
+        onCtaClick={openLead}
         className="bg-gradient-black-dark"
         title="Not sure where to start?"
         subtitle="That's why the free review exists. In 10 minutes I will show you what I would fix first and recommend the best next step."
@@ -404,7 +403,8 @@ export default function FloristOfferPage() {
       <FAQ items={faqItems} />
 
       <RevenueReviewCTA
-        ctaHref={BOOK_REVIEW_URL}
+        ctaHref="#book"
+        onCtaClick={openLead}
         className="bg-gradient-black-dark"
         title="Book a Free 10-Minute Revenue Review"
         subtitle="Most florists either start with the $400 Conversion Upgrade or move into the Revenue-Ready Website System."

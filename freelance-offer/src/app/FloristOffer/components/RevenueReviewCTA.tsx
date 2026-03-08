@@ -3,6 +3,7 @@ import Link from "next/link";
 export type RevenueReviewCTAProps = {
   id?: string;
   ctaHref: string;
+  onCtaClick?: () => void;
   ctaText?: string;
   title?: string;
   subtitle?: string;
@@ -14,6 +15,7 @@ export type RevenueReviewCTAProps = {
 export default function RevenueReviewCTA({
   id,
   ctaHref,
+  onCtaClick,
   ctaText = "Book a Free 10-Minute Revenue Review",
   title = "Start with a free 10-minute revenue review",
   subtitle = "In 10 minutes we'll diagnose what's costing you online orders and recommend the best next step.",
@@ -30,7 +32,15 @@ export default function RevenueReviewCTA({
         <p className="mt-4 text-lg opacity-90 max-w-3xl mx-auto">{subtitle}</p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-          {isExternal ? (
+          {onCtaClick ? (
+            <button
+              type="button"
+              onClick={onCtaClick}
+              className="btn-gradient w-full sm:w-auto text-xl md:text-2xl px-10 py-4 rounded-full"
+            >
+              {ctaText}
+            </button>
+          ) : isExternal ? (
             <a
               href={ctaHref}
               target="_blank"
