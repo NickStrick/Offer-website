@@ -13,6 +13,8 @@ import About from "./components/About";
 // import Tiers from "./components/TieredMonthlyOffers";
 import Footer from "../components/Footer";
 import ClaimBtnModal from "./components/FreeOfferModal";
+import TechStack from "./components/TechStack";
+import ProjectProof from "./components/ProjectProof";
 
 import { useRouter } from "next/navigation";
 
@@ -79,7 +81,7 @@ export default function Home2() {
       viewport={{ once: true }}
       transition={{ duration: 1, ease: "easeInOut" }}>
         <h1 className="floating-text text-4xl md:text-6xl font-bold mb-4 ml-[0] sm:ml-[230px] mt-[80px] sm:mt-[0px]">{`Stricker Digital`}</h1>
-        <h1 className="floating-text text-2xl md:text-4xl font-bold mb-4 ml-[0] sm:ml-[230px] mt-[80px] sm:mt-[0px]">{`We set up your optimized website and give you the controls`}</h1>
+        <h1 className="floating-text text-2xl md:text-4xl font-bold mb-4 ml-[0] sm:ml-[230px] mt-[80px] sm:mt-[0px]">{`Custom-Engineered Web Applications Without Technical Debt`}</h1>
       </motion.div>
        <Image src={CTAImage} alt="stricker Ditial" className="p-6 z-2 cursor-pointer w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} onClick={() => router.push("/")}/>
     </section>
@@ -87,6 +89,8 @@ export default function Home2() {
       
 <ClaimBtnModal />
 <About />
+<TechStack />
+<ProjectProof />
 <ClaimBtnModal />
 {/* <Tiers /> */}
 <Footer />

@@ -6,6 +6,7 @@ import Script from 'next/script'
 
 import { LanguageProvider } from './context/LanguageContext';
 import AnalyticsListener from "./components/AnalyticsListener";
+import Navbar from "./components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -60,6 +61,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       ><LanguageProvider>
+        <Navbar />
         <main className="overflow-hidden">{children}</main>
       </LanguageProvider>
       {/* Google Analytics */}

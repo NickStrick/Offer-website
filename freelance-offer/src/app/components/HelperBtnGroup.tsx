@@ -25,36 +25,39 @@ export default function HelperBtnGroup({
   }, []);
 
   return (
-    <section className="bg-gradient-black-purple text-white px-6 py-20 mt-[-2px]">
-   <motion.div className=" mt-2 flex justify-center flex-col flex-nowrap px-2 gradient-border"
-      initial="hidden"
+    <section className="bg-gradient-black-purple text-white px-6 py-16 mt-[-2px]">
+      <motion.div
+        className="mx-auto max-w-2xl flex flex-col items-center text-center"
+        initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: .8, ease: "easeOut" }}
         variants={{
-          hidden: { opacity: 0, x: 70 },
-          visible: { opacity: 1, x: 0 },
-        }}>
-          
-        <div className="card p-6 z-2 text-center">
-            <h1 className=" text-2xl md:text-3xl font-extrabold tracking-tight mb-8">Learn more about us</h1>
-            <div className=" flex justify-center flex-wrap gap-3 flex-row">
-                <Link href="https://www.nickolasstricker.com/projects" target="_blank" className="btn min-w-[245px]  btn-inverted">Previous Projects</Link>
-                <Link href="https://www.nickolasstricker.com/skills#certificate" target="_blank" className="btn min-w-[245px]  btn-inverted">Certifications</Link>
-                <Link href={reviewsHref} className="btn min-w-[245px]  btn-inverted">Reviews</Link>
-            </div>
+          hidden: { opacity: 0, y: 40 },
+          visible: { opacity: 1, y: 0 },
+        }}
+      >
+        <div className="p-1.5 rounded-full bg-gradient-to-tr from-[var(--color-purple)] via-[var(--color-highlight)] to-[var(--color-accent)]">
+          <Image
+            priority={true}
+            width={320}
+            height={320}
+            src={Pfp.src}
+            alt="Nick Stricker"
+            className="w-48 h-48 md:w-72 md:h-72 rounded-full object-cover shadow-2xl"
+          />
         </div>
-        <div className="gradient-border-inner flex justify-center">
-      <Image
-      priority={true}
-      width={120}
-      height={120}
-        src={Pfp.src}
-        alt="Connecting the Dots"
-        className="w-auto shadow-lg max-h-[80vh] object-cover rounded-full"
-      /></div>
-      <Socails />
-    </motion.div>
+
+        <h1 className="mt-6 text-2xl md:text-3xl font-extrabold tracking-tight">Learn more about us</h1>
+
+        <Socails />
+
+        <div className="flex justify-center flex-wrap gap-3">
+          <Link href="https://www.nickolasstricker.com/projects" target="_blank" className="btn min-w-[220px] btn-inverted">Previous Projects</Link>
+          <Link href="https://www.nickolasstricker.com/skills#certificate" target="_blank" className="btn min-w-[220px] btn-inverted">Certifications</Link>
+          <Link href={reviewsHref} className="btn min-w-[220px] btn-inverted">Reviews</Link>
+        </div>
+      </motion.div>
     </section>
     )
 }

@@ -15,6 +15,8 @@ import HowItWorks from "./components/HowItWorks";
 import OfferTiers from "./components/OfferTiers";
 import AddOns from "./components/AddOns";
 import WhoThisIsFor from "./components/WhoThisIsFor";
+import Framework from "./components/Framework";
+import CaseStudy from "./components/CaseStudy";
 
 import headBackgorundImage from "../../../public/colorsky.jpg";
 
@@ -67,12 +69,23 @@ export default function RevenueConsultPage() {
         className={revenueConsultCopy.reviewCtas.top.className}
       />
 
+      <About copy={revenueConsultCopy.about} />
+
       <HowItWorks
         id={revenueConsultCopy.howItWorks.id}
         title={revenueConsultCopy.howItWorks.title}
         subtitle={revenueConsultCopy.howItWorks.subtitle}
         steps={revenueConsultCopy.howItWorks.steps}
       />
+
+      <Framework
+        id={revenueConsultCopy.framework.id}
+        title={revenueConsultCopy.framework.title}
+        subtitle={revenueConsultCopy.framework.subtitle}
+        items={revenueConsultCopy.framework.items}
+      />
+
+      <CaseStudy copy={revenueConsultCopy.caseStudy} />
 
       <SeperatorWave type={topWaveType} flip={true} color={"var(--bg-wave)"} />
 
@@ -112,8 +125,6 @@ export default function RevenueConsultPage() {
         secondaryHref={revenueConsultCopy.reviewCtas.middle.secondaryHref}
         secondaryText={revenueConsultCopy.reviewCtas.middle.secondaryText}
       />
-
-      <About copy={revenueConsultCopy.about} />
 
       <Testimonials
         {...{

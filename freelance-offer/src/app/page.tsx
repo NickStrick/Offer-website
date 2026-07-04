@@ -1,13 +1,13 @@
 'use client';
 import { useState, useEffect } from "react";
-import AboutMe from "./components/AboutMe";
-import FloatingText from "./components/FloatingText";
 // import Tiers from "./components/TieredMonthlyOffers";
 import Footer from "./components/Footer";
-import ClaimBtnModal from "./components/OfferBtnGroup";
 import Headline from "./components/Headline";
 import Share from "./components/Share";
 import Testimonals from "./components/Testimonials";
+import Philosophy from "./components/Philosophy";
+import BlueprintPillars from "./components/BlueprintPillars";
+import HelperBtnGroup from "./components/HelperBtnGroup";
 import {SeperatorWave} from './components/SeperatorWave';
 
 import { useLanguage } from "./context/LanguageContext";
@@ -103,21 +103,23 @@ export default function Home2() {
 
     fetchEvents();
   }, []);
-  const btnGroup2Props = {
-  customClass: 'bg-gradient-purple-black',
-  title: 'Built in days, not weeks.',
-  subtext: 'What takes others months to build, we build for you in mere days!'
-}
   const { language } = useLanguage();
   console.log("language", language, rawJSON);
   return (
     <main className="min-h-screen bg-neutral-900 text-white">
-      <Headline />
+      <Headline
+        headlineText="Bespoke System Architecture & Private Digital Vaults for High-Margin Brands"
+        subheadlineText="Zero-latency commerce. Authenticated private portals. Infrastructure engineered, not templated."
+        ctas={[
+          { label: "Apply for Architectural Audit", href: "/revenue-consult#book" },
+          { label: "Browse the Technical Library", href: "/library", variant: "inverted" },
+        ]}
+      />
       <SeperatorWave type={topWaveType} flip={false} color={'var(--bg-wave)'} />
-      <ClaimBtnModal />
-      <AboutMe />
+      <HelperBtnGroup reviewsHref="#testimonials" />
+      <Philosophy />
       <SeperatorWave type={bottomWaveType} flip={true} color={'var(--bg-wave)'} />
-      <FloatingText />
+      <BlueprintPillars />
       <SeperatorWave type={topWaveType} flip={false} color={'var(--bg-wave)'} />
       <Testimonals {...{
   type:"testimonials",
@@ -132,7 +134,6 @@ rounded: "xl",
 background: "default",
 },
 }} />
-      <ClaimBtnModal  {...btnGroup2Props}/>
       <Share />
       <Footer />
     </main>

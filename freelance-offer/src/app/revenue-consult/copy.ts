@@ -20,6 +20,18 @@ export type RevenueConsultHowItWorksStep = {
   description: string;
 };
 
+export type RevenueConsultFrameworkItem = {
+  title: string;
+  description: string;
+};
+
+export type RevenueConsultCaseStudy = {
+  title: string;
+  friction: { label: string; text: string };
+  architecture: { label: string; text: string };
+  metric: { label: string; text: string };
+};
+
 export type RevenueConsultTier = {
   name: string;
   price: string;
@@ -76,8 +88,47 @@ export type RevenueConsultAboutCopy = {
 
 export const revenueConsultCopy = {
   headline: {
-    headlineText: "Website Revenue Consult",
+    headlineText: "Eliminate Digital Friction. Maximize Enterprise Volume.",
   },
+
+  framework: {
+    id: "framework",
+    title: "Systems Auditing",
+    subtitle: "Deep diagnostic mechanics—not simple marketing tactics.",
+    items: [
+      {
+        title: "Latency & Flow Profiling",
+        description:
+          "We dive deep into application structures and third-party integrations (Clover, Square, custom webhooks). We locate where server lags or database schemas are causing high-intent users to abandon transactions.",
+      },
+      {
+        title: "Conversion Optimization Framework",
+        description:
+          "Shifting complex user interactions from overwhelming single-page \"walls of inputs\" into smooth, high-converting, multi-step linear engines designed to maximize data integrity and user emotional investment.",
+      },
+      {
+        title: "Zero-Trust Security & Dispute Protection",
+        description:
+          "Designing robust identity networks (Auth0 Actions, MFA configurations, custom M2M management tokens) to protect high-ticket brokers from transaction liabilities, while maintaining flawless end-user checkout flows.",
+      },
+    ] satisfies RevenueConsultFrameworkItem[],
+  },
+
+  caseStudy: {
+    title: "Refactoring Redtiallux Checkout Infrastructure",
+    friction: {
+      label: "The Friction",
+      text: "Monolithic checkout walls causing high user bounce rates on premium watch inventories.",
+    },
+    architecture: {
+      label: "The Architecture",
+      text: "Transformed the database collection process into a structured, linear flow restricted to a maximum of 5 data inputs per step, paired with zero-latency custom-coded animations.",
+    },
+    metric: {
+      label: "The Metric",
+      text: "Secured a 30% lift in month-over-month user form completions within the first 30 days of active deployment.",
+    },
+  } satisfies RevenueConsultCaseStudy,
 
   intro: {
     title: "Find the fastest way to increase revenue from your website",

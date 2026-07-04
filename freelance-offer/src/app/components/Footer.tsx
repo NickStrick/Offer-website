@@ -22,22 +22,15 @@ export default function Footer() {
           <Link href="/" className="hover:text-green-600 transition">
             {language === 'es' ? 'Inicio' : 'Home'}
           </Link>
-          {/* <Link href="/free" className="hover:text-green-600 transition">
-            {language === 'es' ? 'Inicio' : 'Free Stuff'}
-          </Link> */}
-          {/* <Link href="/custom-website" className="hover:text-green-600 transition">
-            {language === 'es' ? '' : 'Custom Site'}
+          <Link href="/revenue-consult" className="hover:text-green-600 transition">
+            {language === 'es' ? 'Consulta' : 'Consult'}
           </Link>
-          <Link href="/core" className="hover:text-green-600 transition">
-            {language === 'es' ? 'Acerca de' : 'Traffic System'}
-          </Link> */}
-          <Link href="/FloristOffer" className="hover:text-green-600 transition">
-            {language === 'es' ? 'Inicio' : 'Florist Offer'}
+          <Link href="/library" className="hover:text-green-600 transition">
+            {language === 'es' ? 'Biblioteca' : 'Library'}
           </Link>
           <Link href="https://www.nickolasstricker.com" className="hover:text-green-600 transition">
             {language === 'es' ? 'Acerca de' : 'Portfolio'}
           </Link>
-          
         </div>
 
         {/* Social Media */}
