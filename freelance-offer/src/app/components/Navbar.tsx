@@ -20,7 +20,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 py-2 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-sm tracking-tight">
           <Image src={Logo} alt="Stricker Digital" width={28} height={28} className="h-7 w-7" priority />
-          <span className="gradient-text-color">Stricker Digital</span>
+          <span className="gradient-text-color !pb-[0px]">Stricker Digital</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
