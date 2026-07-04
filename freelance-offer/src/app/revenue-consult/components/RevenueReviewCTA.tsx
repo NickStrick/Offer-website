@@ -27,7 +27,7 @@ export default function RevenueReviewCTA({
   const isExternal = /^https?:\/\//i.test(ctaHref);
 
   return (
-    <section id={id} className={`px-6 py-16 text-white ${className}`}>
+    <section id={id} className={`px-6 pt-16 pb-[120px] text-white ${className}`}>
       <div className="mx-auto max-w-5xl text-center">
         <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">{title}</h2>
         <p className="mt-4 text-lg opacity-90 max-w-3xl mx-auto">{subtitle}</p>

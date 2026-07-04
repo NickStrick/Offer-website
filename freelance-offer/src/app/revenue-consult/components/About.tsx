@@ -13,7 +13,7 @@ const bottomWaveType = "1-hill";
 export default function About({ copy }: { copy: RevenueConsultAboutCopy }) {
   return (
     <>
-    <SeperatorWave type={topWaveType} flip={false} color={"var(--bg)"} />
+    <SeperatorWave type={topWaveType} flip={false} color={"var(--bg-wave)"} />
       <HelperBtnGroup reviewsHref="#testimonials" />
       <SeperatorWave type={bottomWaveType} flip={true} color={"var(--bg)"} />
       <section
