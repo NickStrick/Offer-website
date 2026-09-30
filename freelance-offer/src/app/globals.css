@@ -709,3 +709,48 @@ paint-order: stroke fill;
   transform: rotate(0deg) scale(1.05);
   color: rgba(255, 255, 255, 0.12);
 }
+
+/* ============================
+   Legal pages (terms, refund policy)
+   ============================ */
+.legal-prose h2 {
+  margin-top: 2.75rem;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+.legal-prose h2:first-child {
+  margin-top: 0;
+}
+.legal-prose h3 {
+  margin-top: 1.75rem;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+.legal-prose p,
+.legal-prose li {
+  margin-top: 0.9rem;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-muted);
+}
+.legal-prose ul {
+  margin-top: 0.5rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+.legal-prose li {
+  margin-top: 0.5rem;
+}
+.legal-prose li::marker {
+  color: var(--color-green);
+}
+.legal-prose strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.legal-prose a {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: rgba(34, 197, 94, 0.6);
+  text-underline-offset: 4px;
+}

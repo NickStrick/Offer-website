@@ -7,7 +7,7 @@ import { faArrowRight, faCheck, faChalkboard, faPlay } from "@fortawesome/free-s
 
 import { LEADS_FORM_ENTRIES, LEADS_FORM_URL, checklistCopy } from "../offers/copy";
 
-/** Email capture for the free checklist. Saves the lead, then sends them to the walkthrough page. */
+/** Email capture for the free checklist. Saves the lead, then sends them to the checklist page. */
 export function ChecklistForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -53,7 +53,7 @@ export function ChecklistForm() {
   );
 }
 
-/** Whiteboard-style thumbnail preview for the walkthrough video. */
+/** Whiteboard-style preview: a blueprint sketch, plus a play button once the video is published. */
 function WhiteboardPreview() {
   return (
     <div className="relative aspect-video overflow-hidden rounded-xl border border-white/10 bg-[#0c0e0c]">
@@ -73,18 +73,22 @@ function WhiteboardPreview() {
           <circle cx="166" cy="90" r="30" strokeDasharray="4 5" />
         </g>
       </svg>
+      {checklistCopy.videoReady ? (
       <div className="absolute inset-0 flex items-center justify-center">
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-green)] to-[var(--color-highlight)] text-white shadow-[0_10px_30px_-8px_rgba(197,113,4,0.8)]">
           <FontAwesomeIcon icon={faPlay} className="ml-0.5 text-lg" aria-hidden />
         </span>
       </div>
+      ) : null}
       <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-black/60 px-3 py-1 text-xs text-white/85">
         <FontAwesomeIcon icon={faChalkboard} aria-hidden />
-        Excalidraw walkthrough
+        {checklistCopy.videoReady ? "Excalidraw walkthrough" : "Excalidraw blueprint"}
       </div>
-      <div className="absolute bottom-3 right-3 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white/85">
-        60 sec
-      </div>
+      {checklistCopy.videoReady ? (
+        <div className="absolute bottom-3 right-3 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white/85">
+          60 sec
+        </div>
+      ) : null}
     </div>
   );
 }

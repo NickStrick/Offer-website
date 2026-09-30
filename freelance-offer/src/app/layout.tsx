@@ -25,7 +25,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.strickerdigital.com"),
-  title: "Stricker Digital",
+  // Pages set their own title; the template appends the brand. The homepage uses the default.
+  title: {
+    default: "Stricker Digital | Architecture, Communication & System Strategy",
+    template: "%s | Stricker Digital",
+  },
   description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into commercial business value.",
   openGraph: {
     title: "Stricker Digital",

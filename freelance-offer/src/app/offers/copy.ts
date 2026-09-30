@@ -11,7 +11,7 @@ import {
   faStopwatch,
   faUserShield,
 } from "@fortawesome/free-solid-svg-icons";
-import { caseStudyImages, videos, type ImageMedia, type VideoMedia } from "../media";
+import { caseStudyImages, isMediaReady, videos, type ImageMedia, type VideoMedia } from "../media";
 
 export type OffersFAQItem = {
   question: string;
@@ -121,17 +121,28 @@ export const contactHref = {
 // Until then, the button falls back to the contact form with the Masterclass preselected.
 export const MASTERCLASS_CHECKOUT_URL = process.env.NEXT_PUBLIC_STRIPE_MASTERCLASS_URL || contactHref.masterclass;
 
+/**
+ * The whiteboard video isn't recorded yet. Until videos.enterpriseChecklist is published in media.ts,
+ * the lead magnet is promoted as a blueprint + spec sheet; publishing the video switches the wording automatically.
+ */
+const checklistVideoReady = isMediaReady(videos.enterpriseChecklist);
+
 /** Free lead magnet: The 2026 Enterprise Infrastructure & Architecture Checklist. */
 export const checklistCopy = {
+  videoReady: checklistVideoReady,
   id: "free-checklist",
   resourcePath: "/resources/enterprise-checklist",
   tag: "Free Diagnostic",
   price: "$0",
   title: "2026 Enterprise Infrastructure Checklist",
   subtitle:
-    "An over-the-shoulder visual whiteboard walkthrough (Excalidraw) mapping the top 3 architectural flaws, API latency bottlenecks, and checkout form leaks that cost scaling B2B platforms $50k+ in abandoned revenue.",
+    checklistVideoReady
+      ? "An over-the-shoulder visual whiteboard walkthrough (Excalidraw) mapping the top 3 architectural flaws, API latency bottlenecks, and checkout form leaks that cost scaling B2B platforms $50k+ in abandoned revenue."
+      : "A visual Excalidraw blueprint and spec sheet mapping the top 3 architectural flaws, API latency bottlenecks, and checkout form leaks that cost scaling B2B platforms $50k+ in abandoned revenue.",
   highlights: [
-    "60-Second Over-The-Shoulder Excalidraw Video Teardown",
+    checklistVideoReady
+      ? "60-Second Over-The-Shoulder Excalidraw Video Teardown"
+      : "Excalidraw Blueprint of the Top 3 Architectural Flaws",
     "Decoupled Next.js / AWS Architecture & Caching Spec Sheet",
     "Mobile Checkout Friction Audit Protocol (Max 5 Inputs)",
   ],
@@ -141,7 +152,7 @@ export const checklistCopy = {
   /** Saved in the Google Form's "First name" answer so you can tell these leads apart. */
   sourceValue: "2026 Enterprise Checklist",
   modalTitle: "Get the free whiteboard spec",
-  modalDescription: "Enter your business email and we'll take you straight to the walkthrough.",
+  modalDescription: "Enter your business email and we'll take you straight to the checklist.",
   consent: CONSENT_TEXT,
 };
 
@@ -235,7 +246,7 @@ export const offerLadders: readonly OfferLadder[] = [
         ],
         riskReversal: {
           title: "24-Hour Total Clarity Guarantee",
-          body: "Review your 10-minute video teardown and Excalidraw system topology. If within 24 hours of delivery you don't feel you received total clarity on your application's bottlenecks, let us know and we will issue a prompt, 100% refund, no questions asked.",
+          body: "Review your Excalidraw system topology and refactoring spec sheet. If within 24 hours of delivery you don't feel you received total clarity on your application's bottlenecks, let us know and we will issue a prompt, 100% refund, no questions asked.",
         },
         ctaText: "Apply for $5k Enterprise Audit",
         ctaAction: "modal",
@@ -296,7 +307,7 @@ export const caseStudies: readonly OffersCaseStudy[] = [
     },
     metric: {
       label: "The Metric",
-      text: "Secured a 30% lift in month-over-month user form completions within the first 30 days of active deployment.",
+      text: "Secured a 30% lift in completed checkout conversions within the first 30 days of active deployment.",
     },
   },
   {
@@ -569,7 +580,7 @@ export const offersCopy = {
       {
         question: "Is the Enterprise Checklist really free?",
         answer:
-          "Yes. Enter your business email and you go straight to the whiteboard walkthrough and spec sheet. No sales call, no obligation.",
+          "Yes. Enter your business email and you go straight to the checklist and spec sheet. No sales call, no obligation.",
       },
       {
         question: "What's the difference between the Masterclass and the Sprint?",
@@ -594,7 +605,7 @@ export const offersCopy = {
       {
         question: "Is the audit guaranteed?",
         answer:
-          "Yes. Review your 10-minute video teardown and Excalidraw system topology. If within 24 hours of delivery you don't feel you received total clarity on your application's bottlenecks, let us know and we will issue a prompt, 100% refund, no questions asked.",
+          "Yes. Review your Excalidraw system topology and refactoring spec sheet. If within 24 hours of delivery you don't feel you received total clarity on your application's bottlenecks, let us know and we will issue a prompt, 100% refund, no questions asked.",
       },
       {
         question: "Who writes the code after the audit?",

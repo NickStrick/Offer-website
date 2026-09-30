@@ -43,7 +43,7 @@ export default function Footer() {
     {
       title: es ? 'Recursos gratis' : 'Free Resources',
       links: [
-        { href: "/#free-checklist", label: "The 2026 Enterprise Infrastructure Checklist (Whiteboard Video)" },
+        { href: "/#free-checklist", label: "The 2026 Enterprise Infrastructure Checklist" },
         { href: "/library#books", label: "\"The Iteration Loop\" Book Beta Waitlist" },
       ],
     },
@@ -109,7 +109,17 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto mt-14 flex max-w-6xl flex-col gap-3 border-t border-white/[0.06] pt-8 text-xs text-ink-subtle md:flex-row md:justify-between">
-        <span>&copy; {new Date().getFullYear()} Stricker Digital. All rights reserved.</span>
+        <div className="flex flex-col gap-3">
+          <span>&copy; {new Date().getFullYear()} Stricker Digital. All rights reserved.</span>
+          <div className="flex gap-5">
+            <Link href="/terms" className="transition hover:text-white">
+              {es ? 'Términos de servicio' : 'Terms of Service'}
+            </Link>
+            <Link href="/refund-policy" className="transition hover:text-white">
+              {es ? 'Política de reembolso' : 'Refund Policy'}
+            </Link>
+          </div>
+        </div>
         <span className="max-w-2xl md:text-right">
           The information contained within this website is the property of nickolasstricker.com. Any use of the images, content, or ideas expressed herein without the express written consent of nickolasstricker.com is prohibited.
         </span>

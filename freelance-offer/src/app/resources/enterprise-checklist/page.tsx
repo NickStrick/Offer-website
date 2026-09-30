@@ -21,7 +21,7 @@ import { checklistCopy, offerTiers } from "../../offers/copy";
 
 // Reached after the email signup; keep it out of search results.
 export const metadata: Metadata = {
-  title: "The 2026 Enterprise Infrastructure & Architecture Checklist | Stricker Digital",
+  title: "2026 Enterprise Infrastructure Checklist",
   robots: { index: false, follow: false },
 };
 
@@ -78,10 +78,10 @@ export default function EnterpriseChecklistPage() {
             <div className="surface-card flex items-start gap-4 !border-amber-500/30 p-6">
               <FontAwesomeIcon icon={faClock} className="mt-1 text-lg text-amber-300" aria-hidden />
               <div>
-                <h2 className="text-lg font-semibold">The whiteboard video is being recorded</h2>
+                <h2 className="text-lg font-semibold">A whiteboard video walkthrough is on the way</h2>
                 <p className="mt-1 text-[15px] leading-relaxed text-ink-muted">
-                  We&apos;ll email you the unedited walkthrough as soon as it&apos;s live. The full written checklist is
-                  below so you can start now.
+                  We&apos;ll email you a recorded Excalidraw walkthrough as soon as it&apos;s live. The full checklist
+                  and spec sheet are below so you can start now.
                 </p>
               </div>
             </div>

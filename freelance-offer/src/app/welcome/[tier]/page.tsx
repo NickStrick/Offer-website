@@ -7,6 +7,7 @@ import { faArrowRight, faCircleCheck, faEnvelope } from "@fortawesome/free-solid
 import Headline from "../../components/Headline";
 import Footer from "../../components/Footer";
 import { VideoPlayer } from "../../components/Video";
+import { isMediaReady } from "../../media";
 import { CONTACT_EMAIL, welcomePages } from "../../offers/copy";
 
 type Params = { tier: string };
@@ -18,10 +19,14 @@ export function generateStaticParams(): Params[] {
 export const dynamicParams = false;
 
 // Post-signup pages shouldn't show up in search results.
-export const metadata: Metadata = {
-  title: "Welcome | Stricker Digital",
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { tier } = await params;
+  const page = welcomePages[tier as keyof typeof welcomePages];
+  return {
+    title: page ? `Welcome: ${page.eyebrow}` : "Welcome",
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function WelcomePage({ params }: { params: Promise<Params> }) {
   const { tier } = await params;
@@ -39,7 +44,9 @@ export default async function WelcomePage({ params }: { params: Promise<Params> 
           <div className="surface-card mt-12 p-7 md:p-10">
             <h2 className="text-2xl font-semibold md:text-3xl">What happens next</h2>
             <ol className="mt-6 space-y-4">
-              {page.steps.map((step) => (
+              {page.steps
+                .filter((step) => isMediaReady(page.video) || !/^Watch\b/.test(step))
+                .map((step) => (
                 <li key={step} className="flex gap-3 text-base leading-relaxed text-zinc-200">
                   <FontAwesomeIcon icon={faCircleCheck} className="mt-1 w-5 shrink-0 text-green-400" aria-hidden />
                   <span>{step}</span>
