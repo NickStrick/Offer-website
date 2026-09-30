@@ -1,18 +1,17 @@
 'use client';
-import { useRef } from "react";
 import Footer from "./components/Footer";
 import Headline from "./components/Headline";
 import Testimonals from "./components/Testimonials";
 import Philosophy from "./components/Philosophy";
-import BlueprintPillars from "./components/BlueprintPillars";
 import HelperBtnGroup from "./components/HelperBtnGroup";
 import FeaturedOffers from "./components/FeaturedOffers";
-import IntakeModal, { type IntakeModalHandle } from "./components/IntakeModal";
 import CaseStudies from "./components/CaseStudies";
+import ProofMetrics from "./components/ProofMetrics";
+import LibraryTeaser from "./components/LibraryTeaser";
 import VideoSection from "./components/Video";
 import { videos } from "./media";
 import CtaBanner from "./offers/components/CtaBanner";
-import { offersCopy } from "./offers/copy";
+import { contactHref, offersCopy } from "./offers/copy";
 
 import josePhoto from "../../public/testimonials/jose-headshot.jpg"
 import connorPhoto from "../../public/testimonials/connor-headshot.png"
@@ -68,25 +67,23 @@ const myTestimonialList = [
   }
 ]
 export default function Home() {
-  const intakeModalRef = useRef<IntakeModalHandle>(null);
-  const openIntake = () => intakeModalRef.current?.open();
-
   return (
     <main className="min-h-screen bg-page text-white">
       <Headline
-        headlineText="System Architecture & Conversion Audits for B2B SaaS"
-        subheadlineText="Fixed-scope diagnostics that map architectural debt onto recovered revenue. Delivered in 48 hours. Engineered, not templated."
+        eyebrow="Architecture, Communication & System Strategy"
+        headlineText="Bridging Deep Systems Architecture to Commercial Business Value."
+        subheadlineText="Fixed-scope diagnostic audits, high-impact technical presentation frameworks, and enterprise-grade software blueprints that eliminate friction and protect margins."
         ctas={[
-          { label: "Apply for Architectural Audit", href: "/offers#apply" },
-          { label: "Get a Free Video Audit", href: "#free-audit", variant: "inverted" },
+          { label: "Request Architectural Audit", href: contactHref.audit },
+          { label: "Explore The Library & IP", href: "/library#books", variant: "inverted" },
         ]}
       />
       <VideoSection video={videos.intro} id="intro-video" />
       <Philosophy />
-      <IntakeModal ref={intakeModalRef} />
-      <FeaturedOffers onApply={openIntake} />
+      <FeaturedOffers />
+      <ProofMetrics />
       <CaseStudies />
-      <BlueprintPillars />
+      <LibraryTeaser />
       <Testimonals {...{
         type: "testimonials",
         title: "What clients say",
@@ -100,8 +97,8 @@ export default function Home() {
           background: "default",
         },
       }} />
-      <HelperBtnGroup reviewsHref="#testimonials" />
-      <CtaBanner ctaHref="/offers#apply" onCtaClick={openIntake} {...offersCopy.ctaBanners.bottom} />
+      <HelperBtnGroup reviewsHref="#testimonials" bio={offersCopy.about.cards.left.bodyLines} />
+      <CtaBanner {...offersCopy.ctaBanners.bottom} />
       <Footer />
     </main>
   );

@@ -1,37 +1,38 @@
 "use client";
 import { motion } from "framer-motion";
-import { faCode, faGaugeHigh, faSeedling, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowsRotate, faDiagramProject, faMicrophoneLines, faPersonRunning } from "@fortawesome/free-solid-svg-icons";
+
 import SectionHeader from "./SectionHeader";
 
 const points = [
   {
-    title: "No Templates",
-    icon: faCode,
-    description: "We engineer your site like enterprise software, not a page builder.",
+    title: "Personal Performance",
+    icon: faPersonRunning,
+    description: "Ship small, measure, patch. Skills are built in tight release cycles, not one big launch.",
   },
   {
-    title: "Profiled Pipelines",
-    icon: faGaugeHigh,
-    description: "We find and kill friction hotspots before they cost you revenue.",
+    title: "Vocal Authority",
+    icon: faMicrophoneLines,
+    description: "Presentation is a system too. Pace, pause, and structure get tuned like production code.",
   },
   {
-    title: "Zero-Trust Security",
-    icon: faShieldHalved,
-    description: "Bulletproof frameworks that protect your margin.",
+    title: "Business Systems",
+    icon: faDiagramProject,
+    description: "Friction is logged, diagnosed, and fixed with the same rigor as a production bug.",
   },
 ];
 
+/** "The Iteration Loop Philosophy" banner: continuous deployment applied beyond code. */
 export default function Philosophy() {
   return (
     <section className="section-pad bg-gradient-purple-black text-white">
       <div className="mx-auto max-w-6xl">
         <SectionHeader
-          eyebrow="Our Philosophy"
-          eyebrowIcon={faSeedling}
-          title="Engineered for growth, not assembled from templates."
-          subtitle="Every recommendation is grounded in how your system actually behaves and tied to a business metric."
+          eyebrow="The Iteration Loop Philosophy"
+          eyebrowIcon={faArrowsRotate}
+          title="Continuous deployment, applied to everything."
+          subtitle="The same loop that ships reliable software (build, measure, patch, repeat) drives how we improve performance, communication, and the systems behind a business."
         />
 
         <div className="grid gap-5 md:grid-cols-3">

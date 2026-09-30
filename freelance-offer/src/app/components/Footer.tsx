@@ -34,9 +34,11 @@ export default function Footer() {
       title: es ? 'Ofertas' : 'Offers',
       links: [
         { href: "/offers#free-audit", label: "Free Loom Audit" },
-        { href: "/offers#micro-audit", label: "Micro-Audit" },
-        { href: "/offers#enterprise-audit", label: "Enterprise Audit" },
-        { href: "/offers#enterprise-retainer", label: "Enterprise Implementation" },
+        { href: "/offers#architecture-audit", label: "Architecture Audit" },
+        { href: "/offers#communication-sprint", label: "Communication Sprints" },
+        { href: "/offers#zero-trust-security", label: "Zero-Trust Security" },
+        { href: "/library#digital-vault", label: "The Digital Vault" },
+        { href: "/library#books", label: "Books" },
       ],
     },
   ];
@@ -50,7 +52,7 @@ export default function Footer() {
             Stricker Digital
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-muted">
-            Productized system architecture and conversion audits for B2B SaaS.
+            Architecture, communication, and system strategy for B2B platforms.
           </p>
           <div className="mt-6 flex gap-2">
             {socials.map((s) => (

@@ -3,9 +3,9 @@ import josePhoto from "../../../public/testimonials/jose-headshot.jpg";
 import lukeRottaPhoto from "../../../public/testimonials/lukerotta.jpg";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import {
+  faChalkboardUser,
+  faCodeBranch,
   faDiagramProject,
-  faMagnifyingGlassChart,
-  faRocket,
   faRoute,
   faStopwatch,
   faUserShield,
@@ -50,16 +50,8 @@ export type OffersCaseStudy = {
   metric: { label: string; text: string };
 };
 
-/**
- * How a tier's CTA behaves:
- * - "checkout": external payment link (Stripe) or fallback route
- * - "apply":    opens the ICP intake modal (filters by ARR)
- * - "link":     internal route
- */
-export type OfferCtaAction = "checkout" | "apply" | "link";
-
 export type OfferTier = {
-  id: "micro-audit" | "enterprise-audit" | "enterprise-retainer";
+  id: "architecture-audit" | "communication-sprint" | "zero-trust-security";
   variant: "standard" | "featured" | "anchor";
   badge: string;
   title: string;
@@ -69,8 +61,7 @@ export type OfferTier = {
   valueProp: string;
   features: readonly string[];
   ctaText: string;
-  ctaAction: OfferCtaAction;
-  ctaHref?: string;
+  ctaHref: string;
 };
 
 export type OffersCtaBannerCopy = {
@@ -78,44 +69,10 @@ export type OffersCtaBannerCopy = {
   title: string;
   subtitle: string;
   ctaText: string;
+  ctaHref: string;
   secondaryText?: string;
   secondaryHref?: string;
   className?: string;
-};
-
-export type OffersIntakeModalCopy = {
-  submitUrl: string;
-  bookCallUrl: string;
-  /** Google Form entry IDs. Leave `arr` / `company` empty until those questions exist on the form. */
-  entries: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    company: string;
-    arr: string;
-  };
-  closeLabel: string;
-  title: string;
-  description: string;
-  placeholders: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    company: string;
-  };
-  arrLabel: string;
-  arrOptions: readonly { value: string; label: string; qualifies: boolean }[];
-  submit: {
-    idle: string;
-    loading: string;
-  };
-  notQualified: {
-    title: string;
-    body: string;
-    ctaText: string;
-    backText: string;
-  };
-  consent: string;
 };
 
 export type LeadMagnetCopy = {
@@ -152,73 +109,89 @@ export type OffersAboutCopy = {
   };
 };
 
-// Set NEXT_PUBLIC_STRIPE_MICRO_AUDIT_URL to the Stripe Payment Link for Tier 1.
-// Until then, the CTA falls back to the contact intake.
-export const MICRO_AUDIT_CHECKOUT_URL =
-  process.env.NEXT_PUBLIC_STRIPE_MICRO_AUDIT_URL || "/contact?tier=micro-audit";
-
 export const SALES_EMAIL = "sales@strickerdigital.com";
+
+/** Google Form that collects every lead on the site. */
+export const LEADS_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSei5MW9D_2R8OzjDQdy78j_x7Z3Hx0NXO1ohwoljdZ6xHQg9Q/formResponse";
+/** Existing Google Form questions: First name, Last name, Email. */
+export const LEADS_FORM_ENTRIES = {
+  firstName: "entry.1511831625",
+  lastName: "entry.659719382",
+  email: "entry.1036202572",
+};
+
+export const BOOK_CALL_URL = "https://calendly.com/strickerdigital/30-min-website-consult";
+
+export const CONSENT_TEXT =
+  "By providing your information today, you are giving consent for us to contact you by mail, phone, text, or email. We do not sell your personal information, and you can withdraw consent at any time.";
+
+/** Contact links with the intent dropdown preselected. */
+export const contactHref = {
+  audit: "/contact?intent=audit",
+  cohort: "/contact?intent=cohort",
+  betaReader: "/contact?intent=beta-reader",
+  general: "/contact?intent=general",
+};
 
 export const offerTiers: readonly OfferTier[] = [
   {
-    id: "micro-audit",
-    variant: "standard",
-    badge: "48-Hour Delivery",
-    title: "Micro Conversion & Latency Audit",
-    price: "$400",
-    priceNote: "one-time",
-    audience: "Growth-stage founders wanting immediate visual proof of form/API friction.",
-    valueProp: "Identify your top 3 conversion and system latency leaks without booking a sales call.",
-    features: [
-      "Complete 10-Minute Loom Video Teardown",
-      "Excalidraw Progressive UI/UX Layout Blueprint",
-      "Top 3 API / Checkout Bottlenecks Mapped for your internal dev team",
-    ],
-    ctaText: "Order Micro-Audit ($400)",
-    ctaAction: "checkout",
-    ctaHref: MICRO_AUDIT_CHECKOUT_URL,
-  },
-  {
-    id: "enterprise-audit",
+    id: "architecture-audit",
     variant: "featured",
-    badge: "Most Popular",
-    title: "48-Hour Enterprise System & Security Audit",
-    price: "$3,500 to $5,000",
+    badge: "Core Offer",
+    title: "Fixed-Scope Architecture Audit",
+    price: "$2,500 to $5,000",
     priceNote: "fixed-scope",
-    audience:
-      "B2B SaaS Platforms ($1M to $10M ARR) experiencing user drop-off or infrastructure friction.",
+    audience: "Growth-stage B2B platforms ($1M to $10M ARR) experiencing checkout friction or API latency.",
     valueProp:
-      "A complete diagnostic overhaul mapping architectural debt directly onto recovered business margins.",
+      "A 48-hour diagnostic that maps where your system leaks revenue. Your internal dev team executes the fix.",
     features: [
-      "Full Checkout, API Latency & Auth Security Audit",
-      "Custom Excalidraw System Topology Blueprint",
-      "Developer-Ready Refactoring Spec Sheet",
-      "AWS Caching & Cost-Optimization Review (FinOps)",
-      "30-Minute Executive Strategy Sync",
+      "48-hour over-the-shoulder Loom video teardown",
+      "Excalidraw blueprint of your system and flows",
+      "Checkout friction and API latency mapped",
+      "AWS cost leaks identified",
+      "Hand-off ready for your internal dev team",
     ],
-    ctaText: "Apply for Architectural Audit",
-    ctaAction: "apply",
+    ctaText: "Request Architectural Audit",
+    ctaHref: contactHref.audit,
   },
   {
-    id: "enterprise-retainer",
-    variant: "anchor",
-    badge: "Full Implementation",
-    title: "Enterprise AI Agent & Vault Implementation",
-    price: "$50,000",
-    priceNote: "retainer",
-    audience:
-      "High-growth enterprise platforms requiring custom AI workflows, multi-tenant \"Digital Vault\" security, and hands-on refactoring.",
+    id: "communication-sprint",
+    variant: "standard",
+    badge: "5-Day Cohort",
+    title: "Developer-to-SE Communication Sprint",
+    price: "$1,500 to $3,500",
+    priceNote: "per seat",
+    audience: "Ambitious developers and junior technical operators moving into client-facing and sales engineering roles.",
     valueProp:
-      "End-to-end architecture design, agentic workflow automation, and infrastructure deployment built for high-scale, zero-trust environments.",
+      "A 5-day presentation cohort that teaches technical people to speak with authority in the boardroom.",
     features: [
-      "Custom Next.js / AWS Private Portal Deployment",
-      "Autonomous AI Agent Workflows (n8n/CrewAI)",
-      "Zero-Trust Security, Auth0 & Session Isolation Setup",
-      "30-Day Hands-On Engineering Support",
+      "Vocal command: Rate Pivot and Power Pause",
+      "Live whiteboard presentation mechanics",
+      "Sales discovery and MEDDPICC alignment",
+      "Small cohort with live practice and feedback",
     ],
-    ctaText: "Inquire for Enterprise Retainer",
-    ctaAction: "link",
-    ctaHref: "/contact?tier=enterprise",
+    ctaText: "Inquire About Cohorts",
+    ctaHref: contactHref.cohort,
+  },
+  {
+    id: "zero-trust-security",
+    variant: "anchor",
+    badge: "Security",
+    title: "Zero-Trust Security & Auth Boundaries",
+    price: "Custom",
+    priceNote: "scoped per platform",
+    audience: "High-trust platforms handling sensitive client data, payments, or private portals.",
+    valueProp:
+      "Identity and access architecture designed so your platform stays secure without slowing users down.",
+    features: [
+      "Identity verification flows",
+      "OAuth 2.0 token design",
+      "Multi-factor authentication (MFA) architecture",
+      "Built for high-trust platforms",
+    ],
+    ctaText: "Discuss Security Scope",
+    ctaHref: contactHref.audit,
   },
 ];
 
@@ -230,12 +203,11 @@ export const leadMagnetCopy: LeadMagnetCopy = {
   body: "Send us your web application or checkout link. We'll map out your top 3 conversion and latency bottlenecks on Excalidraw for free. No sales call required.",
   ctaText: "Request Free Loom Audit",
   modal: {
-    submitUrl:
-      "https://docs.google.com/forms/d/e/1FAIpQLSei5MW9D_2R8OzjDQdy78j_x7Z3Hx0NXO1ohwoljdZ6xHQg9Q/formResponse",
+    submitUrl: LEADS_FORM_URL,
     entries: {
-      email: "entry.1036202572",
-      url: "entry.659719382", // "Last name" field until a URL question exists
-      source: "entry.1511831625", // "First name" field until a Source question exists
+      email: LEADS_FORM_ENTRIES.email,
+      url: LEADS_FORM_ENTRIES.lastName, // "Last name" field until a URL question exists
+      source: LEADS_FORM_ENTRIES.firstName, // "First name" field until a Source question exists
     },
     sourceValue: "Free Loom Audit",
     closeLabel: "✖",
@@ -252,12 +224,11 @@ export const leadMagnetCopy: LeadMagnetCopy = {
     },
     success: {
       title: "You're in the queue.",
-      body: "Your 2-minute Loom audit will land in your inbox. Want the full 10-minute teardown and layout blueprint in 48 hours?",
-      upsellText: "Order Micro-Audit ($400)",
-      upsellHref: MICRO_AUDIT_CHECKOUT_URL,
+      body: "Your 2-minute Loom audit will land in your inbox. Want the full system map, AWS cost review, and hand-off ready blueprint in 48 hours?",
+      upsellText: "Request Architectural Audit",
+      upsellHref: contactHref.audit,
     },
-    consent:
-      "By providing your information today, you are giving consent for us to contact you by mail, phone, text, or email. We do not sell your personal information, and you can withdraw consent at any time.",
+    consent: CONSENT_TEXT,
   },
 };
 
@@ -329,11 +300,18 @@ export const caseStudies: readonly OffersCaseStudy[] = [
   },
 ];
 
+/** Headline results shown as a stats band. */
+export const proofMetrics = [
+  { value: "30%", label: "lift in completed checkout conversions" },
+  { value: "22%", label: "raw reduction in user friction tickets" },
+  { value: "48 hrs", label: "from kickoff to delivered audit" },
+];
+
 export const featuredOffersHeader = {
-  tag: "Productized B2B Architecture Services",
-  title: "Eliminate System Friction. Recover Leaked Revenue.",
+  tag: "Architecture, Communication & Security",
+  title: "Quantifying technical friction into measurable commercial ROI.",
   subtitle:
-    "Fixed-scope diagnostic clarity and enterprise refactoring blueprints delivered in 48 hours. No open-ended hourly billing, just quantifiable business metrics.",
+    "Fixed-scope audits for your platform, communication sprints for your people, and security architecture you can trust. No open-ended hourly billing.",
 };
 
 export type WelcomePageCopy = {
@@ -345,119 +323,66 @@ export type WelcomePageCopy = {
   nextCta: { text: string; href: string };
 };
 
-/** Post-signup pages at /welcome/[tier]. Point Stripe / Calendly redirects here. */
-export const welcomePages: Record<OfferTier["id"], WelcomePageCopy> = {
-  "micro-audit": {
-    eyebrow: "Micro Conversion & Latency Audit",
-    title: "You're in. Your Micro-Audit is underway.",
-    subtitle: "Here's what happens over the next 48 hours.",
-    video: videos.welcomeMicroAudit,
-    steps: [
-      "Check your inbox for your payment confirmation.",
-      "Reply with your app or checkout URL and the flow you want reviewed, if you haven't already sent it.",
-      "Your 10-minute Loom teardown and Excalidraw blueprint arrive within 24 to 48 hours.",
-    ],
-    nextCta: { text: "Explore the Enterprise Audit", href: "/offers#enterprise-audit" },
-  },
-  "enterprise-audit": {
-    eyebrow: "48-Hour Enterprise System & Security Audit",
-    title: "Your Executive Strategy Sync is booked.",
+/** Post-signup pages at /welcome/[offer]. Point Calendly / checkout redirects here. */
+export const welcomePages: Record<"architecture-audit" | "communication-sprint", WelcomePageCopy> = {
+  "architecture-audit": {
+    eyebrow: "Fixed-Scope Architecture Audit",
+    title: "Your audit kickoff is booked.",
     subtitle: "A few things to prepare so we get the most out of the call.",
-    video: videos.welcomeEnterpriseAudit,
+    video: videos.welcomeAudit,
     steps: [
       "Watch the short prep video above.",
       "List the flows that matter most (signup, onboarding, checkout) and any known drop-off points.",
       "Have recent analytics and a staging or read-only environment ready to share.",
-      "After the sync we confirm fixed scope and price; the audit is delivered within 48 hours of kickoff.",
+      "After kickoff we confirm fixed scope and price, and your Loom teardown and Excalidraw blueprint arrive within 48 hours.",
     ],
     nextCta: { text: "Back to offers", href: "/offers" },
   },
-  "enterprise-retainer": {
-    eyebrow: "Enterprise AI Agent & Vault Implementation",
-    title: "Welcome aboard. Let's build.",
-    subtitle: "Here's how the implementation kicks off.",
-    video: videos.welcomeEnterpriseRetainer,
+  "communication-sprint": {
+    eyebrow: "Developer-to-SE Communication Sprint",
+    title: "Welcome to the cohort.",
+    subtitle: "Here's how to get ready for your 5-day sprint.",
+    video: videos.welcomeCohort,
     steps: [
-      "Watch the kickoff video above.",
-      "Look out for the kickoff agenda and access checklist in your inbox.",
-      "We map the architecture, then build and deploy with 30 days of hands-on engineering support.",
+      "Watch the welcome video above.",
+      "Look out for your cohort schedule and calendar invites in your inbox.",
+      "Pick one technical topic you explain often. We'll use it for your first whiteboard session.",
     ],
-    nextCta: { text: "Contact us", href: "/contact?tier=enterprise" },
+    nextCta: { text: "Explore the Library", href: "/library" },
   },
 };
 
 export const offersCopy = {
   headline: {
-    eyebrow: "Offers & pricing",
-    headlineText: "Start free. Scale up when the numbers justify it.",
-    subheadlineText:
-      "Productized architecture audits for B2B SaaS. Every engagement has a defined deliverable and a defined price, with no open-ended hourly billing.",
+    eyebrow: "Advisory",
+    headlineText: "Diagnostic Systems Strategy & Boardroom Discovery",
+    subheadlineText: "Quantifying technical friction into measurable commercial ROI.",
     ctas: [
-      { label: "Get the free audit", href: "#free-audit" },
-      { label: "Compare offers", href: "#offers", variant: "inverted" as const },
+      { label: "Request Architectural Audit", href: contactHref.audit },
+      { label: "Get the free audit", href: "#free-audit", variant: "inverted" as const },
     ],
   },
-
-  intakeModal: {
-    submitUrl:
-      "https://docs.google.com/forms/d/e/1FAIpQLSei5MW9D_2R8OzjDQdy78j_x7Z3Hx0NXO1ohwoljdZ6xHQg9Q/formResponse",
-    bookCallUrl: "https://calendly.com/strickerdigital/30-min-website-consult",
-    entries: {
-      firstName: "entry.1511831625",
-      lastName: "entry.659719382",
-      email: "entry.1036202572",
-      company: "",
-      arr: "",
-    },
-    closeLabel: "✖",
-    title: "Apply for the Architectural Audit",
-    description:
-      "The 48-Hour Enterprise Audit is built for B2B SaaS platforms at $1M+ ARR. Tell us about your company, and qualified applicants go straight to scheduling the discovery sync.",
-    placeholders: {
-      firstName: "First name",
-      lastName: "Last name",
-      email: "Work email",
-      company: "Company website",
-    },
-    arrLabel: "Current annual recurring revenue",
-    arrOptions: [
-      { value: "under-1m", label: "Under $1M ARR", qualifies: false },
-      { value: "1m-3m", label: "$1M to $3M ARR", qualifies: true },
-      { value: "3m-10m", label: "$3M to $10M ARR", qualifies: true },
-      { value: "10m-plus", label: "$10M+ ARR", qualifies: true },
-    ],
-    submit: {
-      idle: "Submit application",
-      loading: "Submitting…",
-    },
-    notQualified: {
-      title: "Start with the Micro-Audit",
-      body: "The Enterprise Audit is scoped for platforms at $1M+ ARR. The $400 Micro Conversion & Latency Audit maps your top 3 conversion and latency leaks in 48 hours. No sales call required.",
-      ctaText: "Order Micro-Audit ($400)",
-      backText: "Back",
-    },
-    consent:
-      "By providing your information today, you are giving consent for us to contact you by mail, phone, text, or email. We do not sell your personal information, and you can withdraw consent at any time.",
-  } satisfies OffersIntakeModalCopy,
 
   ctaBanners: {
     middle: {
       id: "apply",
-      ctaText: "Apply for Architectural Audit",
+      ctaText: "Request Architectural Audit",
+      ctaHref: contactHref.audit,
       title: "Ready for the full diagnostic?",
       subtitle:
-        "Applications are reviewed for fit ($1M+ ARR). Qualified teams book the executive discovery sync right away.",
+        "Tell us about your platform. Audits are scoped for B2B platforms between $1M and $10M ARR.",
       secondaryText: "Get the free Loom audit",
       secondaryHref: "#free-audit",
       className: "bg-page",
     },
     bottom: {
-      ctaText: "Apply for Architectural Audit",
+      ctaText: "Request Architectural Audit",
+      ctaHref: contactHref.audit,
       title: "Stop guessing where the friction is.",
       subtitle:
-        "Fixed scope. Fixed price. A hand-off ready spec your team can execute the following week.",
-      secondaryText: "Talk enterprise",
-      secondaryHref: "/contact?tier=enterprise",
+        "Fixed scope. Fixed price. A hand-off ready blueprint your team can execute the following week.",
+      secondaryText: "Inquire about cohorts",
+      secondaryHref: contactHref.cohort,
       className: "bg-page",
     },
   } satisfies Record<string, OffersCtaBannerCopy>,
@@ -465,7 +390,7 @@ export const offersCopy = {
   howItWorks: {
     id: "how-it-works",
     title: "How it works",
-    subtitle: "A value ladder. Start where the evidence you need is, and move up when the numbers justify it.",
+    subtitle: "Start with free evidence, fix the system, then level up the people who present it.",
     steps: [
       {
         icon: faVideo,
@@ -475,25 +400,25 @@ export const offersCopy = {
           "Send your app or checkout link. We record a quick over-the-shoulder walkthrough of your top 3 bottlenecks. No sales call.",
       },
       {
-        icon: faMagnifyingGlassChart,
-        eyebrow: "Step 1: $400",
-        title: "Micro-Audit",
-        description:
-          "A recorded Loom teardown and layout blueprint of your top 3 conversion and latency leaks, delivered in 24 to 48 hours.",
-      },
-      {
         icon: faDiagramProject,
-        eyebrow: "Step 2: $3,500 to $5,000",
-        title: "48-Hour Enterprise Audit",
+        eyebrow: "Step 1: $2,500 to $5,000",
+        title: "Architecture Audit",
         description:
-          "Full checkout, API, auth, and AWS cost review. You leave with a system topology and a refactoring spec your internal team can execute.",
+          "A 48-hour video teardown and Excalidraw blueprint mapping checkout friction, API latency, and AWS cost leaks.",
       },
       {
-        icon: faRocket,
-        eyebrow: "Step 3: $50,000",
-        title: "Enterprise Implementation",
+        icon: faCodeBranch,
+        eyebrow: "Step 2: Your team",
+        title: "Your Team Executes",
         description:
-          "We build it: Digital Vault infrastructure, AI agent workflows, and zero-trust security, with 30 days of hands-on engineering support.",
+          "Your internal developers ship the fixes from a clear, prioritized blueprint. No agency lock-in.",
+      },
+      {
+        icon: faChalkboardUser,
+        eyebrow: "Step 3: $1,500 to $3,500 per seat",
+        title: "Communication Sprint",
+        description:
+          "Train the engineers who present the work to lead discovery and command the room with executives.",
       },
     ] satisfies OffersHowItWorksStep[],
   },
@@ -511,28 +436,28 @@ export const offersCopy = {
       },
       {
         icon: faRoute,
-        title: "Conversion Optimization Framework",
+        title: "Checkout Friction Mapping",
         description:
           "Shifting complex interactions from overwhelming single-page \"walls of inputs\" into smooth, multi-step linear flows designed to maximize completion rates and data integrity.",
       },
       {
         icon: faUserShield,
-        title: "Zero-Trust Security & FinOps",
+        title: "Security & AWS Cost Review",
         description:
-          "Reviewing identity (Auth0 Actions, MFA, M2M tokens, session isolation) and AWS caching/cost posture so your platform stays secure without slowing checkout or inflating your bill.",
+          "Reviewing identity (OAuth 2.0, MFA, session boundaries) and AWS caching and cost posture so your platform stays secure without slowing checkout or inflating your bill.",
       },
     ] satisfies OffersFrameworkItem[],
   },
 
   whoThisIsFor: {
     title: "Who this is for",
-    intro: "Built for B2B SaaS founders and technical leaders who:",
+    intro: "Built for platforms that need clarity and for the technical people who have to explain it.",
     bullets: [
-      "Run a platform between $1M and $10M ARR",
-      "See user drop-off in signup, onboarding, or checkout flows",
-      "Suspect API latency or auth friction is costing conversions",
-      "Want a fixed-scope answer instead of an open-ended hourly engagement",
-      "Need a spec their internal dev team can execute immediately",
+      "B2B platforms between $1M and $10M ARR with checkout friction or API latency",
+      "Teams that want a fixed-scope answer instead of open-ended hourly billing",
+      "Internal dev teams ready to execute from a clear blueprint",
+      "Developers and technical operators moving into sales engineering or client-facing roles",
+      "Engineers who need to present to executives and boardrooms with authority",
     ],
   },
 
@@ -542,7 +467,7 @@ export const offersCopy = {
       left: {
         title: "Who We Are",
         bodyLines: [
-          "I’m Nick, a full-stack engineer who architects and audits production systems.",
+          "I’m Nick, a full-stack engineer who architects and audits production systems and teaches technical people to communicate with authority.",
           "I’ve worked inside 600,000-line enterprise execution engines, shipping webhook delivery layers and real-time platforms that drove a 30% performance optimization and a 22% drop in user friction tickets.",
         ],
       },
@@ -595,32 +520,77 @@ export const offersCopy = {
           "Yes. Send your link and you get a 2-minute recorded walkthrough of your top 3 conversion and latency bottlenecks. No sales call, no obligation.",
       },
       {
-        question: "What's the difference between the Micro-Audit and the Enterprise Audit?",
+        question: "What do I get from the Architecture Audit?",
         answer:
-          "The Micro-Audit is a fast, recorded teardown of your top 3 conversion and latency leaks, with no call required. The Enterprise Audit covers checkout, API latency, authentication security, and AWS cost, and ends with a system topology, a step-by-step refactoring spec, and a live executive strategy sync.",
+          "A 48-hour over-the-shoulder video teardown and an Excalidraw blueprint mapping your checkout friction, API latency, and AWS cost leaks, prioritized so your team knows what to fix first.",
       },
       {
-        question: "Why is the Enterprise Audit priced as a range?",
+        question: "Why is the audit priced as a range?",
         answer:
           "The fixed price is set before work begins, based on the surface area in scope (number of critical flows, services, and integrations). You know the exact number before you commit, and there is no hourly billing.",
       },
       {
+        question: "Do you write the code?",
+        answer:
+          "No. We deliver the diagnosis and the blueprint, and your internal dev team executes it. That keeps the engagement fast, fixed-scope, and free of agency lock-in.",
+      },
+      {
+        question: "What happens in a Communication Sprint?",
+        answer:
+          "A 5-day presentation cohort for developers and technical operators. You practice vocal command (Rate Pivot, Power Pause), live whiteboard mechanics, and sales discovery aligned to MEDDPICC.",
+      },
+      {
         question: "What if we're under $1M ARR?",
         answer:
-          "Start with the free 2-minute Loom audit or the $400 Micro-Audit. Both surface the highest-impact fixes quickly and tell you whether a full audit is worth it later.",
-      },
-      {
-        question: "Do you implement the fixes?",
-        answer:
-          "The Enterprise Audit spec is written to be hand-off ready for your internal team. If you want us to build it, the Enterprise Implementation retainer covers deployment and 30 days of hands-on engineering support.",
-      },
-      {
-        question: "How fast is delivery?",
-        answer:
-          "Both audits are delivered within 48 hours of kickoff, once we have the access and context agreed on in scope.",
+          "Start with the free 2-minute Loom audit. It surfaces the highest-impact fixes quickly and tells you whether a full audit is worth it later.",
       },
     ] satisfies OffersFAQItem[],
   },
 } as const;
 
 export type OffersCopy = typeof offersCopy;
+
+/** /contact intake form. */
+export const contactCopy = {
+  eyebrow: "Contact",
+  headline: "Let's Align Your Architecture with Commercial Outcomes.",
+  subheadline: "Tell us what you need and we'll point you to the right starting point.",
+  intents: [
+    { value: "audit", label: "Request a 48-Hour Architecture & Security Audit" },
+    { value: "cohort", label: "Inquire about Developer-to-SE Communication Cohorts / Sprints" },
+    { value: "beta-reader", label: "Join \"The Iteration Loop\" Book Beta Reader List" },
+    { value: "general", label: "General Business Inquiry / Keynote Speaking" },
+  ],
+  /**
+   * Google Form entry IDs for the extra fields. Leave empty until those questions exist on the form;
+   * until then the intent, company, ARR and message are added to the "Last name" answer so nothing is lost.
+   */
+  extraEntries: {
+    intent: "",
+    company: "",
+    arr: "",
+    message: "",
+  },
+  arrLabel: "Company ARR (optional)",
+  arrOptions: [
+    { value: "under-1m", label: "Under $1M ARR" },
+    { value: "1m-3m", label: "$1M to $3M ARR" },
+    { value: "3m-10m", label: "$3M to $10M ARR" },
+    { value: "10m-plus", label: "$10M+ ARR" },
+  ],
+  underArrNote: "Under $1M ARR? The free 2-minute Loom audit is the faster place to start.",
+  placeholders: {
+    firstName: "First name",
+    lastName: "Last name",
+    email: "Work email",
+    company: "Company or website (optional)",
+    message: "What's going on? Share any context that helps (optional)",
+  },
+  submit: { idle: "Send", loading: "Sending…" },
+  success: {
+    title: "Thanks, we've got it.",
+    body: "We'll reply by email shortly. If you'd like to reach us directly in the meantime, email",
+    bookCallText: "Book a call now",
+  },
+  consent: CONSENT_TEXT,
+};

@@ -30,14 +30,14 @@ export const videos = {
   /** Homepage — introductory video under the hero. */
   intro: {
     title: "Meet Stricker Digital",
-    caption: "Who we are, who we work with, and how a 48-hour audit recovers leaked revenue.",
+    caption: "Who we are, who we work with, and how architecture and communication turn into business value.",
     src: "",
     published: false,
   },
   /** /offers — walkthrough of the free audit and the three tiers. */
   offers: {
     title: "Which offer is right for you?",
-    caption: "A quick walkthrough of the free Loom audit and each paid tier.",
+    caption: "A quick walkthrough of the free Loom audit, the architecture audit, and the communication sprints.",
     src: "",
     published: false,
   },
@@ -47,21 +47,15 @@ export const videos = {
     src: "",
     published: false,
   },
-  /** /welcome/micro-audit — set as the Stripe Payment Link's after-payment redirect. */
-  welcomeMicroAudit: {
-    title: "Welcome! Your Micro-Audit is underway",
+  /** /welcome/architecture-audit: set as the Calendly event's after-booking redirect. */
+  welcomeAudit: {
+    title: "Welcome! Let’s prepare for your Architecture Audit",
     src: "",
     published: false,
   },
-  /** /welcome/enterprise-audit — set as the Calendly event's after-booking redirect. */
-  welcomeEnterpriseAudit: {
-    title: "Welcome! Let’s prepare for your Enterprise Audit",
-    src: "",
-    published: false,
-  },
-  /** /welcome/enterprise-retainer — send to clients after the retainer is signed. */
-  welcomeEnterpriseRetainer: {
-    title: "Welcome! Let’s kick off your implementation",
+  /** /welcome/communication-sprint: send to cohort members after they register. */
+  welcomeCohort: {
+    title: "Welcome to your Communication Sprint",
     src: "",
     published: false,
   },

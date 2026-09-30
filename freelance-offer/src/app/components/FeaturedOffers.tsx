@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
+  faChalkboardUser,
   faCheck,
   faLayerGroup,
+  faLock,
   faMagnifyingGlassChart,
-  faRocket,
   faShieldHalved,
   faStar,
-  faStopwatch,
-  faVault,
+  faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 
 import LeadMagnet from "./LeadMagnet";
@@ -20,8 +20,6 @@ import { featuredOffersHeader, offerTiers, type OfferTier } from "../offers/copy
 
 type FeaturedOffersProps = {
   id?: string;
-  /** Opens the Tier 2 intake modal. */
-  onApply: () => void;
   className?: string;
 };
 
@@ -39,50 +37,28 @@ const badgeStyles: Record<OfferTier["variant"], string> = {
 };
 
 const badgeIcons = {
-  standard: faStopwatch,
+  standard: faUsers,
   featured: faStar,
-  anchor: faRocket,
+  anchor: faLock,
 } as const;
 
-const tierIcons: Record<OfferTier["id"], typeof faVault> = {
-  "micro-audit": faMagnifyingGlassChart,
-  "enterprise-audit": faShieldHalved,
-  "enterprise-retainer": faVault,
+const tierIcons: Record<OfferTier["id"], typeof faShieldHalved> = {
+  "architecture-audit": faMagnifyingGlassChart,
+  "communication-sprint": faChalkboardUser,
+  "zero-trust-security": faShieldHalved,
 };
 
-function TierCta({ tier, onApply }: { tier: OfferTier; onApply: () => void }) {
+function TierCta({ tier }: { tier: OfferTier }) {
   const className = `${tier.variant === "featured" ? "btn-gradient" : "btn-inverted"} mt-8 w-full gap-2`;
-  const content = (
-    <>
+  return (
+    <Link href={tier.ctaHref} className={className}>
       {tier.ctaText}
       <FontAwesomeIcon icon={faArrowRight} className="text-sm" aria-hidden />
-    </>
-  );
-
-  if (tier.ctaAction === "apply") {
-    return (
-      <button type="button" onClick={onApply} className={className}>
-        {content}
-      </button>
-    );
-  }
-
-  const href = tier.ctaHref ?? "/contact";
-  if (/^https?:\/\//i.test(href)) {
-    return (
-      <a href={href} target="_blank" rel="noreferrer" className={className}>
-        {content}
-      </a>
-    );
-  }
-  return (
-    <Link href={href} className={className}>
-      {content}
     </Link>
   );
 }
 
-export default function FeaturedOffers({ id = "offers", onApply, className = "bg-page" }: FeaturedOffersProps) {
+export default function FeaturedOffers({ id = "offers", className = "bg-page" }: FeaturedOffersProps) {
   return (
     <section id={id} className={`${className} section-pad scroll-mt-16 text-white`}>
       <div className="mx-auto max-w-6xl">
@@ -154,7 +130,7 @@ export default function FeaturedOffers({ id = "offers", onApply, className = "bg
               </p>
 
               <div className="mt-auto">
-                <TierCta tier={tier} onApply={onApply} />
+                <TierCta tier={tier} />
               </div>
             </motion.div>
           ))}

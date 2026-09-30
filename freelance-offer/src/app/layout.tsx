@@ -26,10 +26,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.strickerdigital.com"),
   title: "Stricker Digital",
-  description: "Productized system architecture and conversion audits for B2B SaaS. Fixed scope, 48-hour delivery.",
+  description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into commercial business value.",
   openGraph: {
     title: "Stricker Digital",
-    description: "Productized system architecture and conversion audits for B2B SaaS. Fixed scope, 48-hour delivery.",
+    description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into commercial business value.",
     url: "https://www.strickerdigital.com",
     siteName: "Stricker Digital",
     images: [
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Stricker Digital",
-    description: "Productized system architecture and conversion audits for B2B SaaS. Fixed scope, 48-hour delivery.",
+    description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into commercial business value.",
     images: ["/SDLogocircle.png"],
   },
 };

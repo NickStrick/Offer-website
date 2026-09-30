@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useRef } from "react";
 import Headline from "../components/Headline";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
@@ -8,7 +7,7 @@ import FeaturedOffers from "../components/FeaturedOffers";
 import CaseStudies from "../components/CaseStudies";
 import VideoSection from "../components/Video";
 import { videos } from "../media";
-import IntakeModal, { type IntakeModalHandle } from "../components/IntakeModal";
+import ProofMetrics from "../components/ProofMetrics";
 
 import CtaBanner from "./components/CtaBanner";
 import FAQ from "./components/FAQ";
@@ -20,14 +19,7 @@ import Framework from "./components/Framework";
 import { offersCopy } from "./copy";
 
 export default function OffersPage() {
-  const intakeModalRef = useRef<IntakeModalHandle>(null);
-  const openIntake = () => intakeModalRef.current?.open();
   const { ctaBanners } = offersCopy;
-
-  // Links like /offers#apply (navbar CTA) open the application directly.
-  useEffect(() => {
-    if (window.location.hash === "#apply") openIntake();
-  }, []);
 
   return (
     <main className="min-h-screen bg-page text-white">
@@ -38,11 +30,11 @@ export default function OffersPage() {
         ctas={[...offersCopy.headline.ctas]}
       />
 
-      <IntakeModal ref={intakeModalRef} copy={offersCopy.intakeModal} />
-
       <VideoSection video={videos.offers} id="offers-video" />
 
-      <FeaturedOffers onApply={openIntake} />
+      <FeaturedOffers />
+
+      <ProofMetrics />
 
       <HowItWorks
         id={offersCopy.howItWorks.id}
@@ -68,7 +60,7 @@ export default function OffersPage() {
         className="bg-page"
       />
 
-      <CtaBanner ctaHref="#apply" onCtaClick={openIntake} {...ctaBanners.middle} />
+      <CtaBanner {...ctaBanners.middle} />
 
       <Testimonials
         {...{
@@ -90,7 +82,7 @@ export default function OffersPage() {
 
       <FAQ id={offersCopy.faq.id} title={offersCopy.faq.title} items={offersCopy.faq.items} className="bg-gradient-purple-black" />
 
-      <CtaBanner ctaHref="#apply" onCtaClick={openIntake} {...ctaBanners.bottom} />
+      <CtaBanner {...ctaBanners.bottom} />
 
       <Footer />
     </main>

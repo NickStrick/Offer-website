@@ -40,8 +40,8 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href="/offers#apply" className="btn-gradient ml-3 !px-4 !py-2 !text-sm">
-            Apply for Audit
+          <Link href="/contact?intent=audit" className="btn-gradient ml-3 !px-4 !py-2 !text-sm">
+            Request Audit
           </Link>
         </nav>
 
@@ -67,8 +67,8 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href="/offers#apply" onClick={() => setOpen(false)} className="btn-gradient mt-2">
-            Apply for Audit
+          <Link href="/contact?intent=audit" onClick={() => setOpen(false)} className="btn-gradient mt-2">
+            Request Audit
           </Link>
         </nav>
       ) : null}
