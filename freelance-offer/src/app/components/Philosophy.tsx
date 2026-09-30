@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { faCode, faGaugeHigh, faSeedling, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 
-import IconTile from "./IconTile";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SectionHeader from "./SectionHeader";
 
 const points = [
@@ -38,15 +38,18 @@ export default function Philosophy() {
           {points.map((point, i) => (
             <motion.div
               key={point.title}
-              className="surface-card surface-card-hover p-7"
+              className="testimonial-card p-7"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.08 }}
             >
-              <IconTile icon={point.icon} className="mb-6" />
-              <h3 className="text-lg font-semibold">{point.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-ink-muted">{point.description}</p>
+              <FontAwesomeIcon icon={point.icon} className="testimonial-watermark" aria-hidden />
+              <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-black/30 text-lg text-amber-300 ring-1 ring-white/15">
+                <FontAwesomeIcon icon={point.icon} aria-hidden />
+              </span>
+              <h3 className="text-lg font-bold">{point.title}</h3>
+              <p className="mt-2 text-[15px] font-semibold leading-relaxed tracking-wide text-white/85">{point.description}</p>
             </motion.div>
           ))}
         </div>
