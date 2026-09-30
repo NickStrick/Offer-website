@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCheck, faChalkboard, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 import { LEADS_FORM_ENTRIES, LEADS_FORM_URL, checklistCopy } from "../offers/copy";
 
 /** Email capture for the free checklist. Saves the lead, then sends them to the walkthrough page. */
-export function ChecklistForm({ autoFocus = false, inline = false }: { autoFocus?: boolean; inline?: boolean }) {
+export function ChecklistForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -35,11 +35,10 @@ export function ChecklistForm({ autoFocus = false, inline = false }: { autoFocus
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`flex flex-col gap-3 ${inline ? "sm:flex-row" : ""}`}>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
       <input
         type="email"
         required
-        autoFocus={autoFocus}
         aria-label={checklistCopy.emailPlaceholder}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -51,50 +50,6 @@ export function ChecklistForm({ autoFocus = false, inline = false }: { autoFocus
         {loading ? null : <FontAwesomeIcon icon={faArrowRight} className="text-sm" aria-hidden />}
       </button>
     </form>
-  );
-}
-
-/** Pop-up version, opened from the Tier 0 card in the offer ladder. */
-export function ChecklistModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className="fixed inset-0 z-[550] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-        >
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="checklist-modal-title"
-            className="surface-card w-full max-w-[560px] !border-green-500/40 p-7 text-white md:p-8"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 10, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-start justify-between gap-4">
-              <div className="eyebrow !text-green-400">{checklistCopy.tag}</div>
-              <button onClick={onClose} aria-label="Close" className="rounded-lg px-2 text-ink-subtle hover:text-white">
-                ✖
-              </button>
-            </div>
-            <h4 id="checklist-modal-title" className="mt-3 text-2xl font-semibold">
-              {checklistCopy.title}
-            </h4>
-            <p className="mt-2 text-[15px] text-ink-muted">{checklistCopy.modalDescription}</p>
-            <div className="mt-6">
-              <ChecklistForm autoFocus inline />
-            </div>
-            <p className="mt-4 text-xs leading-relaxed text-ink-subtle">{checklistCopy.consent}</p>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
   );
 }
 
@@ -148,8 +103,13 @@ export default function LeadMagnetBanner({ className = "bg-page" }: { className?
         <div aria-hidden className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-green-500/15 blur-3xl" />
         <div className="relative grid items-center gap-10 md:grid-cols-[1.15fr_1fr]">
           <div>
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-green-400">
-              {checklistCopy.tag}
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-green-400">
+                {checklistCopy.tag}
+              </div>
+              <span className="font-mono text-xs uppercase tracking-[0.14em] text-ink-subtle">
+                Tier 0 · <span className="text-white">{checklistCopy.price}</span>
+              </span>
             </div>
             <h2 className="mt-5 text-2xl font-semibold md:text-[2rem]" style={{ letterSpacing: "-0.03em", lineHeight: 1.12 }}>
               {checklistCopy.title}

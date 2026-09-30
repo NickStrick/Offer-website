@@ -33,9 +33,10 @@ export default function Footer() {
     {
       title: es ? 'Ofertas' : 'Offers',
       links: [
-        { href: "/offers#communication-masterclass", label: "Communication Masterclass" },
-        { href: "/offers#presentation-sprint", label: "5-Day Presentation Sprint" },
-        { href: "/offers#enterprise-audit", label: "Enterprise Audit & Build" },
+        { href: "/offers#communication-masterclass", label: "Communication System ($500)" },
+        { href: "/offers#presentation-sprint", label: "SE Accelerator Sprint ($2,500)" },
+        { href: "/offers#enterprise-audit", label: "Enterprise Audit ($5,000)" },
+        { href: "/offers#enterprise-retainer", label: "Vault Implementation ($50,000)" },
         { href: "/library#digital-vault", label: "The Digital Vault" },
       ],
     },

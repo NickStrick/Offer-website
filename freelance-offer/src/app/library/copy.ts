@@ -61,8 +61,8 @@ export const libraryCopy = {
         description: "Custom engineered infrastructure with no shared attack surface.",
       },
     ] satisfies VaultFeature[],
-    ctaText: "Request early access",
-    ctaHref: contactHref.general,
+    ctaText: "Inquire about a Vault build",
+    ctaHref: contactHref.retainer,
   },
 
   books: {

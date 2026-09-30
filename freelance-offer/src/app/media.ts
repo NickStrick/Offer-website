@@ -50,19 +50,25 @@ export const videos = {
   },
   /** /welcome/communication-masterclass: set as the Stripe Payment Link's after-payment redirect. */
   welcomeMasterclass: {
-    title: "Welcome to the Boardroom Communication Masterclass",
+    title: "Welcome to the Boardroom Communication & Iteration System",
     src: "",
     published: false,
   },
-  /** /welcome/presentation-sprint: send to accepted sprint applicants. */
+  /** /welcome/presentation-sprint: send to accepted cohort applicants. */
   welcomeSprint: {
-    title: "Welcome to your 5-Day Boardroom Presentation Sprint",
+    title: "Welcome to the 5-Day Boardroom Gravity & SE Transition Accelerator",
     src: "",
     published: false,
   },
   /** /welcome/architecture-audit: set as the Calendly event's after-booking redirect. */
   welcomeAudit: {
-    title: "Welcome! Let’s prepare for your Architecture Audit",
+    title: "Welcome! Let’s prepare for your Enterprise Audit",
+    src: "",
+    published: false,
+  },
+  /** /welcome/enterprise-retainer: send to clients once the $50k retainer is signed. */
+  welcomeRetainer: {
+    title: "Welcome! Let’s kick off your Vault implementation",
     src: "",
     published: false,
   },

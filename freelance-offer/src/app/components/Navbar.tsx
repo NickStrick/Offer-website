@@ -49,8 +49,8 @@ export default function Navbar() {
             <FontAwesomeIcon icon={faGift} className="text-xs" aria-hidden />
             {checklistLink.label}
           </Link>
-          <Link href="/contact?tier=enterprise" className="btn-gradient ml-3 !px-4 !py-2 !text-sm">
-            Request Audit
+          <Link href="/contact?intent=audit" className="btn-gradient ml-3 !px-4 !py-2 !text-sm">
+            Apply for $5k Audit
           </Link>
         </nav>
 
@@ -80,8 +80,8 @@ export default function Navbar() {
             <FontAwesomeIcon icon={faGift} className="text-xs" aria-hidden />
             {checklistLink.label}
           </Link>
-          <Link href="/contact?tier=enterprise" onClick={() => setOpen(false)} className="btn-gradient mt-2">
-            Request Audit
+          <Link href="/contact?intent=audit" onClick={() => setOpen(false)} className="btn-gradient mt-2">
+            Apply for $5k Audit
           </Link>
         </nav>
       ) : null}

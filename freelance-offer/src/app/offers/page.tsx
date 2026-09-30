@@ -3,7 +3,7 @@
 import Headline from "../components/Headline";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
-import FeaturedOffers from "../components/FeaturedOffers";
+import DualOfferLadders from "../components/DualOfferLadders";
 import CaseStudies from "../components/CaseStudies";
 import VideoSection from "../components/Video";
 import { videos } from "../media";
@@ -35,7 +35,7 @@ export default function OffersPage() {
 
       <VideoSection video={videos.offers} id="offers-video" />
 
-      <FeaturedOffers />
+      <DualOfferLadders />
 
       <ProofMetrics />
 

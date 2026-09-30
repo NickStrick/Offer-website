@@ -4,7 +4,7 @@ import Headline from "./components/Headline";
 import Testimonals from "./components/Testimonials";
 import Philosophy from "./components/Philosophy";
 import HelperBtnGroup from "./components/HelperBtnGroup";
-import FeaturedOffers from "./components/FeaturedOffers";
+import DualOfferLadders from "./components/DualOfferLadders";
 import CaseStudies from "./components/CaseStudies";
 import ProofMetrics from "./components/ProofMetrics";
 import LibraryTeaser from "./components/LibraryTeaser";
@@ -75,13 +75,13 @@ export default function Home() {
         headlineText="Bridging Deep Systems Architecture to Commercial Business Value."
         subheadlineText="Fixed-scope diagnostic audits, high-impact technical presentation frameworks, and enterprise-grade software blueprints that eliminate friction and protect margins."
         ctas={[
-          { label: "Request Architectural Audit", href: contactHref.enterprise },
+          { label: "Apply for $5k Audit", href: contactHref.audit },
           { label: "Explore The Library & IP", href: "/library#books", variant: "inverted" },
         ]}
       />
       <LeadMagnetBanner />
       <VideoSection video={videos.intro} id="intro-video" />
-      <FeaturedOffers />
+      <DualOfferLadders />
       <ProofMetrics />
       <Philosophy />
       <CaseStudies />

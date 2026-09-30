@@ -65,7 +65,6 @@ const sections = [
 
 export default function EnterpriseChecklistPage() {
   const video = videos.enterpriseChecklist;
-  const nextTiers = offerTiers.filter((t) => t.id !== "enterprise-checklist");
 
   return (
     <main className="min-h-screen bg-page text-white">
@@ -121,8 +120,8 @@ export default function EnterpriseChecklistPage() {
             title="Found gaps? Here's where to go next."
             subtitle="Sharpen how you explain the fixes, or bring us in to audit and build them."
           />
-          <div className="grid gap-5 md:grid-cols-3">
-            {nextTiers.map((tier) => (
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {offerTiers.map((tier) => (
               <Link
                 key={tier.id}
                 href={`/offers#${tier.id}`}

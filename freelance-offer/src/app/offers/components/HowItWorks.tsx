@@ -23,14 +23,14 @@ export default function HowItWorks({
       <div className="mx-auto max-w-6xl">
         <SectionHeader eyebrow="The value ladder" eyebrowIcon={faSeedling} title={title} subtitle={subtitle} />
 
-        <ol className="relative grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <ol className="relative grid gap-5 md:grid-cols-2 lg:grid-cols-5">
           {/* growth line connecting the steps */}
           <div
             aria-hidden
             className="absolute left-0 right-0 top-[52px] hidden h-px bg-gradient-to-r from-green-500/40 via-green-500/20 to-amber-500/40 lg:block"
           />
           {steps.map((step, i) => (
-            <li key={step.eyebrow + step.title} className="surface-card surface-card-hover relative p-7">
+            <li key={step.eyebrow + step.title} className="surface-card surface-card-hover relative p-6">
               <div className="flex items-center justify-between">
                 {step.icon ? <IconTile icon={step.icon} /> : <span />}
                 <span className="font-mono text-xs text-ink-subtle">0{i + 1}</span>

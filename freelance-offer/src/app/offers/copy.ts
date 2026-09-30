@@ -10,6 +10,7 @@ import {
   faRoute,
   faStopwatch,
   faUserShield,
+  faVault,
 } from "@fortawesome/free-solid-svg-icons";
 import { caseStudyImages, videos, type ImageMedia, type VideoMedia } from "../media";
 
@@ -51,21 +52,31 @@ export type OffersCaseStudy = {
 };
 
 export type OfferTier = {
-  id: "enterprise-checklist" | "communication-masterclass" | "presentation-sprint" | "enterprise-audit";
-  /** "free" is the lead magnet entry point; "featured" is the highlighted tier. */
-  variant: "free" | "standard" | "featured" | "anchor";
+  id: "communication-masterclass" | "presentation-sprint" | "enterprise-audit" | "enterprise-retainer";
+  /** featured: highlighted career card; core: dominant B2B card; anchor: premium price anchor. */
+  variant: "standard" | "featured" | "core" | "anchor";
   tierLabel: string;
   badge: string;
   title: string;
   price: string;
   priceNote: string;
-  audience: string;
-  valueProp: string;
   features: readonly string[];
+  bonuses: readonly string[];
+  riskReversal?: { title: string; body: string };
   ctaText: string;
-  /** "modal" opens the checklist signup; "link" goes to ctaHref. */
-  ctaAction: "modal" | "link";
+  /** "link" goes to ctaHref; "modal" opens the application pop-up for `intent`. */
+  ctaAction: "link" | "modal";
   ctaHref?: string;
+  modal?: { intent: "sprint" | "audit"; title: string; description: string };
+};
+
+export type OfferLadder = {
+  id: string;
+  badge: string;
+  headline: string;
+  subheadline: string;
+  icp: string;
+  tiers: readonly OfferTier[];
 };
 
 export type OffersCtaBannerCopy = {
@@ -106,7 +117,8 @@ export const CONSENT_TEXT =
 
 /** Contact links with the intent dropdown preselected. */
 export const contactHref = {
-  enterprise: "/contact?tier=enterprise",
+  audit: "/contact?intent=audit",
+  retainer: "/contact?tier=50k",
   sprint: "/contact?intent=sprint",
   masterclass: "/contact?intent=masterclass",
   betaReader: "/contact?intent=beta-reader",
@@ -121,8 +133,9 @@ export const MASTERCLASS_CHECKOUT_URL = process.env.NEXT_PUBLIC_STRIPE_MASTERCLA
 export const checklistCopy = {
   id: "free-checklist",
   resourcePath: "/resources/enterprise-checklist",
-  tag: "Free Diagnostic Resource",
-  title: "The 2026 Enterprise Infrastructure & Architecture Checklist",
+  tag: "Free Diagnostic",
+  price: "$0",
+  title: "2026 Enterprise Infrastructure Checklist",
   subtitle:
     "An over-the-shoulder visual whiteboard walkthrough (Excalidraw) mapping the top 3 architectural flaws, API latency bottlenecks, and checkout form leaks that cost scaling B2B platforms $50k+ in abandoned revenue.",
   highlights: [
@@ -140,82 +153,132 @@ export const checklistCopy = {
   consent: CONSENT_TEXT,
 };
 
-export const offerTiers: readonly OfferTier[] = [
+/** Two ladders, one per customer profile. */
+export const offerLadders: readonly OfferLadder[] = [
   {
-    id: "enterprise-checklist",
-    variant: "free",
-    tierLabel: "Tier 0",
-    badge: "Free Entry",
-    title: "The 2026 Enterprise Checklist",
-    price: "Free",
-    priceNote: "instant access",
-    audience: "Founders and technical operators who want a fast, visual read on where their platform leaks revenue.",
-    valueProp: "The whiteboard walkthrough and spec sheet behind every audit, free.",
-    features: checklistCopy.highlights,
-    ctaText: "Get Free Whiteboard Spec",
-    ctaAction: "modal",
+    id: "career",
+    badge: "Career & Communication Acceleration",
+    headline: "Master Vocal Authority & Command the Boardroom.",
+    subheadline:
+      "Self-paced playbooks and live 5-day presentation sprints for technical builders looking to double their leverage and transition into $200k+ Sales Engineering roles.",
+    icp: "Ambitious Software Engineers, Junior SEs, Technical Operators, and Builders.",
+    tiers: [
+      {
+        id: "communication-masterclass",
+        variant: "standard",
+        tierLabel: "Tier 1",
+        badge: "Self-Paced / Digital System",
+        title: "The Boardroom Communication & Iteration System",
+        price: "$500",
+        priceNote: "one-time access",
+        features: [
+          "Complete Video Vault: Vocal Command, Power Pause & Rate Pivot Drills",
+          "Technical-to-Commercial Metric Translation Matrix (Converting code to ROI)",
+          "MEDDPICC Enterprise Discovery Playbook & Excalidraw Templates",
+        ],
+        bonuses: [
+          "Early Access Chapter Drafts of 'The Iteration Loop' Book",
+          "Plug-and-Play Whiteboard Presentation Blueprints",
+        ],
+        ctaText: "Enroll in Masterclass ($500)",
+        ctaAction: "link",
+        ctaHref: MASTERCLASS_CHECKOUT_URL,
+      },
+      {
+        id: "presentation-sprint",
+        variant: "featured",
+        tierLabel: "Tier 2",
+        badge: "5-Day Live Cohort / Capped at 10 Seats",
+        title: "The 5-Day Boardroom Gravity & SE Transition Accelerator",
+        price: "$2,500",
+        priceNote: "seat",
+        features: [
+          "5 Days of Live Interactive Vocal Mechanics & Whiteboard Presentation Drills",
+          "1-on-1 Excalidraw Whiteboard Discovery & MEDDPICC Strategy Audit",
+          "Live Interview & Technical Objection Mock Scenarios",
+        ],
+        bonuses: [
+          "Direct Resume & Portfolio Review (Bypassing ATS Filters)",
+          "Lifetime Access to The Boardroom Communication Vault ($500 Value)",
+        ],
+        riskReversal: {
+          title: "100% Day-2 Money-Back Guarantee",
+          body: "Refund on the spot if you don't feel your presentation skills have leveled up.",
+        },
+        ctaText: "Apply for Next Cohort ($2,500)",
+        ctaAction: "modal",
+        modal: {
+          intent: "sprint",
+          title: "Apply for the next cohort",
+          description: "Cohorts are capped at 10 seats. Tell us where you are today and we'll reply with next steps.",
+        },
+      },
+    ],
   },
   {
-    id: "communication-masterclass",
-    variant: "standard",
-    tierLabel: "Tier 1",
-    badge: "Masterclass",
-    title: "The Boardroom Communication Masterclass",
-    price: "$500",
-    priceNote: "one-time",
-    audience: "Developers and technical operators who want to explain their work to executives with authority.",
-    valueProp: "The core frameworks for presenting technical work so decision makers listen and act.",
-    features: [
-      "Vocal command: Rate Pivot and Power Pause",
-      "Whiteboard explanation frameworks",
-      "Structuring technical updates for executives",
-      "Sales discovery fundamentals",
+    id: "enterprise",
+    badge: "B2B Enterprise Architecture & Consulting",
+    headline: "Eradicate System Friction. Protect Business Margins.",
+    subheadline:
+      "Fixed-scope diagnostic audits and production-grade private portal deployments delivered in 48 hours. Zero open-ended hourly billing.",
+    icp: "B2B SaaS Founders ($1M to $10M ARR), CTOs, and High-Ticket Digital Operators with checkout friction, API latency, or security debt.",
+    tiers: [
+      {
+        id: "enterprise-audit",
+        variant: "core",
+        tierLabel: "Tier 3",
+        badge: "Core B2B Diagnostic / Maximum 2 Slots per Month",
+        title: "The 48-Hour Enterprise System Latency & Conversion Vault",
+        price: "$5,000",
+        priceNote: "fixed-scope",
+        features: [
+          "Complete Checkout, API Latency & Auth Security Audit",
+          "Custom Excalidraw System Topology & Progressive Flow Blueprint",
+          "Developer-Ready Refactoring Spec Sheet (Zero dev management required)",
+        ],
+        bonuses: [
+          "AWS Caching & FinOps Cost-Reduction Protocol",
+          "30-Minute Live Executive Discovery & Strategy Sync",
+          "30-Day Post-Audit Code Implementation Review",
+        ],
+        riskReversal: {
+          title: "$10,000 Findings Guarantee",
+          body: "Guaranteed to identify at least $10,000 in leaked checkout revenue or AWS cost savings, or issue a 100% full refund.",
+        },
+        ctaText: "Apply for $5k Enterprise Audit",
+        ctaAction: "modal",
+        modal: {
+          intent: "audit",
+          title: "Apply for the $5k Enterprise Audit",
+          description: "Built for B2B SaaS platforms at $1M+ ARR, with a maximum of 2 audit slots per month.",
+        },
+      },
+      {
+        id: "enterprise-retainer",
+        variant: "anchor",
+        tierLabel: "Tier 4",
+        badge: "Full Deployment Retainer",
+        title: "Enterprise AI Agent & Digital Vault Implementation",
+        price: "$50,000",
+        priceNote: "full deployment retainer",
+        features: [
+          "Full Custom Next.js / AWS Private Client Portal Deployment (\"Digital Vault\")",
+          "Autonomous AI Agent Workflow Integration (n8n / CrewAI)",
+          "Zero-Trust OAuth 2.0, Auth0 Actions & Session Isolation Setup",
+          "Multi-Tenant Data Boundaries, Audit Logs & CIS Compliance",
+          "30-Day Hands-on Engineering & Pre-Sales Implementation Support",
+        ],
+        bonuses: [],
+        ctaText: "Inquire for Enterprise Retainer ($50k)",
+        ctaAction: "link",
+        ctaHref: contactHref.retainer,
+      },
     ],
-    ctaText: "Get the Masterclass ($500)",
-    ctaAction: "link",
-    ctaHref: MASTERCLASS_CHECKOUT_URL,
-  },
-  {
-    id: "presentation-sprint",
-    variant: "featured",
-    tierLabel: "Tier 2",
-    badge: "Most Popular",
-    title: "5-Day Boardroom Presentation Sprint",
-    price: "$1,500 to $3,500",
-    priceNote: "per seat",
-    audience: "Ambitious developers and junior technical operators moving into client-facing and sales engineering roles.",
-    valueProp: "A 5-day live cohort that turns technical people into confident boardroom presenters.",
-    features: [
-      "Vocal command: Rate Pivot and Power Pause",
-      "Live whiteboard presentation mechanics",
-      "Sales discovery and MEDDPICC alignment",
-      "Small cohort with live practice and feedback",
-    ],
-    ctaText: "Apply for the Sprint",
-    ctaAction: "link",
-    ctaHref: contactHref.sprint,
-  },
-  {
-    id: "enterprise-audit",
-    variant: "anchor",
-    tierLabel: "Tier 3",
-    badge: "Enterprise",
-    title: "Enterprise Architecture Audit & Digital Vault Build",
-    price: "$5,000 to $50,000",
-    priceNote: "scoped per platform",
-    audience: "Growth-stage B2B platforms ($1M to $10M ARR) with checkout friction, API latency, or security gaps.",
-    valueProp: "From a fixed-scope architecture audit to a full private portal build on Next.js and AWS.",
-    features: [
-      "48-hour Loom teardown and Excalidraw blueprint",
-      "Checkout friction, API latency, and AWS cost leaks mapped",
-      "Zero-trust security: OAuth 2.0, MFA, identity boundaries",
-      "Digital Vault private portal build (Next.js / AWS)",
-    ],
-    ctaText: "Contact for Enterprise",
-    ctaAction: "link",
-    ctaHref: contactHref.enterprise,
   },
 ];
+
+/** Every paid tier, in ladder order. */
+export const offerTiers: readonly OfferTier[] = offerLadders.flatMap((ladder) => ladder.tiers);
 
 export const caseStudiesHeader = {
   id: "case-studies",
@@ -292,13 +355,6 @@ export const proofMetrics = [
   { value: "48 hrs", label: "from kickoff to delivered audit" },
 ];
 
-export const featuredOffersHeader = {
-  tag: "The Offer Ladder",
-  title: "From free checklist to boardroom ready.",
-  subtitle:
-    "Start free, sharpen how you communicate technical work, then bring in enterprise architecture when the stakes are highest. No open-ended hourly billing.",
-};
-
 export type WelcomePageCopy = {
   eyebrow: string;
   title: string;
@@ -309,9 +365,12 @@ export type WelcomePageCopy = {
 };
 
 /** Post-signup pages at /welcome/[offer]. Point Stripe / Calendly redirects here. */
-export const welcomePages: Record<"communication-masterclass" | "presentation-sprint" | "architecture-audit", WelcomePageCopy> = {
+export const welcomePages: Record<
+  "communication-masterclass" | "presentation-sprint" | "architecture-audit" | "enterprise-retainer",
+  WelcomePageCopy
+> = {
   "communication-masterclass": {
-    eyebrow: "The Boardroom Communication Masterclass",
+    eyebrow: "The Boardroom Communication & Iteration System",
     title: "You're in. Welcome to the Masterclass.",
     subtitle: "Here's how to get the most out of it.",
     video: videos.welcomeMasterclass,
@@ -323,7 +382,7 @@ export const welcomePages: Record<"communication-masterclass" | "presentation-sp
     nextCta: { text: "Explore the 5-Day Sprint", href: "/offers#presentation-sprint" },
   },
   "presentation-sprint": {
-    eyebrow: "5-Day Boardroom Presentation Sprint",
+    eyebrow: "The 5-Day Boardroom Gravity & SE Transition Accelerator",
     title: "Welcome to the Sprint.",
     subtitle: "Here's how to get ready for your 5 days.",
     video: videos.welcomeSprint,
@@ -335,7 +394,7 @@ export const welcomePages: Record<"communication-masterclass" | "presentation-sp
     nextCta: { text: "Explore the Library", href: "/library" },
   },
   "architecture-audit": {
-    eyebrow: "Enterprise Architecture Audit & Digital Vault Build",
+    eyebrow: "The 48-Hour Enterprise System Latency & Conversion Vault",
     title: "Your kickoff is booked.",
     subtitle: "A few things to prepare so we get the most out of the call.",
     video: videos.welcomeAudit,
@@ -343,9 +402,21 @@ export const welcomePages: Record<"communication-masterclass" | "presentation-sp
       "Watch the short prep video above.",
       "List the flows that matter most (signup, onboarding, checkout) and any known drop-off points.",
       "Have recent analytics and a staging or read-only environment ready to share.",
-      "After kickoff we confirm fixed scope and price, and your Loom teardown and Excalidraw blueprint arrive within 48 hours.",
+      "Your topology blueprint, refactoring spec sheet, and FinOps protocol arrive within 48 hours of kickoff, followed by the executive strategy sync and a 30-day post-audit implementation review.",
     ],
     nextCta: { text: "Back to offers", href: "/offers" },
+  },
+  "enterprise-retainer": {
+    eyebrow: "Enterprise AI Agent & Digital Vault Implementation",
+    title: "Welcome aboard. Let's build.",
+    subtitle: "Here's how the implementation kicks off.",
+    video: videos.welcomeRetainer,
+    steps: [
+      "Watch the kickoff video above.",
+      "Look out for the kickoff agenda and access checklist in your inbox.",
+      "We map the architecture, then build and deploy with 30 days of hands-on engineering support.",
+    ],
+    nextCta: { text: "Contact us", href: contactHref.retainer },
   },
 };
 
@@ -363,23 +434,23 @@ export const offersCopy = {
   ctaBanners: {
     middle: {
       id: "apply",
-      ctaText: "Contact for Enterprise",
-      ctaHref: contactHref.enterprise,
+      ctaText: "Apply for $5k Audit",
+      ctaHref: contactHref.audit,
       title: "Need the architecture handled too?",
       subtitle:
-        "Enterprise audits and Digital Vault builds are scoped for B2B platforms between $1M and $10M ARR.",
+        "The $5,000 Enterprise Audit is a fixed-scope, 48-hour diagnostic for B2B SaaS platforms at $1M+ ARR.",
       secondaryText: "Get the free checklist",
       secondaryHref: `#${checklistCopy.id}`,
       className: "bg-page",
     },
     bottom: {
-      ctaText: "Apply for the 5-Day Sprint",
+      ctaText: "Apply for Next Cohort ($2,500)",
       ctaHref: contactHref.sprint,
       title: "Ready to command the room?",
       subtitle:
         "Five days of live practice on vocal command, whiteboard mechanics, and sales discovery.",
-      secondaryText: "Enterprise audit & build",
-      secondaryHref: contactHref.enterprise,
+      secondaryText: "Apply for $5k Audit",
+      secondaryHref: contactHref.audit,
       className: "bg-page",
     },
   } satisfies Record<string, OffersCtaBannerCopy>,
@@ -387,35 +458,42 @@ export const offersCopy = {
   howItWorks: {
     id: "how-it-works",
     title: "How it works",
-    subtitle: "Start free, build communication skills, then bring in architecture when the stakes are highest.",
+    subtitle: "Start free, build communication skills, then bring in a fixed-price audit or a full implementation.",
     steps: [
       {
         icon: faClipboardCheck,
-        eyebrow: "Tier 0: Free",
-        title: "The 2026 Enterprise Checklist",
+        eyebrow: "Tier 0: $0",
+        title: "Enterprise Checklist",
         description:
           "A 60-second whiteboard teardown and spec sheet covering the top 3 architectural flaws and checkout leaks.",
       },
       {
         icon: faMicrophoneLines,
         eyebrow: "Tier 1: $500",
-        title: "Communication Masterclass",
+        title: "Communication & Iteration System",
         description:
-          "The core frameworks for presenting technical work: vocal command, whiteboard structure, and discovery.",
+          "Self-paced video vault, metric translation matrix, MEDDPICC playbook, and whiteboard blueprints.",
       },
       {
         icon: faChalkboardUser,
-        eyebrow: "Tier 2: $1,500 to $3,500",
-        title: "5-Day Presentation Sprint",
+        eyebrow: "Tier 2: $2,500",
+        title: "SE Transition Accelerator",
         description:
-          "A live cohort with daily practice and feedback until presenting to executives feels natural.",
+          "Five live days of vocal mechanics, whiteboard drills, 1-on-1 discovery coaching, and mock interviews. Capped at 10 seats.",
       },
       {
         icon: faDiagramProject,
-        eyebrow: "Tier 3: $5,000 to $50,000",
-        title: "Enterprise Audit & Build",
+        eyebrow: "Tier 3: $5,000",
+        title: "48-Hour Enterprise Audit",
         description:
-          "A fixed-scope architecture audit, scaling up to a full Digital Vault private portal build.",
+          "Checkout, API latency, and auth security audit with a refactoring spec your team can execute. $10k findings guarantee.",
+      },
+      {
+        icon: faVault,
+        eyebrow: "Tier 4: $50,000",
+        title: "Digital Vault Implementation",
+        description:
+          "We build and deploy the Digital Vault portal, AI agent workflows, and zero-trust security, with 30 days of hands-on support.",
       },
     ] satisfies OffersHowItWorksStep[],
   },
@@ -519,7 +597,7 @@ export const offersCopy = {
       {
         question: "What's the difference between the Masterclass and the Sprint?",
         answer:
-          "The $500 Masterclass teaches the core frameworks. The 5-Day Sprint is a live cohort where you practice them daily with feedback until presenting to executives feels natural.",
+          "The $500 Masterclass is self-paced: the video vault, metric translation matrix, MEDDPICC playbook, and blueprints. The $2,500 Accelerator is a live 5-day cohort (capped at 10 seats) with 1-on-1 coaching, mock interviews, a resume review, and lifetime access to the Masterclass vault.",
       },
       {
         question: "Who is the Sprint for?",
@@ -527,14 +605,24 @@ export const offersCopy = {
           "Developers and junior technical operators moving into client-facing or sales engineering roles, and engineers who need to present to leadership with authority.",
       },
       {
-        question: "Why is the Sprint priced as a range?",
+        question: "What if the Sprint isn't working for me?",
         answer:
-          "Seat price is set per cohort. You know the exact number before you commit.",
+          "Every cohort has a 100% Day-2 Money-Back Guarantee. If you don't feel your presentation skills have leveled up by day 2, you get a refund on the spot.",
       },
       {
-        question: "What does the Enterprise tier include?",
+        question: "What does the $5,000 Enterprise Audit include?",
         answer:
-          "It starts with a fixed-scope architecture audit: a 48-hour Loom teardown and Excalidraw blueprint covering checkout friction, API latency, security, and AWS cost. If you want us to build the fix, it scales to a full Digital Vault private portal on Next.js and AWS.",
+          "A complete checkout, API latency, and auth security audit, a custom Excalidraw topology and flow blueprint, and a developer-ready refactoring spec sheet. Bonuses: an AWS caching and FinOps protocol, a 30-minute executive strategy sync, and a 30-day post-audit implementation review. One fixed price, delivered in 48 hours, with a maximum of 2 slots per month.",
+      },
+      {
+        question: "Is the audit guaranteed?",
+        answer:
+          "Yes. We guarantee to identify at least $10,000 in leaked checkout revenue or AWS cost savings, or you get a 100% full refund.",
+      },
+      {
+        question: "Who writes the code after the audit?",
+        answer:
+          "Your internal dev team, using the refactoring spec sheet, and we review their implementation for 30 days after the audit. If you'd rather we build it, the $50,000 retainer covers the full Digital Vault deployment, AI agent workflows, zero-trust security, and 30 days of hands-on support.",
       },
       {
         question: "What if we're under $1M ARR?",
@@ -553,9 +641,10 @@ export const contactCopy = {
   headline: "Let's Align Your Architecture with Commercial Outcomes.",
   subheadline: "Tell us what you need and we'll point you to the right starting point.",
   intents: [
-    { value: "sprint", label: "Apply for the 5-Day Boardroom Presentation Sprint" },
-    { value: "masterclass", label: "Join the Boardroom Communication Masterclass" },
-    { value: "enterprise", label: "Enterprise Architecture Audit & Digital Vault Build" },
+    { value: "sprint", label: "Apply for the 5-Day Boardroom Gravity & SE Transition Accelerator ($2,500)" },
+    { value: "masterclass", label: "Enroll in the Boardroom Communication & Iteration System ($500)" },
+    { value: "audit", label: "Apply for the $5k Enterprise Audit" },
+    { value: "retainer", label: "Enterprise AI Agent & Digital Vault Implementation ($50,000)" },
     { value: "beta-reader", label: "Join \"The Iteration Loop\" Book Beta Reader List" },
     { value: "general", label: "General Business Inquiry / Keynote Speaking" },
   ],
@@ -572,14 +661,14 @@ export const contactCopy = {
   },
   roleLabel: "Current role (for your Sprint application)",
   rolePlaceholder: "e.g. Software Engineer, Solutions Engineer, Tech Lead",
-  arrLabel: "Company ARR (optional)",
+  arrLabel: "Company ARR",
   arrOptions: [
     { value: "under-1m", label: "Under $1M ARR" },
     { value: "1m-3m", label: "$1M to $3M ARR" },
     { value: "3m-10m", label: "$3M to $10M ARR" },
     { value: "10m-plus", label: "$10M+ ARR" },
   ],
-  underArrNote: "Under $1M ARR? The free Enterprise Checklist is the faster place to start.",
+  underArrNote: "The $5,000 audit is built for platforms at $1M+ ARR. Under that, the free Enterprise Checklist is the faster place to start.",
   placeholders: {
     firstName: "First name",
     lastName: "Last name",
