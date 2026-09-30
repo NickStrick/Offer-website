@@ -8,6 +8,7 @@ import CaseStudies from "../components/CaseStudies";
 import VideoSection from "../components/Video";
 import { videos } from "../media";
 import ProofMetrics from "../components/ProofMetrics";
+import LeadMagnetBanner from "../components/LeadMagnetBanner";
 
 import CtaBanner from "./components/CtaBanner";
 import FAQ from "./components/FAQ";
@@ -29,6 +30,8 @@ export default function OffersPage() {
         subheadlineText={offersCopy.headline.subheadlineText}
         ctas={[...offersCopy.headline.ctas]}
       />
+
+      <LeadMagnetBanner />
 
       <VideoSection video={videos.offers} id="offers-video" />
 

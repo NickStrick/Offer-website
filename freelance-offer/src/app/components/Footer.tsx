@@ -33,19 +33,24 @@ export default function Footer() {
     {
       title: es ? 'Ofertas' : 'Offers',
       links: [
-        { href: "/offers#free-audit", label: "Free Loom Audit" },
-        { href: "/offers#architecture-audit", label: "Architecture Audit" },
-        { href: "/offers#communication-sprint", label: "Communication Sprints" },
-        { href: "/offers#zero-trust-security", label: "Zero-Trust Security" },
+        { href: "/offers#communication-masterclass", label: "Communication Masterclass" },
+        { href: "/offers#presentation-sprint", label: "5-Day Presentation Sprint" },
+        { href: "/offers#enterprise-audit", label: "Enterprise Audit & Build" },
         { href: "/library#digital-vault", label: "The Digital Vault" },
-        { href: "/library#books", label: "Books" },
+      ],
+    },
+    {
+      title: es ? 'Recursos gratis' : 'Free Resources',
+      links: [
+        { href: "/#free-checklist", label: "The 2026 Enterprise Infrastructure Checklist (Whiteboard Video)" },
+        { href: "/library#books", label: "\"The Iteration Loop\" Book Beta Waitlist" },
       ],
     },
   ];
 
   return (
     <footer className="border-t border-white/[0.06] bg-page px-6 pt-16 pb-10 text-white">
-      <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+      <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_1.1fr_1.2fr_1.1fr]">
         <div>
           <Link href="/" className="flex items-center gap-2.5 text-[15px] font-semibold tracking-tight">
             <Image src={Logo} alt="" width={28} height={28} className="h-7 w-7" />

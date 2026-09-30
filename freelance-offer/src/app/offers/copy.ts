@@ -4,12 +4,12 @@ import lukeRottaPhoto from "../../../public/testimonials/lukerotta.jpg";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import {
   faChalkboardUser,
-  faCodeBranch,
+  faClipboardCheck,
   faDiagramProject,
+  faMicrophoneLines,
   faRoute,
   faStopwatch,
   faUserShield,
-  faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import { caseStudyImages, videos, type ImageMedia, type VideoMedia } from "../media";
 
@@ -51,8 +51,10 @@ export type OffersCaseStudy = {
 };
 
 export type OfferTier = {
-  id: "architecture-audit" | "communication-sprint" | "zero-trust-security";
-  variant: "standard" | "featured" | "anchor";
+  id: "enterprise-checklist" | "communication-masterclass" | "presentation-sprint" | "enterprise-audit";
+  /** "free" is the lead magnet entry point; "featured" is the highlighted tier. */
+  variant: "free" | "standard" | "featured" | "anchor";
+  tierLabel: string;
   badge: string;
   title: string;
   price: string;
@@ -61,7 +63,9 @@ export type OfferTier = {
   valueProp: string;
   features: readonly string[];
   ctaText: string;
-  ctaHref: string;
+  /** "modal" opens the checklist signup; "link" goes to ctaHref. */
+  ctaAction: "modal" | "link";
+  ctaHref?: string;
 };
 
 export type OffersCtaBannerCopy = {
@@ -73,32 +77,6 @@ export type OffersCtaBannerCopy = {
   secondaryText?: string;
   secondaryHref?: string;
   className?: string;
-};
-
-export type LeadMagnetCopy = {
-  id: string;
-  /** Shown in the success state after someone requests the free audit. */
-  video: VideoMedia;
-  tag: string;
-  title: string;
-  body: string;
-  ctaText: string;
-  modal: {
-    submitUrl: string;
-    /**
-     * Google Form entry IDs. Until the form has dedicated "Source" and "URL" questions,
-     * these reuse the existing first/last name fields so leads are still captured.
-     */
-    entries: { email: string; url: string; source: string };
-    sourceValue: string;
-    closeLabel: string;
-    title: string;
-    description: string;
-    placeholders: { email: string; url: string };
-    submit: { idle: string; loading: string };
-    success: { title: string; body: string; upsellText: string; upsellHref: string };
-    consent: string;
-  };
 };
 
 export type OffersAboutCopy = {
@@ -128,109 +106,116 @@ export const CONSENT_TEXT =
 
 /** Contact links with the intent dropdown preselected. */
 export const contactHref = {
-  audit: "/contact?intent=audit",
-  cohort: "/contact?intent=cohort",
+  enterprise: "/contact?tier=enterprise",
+  sprint: "/contact?intent=sprint",
+  masterclass: "/contact?intent=masterclass",
   betaReader: "/contact?intent=beta-reader",
   general: "/contact?intent=general",
 };
 
+// Set NEXT_PUBLIC_STRIPE_MASTERCLASS_URL to the Stripe Payment Link for the Masterclass.
+// Until then, the button falls back to the contact form with the Masterclass preselected.
+export const MASTERCLASS_CHECKOUT_URL = process.env.NEXT_PUBLIC_STRIPE_MASTERCLASS_URL || contactHref.masterclass;
+
+/** Free lead magnet: The 2026 Enterprise Infrastructure & Architecture Checklist. */
+export const checklistCopy = {
+  id: "free-checklist",
+  resourcePath: "/resources/enterprise-checklist",
+  tag: "Free Diagnostic Resource",
+  title: "The 2026 Enterprise Infrastructure & Architecture Checklist",
+  subtitle:
+    "An over-the-shoulder visual whiteboard walkthrough (Excalidraw) mapping the top 3 architectural flaws, API latency bottlenecks, and checkout form leaks that cost scaling B2B platforms $50k+ in abandoned revenue.",
+  highlights: [
+    "60-Second Over-The-Shoulder Excalidraw Video Teardown",
+    "Decoupled Next.js / AWS Architecture & Caching Spec Sheet",
+    "Mobile Checkout Friction Audit Protocol (Max 5 Inputs)",
+  ],
+  emailPlaceholder: "Enter your business email...",
+  ctaText: "Get Free Whiteboard Spec",
+  loadingText: "Sending…",
+  /** Saved in the Google Form's "First name" answer so you can tell these leads apart. */
+  sourceValue: "2026 Enterprise Checklist",
+  modalTitle: "Get the free whiteboard spec",
+  modalDescription: "Enter your business email and we'll take you straight to the walkthrough.",
+  consent: CONSENT_TEXT,
+};
+
 export const offerTiers: readonly OfferTier[] = [
   {
-    id: "architecture-audit",
-    variant: "featured",
-    badge: "Core Offer",
-    title: "Fixed-Scope Architecture Audit",
-    price: "$2,500 to $5,000",
-    priceNote: "fixed-scope",
-    audience: "Growth-stage B2B platforms ($1M to $10M ARR) experiencing checkout friction or API latency.",
-    valueProp:
-      "A 48-hour diagnostic that maps where your system leaks revenue. Your internal dev team executes the fix.",
-    features: [
-      "48-hour over-the-shoulder Loom video teardown",
-      "Excalidraw blueprint of your system and flows",
-      "Checkout friction and API latency mapped",
-      "AWS cost leaks identified",
-      "Hand-off ready for your internal dev team",
-    ],
-    ctaText: "Request Architectural Audit",
-    ctaHref: contactHref.audit,
+    id: "enterprise-checklist",
+    variant: "free",
+    tierLabel: "Tier 0",
+    badge: "Free Entry",
+    title: "The 2026 Enterprise Checklist",
+    price: "Free",
+    priceNote: "instant access",
+    audience: "Founders and technical operators who want a fast, visual read on where their platform leaks revenue.",
+    valueProp: "The whiteboard walkthrough and spec sheet behind every audit, free.",
+    features: checklistCopy.highlights,
+    ctaText: "Get Free Whiteboard Spec",
+    ctaAction: "modal",
   },
   {
-    id: "communication-sprint",
+    id: "communication-masterclass",
     variant: "standard",
-    badge: "5-Day Cohort",
-    title: "Developer-to-SE Communication Sprint",
+    tierLabel: "Tier 1",
+    badge: "Masterclass",
+    title: "The Boardroom Communication Masterclass",
+    price: "$500",
+    priceNote: "one-time",
+    audience: "Developers and technical operators who want to explain their work to executives with authority.",
+    valueProp: "The core frameworks for presenting technical work so decision makers listen and act.",
+    features: [
+      "Vocal command: Rate Pivot and Power Pause",
+      "Whiteboard explanation frameworks",
+      "Structuring technical updates for executives",
+      "Sales discovery fundamentals",
+    ],
+    ctaText: "Get the Masterclass ($500)",
+    ctaAction: "link",
+    ctaHref: MASTERCLASS_CHECKOUT_URL,
+  },
+  {
+    id: "presentation-sprint",
+    variant: "featured",
+    tierLabel: "Tier 2",
+    badge: "Most Popular",
+    title: "5-Day Boardroom Presentation Sprint",
     price: "$1,500 to $3,500",
     priceNote: "per seat",
     audience: "Ambitious developers and junior technical operators moving into client-facing and sales engineering roles.",
-    valueProp:
-      "A 5-day presentation cohort that teaches technical people to speak with authority in the boardroom.",
+    valueProp: "A 5-day live cohort that turns technical people into confident boardroom presenters.",
     features: [
       "Vocal command: Rate Pivot and Power Pause",
       "Live whiteboard presentation mechanics",
       "Sales discovery and MEDDPICC alignment",
       "Small cohort with live practice and feedback",
     ],
-    ctaText: "Inquire About Cohorts",
-    ctaHref: contactHref.cohort,
+    ctaText: "Apply for the Sprint",
+    ctaAction: "link",
+    ctaHref: contactHref.sprint,
   },
   {
-    id: "zero-trust-security",
+    id: "enterprise-audit",
     variant: "anchor",
-    badge: "Security",
-    title: "Zero-Trust Security & Auth Boundaries",
-    price: "Custom",
+    tierLabel: "Tier 3",
+    badge: "Enterprise",
+    title: "Enterprise Architecture Audit & Digital Vault Build",
+    price: "$5,000 to $50,000",
     priceNote: "scoped per platform",
-    audience: "High-trust platforms handling sensitive client data, payments, or private portals.",
-    valueProp:
-      "Identity and access architecture designed so your platform stays secure without slowing users down.",
+    audience: "Growth-stage B2B platforms ($1M to $10M ARR) with checkout friction, API latency, or security gaps.",
+    valueProp: "From a fixed-scope architecture audit to a full private portal build on Next.js and AWS.",
     features: [
-      "Identity verification flows",
-      "OAuth 2.0 token design",
-      "Multi-factor authentication (MFA) architecture",
-      "Built for high-trust platforms",
+      "48-hour Loom teardown and Excalidraw blueprint",
+      "Checkout friction, API latency, and AWS cost leaks mapped",
+      "Zero-trust security: OAuth 2.0, MFA, identity boundaries",
+      "Digital Vault private portal build (Next.js / AWS)",
     ],
-    ctaText: "Discuss Security Scope",
-    ctaHref: contactHref.audit,
+    ctaText: "Contact for Enterprise",
+    ctaAction: "link",
+    ctaHref: contactHref.enterprise,
   },
 ];
-
-export const leadMagnetCopy: LeadMagnetCopy = {
-  id: "free-audit",
-  video: videos.welcomeFreeAudit,
-  tag: "Free Diagnostic",
-  title: "Want a Free 2-Minute Over-The-Shoulder Video Audit?",
-  body: "Send us your web application or checkout link. We'll map out your top 3 conversion and latency bottlenecks on Excalidraw for free. No sales call required.",
-  ctaText: "Request Free Loom Audit",
-  modal: {
-    submitUrl: LEADS_FORM_URL,
-    entries: {
-      email: LEADS_FORM_ENTRIES.email,
-      url: LEADS_FORM_ENTRIES.lastName, // "Last name" field until a URL question exists
-      source: LEADS_FORM_ENTRIES.firstName, // "First name" field until a Source question exists
-    },
-    sourceValue: "Free Loom Audit",
-    closeLabel: "✖",
-    title: "Get Your Free Loom Audit",
-    description:
-      "Drop your app or checkout link and where to send the video. You'll get a 2-minute walkthrough of your top 3 bottlenecks. No call, no pitch.",
-    placeholders: {
-      email: "Work email",
-      url: "App or checkout URL",
-    },
-    submit: {
-      idle: "Send my free audit",
-      loading: "Sending…",
-    },
-    success: {
-      title: "You're in the queue.",
-      body: "Your 2-minute Loom audit will land in your inbox. Want the full system map, AWS cost review, and hand-off ready blueprint in 48 hours?",
-      upsellText: "Request Architectural Audit",
-      upsellHref: contactHref.audit,
-    },
-    consent: CONSENT_TEXT,
-  },
-};
 
 export const caseStudiesHeader = {
   id: "case-studies",
@@ -308,10 +293,10 @@ export const proofMetrics = [
 ];
 
 export const featuredOffersHeader = {
-  tag: "Architecture, Communication & Security",
-  title: "Quantifying technical friction into measurable commercial ROI.",
+  tag: "The Offer Ladder",
+  title: "From free checklist to boardroom ready.",
   subtitle:
-    "Fixed-scope audits for your platform, communication sprints for your people, and security architecture you can trust. No open-ended hourly billing.",
+    "Start free, sharpen how you communicate technical work, then bring in enterprise architecture when the stakes are highest. No open-ended hourly billing.",
 };
 
 export type WelcomePageCopy = {
@@ -323,11 +308,35 @@ export type WelcomePageCopy = {
   nextCta: { text: string; href: string };
 };
 
-/** Post-signup pages at /welcome/[offer]. Point Calendly / checkout redirects here. */
-export const welcomePages: Record<"architecture-audit" | "communication-sprint", WelcomePageCopy> = {
+/** Post-signup pages at /welcome/[offer]. Point Stripe / Calendly redirects here. */
+export const welcomePages: Record<"communication-masterclass" | "presentation-sprint" | "architecture-audit", WelcomePageCopy> = {
+  "communication-masterclass": {
+    eyebrow: "The Boardroom Communication Masterclass",
+    title: "You're in. Welcome to the Masterclass.",
+    subtitle: "Here's how to get the most out of it.",
+    video: videos.welcomeMasterclass,
+    steps: [
+      "Check your inbox for your payment confirmation and access details.",
+      "Watch the welcome video above.",
+      "Pick one technical topic you explain often and practice it with each framework.",
+    ],
+    nextCta: { text: "Explore the 5-Day Sprint", href: "/offers#presentation-sprint" },
+  },
+  "presentation-sprint": {
+    eyebrow: "5-Day Boardroom Presentation Sprint",
+    title: "Welcome to the Sprint.",
+    subtitle: "Here's how to get ready for your 5 days.",
+    video: videos.welcomeSprint,
+    steps: [
+      "Watch the welcome video above.",
+      "Look out for your cohort schedule and calendar invites in your inbox.",
+      "Pick one technical topic you explain often. We'll use it for your first whiteboard session.",
+    ],
+    nextCta: { text: "Explore the Library", href: "/library" },
+  },
   "architecture-audit": {
-    eyebrow: "Fixed-Scope Architecture Audit",
-    title: "Your audit kickoff is booked.",
+    eyebrow: "Enterprise Architecture Audit & Digital Vault Build",
+    title: "Your kickoff is booked.",
     subtitle: "A few things to prepare so we get the most out of the call.",
     video: videos.welcomeAudit,
     steps: [
@@ -338,18 +347,6 @@ export const welcomePages: Record<"architecture-audit" | "communication-sprint",
     ],
     nextCta: { text: "Back to offers", href: "/offers" },
   },
-  "communication-sprint": {
-    eyebrow: "Developer-to-SE Communication Sprint",
-    title: "Welcome to the cohort.",
-    subtitle: "Here's how to get ready for your 5-day sprint.",
-    video: videos.welcomeCohort,
-    steps: [
-      "Watch the welcome video above.",
-      "Look out for your cohort schedule and calendar invites in your inbox.",
-      "Pick one technical topic you explain often. We'll use it for your first whiteboard session.",
-    ],
-    nextCta: { text: "Explore the Library", href: "/library" },
-  },
 };
 
 export const offersCopy = {
@@ -358,31 +355,31 @@ export const offersCopy = {
     headlineText: "Diagnostic Systems Strategy & Boardroom Discovery",
     subheadlineText: "Quantifying technical friction into measurable commercial ROI.",
     ctas: [
-      { label: "Request Architectural Audit", href: contactHref.audit },
-      { label: "Get the free audit", href: "#free-audit", variant: "inverted" as const },
+      { label: "Apply for the 5-Day Sprint", href: contactHref.sprint },
+      { label: "Get the free checklist", href: `#${checklistCopy.id}`, variant: "inverted" as const },
     ],
   },
 
   ctaBanners: {
     middle: {
       id: "apply",
-      ctaText: "Request Architectural Audit",
-      ctaHref: contactHref.audit,
-      title: "Ready for the full diagnostic?",
+      ctaText: "Contact for Enterprise",
+      ctaHref: contactHref.enterprise,
+      title: "Need the architecture handled too?",
       subtitle:
-        "Tell us about your platform. Audits are scoped for B2B platforms between $1M and $10M ARR.",
-      secondaryText: "Get the free Loom audit",
-      secondaryHref: "#free-audit",
+        "Enterprise audits and Digital Vault builds are scoped for B2B platforms between $1M and $10M ARR.",
+      secondaryText: "Get the free checklist",
+      secondaryHref: `#${checklistCopy.id}`,
       className: "bg-page",
     },
     bottom: {
-      ctaText: "Request Architectural Audit",
-      ctaHref: contactHref.audit,
-      title: "Stop guessing where the friction is.",
+      ctaText: "Apply for the 5-Day Sprint",
+      ctaHref: contactHref.sprint,
+      title: "Ready to command the room?",
       subtitle:
-        "Fixed scope. Fixed price. A hand-off ready blueprint your team can execute the following week.",
-      secondaryText: "Inquire about cohorts",
-      secondaryHref: contactHref.cohort,
+        "Five days of live practice on vocal command, whiteboard mechanics, and sales discovery.",
+      secondaryText: "Enterprise audit & build",
+      secondaryHref: contactHref.enterprise,
       className: "bg-page",
     },
   } satisfies Record<string, OffersCtaBannerCopy>,
@@ -390,42 +387,42 @@ export const offersCopy = {
   howItWorks: {
     id: "how-it-works",
     title: "How it works",
-    subtitle: "Start with free evidence, fix the system, then level up the people who present it.",
+    subtitle: "Start free, build communication skills, then bring in architecture when the stakes are highest.",
     steps: [
       {
-        icon: faVideo,
-        eyebrow: "Start here: Free",
-        title: "2-Minute Loom Audit",
+        icon: faClipboardCheck,
+        eyebrow: "Tier 0: Free",
+        title: "The 2026 Enterprise Checklist",
         description:
-          "Send your app or checkout link. We record a quick over-the-shoulder walkthrough of your top 3 bottlenecks. No sales call.",
+          "A 60-second whiteboard teardown and spec sheet covering the top 3 architectural flaws and checkout leaks.",
       },
       {
-        icon: faDiagramProject,
-        eyebrow: "Step 1: $2,500 to $5,000",
-        title: "Architecture Audit",
+        icon: faMicrophoneLines,
+        eyebrow: "Tier 1: $500",
+        title: "Communication Masterclass",
         description:
-          "A 48-hour video teardown and Excalidraw blueprint mapping checkout friction, API latency, and AWS cost leaks.",
-      },
-      {
-        icon: faCodeBranch,
-        eyebrow: "Step 2: Your team",
-        title: "Your Team Executes",
-        description:
-          "Your internal developers ship the fixes from a clear, prioritized blueprint. No agency lock-in.",
+          "The core frameworks for presenting technical work: vocal command, whiteboard structure, and discovery.",
       },
       {
         icon: faChalkboardUser,
-        eyebrow: "Step 3: $1,500 to $3,500 per seat",
-        title: "Communication Sprint",
+        eyebrow: "Tier 2: $1,500 to $3,500",
+        title: "5-Day Presentation Sprint",
         description:
-          "Train the engineers who present the work to lead discovery and command the room with executives.",
+          "A live cohort with daily practice and feedback until presenting to executives feels natural.",
+      },
+      {
+        icon: faDiagramProject,
+        eyebrow: "Tier 3: $5,000 to $50,000",
+        title: "Enterprise Audit & Build",
+        description:
+          "A fixed-scope architecture audit, scaling up to a full Digital Vault private portal build.",
       },
     ] satisfies OffersHowItWorksStep[],
   },
 
   framework: {
     id: "framework",
-    title: "What we audit",
+    title: "What the enterprise audit covers",
     subtitle: "Deep diagnostic mechanics, not surface-level marketing tactics.",
     items: [
       {
@@ -451,13 +448,13 @@ export const offersCopy = {
 
   whoThisIsFor: {
     title: "Who this is for",
-    intro: "Built for platforms that need clarity and for the technical people who have to explain it.",
+    intro: "Built for the technical people who have to explain the work, and the platforms they run.",
     bullets: [
-      "B2B platforms between $1M and $10M ARR with checkout friction or API latency",
-      "Teams that want a fixed-scope answer instead of open-ended hourly billing",
-      "Internal dev teams ready to execute from a clear blueprint",
       "Developers and technical operators moving into sales engineering or client-facing roles",
       "Engineers who need to present to executives and boardrooms with authority",
+      "Technical leads who want their updates to drive decisions, not questions",
+      "B2B platforms between $1M and $10M ARR with checkout friction or API latency",
+      "Teams that want a fixed-scope answer instead of open-ended hourly billing",
     ],
   },
 
@@ -515,34 +512,34 @@ export const offersCopy = {
     title: "Frequently asked questions",
     items: [
       {
-        question: "Is the free Loom audit really free?",
+        question: "Is the Enterprise Checklist really free?",
         answer:
-          "Yes. Send your link and you get a 2-minute recorded walkthrough of your top 3 conversion and latency bottlenecks. No sales call, no obligation.",
+          "Yes. Enter your business email and you go straight to the whiteboard walkthrough and spec sheet. No sales call, no obligation.",
       },
       {
-        question: "What do I get from the Architecture Audit?",
+        question: "What's the difference between the Masterclass and the Sprint?",
         answer:
-          "A 48-hour over-the-shoulder video teardown and an Excalidraw blueprint mapping your checkout friction, API latency, and AWS cost leaks, prioritized so your team knows what to fix first.",
+          "The $500 Masterclass teaches the core frameworks. The 5-Day Sprint is a live cohort where you practice them daily with feedback until presenting to executives feels natural.",
       },
       {
-        question: "Why is the audit priced as a range?",
+        question: "Who is the Sprint for?",
         answer:
-          "The fixed price is set before work begins, based on the surface area in scope (number of critical flows, services, and integrations). You know the exact number before you commit, and there is no hourly billing.",
+          "Developers and junior technical operators moving into client-facing or sales engineering roles, and engineers who need to present to leadership with authority.",
       },
       {
-        question: "Do you write the code?",
+        question: "Why is the Sprint priced as a range?",
         answer:
-          "No. We deliver the diagnosis and the blueprint, and your internal dev team executes it. That keeps the engagement fast, fixed-scope, and free of agency lock-in.",
+          "Seat price is set per cohort. You know the exact number before you commit.",
       },
       {
-        question: "What happens in a Communication Sprint?",
+        question: "What does the Enterprise tier include?",
         answer:
-          "A 5-day presentation cohort for developers and technical operators. You practice vocal command (Rate Pivot, Power Pause), live whiteboard mechanics, and sales discovery aligned to MEDDPICC.",
+          "It starts with a fixed-scope architecture audit: a 48-hour Loom teardown and Excalidraw blueprint covering checkout friction, API latency, security, and AWS cost. If you want us to build the fix, it scales to a full Digital Vault private portal on Next.js and AWS.",
       },
       {
         question: "What if we're under $1M ARR?",
         answer:
-          "Start with the free 2-minute Loom audit. It surfaces the highest-impact fixes quickly and tells you whether a full audit is worth it later.",
+          "Start with the free Enterprise Checklist. It surfaces the highest-impact fixes quickly and tells you whether a full audit is worth it later.",
       },
     ] satisfies OffersFAQItem[],
   },
@@ -556,21 +553,25 @@ export const contactCopy = {
   headline: "Let's Align Your Architecture with Commercial Outcomes.",
   subheadline: "Tell us what you need and we'll point you to the right starting point.",
   intents: [
-    { value: "audit", label: "Request a 48-Hour Architecture & Security Audit" },
-    { value: "cohort", label: "Inquire about Developer-to-SE Communication Cohorts / Sprints" },
+    { value: "sprint", label: "Apply for the 5-Day Boardroom Presentation Sprint" },
+    { value: "masterclass", label: "Join the Boardroom Communication Masterclass" },
+    { value: "enterprise", label: "Enterprise Architecture Audit & Digital Vault Build" },
     { value: "beta-reader", label: "Join \"The Iteration Loop\" Book Beta Reader List" },
     { value: "general", label: "General Business Inquiry / Keynote Speaking" },
   ],
   /**
    * Google Form entry IDs for the extra fields. Leave empty until those questions exist on the form;
-   * until then the intent, company, ARR and message are added to the "Last name" answer so nothing is lost.
+   * until then the intent, company, role, ARR and message are added to the "Last name" answer so nothing is lost.
    */
   extraEntries: {
     intent: "",
     company: "",
+    role: "",
     arr: "",
     message: "",
   },
+  roleLabel: "Current role (for your Sprint application)",
+  rolePlaceholder: "e.g. Software Engineer, Solutions Engineer, Tech Lead",
   arrLabel: "Company ARR (optional)",
   arrOptions: [
     { value: "under-1m", label: "Under $1M ARR" },
@@ -578,13 +579,14 @@ export const contactCopy = {
     { value: "3m-10m", label: "$3M to $10M ARR" },
     { value: "10m-plus", label: "$10M+ ARR" },
   ],
-  underArrNote: "Under $1M ARR? The free 2-minute Loom audit is the faster place to start.",
+  underArrNote: "Under $1M ARR? The free Enterprise Checklist is the faster place to start.",
   placeholders: {
     firstName: "First name",
     lastName: "Last name",
     email: "Work email",
     company: "Company or website (optional)",
     message: "What's going on? Share any context that helps (optional)",
+    sprintMessage: "What do you present today, and what do you want to get better at?",
   },
   submit: { idle: "Send", loading: "Sending…" },
   success: {

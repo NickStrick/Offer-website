@@ -25,11 +25,13 @@ import {
 
 type IntentValue = (typeof contactCopy.intents)[number]["value"];
 
-/** Old links used ?tier=…; map them onto the new intents. */
-const legacyTierToIntent: Record<string, IntentValue> = {
-  "micro-audit": "audit",
-  "enterprise-audit": "audit",
-  enterprise: "general",
+/** ?tier=… links (and older intent names) map onto the current intents. */
+const tierToIntent: Record<string, IntentValue> = {
+  enterprise: "enterprise",
+  "enterprise-audit": "enterprise",
+  "micro-audit": "enterprise",
+  audit: "enterprise",
+  cohort: "sprint",
 };
 
 const fieldClass =
@@ -44,7 +46,7 @@ function ContactForm() {
   const initialIntent = useMemo<IntentValue | "">(() => {
     const intent = params.get("intent");
     if (isIntent(intent)) return intent;
-    return legacyTierToIntent[params.get("tier") ?? ""] ?? "";
+    return tierToIntent[intent ?? ""] ?? tierToIntent[params.get("tier") ?? ""] ?? "";
   }, [params]);
 
   const [values, setValues] = useState({
@@ -52,6 +54,7 @@ function ContactForm() {
     lastName: "",
     email: "",
     company: "",
+    role: "",
     intent: initialIntent as IntentValue | "",
     arr: "",
     message: "",
@@ -67,7 +70,8 @@ function ContactForm() {
   const set = (key: keyof typeof values) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setValues({ ...values, [key]: e.target.value });
 
-  const isAudit = values.intent === "audit";
+  const isEnterprise = values.intent === "enterprise";
+  const isSprint = values.intent === "sprint";
   const isEmailValid = /[^\s@]+@[^\s@]+\.[^\s@]+/.test(values.email.trim());
   const isDisabled = loading || !values.firstName.trim() || !isEmailValid || !values.intent;
 
@@ -92,6 +96,7 @@ function ContactForm() {
     };
     addExtra(extras.intent, "Intent", intentLabel);
     addExtra(extras.company, "Company", values.company.trim());
+    addExtra(extras.role, "Role", values.role.trim());
     addExtra(extras.arr, "ARR", arrLabel);
     addExtra(extras.message, "Message", values.message.trim());
     formData.append(LEADS_FORM_ENTRIES.lastName, packed.filter(Boolean).join(" | "));
@@ -125,7 +130,7 @@ function ContactForm() {
           </a>
           .
         </p>
-        {isAudit ? (
+        {isEnterprise || isSprint ? (
           <a href={BOOK_CALL_URL} target="_blank" rel="noreferrer" className="btn-gradient mt-8 gap-2">
             <FontAwesomeIcon icon={faCalendarCheck} aria-hidden />
             {contactCopy.success.bookCallText}
@@ -161,7 +166,16 @@ function ContactForm() {
       <input type="email" aria-label={contactCopy.placeholders.email} value={values.email} onChange={set("email")} className={fieldClass} placeholder={contactCopy.placeholders.email} />
       <input aria-label={contactCopy.placeholders.company} value={values.company} onChange={set("company")} className={fieldClass} placeholder={contactCopy.placeholders.company} />
 
-      {isAudit ? (
+      {isSprint ? (
+        <div>
+          <label htmlFor="role" className="mb-2 block text-sm font-medium text-ink-muted">
+            {contactCopy.roleLabel}
+          </label>
+          <input id="role" value={values.role} onChange={set("role")} className={fieldClass} placeholder={contactCopy.rolePlaceholder} />
+        </div>
+      ) : null}
+
+      {isEnterprise ? (
         <div className="relative">
           <label htmlFor="arr" className="mb-2 block text-sm font-medium text-ink-muted">
             {contactCopy.arrLabel}
@@ -178,8 +192,8 @@ function ContactForm() {
           {values.arr === "under-1m" ? (
             <p className="mt-3 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
               {contactCopy.underArrNote}{" "}
-              <Link href="/offers#free-audit" className="font-semibold underline underline-offset-4">
-                Get the free audit
+              <Link href="/#free-checklist" className="font-semibold underline underline-offset-4">
+                Get the free checklist
               </Link>
             </p>
           ) : null}
@@ -192,7 +206,7 @@ function ContactForm() {
         onChange={set("message")}
         rows={4}
         className={`${fieldClass} resize-y`}
-        placeholder={contactCopy.placeholders.message}
+        placeholder={isSprint ? contactCopy.placeholders.sprintMessage : contactCopy.placeholders.message}
       />
 
       {error ? <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">{error}</div> : null}
@@ -229,7 +243,7 @@ export default function ContactPage() {
             </div>
             <div className="surface-card p-7">
               <h2 className="text-lg font-semibold">Ready to talk now?</h2>
-              <p className="mt-2 text-[15px] text-ink-muted">Book a short call to scope your audit or cohort seat.</p>
+              <p className="mt-2 text-[15px] text-ink-muted">Book a short call about the Sprint or an enterprise engagement.</p>
               <a href={BOOK_CALL_URL} target="_blank" rel="noreferrer" className="btn-inverted mt-5 w-full gap-2">
                 <FontAwesomeIcon icon={faCalendarCheck} aria-hidden />
                 Book a call

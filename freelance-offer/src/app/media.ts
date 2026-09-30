@@ -37,25 +37,32 @@ export const videos = {
   /** /offers — walkthrough of the free audit and the three tiers. */
   offers: {
     title: "Which offer is right for you?",
-    caption: "A quick walkthrough of the free Loom audit, the architecture audit, and the communication sprints.",
+    caption: "A quick walkthrough of the free checklist and each tier of the offer ladder.",
     src: "",
     published: false,
   },
-  /** Shown in the free-audit form after someone submits. */
-  welcomeFreeAudit: {
-    title: "What happens with your free audit",
+  /** /resources/enterprise-checklist: the unedited whiteboard walkthrough people get after signing up. */
+  enterpriseChecklist: {
+    title: "The 2026 Enterprise Infrastructure & Architecture Checklist",
+    caption: "An over-the-shoulder Excalidraw walkthrough of the top 3 architectural flaws, API latency bottlenecks, and checkout form leaks.",
+    src: "",
+    published: false,
+  },
+  /** /welcome/communication-masterclass: set as the Stripe Payment Link's after-payment redirect. */
+  welcomeMasterclass: {
+    title: "Welcome to the Boardroom Communication Masterclass",
+    src: "",
+    published: false,
+  },
+  /** /welcome/presentation-sprint: send to accepted sprint applicants. */
+  welcomeSprint: {
+    title: "Welcome to your 5-Day Boardroom Presentation Sprint",
     src: "",
     published: false,
   },
   /** /welcome/architecture-audit: set as the Calendly event's after-booking redirect. */
   welcomeAudit: {
     title: "Welcome! Let’s prepare for your Architecture Audit",
-    src: "",
-    published: false,
-  },
-  /** /welcome/communication-sprint: send to cohort members after they register. */
-  welcomeCohort: {
-    title: "Welcome to your Communication Sprint",
     src: "",
     published: false,
   },
