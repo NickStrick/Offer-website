@@ -15,7 +15,7 @@ type HelperBtnGroupProps = {
 };
 
 const defaultBio = [
-  "I’m Nick—a full-stack engineer who architects and audits production systems.",
+  "I’m Nick, a full-stack engineer who architects and audits production systems.",
   "I’ve worked inside 600,000-line enterprise execution engines, shipping webhook delivery layers and real-time platforms that drove a 30% performance optimization and a 22% drop in user friction tickets.",
 ];
 

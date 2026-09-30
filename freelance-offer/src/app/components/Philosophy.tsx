@@ -31,7 +31,7 @@ export default function Philosophy() {
           eyebrow="Our Philosophy"
           eyebrowIcon={faSeedling}
           title="Engineered for growth, not assembled from templates."
-          subtitle="Every recommendation is grounded in how your system actually behaves—and tied to a business metric."
+          subtitle="Every recommendation is grounded in how your system actually behaves and tied to a business metric."
         />
 
         <div className="grid gap-5 md:grid-cols-3">

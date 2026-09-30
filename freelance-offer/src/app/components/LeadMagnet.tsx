@@ -117,7 +117,7 @@ function LeadMagnetModal({
                 <a
                   href={copy.success.upsellHref}
                   {...(upsellIsExternal ? { target: "_blank", rel: "noreferrer" } : {})}
-                  className="mt-6 inline-block w-full rounded-[10px] bg-green-500 px-8 py-4 text-base font-semibold text-[#04210f] hover:bg-green-400 transition"
+                  className="btn-gradient mt-6 w-full !py-4"
                 >
                   {copy.success.upsellText}
                 </a>
@@ -153,7 +153,7 @@ function LeadMagnetModal({
                   <button
                     type="submit"
                     disabled={isDisabled}
-                    className="w-full rounded-[10px] bg-green-500 px-8 py-4 text-base font-semibold text-[#04210f] transition hover:bg-green-400 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="btn-gradient w-full !py-4"
                   >
                     {loading ? copy.submit.loading : copy.submit.idle}
                   </button>

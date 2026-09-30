@@ -23,7 +23,7 @@ export function MediaPlaceholder({
     >
       <FontAwesomeIcon icon={icon} className="text-4xl text-green-500/70" aria-hidden />
       <div className="text-sm font-semibold text-zinc-300">{label}</div>
-      <div className="text-xs">Placeholder — hidden in production until published in media.ts</div>
+      <div className="text-xs">Placeholder, hidden in production until published in media.ts</div>
     </div>
   );
 }

@@ -21,7 +21,7 @@ const pillars: Pillar[] = [
   {
     icon: faServer,
     title: "Custom Engineering Matrices",
-    description: "Next.js & AWS infrastructure, built from scratch—no shared attack surface.",
+    description: "Next.js & AWS infrastructure, built from scratch with no shared attack surface.",
   },
 ];
 

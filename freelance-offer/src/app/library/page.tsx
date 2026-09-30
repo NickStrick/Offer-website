@@ -11,7 +11,7 @@ export default function LibraryPage() {
       <Headline
         eyebrow="The Technical Library"
         headlineText="The Technical Library"
-        subheadlineText="Systems thinking applied to engineering, skill acquisition, and business resilience—two books, currently in development."
+        subheadlineText="Systems thinking applied to engineering, skill acquisition, and business resilience. Two books, currently in development."
       />
 
       <BookLibrary />

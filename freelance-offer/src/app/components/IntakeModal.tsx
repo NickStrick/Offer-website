@@ -139,7 +139,7 @@ const IntakeModal = forwardRef<IntakeModalHandle, { copy?: OffersIntakeModalCopy
                   <a
                     href={MICRO_AUDIT_CHECKOUT_URL}
                     {...(microAuditIsExternal ? { target: "_blank", rel: "noreferrer" } : {})}
-                    className="w-full rounded-[10px] bg-green-500 px-8 py-4 text-base font-semibold text-[#04210f] hover:bg-green-400 transition"
+                    className="btn-gradient w-full !py-4"
                   >
                     {copy.notQualified.ctaText}
                   </a>
@@ -228,7 +228,7 @@ const IntakeModal = forwardRef<IntakeModalHandle, { copy?: OffersIntakeModalCopy
                   <button
                     type="submit"
                     disabled={isDisabled}
-                    className="w-full rounded-[10px] bg-green-500 px-8 py-4 text-base font-semibold text-[#04210f] transition hover:bg-green-400 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="btn-gradient w-full !py-4"
                   >
                     {loading ? copy.submit.loading : copy.submit.idle}
                   </button>

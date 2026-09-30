@@ -239,7 +239,7 @@ p {
    ============================ */
 .btn-gradient:focus-visible, .btn-inverted:focus-visible {
   @apply outline outline-2 outline-offset-2;
-  outline-color: var(--brand-green-hover);
+  outline-color: var(--color-accent);
 }
 
 /* ============================
@@ -338,18 +338,42 @@ p {
 }
 
   .btn-gradient {
-    @apply inline-flex items-center justify-center px-6 py-3 text-[15px] font-semibold transition duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 text-[15px] font-semibold text-white;
     border-radius: 10px !important;
-    background: var(--brand-green);
-    color: #04210f;
-    border: 1px solid transparent;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 8px 24px -12px rgba(34, 197, 94, 0.6);
+    /* Original brand sweep: green -> orange -> green */
+    background-image: linear-gradient(
+        to right,
+        var(--color-purple) 0%,
+        var(--color-highlight) 40%,
+        var(--color-highlight) 50%,
+        var(--color-purple) 100%
+    );
+    background-size: calc(200% + 4px) calc(100% + 4px);
+    background-position: 0% 0%;
+    border: 2px solid transparent;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 10px 28px -14px rgba(197, 113, 4, 0.7);
+    transition: background-position 1s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 .btn-inverted {
-    @apply inline-flex items-center justify-center px-6 py-3 text-[15px] font-semibold text-white transition duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 text-[15px] font-semibold text-white;
     border-radius: 10px !important;
-    background: rgba(255, 255, 255, 0.03);
+    /* Starts on the dark end; hover slides the original green band in */
+    background-color: rgba(255, 255, 255, 0.03);
+    /* 3x wide: the visible third is fully transparent at rest, the green band slides in on hover */
+    background-image: linear-gradient(
+        to right,
+        transparent 0%,
+        transparent 33%,
+        rgba(30, 161, 0, 0.55) 60%,
+        rgba(30, 161, 0, 0.55) 70%,
+        transparent 100%
+    );
+    background-size: 300% 100%;
+    background-position: 0% 0%;
+    background-repeat: no-repeat;
     border: 1px solid var(--line-strong);
+    transition: background-position 1s ease, border-color 0.3s ease, transform 0.2s ease;
 }
 @keyframes btnunhover {
     0% {
@@ -389,14 +413,23 @@ p {
     border-bottom-width: 5px !important;
   }
 
+  /* Original hover: the gradient slides across and the border lights up amber */
   .btn-gradient:hover {
-      background: var(--brand-green-hover);
+      background-position: -100% 0%;
+      border-color: var(--color-accent);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 14px 32px -14px rgba(244, 163, 54, 0.8);
       cursor: pointer;
   }
   .btn-inverted:hover {
-      background: rgba(255, 255, 255, 0.07);
-      border-color: rgba(255, 255, 255, 0.24);
+      background-position: 50% 0%;
+      border-color: var(--color-accent);
       cursor: pointer;
+  }
+  .btn-gradient:disabled, .btn-gradient[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background-position: 0% 0%;
+      border-color: transparent;
   }
 
   .btn-gold {

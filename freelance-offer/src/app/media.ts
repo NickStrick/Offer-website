@@ -49,19 +49,19 @@ export const videos = {
   },
   /** /welcome/micro-audit — set as the Stripe Payment Link's after-payment redirect. */
   welcomeMicroAudit: {
-    title: "Welcome — your Micro-Audit is underway",
+    title: "Welcome! Your Micro-Audit is underway",
     src: "",
     published: false,
   },
   /** /welcome/enterprise-audit — set as the Calendly event's after-booking redirect. */
   welcomeEnterpriseAudit: {
-    title: "Welcome — preparing for your Enterprise Audit",
+    title: "Welcome! Let’s prepare for your Enterprise Audit",
     src: "",
     published: false,
   },
   /** /welcome/enterprise-retainer — send to clients after the retainer is signed. */
   welcomeEnterpriseRetainer: {
-    title: "Welcome — kicking off your implementation",
+    title: "Welcome! Let’s kick off your implementation",
     src: "",
     published: false,
   },

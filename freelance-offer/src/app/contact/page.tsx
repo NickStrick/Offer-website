@@ -18,7 +18,7 @@ const tierMessages: Record<string, { title: string; body: string; subject: strin
   },
   "micro-audit": {
     title: "Micro Conversion & Latency Audit",
-    body: "Send your product URL and the flow you want reviewed (signup, onboarding, or checkout). Once scope is confirmed, your Loom teardown is delivered within 24–48 hours.",
+    body: "Send your product URL and the flow you want reviewed (signup, onboarding, or checkout). Once scope is confirmed, your Loom teardown is delivered within 24 to 48 hours.",
     subject: "Micro-Audit Request",
   },
 };

@@ -75,7 +75,7 @@ export default function Home() {
     <main className="min-h-screen bg-page text-white">
       <Headline
         headlineText="System Architecture & Conversion Audits for B2B SaaS"
-        subheadlineText="Fixed-scope diagnostics that map architectural debt onto recovered revenue. Delivered in 48 hours—engineered, not templated."
+        subheadlineText="Fixed-scope diagnostics that map architectural debt onto recovered revenue. Delivered in 48 hours. Engineered, not templated."
         ctas={[
           { label: "Apply for Architectural Audit", href: "/offers#apply" },
           { label: "Get a Free Video Audit", href: "#free-audit", variant: "inverted" },

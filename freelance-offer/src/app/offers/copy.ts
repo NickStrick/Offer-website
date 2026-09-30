@@ -183,10 +183,10 @@ export const offerTiers: readonly OfferTier[] = [
     variant: "featured",
     badge: "Most Popular",
     title: "48-Hour Enterprise System & Security Audit",
-    price: "$3,500 – $5,000",
+    price: "$3,500 to $5,000",
     priceNote: "fixed-scope",
     audience:
-      "B2B SaaS Platforms ($1M–$10M ARR) experiencing user drop-off or infrastructure friction.",
+      "B2B SaaS Platforms ($1M to $10M ARR) experiencing user drop-off or infrastructure friction.",
     valueProp:
       "A complete diagnostic overhaul mapping architectural debt directly onto recovered business margins.",
     features: [
@@ -227,7 +227,7 @@ export const leadMagnetCopy: LeadMagnetCopy = {
   video: videos.welcomeFreeAudit,
   tag: "Free Diagnostic",
   title: "Want a Free 2-Minute Over-The-Shoulder Video Audit?",
-  body: "Send us your web application or checkout link. We'll map out your top 3 conversion and latency bottlenecks on Excalidraw for free—no sales call required.",
+  body: "Send us your web application or checkout link. We'll map out your top 3 conversion and latency bottlenecks on Excalidraw for free. No sales call required.",
   ctaText: "Request Free Loom Audit",
   modal: {
     submitUrl:
@@ -241,7 +241,7 @@ export const leadMagnetCopy: LeadMagnetCopy = {
     closeLabel: "✖",
     title: "Get Your Free Loom Audit",
     description:
-      "Drop your app or checkout link and where to send the video. You'll get a 2-minute walkthrough of your top 3 bottlenecks—no call, no pitch.",
+      "Drop your app or checkout link and where to send the video. You'll get a 2-minute walkthrough of your top 3 bottlenecks. No call, no pitch.",
     placeholders: {
       email: "Work email",
       url: "App or checkout URL",
@@ -333,7 +333,7 @@ export const featuredOffersHeader = {
   tag: "Productized B2B Architecture Services",
   title: "Eliminate System Friction. Recover Leaked Revenue.",
   subtitle:
-    "Fixed-scope diagnostic clarity and enterprise refactoring blueprints delivered in 48 hours. No open-ended hourly billing—just quantifiable business metrics.",
+    "Fixed-scope diagnostic clarity and enterprise refactoring blueprints delivered in 48 hours. No open-ended hourly billing, just quantifiable business metrics.",
 };
 
 export type WelcomePageCopy = {
@@ -355,7 +355,7 @@ export const welcomePages: Record<OfferTier["id"], WelcomePageCopy> = {
     steps: [
       "Check your inbox for your payment confirmation.",
       "Reply with your app or checkout URL and the flow you want reviewed, if you haven't already sent it.",
-      "Your 10-minute Loom teardown and Excalidraw blueprint arrive within 24–48 hours.",
+      "Your 10-minute Loom teardown and Excalidraw blueprint arrive within 24 to 48 hours.",
     ],
     nextCta: { text: "Explore the Enterprise Audit", href: "/offers#enterprise-audit" },
   },
@@ -391,7 +391,7 @@ export const offersCopy = {
     eyebrow: "Offers & pricing",
     headlineText: "Start free. Scale up when the numbers justify it.",
     subheadlineText:
-      "Productized architecture audits for B2B SaaS. Every engagement has a defined deliverable and a defined price—no open-ended hourly billing.",
+      "Productized architecture audits for B2B SaaS. Every engagement has a defined deliverable and a defined price, with no open-ended hourly billing.",
     ctas: [
       { label: "Get the free audit", href: "#free-audit" },
       { label: "Compare offers", href: "#offers", variant: "inverted" as const },
@@ -412,7 +412,7 @@ export const offersCopy = {
     closeLabel: "✖",
     title: "Apply for the Architectural Audit",
     description:
-      "The 48-Hour Enterprise Audit is built for B2B SaaS platforms at $1M+ ARR. Tell us about your company—qualified applicants go straight to scheduling the discovery sync.",
+      "The 48-Hour Enterprise Audit is built for B2B SaaS platforms at $1M+ ARR. Tell us about your company, and qualified applicants go straight to scheduling the discovery sync.",
     placeholders: {
       firstName: "First name",
       lastName: "Last name",
@@ -422,8 +422,8 @@ export const offersCopy = {
     arrLabel: "Current annual recurring revenue",
     arrOptions: [
       { value: "under-1m", label: "Under $1M ARR", qualifies: false },
-      { value: "1m-3m", label: "$1M – $3M ARR", qualifies: true },
-      { value: "3m-10m", label: "$3M – $10M ARR", qualifies: true },
+      { value: "1m-3m", label: "$1M to $3M ARR", qualifies: true },
+      { value: "3m-10m", label: "$3M to $10M ARR", qualifies: true },
       { value: "10m-plus", label: "$10M+ ARR", qualifies: true },
     ],
     submit: {
@@ -432,7 +432,7 @@ export const offersCopy = {
     },
     notQualified: {
       title: "Start with the Micro-Audit",
-      body: "The Enterprise Audit is scoped for platforms at $1M+ ARR. The $400 Micro Conversion & Latency Audit maps your top 3 conversion and latency leaks in 48 hours—no sales call required.",
+      body: "The Enterprise Audit is scoped for platforms at $1M+ ARR. The $400 Micro Conversion & Latency Audit maps your top 3 conversion and latency leaks in 48 hours. No sales call required.",
       ctaText: "Order Micro-Audit ($400)",
       backText: "Back",
     },
@@ -465,32 +465,32 @@ export const offersCopy = {
   howItWorks: {
     id: "how-it-works",
     title: "How it works",
-    subtitle: "A value ladder—start where the evidence you need is, move up when the numbers justify it.",
+    subtitle: "A value ladder. Start where the evidence you need is, and move up when the numbers justify it.",
     steps: [
       {
         icon: faVideo,
-        eyebrow: "Start here — Free",
+        eyebrow: "Start here: Free",
         title: "2-Minute Loom Audit",
         description:
-          "Send your app or checkout link. We record a quick over-the-shoulder walkthrough of your top 3 bottlenecks—no sales call.",
+          "Send your app or checkout link. We record a quick over-the-shoulder walkthrough of your top 3 bottlenecks. No sales call.",
       },
       {
         icon: faMagnifyingGlassChart,
-        eyebrow: "Step 1 — $400",
+        eyebrow: "Step 1: $400",
         title: "Micro-Audit",
         description:
-          "A recorded Loom teardown and layout blueprint of your top 3 conversion and latency leaks, delivered in 24–48 hours.",
+          "A recorded Loom teardown and layout blueprint of your top 3 conversion and latency leaks, delivered in 24 to 48 hours.",
       },
       {
         icon: faDiagramProject,
-        eyebrow: "Step 2 — $3,500–$5,000",
+        eyebrow: "Step 2: $3,500 to $5,000",
         title: "48-Hour Enterprise Audit",
         description:
           "Full checkout, API, auth, and AWS cost review. You leave with a system topology and a refactoring spec your internal team can execute.",
       },
       {
         icon: faRocket,
-        eyebrow: "Step 3 — $50,000",
+        eyebrow: "Step 3: $50,000",
         title: "Enterprise Implementation",
         description:
           "We build it: Digital Vault infrastructure, AI agent workflows, and zero-trust security, with 30 days of hands-on engineering support.",
@@ -501,7 +501,7 @@ export const offersCopy = {
   framework: {
     id: "framework",
     title: "What we audit",
-    subtitle: "Deep diagnostic mechanics—not surface-level marketing tactics.",
+    subtitle: "Deep diagnostic mechanics, not surface-level marketing tactics.",
     items: [
       {
         icon: faStopwatch,
@@ -542,7 +542,7 @@ export const offersCopy = {
       left: {
         title: "Who We Are",
         bodyLines: [
-          "I’m Nick—a full-stack engineer who architects and audits production systems.",
+          "I’m Nick, a full-stack engineer who architects and audits production systems.",
           "I’ve worked inside 600,000-line enterprise execution engines, shipping webhook delivery layers and real-time platforms that drove a 30% performance optimization and a 22% drop in user friction tickets.",
         ],
       },
@@ -550,7 +550,7 @@ export const offersCopy = {
         title: "Based in Chicago",
         bodyLines: [
           "Chicago is our base of operations; engagements run remotely with teams anywhere.",
-          "Every recommendation is tied to a business metric—conversion, latency, or cost.",
+          "Every recommendation is tied to a business metric: conversion, latency, or cost.",
           "You get engineering depth with the communication of a sales engineer.",
         ],
       },
@@ -597,12 +597,12 @@ export const offersCopy = {
       {
         question: "What's the difference between the Micro-Audit and the Enterprise Audit?",
         answer:
-          "The Micro-Audit is a fast, recorded teardown of your top 3 conversion and latency leaks—no call required. The Enterprise Audit covers checkout, API latency, authentication security, and AWS cost, and ends with a system topology, a step-by-step refactoring spec, and a live executive strategy sync.",
+          "The Micro-Audit is a fast, recorded teardown of your top 3 conversion and latency leaks, with no call required. The Enterprise Audit covers checkout, API latency, authentication security, and AWS cost, and ends with a system topology, a step-by-step refactoring spec, and a live executive strategy sync.",
       },
       {
         question: "Why is the Enterprise Audit priced as a range?",
         answer:
-          "The fixed price is set before work begins, based on the surface area in scope (number of critical flows, services, and integrations). You know the exact number before you commit—there is no hourly billing.",
+          "The fixed price is set before work begins, based on the surface area in scope (number of critical flows, services, and integrations). You know the exact number before you commit, and there is no hourly billing.",
       },
       {
         question: "What if we're under $1M ARR?",

@@ -21,7 +21,7 @@ const books: Book[] = [
     premise:
       "Deconstructing traditional learning blockades by using continuous deployment models, automated micro-habits, and treating life's unexpected setbacks as programmatic bugs meant to be diagnosed, logged, and patched in real-time.",
     ctaText: "Secure Early Access / Join Beta Reader List",
-    mailSubject: "Early Access - The Iteration Loop",
+    mailSubject: "Early Access: The Iteration Loop",
   },
   {
     title: "Amor Fati in the Arena",
@@ -29,7 +29,7 @@ const books: Book[] = [
     premise:
       "Adopting a hyper-efficient, stoic developer mindset toward major enterprise setbacks. Learning to pull immense practical and structural value from unclosed deals, failed proposals, and architectures requiring a full refactor.",
     ctaText: "Notify Me Upon Release",
-    mailSubject: "Notify Me - Amor Fati in the Arena",
+    mailSubject: "Notify Me: Amor Fati in the Arena",
   },
 ];
 
