@@ -78,7 +78,7 @@ export default function OffersPage() {
           items: offersCopy.testimonials.items,
           style: {
             variant: "carousel",
-            columns: 2,
+            columns: 3,
             showQuoteIcon: true,
             rounded: "xl",
             background: "default",

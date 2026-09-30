@@ -2,7 +2,7 @@
  * Central registry for site videos and case-study images.
  *
  * Nothing here renders on the live site until `published: true` and a `src` is set.
- * In `npm run dev`, unpublished case-study images show as dashed placeholders so you can see where they go.
+ * Case-study images that aren't published yet fall back to the Colorado sky photo (/colorsky.jpg).
  * Video placeholders are switched off entirely (SHOW_VIDEO_PLACEHOLDERS) until the videos are recorded.
  *
  * `src` accepts either:
@@ -83,6 +83,15 @@ export const caseStudyImages = {
 } satisfies Record<string, ImageMedia>;
 
 export const isMediaReady = (m: { src: string; published: boolean }) => m.published && m.src.length > 0;
+
+/** Stand-in shown wherever a specific image hasn't been uploaded yet (Colorado sky). */
+export const fallbackImage = {
+  src: "/colorsky.jpg",
+  alt: "Colorado sky over the mountains",
+};
+
+/** The image to render: the real one once published, otherwise the fallback. */
+export const imageOrFallback = (m: ImageMedia) => (isMediaReady(m) ? m : fallbackImage);
 
 const isDev = process.env.NODE_ENV === "development";
 

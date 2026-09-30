@@ -9,9 +9,8 @@ import {
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { MediaPlaceholder } from "./Video";
 import SectionHeader from "./SectionHeader";
-import { isMediaReady, showMediaPlaceholders } from "../media";
+import { imageOrFallback, isMediaReady, showMediaPlaceholders } from "../media";
 import { caseStudies, caseStudiesHeader, type OffersCaseStudy } from "../offers/copy";
 
 const rowIcons = {
@@ -21,8 +20,8 @@ const rowIcons = {
 } as const;
 
 function CaseStudyCard({ study, flip }: { study: OffersCaseStudy; flip: boolean }) {
-  const hasImage = isMediaReady(study.image);
-  const showMedia = hasImage || showMediaPlaceholders;
+  const image = imageOrFallback(study.image);
+  const isFallback = !isMediaReady(study.image);
   const rows = [
     { key: "friction", ...study.friction },
     { key: "architecture", ...study.architecture },
@@ -37,25 +36,18 @@ function CaseStudyCard({ study, flip }: { study: OffersCaseStudy; flip: boolean 
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className={showMedia ? "grid md:grid-cols-2" : ""}>
-        {showMedia ? (
-          <div className={`relative aspect-[16/10] bg-black/40 md:aspect-auto md:min-h-full ${flip ? "md:order-2" : ""}`}>
-            {hasImage ? (
-              <Image
-                src={study.image.src}
-                alt={study.image.alt}
-                fill
-                sizes="(max-width: 768px) 100vw, 560px"
-                className="object-cover"
-              />
-            ) : (
-              <MediaPlaceholder
-                label={`Image: ${study.image.src || "add an image"} (1600×1000)`}
-                className="!aspect-auto h-full !rounded-none !border-0"
-              />
-            )}
-          </div>
-        ) : null}
+      <div className="grid md:grid-cols-2">
+        <div className={`relative aspect-[16/10] bg-black/40 md:aspect-auto md:min-h-full ${flip ? "md:order-2" : ""}`}>
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes="(max-width: 768px) 100vw, 560px"
+            className="object-cover"
+          />
+          {/* Soften the stand-in photo so it sits with the dark theme */}
+          {isFallback ? <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" /> : null}
+        </div>
 
         <div className="p-7 md:p-10">
           <div className="eyebrow">{study.eyebrow}</div>
@@ -63,7 +55,7 @@ function CaseStudyCard({ study, flip }: { study: OffersCaseStudy; flip: boolean 
             {study.title}
           </h3>
 
-          <dl className={`mt-8 grid gap-6 ${showMedia ? "" : "md:grid-cols-3"}`}>
+          <dl className="mt-8 grid gap-6">
             {rows.map((row) => (
               <div key={row.key} className={row.key === "metric" ? "rounded-xl border border-green-500/20 bg-green-500/[0.06] p-4" : ""}>
                 <dt className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.14em] text-ink-subtle">

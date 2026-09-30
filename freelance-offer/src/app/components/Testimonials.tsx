@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faStar, faQuoteLeft, faComments } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faStar, faQuoteLeft, faQuoteRight, faComments } from '@fortawesome/free-solid-svg-icons';
 import SectionHeader from './SectionHeader';
 
 export type TestimonialItem = {
@@ -55,20 +55,12 @@ export default function Testimonials({
     variant = 'card',
     columns = 3,
     showQuoteIcon = true,
-    rounded = 'xl',
   } = style || {};
 
-  const cardBase =
-    'p-6 pb-8 md:p-7 md:pb-9 bg-accent-1 shadow-md card-green';
-  const cardInk =
-    'p-6 pb-8 md:p-7 md:pb-9 text-[var(--text-1)] bg-[var(--primary)] shadow-lg';
-  const radius =
-    rounded === '2xl' ? 'rounded-3xl' : rounded === 'lg' ? 'rounded-xl' : 'rounded-2xl';
+  const cardBase = 'testimonial-card p-7';
+  const cardInk = 'testimonial-card p-7';
 
-  const gridCols =
-    columns === 2
-      ? 'grid-cols-1 md:grid-cols-2'
-      : 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3';
+  const gridCols = columns === 2 ? 'md:columns-2' : 'md:columns-2 lg:columns-3';
 
   // ---------- Mobile carousel state (only used when variant === 'carousel') ----------
   const trackRef = useRef<HTMLDivElement>(null);
@@ -103,41 +95,12 @@ export default function Testimonials({
           <>
             <div
               ref={trackRef}
-              className="md:hidden  hide-scrollbar -mx-4 px-4 flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth"
-              
+              className="md:hidden hide-scrollbar -mx-6 px-6 py-4 flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth"
             >
               {items.map((t, i) => (
-                <motion.figure
-                  key={`${t.name}-${i}`}
-                  initial={{ opacity: 1, y: 0, x: 0 }}
-                  whileInView={{ opacity: 1, y: 0,x: 0 }}
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.4, ease: 'easeOut', delay: i * 0.04 }}
-                  className={`${
-                    cardBase
-                  } ${radius} snap-center shrink-0 w-[86%] relative`}
-                >
-                  {showQuoteIcon && <FontAwesomeIcon icon={faQuoteLeft} className="mb-4 text-xl text-green-400/80" aria-hidden />}
-                  <blockquote className="text-[15px] leading-relaxed text-zinc-200">{t.quote}</blockquote>
-                  <figcaption className="flex items-center gap-3 mt-6">
-                    {t.avatarUrl ? (
-                      <Image
-                        src={t.avatarUrl}
-                        alt={t.name}
-                        width={44}
-                        height={44}
-                        className="rounded-full object-cover"
-                      />
-                    ) : (
-                      <FontAwesomeIcon icon={faUser} className="w-5 h-5 text-[var(--primary)" />
-                    )}
-                    <div>
-                      <div className="font-semibold">{t.name}</div>
-                      {t.role && <div className="text-sm text-muted">{t.role}</div>}
-                    </div>
-                  </figcaption>
-                  <div className="absolute bottom-4 right-4"><Stars /></div>
-                </motion.figure>
+                <figure key={`${t.name}-${i}`} className={`${cardBase} snap-center shrink-0 w-[86%]`}>
+                  <CardBody t={t} showQuoteIcon={showQuoteIcon} />
+                </figure>
               ))}
             </div>
 
@@ -146,10 +109,8 @@ export default function Testimonials({
               {items.map((_, i) => (
                 <button
                   key={i}
-                  className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                    i === active
-                      ? 'bg-[var(--primary)]'
-                      : 'bg-[color-mix(in_srgb,var(--fg)_25%,transparent)]'
+                  className={`h-2 rounded-full transition-all ${
+                    i === active ? 'w-6 bg-[var(--color-green)]' : 'w-2 bg-white/20'
                   }`}
                   aria-label={`Go to slide ${i + 1}`}
                   onClick={() => {
@@ -164,48 +125,18 @@ export default function Testimonials({
           </>
         ) : null}
 
-        {/* ---------- DESKTOP/TABLET: grid (always) ---------- */}
-        <div className={`hidden md:grid gap-6 md:gap-8 ${gridCols}`}>
+        {/* ---------- DESKTOP/TABLET: staggered masonry columns ---------- */}
+        <div className={`hidden md:block gap-6 ${gridCols}`}>
           {items.map((t, i) => (
             <motion.figure
               key={`${t.name}-${i}`}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: 'easeOut', delay: i * 0.05 }}
-              className={`relative ${variant === 'ink' ? cardInk : cardBase} ${radius}`}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: (i % 3) * 0.08 }}
+              className={`${variant === 'ink' ? cardInk : cardBase} mb-6 break-inside-avoid`}
             >
-              {showQuoteIcon && <FontAwesomeIcon icon={faQuoteLeft} className="mb-4 text-xl text-green-400/80" aria-hidden />}
-
-              <blockquote className="text-[15px] leading-relaxed text-zinc-200">{t.quote}</blockquote>
-
-              <figcaption className="flex items-center gap-3 mt-6">
-                {t.avatarUrl ? (
-                  <Image
-                    src={t.avatarUrl}
-                    alt={t.name}
-                    width={44}
-                    height={44}
-                    className="rounded-full object-cover"
-                  />
-                ) : (
-                  <FontAwesomeIcon icon={faUser} className="w-11 h-11 overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--bg)_40%,transparent)] text-[var(--bg-2)]" />
-                )} 
-                {/* w-11 h-11 rounded-full bg-[color-mix(in_srgb,var(--fg)_20%,transparent)] */}
-                <div>
-                  <div className="font-semibold">{t.name}</div>
-                  {t.role && (
-                    <div
-                      className={`text-sm ${
-                        variant === 'ink' ? 'text-[var(--text)]/85' : 'text-muted'
-                      }`}
-                    >
-                      {t.role}
-                    </div>
-                  )}
-                </div>
-              </figcaption>
-              <div className="absolute bottom-4 right-4"><Stars /></div>
+              <CardBody t={t} showQuoteIcon={showQuoteIcon} />
             </motion.figure>
           ))}
         </div>
@@ -214,6 +145,45 @@ export default function Testimonials({
   );
 }
 
+
+type TestimonialCardItem = { quote: string; name: string; role?: string; avatarUrl?: string };
+
+/** Inner layout shared by the mobile carousel and desktop columns. */
+function CardBody({ t, showQuoteIcon }: { t: TestimonialCardItem; showQuoteIcon: boolean }) {
+  return (
+    <>
+      <FontAwesomeIcon icon={faQuoteRight} className="testimonial-watermark" aria-hidden />
+      <div className="mb-5 flex items-center justify-between">
+        {showQuoteIcon ? (
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/30 text-amber-300 ring-1 ring-white/15">
+            <FontAwesomeIcon icon={faQuoteLeft} className="text-sm" aria-hidden />
+          </span>
+        ) : <span />}
+        <Stars />
+      </div>
+      <blockquote className="text-[15px] font-semibold leading-relaxed tracking-wide text-white">{t.quote}</blockquote>
+      <figcaption className="mt-6 flex items-center gap-3 border-t border-white/15 pt-5">
+        {t.avatarUrl ? (
+          <Image
+            src={t.avatarUrl}
+            alt={t.name}
+            width={44}
+            height={44}
+            className="h-11 w-11 rounded-full object-cover ring-2 ring-white/30"
+          />
+        ) : (
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-black/30 ring-2 ring-white/30">
+            <FontAwesomeIcon icon={faUser} className="text-white/80" aria-hidden />
+          </span>
+        )}
+        <div>
+          <div className="font-bold text-white">{t.name}</div>
+          {t.role && <div className="text-sm text-white/75">{t.role}</div>}
+        </div>
+      </figcaption>
+    </>
+  );
+}
 
 export function AnimatedSection({
   children,

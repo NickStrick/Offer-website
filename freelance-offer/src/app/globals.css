@@ -623,3 +623,56 @@ paint-order: stroke fill;
     -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 30%, transparent 100%);
   }
 }
+
+/* ============================
+   Testimonial cards — the original dark→green sweep, refined
+   ============================ */
+.testimonial-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  border: 2px solid var(--color-green);
+  border-radius: 20px;
+  background-image: linear-gradient(
+    to right,
+    var(--card) 0%,
+    var(--color-green) 70%,
+    var(--color-green) 80%,
+    var(--card) 100%
+  );
+  background-size: calc(200% + 4px) calc(100% + 4px);
+  background-position: 0% 100%;
+  box-shadow: 0 30px 60px -36px rgba(30, 161, 0, 0.7);
+  transition: background-position 0.9s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+/* Subtle grain of light across the top edge */
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(120% 60% at 100% 0%, rgba(255, 255, 255, 0.14), transparent 60%);
+  pointer-events: none;
+}
+.testimonial-card:hover {
+  background-position: 55% 100%;
+  transform: translateY(-4px);
+  border-color: var(--color-green-neon);
+  box-shadow: 0 36px 70px -30px rgba(79, 255, 40, 0.45);
+}
+.testimonial-card .testimonial-watermark {
+  position: absolute;
+  right: -10px;
+  bottom: -26px;
+  z-index: -1;
+  font-size: 150px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.08);
+  transform: rotate(-8deg);
+  transition: transform 0.6s ease, color 0.6s ease;
+}
+.testimonial-card:hover .testimonial-watermark {
+  transform: rotate(0deg) scale(1.05);
+  color: rgba(255, 255, 255, 0.12);
+}

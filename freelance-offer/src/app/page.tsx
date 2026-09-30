@@ -94,7 +94,7 @@ export default function Home() {
         items: myTestimonialList,
         style: {
           variant: "carousel",
-          columns: 2,
+          columns: 3,
           showQuoteIcon: true,
           rounded: "xl",
           background: "default",
