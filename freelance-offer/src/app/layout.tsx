@@ -2,11 +2,16 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import Script from 'next/script'
 
 import { LanguageProvider } from './context/LanguageContext';
 import AnalyticsListener from "./components/AnalyticsListener";
 import Navbar from "./components/Navbar";
+
+// Font Awesome CSS is imported above; stop it injecting styles at runtime (prevents oversized-icon flash).
+config.autoAddCss = false;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,10 +26,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.strickerdigital.com"),
   title: "Stricker Digital",
-  description: "Website & Marketing strategies tailored to you by a seasoned professional.",
+  description: "Productized system architecture and conversion audits for B2B SaaS. Fixed scope, 48-hour delivery.",
   openGraph: {
     title: "Stricker Digital",
-    description: "Website & Marketing strategies tailored to you by a seasoned professional.",
+    description: "Productized system architecture and conversion audits for B2B SaaS. Fixed scope, 48-hour delivery.",
     url: "https://www.strickerdigital.com",
     siteName: "Stricker Digital",
     images: [
@@ -41,7 +46,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Stricker Digital",
-    description: "Website & Marketing strategies tailored to you by a seasoned professional.",
+    description: "Productized system architecture and conversion audits for B2B SaaS. Fixed scope, 48-hour delivery.",
     images: ["/SDLogocircle.png"],
   },
 };

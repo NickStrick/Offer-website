@@ -458,7 +458,7 @@ function ContactModal({
           </div>
 
           {status === "success" && (
-            <p className="text-sm text-emerald-600">Thanks! Your message was sent.</p>
+            <p className="text-sm text-green-600">Thanks! Your message was sent.</p>
           )}
           {status === "error" && (
             <p className="text-sm text-rose-600">Something went wrong. Please try again.</p>

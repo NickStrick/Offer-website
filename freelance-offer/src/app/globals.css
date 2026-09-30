@@ -26,6 +26,19 @@
    --fg: rgb(115 115 115 / var(--tw-text-opacity, 1));
    --bg: #1c1c1c;
    --bg-wave: black;
+
+  /* ---- Design system (2026 refresh) ---- */
+  --page: #0f110f;          /* "light black" page background, faint green tint */
+  --surface: #151815;       /* raised sections */
+  --card: #181b18;          /* cards */
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.14);
+  --ink: #f5f5f3;           /* primary text */
+  --ink-muted: #a3a8a2;     /* secondary text */
+  --ink-subtle: #737a72;    /* tertiary text */
+  --brand-green: #22c55e;   /* primary action */
+  --brand-green-hover: #4ade80;
+  --brand-amber: #f4a336;   /* labels & highlights */
 }
 .hide-scrollbar { scrollbar-width: none; }
 .hide-scrollbar::-webkit-scrollbar { display: none; }
@@ -34,17 +47,27 @@
    Base Styles
    ============================ */
 body {
-  @apply bg-[rgb(246,244,239)] text-black font-sans leading-relaxed text-base antialiased;
+  @apply font-sans leading-relaxed text-base antialiased;
+  background-color: var(--page);
+  color: var(--ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3 {
-  @apply font-serif font-bold leading-tight text-white;
+h1, h2, h3, h4 {
+  @apply font-sans font-semibold text-white;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  text-wrap: balance;
 }
 
 p {
-  @apply text-white text-lg max-w-[720px] mx-auto mb-4 font-normal;
+  @apply font-normal;
+  text-wrap: pretty;
+}
+
+::selection {
+  background: rgba(34, 197, 94, 0.3);
 }
 /* Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
@@ -67,22 +90,7 @@ p {
   background-color: rgba(107, 33, 168, 0.9); /* yellow hover */
 }
 .gradient-text {
-  /* font-size: 3rem; */
-  font-weight: bold;
-  /* background: linear-gradient(180deg, var(--color-accent), var(--color-accent), var(--color-extra-accent), var(--color-extra-accent)); */
   color: white;
-  /* -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text; for Firefox */
-   text-shadow:
-    -2px -2px 0 black,
-     2px -2px 0 black,
-    -2px  2px 0 black,
-     2px  2px 0 black,
-     0   -2px 0 black,
-     0    2px 0 black,
-    -2px  0   0 black,
-     2px  0   0 black;
 }
 .leaf{
   top: -37px;
@@ -229,8 +237,9 @@ p {
 /* ============================
    Accessibility
    ============================ */
-.btn-gradient:focus, .btn-gradient:focus-visible {
-  @apply outline outline-2 outline-[color:var(--color-accent)] outline-offset-2;
+.btn-gradient:focus-visible, .btn-inverted:focus-visible {
+  @apply outline outline-2 outline-offset-2;
+  outline-color: var(--brand-green-hover);
 }
 
 /* ============================
@@ -261,15 +270,15 @@ p {
   }
   
   .bg-gradient-purple-black {
-    background: linear-gradient(to bottom, var(--bg-dark) 60%, var(--bg-purple) 60%, var(--bg-dark) 60%);
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
   }
   .bg-gradient-black-purple {
-    background: linear-gradient(to bottom, black 2%, var(--bg-dark) 80%);
-    /* background: linear-gradient(to top, var(--color-purple) 10%, black 90%); */
+    background: var(--page);
   }
   .bg-gradient-black-dark {
-    background: linear-gradient(to bottom, var(--bg-dark) 5%, black 100%);
-    /* background: linear-gradient(to top, var(--color-purple) 10%, black 90%); */
+    background: var(--page);
   }
   .bg-gradient-white-gray {
     background: linear-gradient(to bottom, white 5%, rgb(220, 220, 220) 100%);
@@ -282,11 +291,7 @@ p {
      background: linear-gradient(to bottom, var(--bg-purple) 5%, var(--bg-dark) 100%);
   }
   .text-muted {
-    /* @apply text-neutral-500; */
-    color:rgb(215 115 15 / var(--tw-text-opacity, 1));
-  }
-  .text-muted {
-     color:rgb(215 115 15 / var(--tw-text-opacity, 1));
+    color: var(--ink-muted);
   }
 
   .text-highlight {
@@ -309,22 +314,7 @@ p {
     color: var(--color-blue) !important;
   }
 .card-green {
-    @apply inline-block px-8 py-4  font-bold text-white  tracking-wide transition duration-300;
-    /* background-image: linear-gradient(to right, var(--color-purple), var(--color-highlight)); */
-    background-image: linear-gradient(
-        to right,
-        var(--bg-dark) 0%,
-        var(--color-purple) 70%,
-        var(--color-purple) 80%,
-        var(--bg-dark) 100%
-    );
-    background-size: calc(200% + 4px) calc(100% + 4px);
-    border:2px solid var(--color-purple);
-    outline:2px solid transparent;
-    background-position: 0% 100%;
-    animation: btnunhover 2s ;
-    animation-play-state: paused;
-    
+    @apply surface-card text-white;
 }
 .card-white {
     @apply inline-block px-8 py-4  font-bold text-black  tracking-wide transition duration-300 rounded-2xl;
@@ -348,39 +338,18 @@ p {
 }
 
   .btn-gradient {
-    @apply inline-block px-8 py-4  font-bold text-white uppercase tracking-wide rounded-full transition duration-300;
-    /* background-image: linear-gradient(to right, var(--color-purple), var(--color-highlight)); */
-    background-image: linear-gradient(
-        to right,
-        var(--color-purple) 0%,
-        var(--color-highlight) 40%,
-        var(--color-highlight) 50%,
-        var(--color-purple) 100%
-    );
-    background-size: calc(200% + 4px) calc(100% + 4px);
-    border:2px solid transparent;
-    outline:2px solid transparent;
-    background-position: 0% 0%;
-    animation: btnunhover 2s ;
-    animation-play-state: paused;
+    @apply inline-flex items-center justify-center px-6 py-3 text-[15px] font-semibold transition duration-200;
+    border-radius: 10px !important;
+    background: var(--brand-green);
+    color: #04210f;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 8px 24px -12px rgba(34, 197, 94, 0.6);
 }
 .btn-inverted {
-    @apply inline-block px-8 py-4  font-bold text-white uppercase tracking-wide rounded-full transition duration-300;
-    /* background-image: linear-gradient(to right, var(--color-purple), var(--color-highlight)); */
-    background-image: linear-gradient(
-        to right,
-        var(--bg-dark) 0%,
-        var(--color-purple) 40%,
-        var(--color-purple) 50%,
-        var(--bg-dark) 100%
-    );
-    background-size: calc(200% + 4px) calc(100% + 4px);
-    border:2px solid var(--color-purple);
-    outline:2px solid transparent;
-    background-position: 0% 0%;
-    animation: btnunhover 2s ;
-    animation-play-state: paused;
-    
+    @apply inline-flex items-center justify-center px-6 py-3 text-[15px] font-semibold text-white transition duration-200;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--line-strong);
 }
 @keyframes btnunhover {
     0% {
@@ -421,14 +390,13 @@ p {
   }
 
   .btn-gradient:hover {
-      border-color: var(--color-accent);
+      background: var(--brand-green-hover);
       cursor: pointer;
-       animation: btnhover 2s forwards;
   }
   .btn-inverted:hover {
-      border-color: var(--color-accent);
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.24);
       cursor: pointer;
-       animation: btnhover 2s forwards;
   }
 
   .btn-gold {
@@ -604,4 +572,54 @@ paint-order: stroke fill;
 .price-card .btn-container{
   padding-top:30px;
   margin-top:auto;
+}
+
+/* ============================
+   Design system utilities
+   ============================ */
+@layer components {
+  .surface-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 24px 48px -32px rgba(0, 0, 0, 0.8);
+  }
+  .surface-card-hover {
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .surface-card-hover:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-2px);
+  }
+  .section-pad {
+    @apply px-6 py-24 md:py-28;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-medium uppercase;
+    letter-spacing: 0.16em;
+    color: var(--brand-amber);
+  }
+  .display-title {
+    @apply text-4xl md:text-5xl font-semibold text-white;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+  }
+  .lead-text {
+    @apply text-lg leading-relaxed;
+    color: var(--ink-muted);
+  }
+  .text-ink-muted { color: var(--ink-muted); }
+  .text-ink-subtle { color: var(--ink-subtle); }
+  .bg-page { background-color: var(--page); }
+  .bg-surface { background-color: var(--surface); }
+  .border-line { border-color: var(--line); }
+  /* Faint engineering grid, faded at the edges */
+  .grid-backdrop {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 30%, transparent 100%);
+  }
 }

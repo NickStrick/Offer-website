@@ -1,11 +1,10 @@
 'use client';
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-import CTAImage from "../../../public/SDLogoTrans.png";
 import Leafs from "../../../public/SDLogoLeafs.png";
-import headBackgorundImage from "../../../public/colorsky.jpg";
 
 type HeadlineCta = {
   label: string;
@@ -16,71 +15,60 @@ type HeadlineCta = {
 type HeadlineProps = {
   headlineText?: string;
   subheadlineText?: string;
+  eyebrow?: string;
   ctas?: HeadlineCta[];
 };
 
 export default function Headline({
   headlineText = "Grow the right way. Your Web & Business Partner",
   subheadlineText,
+  eyebrow = "Stricker Digital",
   ctas,
 }: HeadlineProps) {
-  const router = useRouter();
+  return (
+    <section className="relative isolate overflow-hidden bg-page px-6 pt-24 pb-20 md:pt-32 md:pb-28">
+      {/* Sunrise glow (green growth + amber light) over a faint engineering grid */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="grid-backdrop absolute inset-0" />
+        <div className="absolute left-1/2 top-[-180px] h-[520px] w-[900px] -translate-x-[60%] rounded-full bg-green-500/20 blur-[120px]" />
+        <div className="absolute left-1/2 top-[-120px] h-[420px] w-[620px] translate-x-[5%] rounded-full bg-amber-500/15 blur-[120px]" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      </div>
 
-  return (<>
-  <section
-      className="hero-section bg-fixed section-half-height min-h-[40vh] h-fit py-16 sm:bg-[length:135%] sm:bg-[100%_calc(50%-10px)] bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${headBackgorundImage.src})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
-      }}
-    >
-      {/* Overlay tint for contrast */}
-      <div className="hero-overlay absolute inset-0 z-0" />
+      <motion.div
+        className="relative mx-auto max-w-4xl text-center"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <div className="mx-auto mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] py-1.5 pl-2 pr-4 text-sm text-ink-muted">
+          <Image src={Leafs} alt="" width={20} height={20} className="h-5 w-5" priority />
+          {eyebrow}
+        </div>
 
-      {/* Hero content */}
-      <motion.div className=" z-[0] relative px-4 max-w-3xl mx-auto text-center"
-      initial={{ opacity: 0, y: -70 }}
-      animate={{ opacity: 1.2, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1, ease: "easeInOut" }}>
-        <div className="relative mx-auto mt-10">
-          <h1 className="text-6xl md:text-7xl font-bold mb-4 mr-[0]  mt-[80px] sm:mt-[0px] gradient-text-color md:ml-[-60px]">
-              Stricker Digital
-            </h1>
-        {/* <Image src={BannerImg} alt="stricker Ditial Banner" className="border-2 border-solid border-[var(--color-purple)] z-2 w-[300px] md:w-[600px] h-auto rounded-full ease-in-out mx-auto" height={520} width={1840}  priority={true}/> */}
-        <Image src={Leafs} alt="stricker Ditial Logo leafs" className="md:p-6 z-1 w-[60px] md:w-[150px] h-100 ease-in-out absolute leaf" height={150} width={150} />
-         </div>
-         <h1 className="text-3xl md:text-5xl font-bold mb-4 mr-[0] sm:mt-[0px]">
-           <span className="flex text-3xl md:text-5xl pb-[5px] mt-[20px] gradient-text">
-            {headlineText}</span>
-         </h1>
-         {subheadlineText ? (
-           <p className="mt-4 text-lg md:text-xl text-white/90 max-w-2xl mx-auto gradient-text">
-             {subheadlineText}
-           </p>
-         ) : null}
-         {ctas?.length ? (
-           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-             {ctas.map((cta) => (
-               <a
-                 key={cta.label}
-                 href={cta.href}
-                 className={`${cta.variant === "inverted" ? "btn-inverted" : "btn-gradient"} px-8 py-4 rounded-full min-w-[220px] text-center`}
-               >
-                 {cta.label}
-               </a>
-             ))}
-           </div>
-         ) : null}
-       </motion.div>
+        <h1 className="text-[2.6rem] leading-[1.04] font-semibold text-white sm:text-6xl md:text-7xl" style={{ letterSpacing: "-0.045em" }}>
+          {headlineText}
+        </h1>
 
-       <Image src={CTAImage} alt="stricker Ditial Logo" className="md:p-6 z-2 w-[60px] md:w-[150px] h-100 ease-in-out absolute top-0 left-0" height={150} width={150} onClick={() => router.push("/")}/>
+        {subheadlineText ? (
+          <p className="lead-text mx-auto mt-6 max-w-2xl md:text-xl">{subheadlineText}</p>
+        ) : null}
+
+        {ctas?.length ? (
+          <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+            {ctas.map((cta) => (
+              <a
+                key={cta.label}
+                href={cta.href}
+                className={`${cta.variant === "inverted" ? "btn-inverted" : "btn-gradient"} gap-2`}
+              >
+                {cta.label}
+                {cta.variant === "inverted" ? null : <FontAwesomeIcon icon={faArrowRight} className="text-sm" aria-hidden />}
+              </a>
+            ))}
+          </div>
+        ) : null}
+      </motion.div>
     </section>
-    
-  
-    
-    </>
   );
 }

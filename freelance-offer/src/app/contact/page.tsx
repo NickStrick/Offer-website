@@ -1,108 +1,108 @@
 'use client';
-// import Link from "next/link";
-import Image from "next/image";
+import { Suspense } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faCalendarCheck, faCircleCheck, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
-import instaImg from "../../../public/Instagram.png";
-import LIImg from "../../../public/linkedin.png";
-import facebookImg from "../../../public/facebook.png";
-
-import locImg from "../../../public/location.png";
+import Headline from "../components/Headline";
 import Footer from "../components/Footer";
-import { useLanguage } from "../context/LanguageContext";
+import Socials from "../components/Socials";
+import { SALES_EMAIL, offerTiers, offersCopy } from "../offers/copy";
 
-export default function FoundersPage() {
-  const { language } = useLanguage();
+const tierMessages: Record<string, { title: string; body: string; subject: string }> = {
+  enterprise: {
+    title: "Enterprise AI Agent & Vault Implementation",
+    body: "Tell us about your platform, current architecture, and the outcome you need. We follow up to schedule a scoping call for the full-deployment retainer.",
+    subject: "Enterprise Retainer Inquiry",
+  },
+  "micro-audit": {
+    title: "Micro Conversion & Latency Audit",
+    body: "Send your product URL and the flow you want reviewed (signup, onboarding, or checkout). Once scope is confirmed, your Loom teardown is delivered within 24–48 hours.",
+    subject: "Micro-Audit Request",
+  },
+};
+
+const defaultMessage = {
+  title: "Talk to Stricker Digital",
+  body: "Questions about an audit or implementation? Email us directly and we'll point you to the right starting point.",
+  subject: "Stricker Digital Inquiry",
+};
+
+function ContactContent() {
+  const tier = useSearchParams().get("tier") ?? "";
+  const message = tierMessages[tier] ?? defaultMessage;
+  const offer = offerTiers.find((t) => t.id === (tier === "enterprise" ? "enterprise-retainer" : tier));
+  const mailto = `mailto:${SALES_EMAIL}?subject=${encodeURIComponent(message.subject)}`;
 
   return (
-    <>
-      <div className="min-h-screen text-white">
-        <section className="text-center py-12 px-6 bg-connect">
-          <h2 className="text-3xl font-bold text-white mb-6">
-            {language === 'es' ? 'Conéctate con Nosotros' : 'Connect With Us'}
-          </h2>
-          <p className="mb-4">
-              {language === 'es'
-    ? '¿Quieres colaborar, asociarte con nosotros o ser voluntario? Envíanos un mensaje directo o un correo electrónico a nuestros fundadores, y nos pondremos en contacto contigo.'
-    : 'Want to collaborate, partner with us, or volunteer?  \nDM or email our founders and we\'ll reach out.'}
+    <section className="bg-page px-6 pb-28 text-white">
+      <div className="mx-auto max-w-3xl">
+        <div className="surface-card p-8 text-center md:p-12">
+          {offer ? (
+            <div className="eyebrow">
+              {offer.price} / {offer.priceNote}
+            </div>
+          ) : null}
+          <h2 className="display-title mt-3 !text-3xl md:!text-4xl">{message.title}</h2>
+          <p className="lead-text mx-auto mt-4 max-w-xl">{message.body}</p>
 
-            </p>
-          <ul className="text-lg flex justify-center items-center flex-row flex-wrap">
-            <li className="p-4">
-              <a
-                href="https://www.instagram.com/connectingdotsforlatinx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:underline"
-              >
-                <Image
-                  src={instaImg}
-                  height={70}
-                  width={70}
-                  alt="Instagram"
-                  className="w-[60px] h-[60px] active:opacity-40 focus:opacity-50 hover:scale-110 transition-all duration-300 ease-in-out"
-                />
-              </a>
-            </li>
-            <li className="p-4">
-              <a
-                href="https://www.facebook.com/people/Connecting-Dots-for-Latinx-Professionals/61577340749137/#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:underline"
-              >
-                <Image
-                  src={facebookImg}
-                  height={70}
-                  width={70}
-                  alt="Facebook"
-                  className="w-[60px] h-[60px] active:opacity-40 focus:opacity-50 hover:scale-110 transition-all duration-300 ease-in-out"
-                />
-              </a>
-            </li>
-            <li className="p-4">
-              <a
-                href="https://www.linkedin.com/company/connecting-dots-for-latinx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue hover:underline"
-              >
-                <Image
-                  src={LIImg}
-                  height={70}
-                  width={70}
-                  alt="LinkedIn"
-                  className="w-[60px] h-[60px] active:opacity-40 focus:opacity-50 hover:scale-110 transition-all duration-300 ease-in-out"
-                />
-              </a>
-            </li>
-            
-          </ul>
-          <div className="mt-10">
-             
-            <h3 className="text-1x1 md:text-2xl  text-wrap font-bold text-white mb-6 email-connect max-w-[100%]" >
-              <span> </span> <span className="break-words text-1x1 md:text-2xl font-bold max-w-[100%] text-wrap text-white mb-6 hero-underline">connectingdotsforlatinx@gmail.com</span> 
-            </h3>
-            <h3 className="text-1x1 md:text-2xl  text-wrap font-bold text-white mb-6 email-connect max-w-[100%]" >
-              
-                <Image
-                  src={locImg}
-                  height={20}
-                  width={20}
-                  alt="location"
-                  className="w-[20px] h-[20px] inline-block mr-4 mb-2"
-                />
-                <span className="break-words text-1x1 md:text-2xl font-bold max-w-[100%] text-wrap text-white mb-6">Chicago, IL</span> 
-            </h3>
-              {/* <Link
-              href="/#events"
-              className="btn-gradient inline-block px-6 py-3 font-semibold rounded transition"
+          {offer ? (
+            <ul className="mx-auto mt-6 max-w-xl space-y-2 text-left text-zinc-200">
+              {offer.features.map((f) => (
+                <li key={f} className="flex gap-2">
+                  <FontAwesomeIcon icon={faCircleCheck} className="mt-1 w-4 shrink-0 text-green-400" aria-hidden />
+                  {f}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href={mailto}
+              className="btn-gradient gap-2"
             >
-              {language === 'es' ? 'Suscríbete a nuestro boletín' : 'Subscribe to our Newsletter'}  
-            </Link> */}
+              <FontAwesomeIcon icon={faEnvelope} aria-hidden />
+              Email {SALES_EMAIL}
+            </a>
+            <a
+              href={offersCopy.intakeModal.bookCallUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-inverted gap-2"
+            >
+              <FontAwesomeIcon icon={faCalendarCheck} aria-hidden />
+              Book a call
+            </a>
           </div>
-        </section>
+
+          <Link href="/offers" className="mt-8 inline-flex items-center gap-1 text-sm text-zinc-400 hover:text-white">
+            Compare all offers <FontAwesomeIcon icon={faArrowRight} className="text-xs" aria-hidden />
+          </Link>
+        </div>
+
+        <div className="mt-12 text-center">
+          <p className="text-sm text-ink-subtle">Based in Chicago, IL · Working with teams anywhere</p>
+          <Socials className="mt-4 justify-center" />
+        </div>
       </div>
+    </section>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <main className="min-h-screen bg-page text-white">
+      <Headline
+        headlineText="Let's Scope Your Engagement"
+        subheadlineText="Fixed scope. Fixed price. Tell us where the friction is."
+      />
+      {/* useSearchParams requires a Suspense boundary for static rendering */}
+      <Suspense fallback={null}>
+        <ContactContent />
+      </Suspense>
       <Footer />
-    </>
+    </main>
   );
 }

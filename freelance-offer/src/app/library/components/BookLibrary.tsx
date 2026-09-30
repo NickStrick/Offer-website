@@ -1,5 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
+import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
+
+import IconTile from "../../components/IconTile";
+import SectionHeader from "../../components/SectionHeader";
 
 type Book = {
   title: string;
@@ -31,22 +35,20 @@ const books: Book[] = [
 
 export default function BookLibrary() {
   return (
-    <section id="library" className="bg-gradient-black-dark px-6 py-16 text-white">
-      <div className="mx-auto max-w-5xl">
-        <header className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
-            The Technical Library & E-Books
-          </h2>
-          <p className="mt-4 text-lg opacity-90 max-w-2xl mx-auto">
-            Systems thinking applied to engineering, skill acquisition, and business resilience.
-          </p>
-        </header>
+    <section id="library" className="section-pad bg-gradient-purple-black text-white">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeader
+          eyebrow="Coming soon"
+          eyebrowIcon={faBookOpen}
+          title="The Technical Library & E-Books"
+          subtitle="Systems thinking applied to engineering, skill acquisition, and business resilience."
+        />
 
         <div className="grid gap-6 md:grid-cols-2">
           {books.map((book, i) => (
             <motion.div
               key={book.title}
-              className="rounded-2xl border border-white/10 bg-black/40 p-6 bg-blurred flex flex-col"
+              className="surface-card surface-card-hover flex flex-col p-8"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
@@ -56,12 +58,13 @@ export default function BookLibrary() {
                 visible: { opacity: 1, y: 0 },
               }}
             >
-              <h3 className="text-2xl font-bold text-accent">{book.title}</h3>
-              <p className="mt-2 text-sm uppercase tracking-wide opacity-70">{book.subtag}</p>
-              <p className="mt-4 text-lg opacity-90 flex-1">{book.premise}</p>
+              <IconTile icon={faBookOpen} className="mb-6" />
+              <h3 className="text-2xl font-semibold">{book.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-subtle">{book.subtag}</p>
+              <p className="mt-4 flex-1 text-[15px] leading-relaxed text-ink-muted">{book.premise}</p>
               <a
                 href={`mailto:nickolasstricker@gmail.com?subject=${encodeURIComponent(book.mailSubject)}`}
-                className="btn-gradient mt-6 w-full text-center px-8 py-4 rounded-full"
+                className="btn-inverted mt-8 w-full"
               >
                 {book.ctaText}
               </a>

@@ -1,16 +1,18 @@
 'use client';
-import { useState, useEffect } from "react";
-// import Tiers from "./components/TieredMonthlyOffers";
+import { useRef } from "react";
 import Footer from "./components/Footer";
 import Headline from "./components/Headline";
-import Share from "./components/Share";
 import Testimonals from "./components/Testimonials";
 import Philosophy from "./components/Philosophy";
 import BlueprintPillars from "./components/BlueprintPillars";
 import HelperBtnGroup from "./components/HelperBtnGroup";
-import {SeperatorWave} from './components/SeperatorWave';
-
-import { useLanguage } from "./context/LanguageContext";
+import FeaturedOffers from "./components/FeaturedOffers";
+import IntakeModal, { type IntakeModalHandle } from "./components/IntakeModal";
+import CaseStudies from "./components/CaseStudies";
+import VideoSection from "./components/Video";
+import { videos } from "./media";
+import CtaBanner from "./offers/components/CtaBanner";
+import { offersCopy } from "./offers/copy";
 
 import josePhoto from "../../public/testimonials/jose-headshot.jpg"
 import connorPhoto from "../../public/testimonials/connor-headshot.png"
@@ -20,23 +22,6 @@ import lukeRottaPhoto from "../../public/testimonials/lukerotta.jpg"
 import carolePhoto from "../../public/testimonials/carole-headshot.png"
 import amandaPhoto from "../../public/testimonials/amanda-headshot.jpg"
 
-type EventItem = {
-  date: string;
-  title: { en: string; es: string };
-  registerLink?: string; // Optional link for registration
-  featuring?: string[]; // Optional featuring information
-  description?: string;
-};
-// Example event data 
-  /*const [eventList, setEvents] = useState([
-  { date: "6/18/2025", 
-    title: { en: "Latinx Comedy Night", es: "Noche de Comedia Latinx" }, 
-    registerLink: "https://www.eventbrite.com/e/latinx-comedy-night-tickets-1234567890",
-    featuring: ["Angelica Saavedra", "Sian Duprey", "Rudy Lozano Jr."]
-  }
-]); */
-const topWaveType = '1-hill'
-const bottomWaveType = '1-hill'
 const myTestimonialList = [
   {
     quote:'Nick is a great web developer who takes his job seriously and is willing to meet his clients where they are at. He makes the working relationship enjoyable and provides great recommendations and feedback. He has tremendous attention to detail and has a creative mind. I highly recommend reaching to Nick for anything related to web development and assistance with other related services.', 
@@ -82,59 +67,41 @@ const myTestimonialList = [
     avatarUrl:connorPhoto.src
   }
 ]
-export default function Home2() {
-  const [eventList, setEvents] = useState<EventItem[]>([]);
-  const [rawJSON, setRawJSON] = useState(JSON.stringify({ events: eventList }));
+export default function Home() {
+  const intakeModalRef = useRef<IntakeModalHandle>(null);
+  const openIntake = () => intakeModalRef.current?.open();
 
-  useEffect(() => {
-    async function fetchEvents() {
-      try {
-        const res = await fetch("https://softball-science-data.vercel.app/locker/6"); // <-- your endpoint here
-        const json = await res.json();
-        if (json.data && json.data[0]?.value) {
-          const parsed = JSON.parse(json.data[0].value);
-          setEvents(parsed.events || []);
-          setRawJSON(json.data[0].value); // keep original JSON string
-        }
-      } catch (err) {
-        console.error("Failed to fetch events:", err);
-      }
-    }
-
-    fetchEvents();
-  }, []);
-  const { language } = useLanguage();
-  console.log("language", language, rawJSON);
   return (
-    <main className="min-h-screen bg-neutral-900 text-white">
+    <main className="min-h-screen bg-page text-white">
       <Headline
-        headlineText="Bespoke System Architecture & Private Digital Vaults for High-Margin Brands"
-        subheadlineText="Zero-latency commerce. Authenticated private portals. Infrastructure engineered, not templated."
+        headlineText="System Architecture & Conversion Audits for B2B SaaS"
+        subheadlineText="Fixed-scope diagnostics that map architectural debt onto recovered revenue. Delivered in 48 hours—engineered, not templated."
         ctas={[
-          { label: "Apply for Architectural Audit", href: "/revenue-consult#book" },
-          { label: "Browse the Technical Library", href: "/library", variant: "inverted" },
+          { label: "Apply for Architectural Audit", href: "/offers#apply" },
+          { label: "Get a Free Video Audit", href: "#free-audit", variant: "inverted" },
         ]}
       />
-      <SeperatorWave type={topWaveType} flip={false} color={'var(--bg-wave)'} />
-      <HelperBtnGroup reviewsHref="#testimonials" />
+      <VideoSection video={videos.intro} id="intro-video" />
       <Philosophy />
-      <SeperatorWave type={bottomWaveType} flip={true} color={'var(--bg-wave)'} />
+      <IntakeModal ref={intakeModalRef} />
+      <FeaturedOffers onApply={openIntake} />
+      <CaseStudies />
       <BlueprintPillars />
-      <SeperatorWave type={topWaveType} flip={false} color={'var(--bg-wave)'} />
       <Testimonals {...{
-  type:"testimonials",
-  title : 'Reviews & Testimonials',
-  subtitle : 'This is what our previous clients had to say about us.',
-  items : myTestimonialList,
-  style : {
-variant: "carousel",
-columns: 2,
-showQuoteIcon: true,
-rounded: "xl",
-background: "default",
-},
-}} />
-      <Share />
+        type: "testimonials",
+        title: "What clients say",
+        subtitle: "This is what our previous clients had to say about us.",
+        items: myTestimonialList,
+        style: {
+          variant: "carousel",
+          columns: 2,
+          showQuoteIcon: true,
+          rounded: "xl",
+          background: "default",
+        },
+      }} />
+      <HelperBtnGroup reviewsHref="#testimonials" />
+      <CtaBanner ctaHref="/offers#apply" onCtaClick={openIntake} {...offersCopy.ctaBanners.bottom} />
       <Footer />
     </main>
   );

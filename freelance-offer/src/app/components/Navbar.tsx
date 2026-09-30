@@ -2,60 +2,73 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import Logo from "../../../public/SDLogoTrans.png";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/revenue-consult", label: "Consult" },
+  { href: "/offers", label: "Offers" },
   { href: "/library", label: "Library" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
-    <header className="w-full bg-black/90 text-white">
-      <div className="max-w-6xl mx-auto px-6 py-2 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-bold text-sm tracking-tight">
-          <Image src={Logo} alt="Stricker Digital" width={28} height={28} className="h-7 w-7" priority />
-          <span className="gradient-text-color !pb-[0px]">Stricker Digital</span>
+    <header className="sticky top-0 z-50 w-full border-b border-white/[0.06] bg-[#0f110f]/80 text-white backdrop-blur-xl">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+        <Link href="/" className="flex items-center gap-2.5 text-[15px] font-semibold tracking-tight">
+          <Image src={Logo} alt="" width={28} height={28} className="h-7 w-7" priority />
+          <span>Stricker Digital</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+        <nav className="hidden items-center gap-1 text-sm md:flex">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-accent transition">
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`rounded-lg px-3 py-2 transition ${
+                isActive(link.href) ? "text-white" : "text-ink-muted hover:text-white"
+              }`}
+            >
               {link.label}
             </Link>
           ))}
-          <Link href="/revenue-consult#book" className="btn-gradient px-5 py-1.5 rounded-full text-sm">
-            Book a Consult
+          <Link href="/offers#apply" className="btn-gradient ml-3 !px-4 !py-2 !text-sm">
+            Apply for Audit
           </Link>
         </nav>
 
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-white focus:outline-none"
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 md:hidden"
           aria-label="Toggle menu"
+          aria-expanded={open}
         >
-          {open ? <X size={20} /> : <Menu size={20} />}
+          <FontAwesomeIcon icon={open ? faXmark : faBars} className="text-base" />
         </button>
       </div>
 
       {open ? (
-        <nav className="md:hidden border-t border-white/10 px-6 py-3 flex flex-col gap-3 text-sm font-medium">
+        <nav className="flex flex-col gap-1 border-t border-white/[0.06] px-6 py-4 text-[15px] md:hidden">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className={`rounded-lg px-3 py-2.5 ${isActive(link.href) ? "bg-white/5 text-white" : "text-ink-muted"}`}
+            >
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/revenue-consult#book"
-            onClick={() => setOpen(false)}
-            className="btn-gradient px-5 py-1.5 rounded-full text-sm text-center"
-          >
-            Book a Consult
+          <Link href="/offers#apply" onClick={() => setOpen(false)} className="btn-gradient mt-2">
+            Apply for Audit
           </Link>
         </nav>
       ) : null}

@@ -6,7 +6,8 @@ import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faStar, faQuoteLeft, faComments } from '@fortawesome/free-solid-svg-icons';
+import SectionHeader from './SectionHeader';
 
 export type TestimonialItem = {
   quote: string;
@@ -34,9 +35,9 @@ export type TestimonialsSection = {
 // Small helper to render a fixed 5‑star rating
 function Stars() {
 return (
-<div className="flex items-center gap-1 text-yellow-300" aria-label="5 out of 5 stars">
+<div className="flex items-center gap-1 text-amber-400" aria-label="5 out of 5 stars">
 {Array.from({ length: 5 }).map((_, i) => (
-<FontAwesomeIcon key={i} icon={faStar} className="w-4 h-4" aria-hidden="true" />
+<FontAwesomeIcon key={i} icon={faStar} className="w-3 h-3" aria-hidden="true" />
 ))}
 </div>
 );
@@ -90,15 +91,12 @@ export default function Testimonials({
     <section
     id="testimonials"
       className={[
-        'bg-gradient-black-purple  test-section !pb-[6rem]',
+        'bg-gradient-purple-black section-pad scroll-mt-16 text-white',
         '',
       ].join(' ')}
     >
       <AnimatedSection className="mx-auto max-w-6xl">
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          {title && <h2 className="text-4xl md:text-5xl font-extrabold">{title}</h2>}
-          {subtitle && <p className="text-muted mt-3">{subtitle}</p>}
-        </div>
+        {title ? <SectionHeader eyebrow="Testimonials" eyebrowIcon={faComments} title={title} subtitle={subtitle} /> : null}
 
         {/* ---------- MOBILE: swipeable carousel when variant === 'carousel' ---------- */}
         {variant === 'carousel' ? (
@@ -119,8 +117,8 @@ export default function Testimonials({
                     cardBase
                   } ${radius} snap-center shrink-0 w-[86%] relative`}
                 >
-                  {showQuoteIcon && <div className="text-2xl mb-3 opacity-70">“</div>}
-                  <blockquote className="text-[1.05rem] leading-relaxed">{t.quote}</blockquote>
+                  {showQuoteIcon && <FontAwesomeIcon icon={faQuoteLeft} className="mb-4 text-xl text-green-400/80" aria-hidden />}
+                  <blockquote className="text-[15px] leading-relaxed text-zinc-200">{t.quote}</blockquote>
                   <figcaption className="flex items-center gap-3 mt-6">
                     {t.avatarUrl ? (
                       <Image
@@ -177,9 +175,9 @@ export default function Testimonials({
               transition={{ duration: 0.5, ease: 'easeOut', delay: i * 0.05 }}
               className={`relative ${variant === 'ink' ? cardInk : cardBase} ${radius}`}
             >
-              {showQuoteIcon && <div className="text-2xl mb-3 opacity-70">“</div>}
+              {showQuoteIcon && <FontAwesomeIcon icon={faQuoteLeft} className="mb-4 text-xl text-green-400/80" aria-hidden />}
 
-              <blockquote className="text-[1.05rem] leading-relaxed">{t.quote}</blockquote>
+              <blockquote className="text-[15px] leading-relaxed text-zinc-200">{t.quote}</blockquote>
 
               <figcaption className="flex items-center gap-3 mt-6">
                 {t.avatarUrl ? (
