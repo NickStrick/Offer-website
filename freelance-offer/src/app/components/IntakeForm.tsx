@@ -9,7 +9,7 @@ import {
   BOOK_CALL_URL,
   LEADS_FORM_ENTRIES,
   LEADS_FORM_URL,
-  SALES_EMAIL,
+  CONTACT_EMAIL,
   contactCopy,
 } from "../offers/copy";
 
@@ -115,7 +115,7 @@ export default function IntakeForm({
       await fetch(LEADS_FORM_URL, { method: "POST", mode: "no-cors", body: formData });
       setSent(true);
     } catch {
-      setError(`Something went wrong sending the form. Please email us at ${SALES_EMAIL}.`);
+      setError(`Something went wrong sending the form. Please email us at ${CONTACT_EMAIL}.`);
     } finally {
       setLoading(false);
     }
@@ -128,8 +128,8 @@ export default function IntakeForm({
         <h2 className="display-title mt-5 !text-3xl">{contactCopy.success.title}</h2>
         <p className="lead-text mx-auto mt-4 max-w-md">
           {contactCopy.success.body}{" "}
-          <a href={`mailto:${SALES_EMAIL}`} className="text-white underline decoration-green-500/60 underline-offset-4">
-            {SALES_EMAIL}
+          <a href={`mailto:${CONTACT_EMAIL}`} className="text-white underline decoration-green-500/60 underline-offset-4">
+            {CONTACT_EMAIL}
           </a>
           .
         </p>

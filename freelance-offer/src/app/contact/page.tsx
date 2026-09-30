@@ -8,7 +8,7 @@ import Headline from "../components/Headline";
 import Footer from "../components/Footer";
 import Socials from "../components/Socials";
 import IntakeForm, { resolveIntent } from "../components/IntakeForm";
-import { BOOK_CALL_URL, SALES_EMAIL, contactCopy } from "../offers/copy";
+import { BOOK_CALL_URL, CONTACT_EMAIL, contactCopy } from "../offers/copy";
 
 function ContactForm() {
   const params = useSearchParams();
@@ -33,9 +33,9 @@ export default function ContactPage() {
             <div className="surface-card p-7">
               <h2 className="text-lg font-semibold">Prefer email?</h2>
               <p className="mt-2 text-[15px] text-ink-muted">Write to us directly and we&apos;ll reply shortly.</p>
-              <a href={`mailto:${SALES_EMAIL}`} className="btn-inverted mt-5 w-full gap-2">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="btn-inverted mt-5 w-full gap-2">
                 <FontAwesomeIcon icon={faEnvelope} aria-hidden />
-                {SALES_EMAIL}
+                {CONTACT_EMAIL}
               </a>
             </div>
             <div className="surface-card p-7">

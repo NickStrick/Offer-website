@@ -7,7 +7,7 @@ import { faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 import Logo from "../../../public/SDLogoTrans.png";
 import { useLanguage } from "../context/LanguageContext";
-import { SALES_EMAIL } from "../offers/copy";
+import { CONTACT_EMAIL } from "../offers/copy";
 
 const socials = [
   { href: "https://www.linkedin.com/in/nick-stricker/", label: "LinkedIn", icon: faLinkedin },
@@ -95,9 +95,9 @@ export default function Footer() {
           <h3 className="text-sm font-medium text-white">{es ? 'Contacto' : 'Contact'}</h3>
           <ul className="mt-4 space-y-3 text-sm text-ink-muted">
             <li>
-              <a href={`mailto:${SALES_EMAIL}`} className="inline-flex items-center gap-2 transition hover:text-white">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="inline-flex items-center gap-2 transition hover:text-white">
                 <FontAwesomeIcon icon={faEnvelope} className="w-4" aria-hidden />
-                {SALES_EMAIL}
+                {CONTACT_EMAIL}
               </a>
             </li>
             <li className="inline-flex items-center gap-2">

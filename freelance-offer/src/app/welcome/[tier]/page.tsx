@@ -7,7 +7,7 @@ import { faArrowRight, faCircleCheck, faEnvelope } from "@fortawesome/free-solid
 import Headline from "../../components/Headline";
 import Footer from "../../components/Footer";
 import { VideoPlayer } from "../../components/Video";
-import { SALES_EMAIL, welcomePages } from "../../offers/copy";
+import { CONTACT_EMAIL, welcomePages } from "../../offers/copy";
 
 type Params = { tier: string };
 
@@ -50,11 +50,11 @@ export default async function WelcomePage({ params }: { params: Promise<Params> 
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href={`mailto:${SALES_EMAIL}`}
+              href={`mailto:${CONTACT_EMAIL}`}
               className="btn-gradient gap-2"
             >
               <FontAwesomeIcon icon={faEnvelope} aria-hidden />
-              Questions? {SALES_EMAIL}
+              Questions? {CONTACT_EMAIL}
             </a>
             <Link
               href={page.nextCta.href}

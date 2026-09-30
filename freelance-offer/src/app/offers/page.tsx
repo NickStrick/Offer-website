@@ -13,7 +13,6 @@ import LeadMagnetBanner from "../components/LeadMagnetBanner";
 import CtaBanner from "./components/CtaBanner";
 import FAQ from "./components/FAQ";
 import About from "./components/About";
-import HowItWorks from "./components/HowItWorks";
 import WhoThisIsFor from "./components/WhoThisIsFor";
 import Framework from "./components/Framework";
 
@@ -39,13 +38,6 @@ export default function OffersPage() {
 
       <ProofMetrics />
 
-      <HowItWorks
-        id={offersCopy.howItWorks.id}
-        title={offersCopy.howItWorks.title}
-        subtitle={offersCopy.howItWorks.subtitle}
-        steps={offersCopy.howItWorks.steps}
-        className="bg-gradient-purple-black"
-      />
 
       <Framework
         id={offersCopy.framework.id}

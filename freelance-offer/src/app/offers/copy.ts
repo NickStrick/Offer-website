@@ -1,16 +1,15 @@
+import amandaPhoto from "../../../public/testimonials/amanda-headshot.jpg";
 import carolePhoto from "../../../public/testimonials/carole-headshot.png";
+import connorPhoto from "../../../public/testimonials/connor-headshot.png";
+import fernandoPhoto from "../../../public/testimonials/fernando-headshot.jpg";
 import josePhoto from "../../../public/testimonials/jose-headshot.jpg";
+import lukePhoto from "../../../public/testimonials/luke-headshot.jpg";
 import lukeRottaPhoto from "../../../public/testimonials/lukerotta.jpg";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import {
-  faChalkboardUser,
-  faClipboardCheck,
-  faDiagramProject,
-  faMicrophoneLines,
   faRoute,
   faStopwatch,
   faUserShield,
-  faVault,
 } from "@fortawesome/free-solid-svg-icons";
 import { caseStudyImages, videos, type ImageMedia, type VideoMedia } from "../media";
 
@@ -24,13 +23,6 @@ export type OffersTestimonialItem = {
   name: string;
   role?: string;
   avatarUrl?: string;
-};
-
-export type OffersHowItWorksStep = {
-  icon?: IconDefinition;
-  eyebrow: string;
-  title: string;
-  description: string;
 };
 
 export type OffersFrameworkItem = {
@@ -98,7 +90,7 @@ export type OffersAboutCopy = {
   };
 };
 
-export const SALES_EMAIL = "sales@strickerdigital.com";
+export const CONTACT_EMAIL = "nick@strickerdigital.com";
 
 /** Google Form that collects every lead on the site. */
 export const LEADS_FORM_URL =
@@ -242,8 +234,8 @@ export const offerLadders: readonly OfferLadder[] = [
           "30-Day Post-Audit Code Implementation Review",
         ],
         riskReversal: {
-          title: "$10,000 Findings Guarantee",
-          body: "Guaranteed to identify at least $10,000 in leaked checkout revenue or AWS cost savings, or issue a 100% full refund.",
+          title: "24-Hour Total Clarity Guarantee",
+          body: "Review your 10-minute video teardown and Excalidraw system topology. If within 24 hours of delivery you don't feel you received total clarity on your application's bottlenecks, let us know and we will issue a prompt, 100% refund, no questions asked.",
         },
         ctaText: "Apply for $5k Enterprise Audit",
         ctaAction: "modal",
@@ -455,49 +447,6 @@ export const offersCopy = {
     },
   } satisfies Record<string, OffersCtaBannerCopy>,
 
-  howItWorks: {
-    id: "how-it-works",
-    title: "How it works",
-    subtitle: "Start free, build communication skills, then bring in a fixed-price audit or a full implementation.",
-    steps: [
-      {
-        icon: faClipboardCheck,
-        eyebrow: "Tier 0: $0",
-        title: "Enterprise Checklist",
-        description:
-          "A 60-second whiteboard teardown and spec sheet covering the top 3 architectural flaws and checkout leaks.",
-      },
-      {
-        icon: faMicrophoneLines,
-        eyebrow: "Tier 1: $500",
-        title: "Communication & Iteration System",
-        description:
-          "Self-paced video vault, metric translation matrix, MEDDPICC playbook, and whiteboard blueprints.",
-      },
-      {
-        icon: faChalkboardUser,
-        eyebrow: "Tier 2: $2,500",
-        title: "SE Transition Accelerator",
-        description:
-          "Five live days of vocal mechanics, whiteboard drills, 1-on-1 discovery coaching, and mock interviews. Capped at 10 seats.",
-      },
-      {
-        icon: faDiagramProject,
-        eyebrow: "Tier 3: $5,000",
-        title: "48-Hour Enterprise Audit",
-        description:
-          "Checkout, API latency, and auth security audit with a refactoring spec your team can execute. $10k findings guarantee.",
-      },
-      {
-        icon: faVault,
-        eyebrow: "Tier 4: $50,000",
-        title: "Digital Vault Implementation",
-        description:
-          "We build and deploy the Digital Vault portal, AI agent workflows, and zero-trust security, with 30 days of hands-on support.",
-      },
-    ] satisfies OffersHowItWorksStep[],
-  },
-
   framework: {
     id: "framework",
     title: "What the enterprise audit covers",
@@ -558,19 +507,12 @@ export const offersCopy = {
   } satisfies OffersAboutCopy,
 
   testimonials: {
-    title: "Reviews & Testimonials",
-    subtitle: "A few words from past clients.",
+    title: "What clients say",
+    subtitle: "This is what our previous clients had to say about us.",
     items: [
       {
         quote:
-          "Nick provided expert advice for my web design and digital marketing strategy. He was professional, efficient, and delivered high-quality work on time.",
-        name: "Luke Rotta",
-        role: "Founder of Redtail Luxe",
-        avatarUrl: lukeRottaPhoto.src,
-      },
-      {
-        quote:
-          "Nick is a great web developer who takes his job seriously and is willing to meet his clients where they are at. He makes the working relationship enjoyable and provides great recommendations and feedback.",
+          "Nick is a great web developer who takes his job seriously and is willing to meet his clients where they are at. He makes the working relationship enjoyable and provides great recommendations and feedback. He has tremendous attention to detail and has a creative mind. I highly recommend reaching to Nick for anything related to web development and assistance with other related services.",
         name: "Jose Ortiz",
         role: "Co-Founder of Connecting Dots for Latinx Professionals",
         avatarUrl: josePhoto.src,
@@ -581,6 +523,41 @@ export const offersCopy = {
         name: "Carole Murray",
         role: "Founder of CM Florals",
         avatarUrl: carolePhoto.src,
+      },
+      {
+        quote:
+          "Nick provided expert advice for my web design and digital marketing strategy. He was professional, efficient, and delivered high-quality work on time. I highly recommend his services to anyone looking to enhance their online presence.",
+        name: "Luke Rotta",
+        role: "Founder of Redtail Luxe",
+        avatarUrl: lukeRottaPhoto.src,
+      },
+      {
+        quote:
+          "Nick is an outstanding professional. He is knowledge, skillful, responsible, detailed oriented, and all around a supportive and very cool guy. I highly recommend reaching out to Nick if you need a dynamic website that addresses your company's need.",
+        name: "Fernando Rayas",
+        role: "Co-Founder of Connecting Dots for Latinx Professionals",
+        avatarUrl: fernandoPhoto.src,
+      },
+      {
+        quote:
+          "Nick had my professional profile website running in 2 days, in time for my book release! Outstanding communication, delivery, and expertise.",
+        name: "Amanda Grau",
+        role: "Board Certified Behavior Analyst",
+        avatarUrl: amandaPhoto.src,
+      },
+      {
+        quote:
+          "Perfect For all my coaching needs, Nick knew exactly what i needed for my private coaching business and gave me the most perfect personalized website for me.",
+        name: "Luke Stricker",
+        role: "Private Baseball Hitting Coach",
+        avatarUrl: lukePhoto.src,
+      },
+      {
+        quote:
+          "Nick nailed my vision from the get go. I highly reccomend him. The perfect solution to market my music teaching, and promote my bands.",
+        name: "Connor M",
+        role: "Stage Guitarist, Music Teacher",
+        avatarUrl: connorPhoto.src,
       },
     ] satisfies OffersTestimonialItem[],
   },
@@ -617,7 +594,7 @@ export const offersCopy = {
       {
         question: "Is the audit guaranteed?",
         answer:
-          "Yes. We guarantee to identify at least $10,000 in leaked checkout revenue or AWS cost savings, or you get a 100% full refund.",
+          "Yes. Review your 10-minute video teardown and Excalidraw system topology. If within 24 hours of delivery you don't feel you received total clarity on your application's bottlenecks, let us know and we will issue a prompt, 100% refund, no questions asked.",
       },
       {
         question: "Who writes the code after the audit?",
