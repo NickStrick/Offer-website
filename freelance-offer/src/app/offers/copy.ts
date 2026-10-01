@@ -502,8 +502,8 @@ export const offersCopy = {
       left: {
         title: "Who We Are",
         bodyLines: [
-          "I’m Nick, a full-stack engineer who architects and audits production systems and teaches technical people to communicate with authority.",
-          "I’ve worked inside 600,000-line enterprise execution engines, shipping webhook delivery layers and real-time platforms that drove a 30% performance optimization and a 22% drop in user friction tickets.",
+          "I’m Nick, my career has always sat at the intersection of technical execution and human connection. I began as a game developer building interactive environments, transitioned into a teaching assistant mentoring engineers through complex codebases, and stepped into product management and demo engineering at Expocad—leading live, in-person enterprise software walkthroughs at national trade shows.",
+          "Today, I am the founder of Stricker Digital, owning the technical thread from discovery to architecture and delivery.",
         ],
       },
       right: {
