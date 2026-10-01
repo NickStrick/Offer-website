@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCheck, faChalkboard, faPlay } from "@fortawesome/free-solid-svg-icons";
 
-import { LEADS_FORM_ENTRIES, LEADS_FORM_URL, checklistCopy } from "../offers/copy";
+import { checklistCopy } from "../offers/copy";
+import { submitLead } from "../lib/leads";
 
 /** Email capture for the free checklist. Saves the lead, then sends them to the checklist page. */
 export function ChecklistForm() {
@@ -18,19 +19,9 @@ export function ChecklistForm() {
     e.preventDefault();
     if (!isValid || loading) return;
     setLoading(true);
-    const formData = new FormData();
-    formData.append(LEADS_FORM_ENTRIES.firstName, checklistCopy.sourceValue);
-    formData.append(LEADS_FORM_ENTRIES.email, email.trim());
-    formData.append("fvv", "1");
-    formData.append("draftResponse", "[]");
-    formData.append("pageHistory", "0");
-    try {
-      // Google Forms doesn't include CORS headers → use no-cors
-      await fetch(LEADS_FORM_URL, { method: "POST", mode: "no-cors", body: formData });
-    } catch (err) {
-      // Never block the visitor from the resource if the lead save fails.
-      console.error("Checklist signup failed", err);
-    }
+    const saved = await submitLead({ intent: checklistCopy.sourceValue, email });
+    // Never block the visitor from the resource if the lead save fails.
+    if (!saved) console.error("Checklist signup could not be saved");
     router.push(checklistCopy.resourcePath);
   }
 

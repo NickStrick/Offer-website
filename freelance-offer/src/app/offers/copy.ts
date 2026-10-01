@@ -92,16 +92,6 @@ export type OffersAboutCopy = {
 
 export const CONTACT_EMAIL = "nick@strickerdigital.com";
 
-/** Google Form that collects every lead on the site. */
-export const LEADS_FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSei5MW9D_2R8OzjDQdy78j_x7Z3Hx0NXO1ohwoljdZ6xHQg9Q/formResponse";
-/** Existing Google Form questions: First name, Last name, Email. */
-export const LEADS_FORM_ENTRIES = {
-  firstName: "entry.1511831625",
-  lastName: "entry.659719382",
-  email: "entry.1036202572",
-};
-
 export const BOOK_CALL_URL = "https://calendly.com/strickerdigital/30-min-website-consult";
 
 export const CONSENT_TEXT =
@@ -149,7 +139,7 @@ export const checklistCopy = {
   emailPlaceholder: "Enter your business email...",
   ctaText: "Get Free Whiteboard Spec",
   loadingText: "Sending…",
-  /** Saved in the Google Form's "First name" answer so you can tell these leads apart. */
+  /** Saved as the Google Form "Intent" answer for checklist signups. */
   sourceValue: "2026 Enterprise Checklist",
   modalTitle: "Get the free whiteboard spec",
   modalDescription: "Enter your business email and we'll take you straight to the checklist.",
@@ -636,17 +626,6 @@ export const contactCopy = {
     { value: "beta-reader", label: "Join \"The Iteration Loop\" Book Beta Reader List" },
     { value: "general", label: "General Business Inquiry / Keynote Speaking" },
   ],
-  /**
-   * Google Form entry IDs for the extra fields. Leave empty until those questions exist on the form;
-   * until then the intent, company, role, ARR and message are added to the "Last name" answer so nothing is lost.
-   */
-  extraEntries: {
-    intent: "",
-    company: "",
-    role: "",
-    arr: "",
-    message: "",
-  },
   roleLabel: "Current role (for your Sprint application)",
   rolePlaceholder: "e.g. Software Engineer, Solutions Engineer, Tech Lead",
   arrLabel: "Company ARR",

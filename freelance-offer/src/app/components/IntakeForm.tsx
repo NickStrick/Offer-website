@@ -5,13 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCalendarCheck, faChevronDown, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
-import {
-  BOOK_CALL_URL,
-  LEADS_FORM_ENTRIES,
-  LEADS_FORM_URL,
-  CONTACT_EMAIL,
-  contactCopy,
-} from "../offers/copy";
+import { BOOK_CALL_URL, CONTACT_EMAIL, contactCopy } from "../offers/copy";
+import { submitLead } from "../lib/leads";
 
 export type IntentValue = (typeof contactCopy.intents)[number]["value"];
 
@@ -84,41 +79,28 @@ export default function IntakeForm({
 
     const intentLabel = contactCopy.intents.find((i) => i.value === values.intent)?.label ?? "";
     const arrLabel = contactCopy.arrOptions.find((o) => o.value === values.arr)?.label ?? "";
-    const extras = contactCopy.extraEntries;
+    // Role and ARR have no question of their own on the form, so they lead the Context answer.
+    const context = [
+      values.role.trim() ? `Role: ${values.role.trim()}` : "",
+      arrLabel ? `ARR: ${arrLabel}` : "",
+      values.message.trim(),
+    ]
+      .filter(Boolean)
+      .join(" | ");
 
-    const formData = new FormData();
-    formData.append(LEADS_FORM_ENTRIES.firstName, values.firstName.trim());
-    formData.append(LEADS_FORM_ENTRIES.email, values.email.trim());
-
-    // Fields without their own Google Form question yet ride along in the "Last name" answer.
-    const packed: string[] = [values.lastName.trim()];
-    const addExtra = (entry: string, label: string, value: string) => {
-      if (!value) return;
-      if (entry) formData.append(entry, value);
-      else packed.push(`${label}: ${value}`);
-    };
-    addExtra(extras.intent, "Intent", intentLabel);
-    addExtra(extras.company, "Company", values.company.trim());
-    addExtra(extras.role, "Role", values.role.trim());
-    addExtra(extras.arr, "ARR", arrLabel);
-    addExtra(extras.message, "Message", values.message.trim());
-    formData.append(LEADS_FORM_ENTRIES.lastName, packed.filter(Boolean).join(" | "));
-
-    formData.append("fvv", "1");
-    formData.append("draftResponse", "[]");
-    formData.append("pageHistory", "0");
-
-    try {
-      setLoading(true);
-      setError(null);
-      // Google Forms doesn't include CORS headers → use no-cors
-      await fetch(LEADS_FORM_URL, { method: "POST", mode: "no-cors", body: formData });
-      setSent(true);
-    } catch {
-      setError(`Something went wrong sending the form. Please email us at ${CONTACT_EMAIL}.`);
-    } finally {
-      setLoading(false);
-    }
+    setLoading(true);
+    setError(null);
+    const saved = await submitLead({
+      intent: intentLabel,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      website: values.company,
+      context,
+    });
+    setLoading(false);
+    if (saved) setSent(true);
+    else setError(`Something went wrong sending the form. Please try again or email us at ${CONTACT_EMAIL}.`);
   }
 
   if (sent) {

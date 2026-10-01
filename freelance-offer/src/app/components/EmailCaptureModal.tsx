@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
-import { CONSENT_TEXT, LEADS_FORM_ENTRIES, LEADS_FORM_URL } from "../offers/copy";
+import { CONSENT_TEXT } from "../offers/copy";
+import { submitLead } from "../lib/leads";
 
 const inputClass =
   "mt-1 w-full rounded-xl border border-zinc-300 p-2 pt-4 pb-4 text-black focus:border-green-500 focus:outline-none shadow-md";
@@ -17,11 +18,7 @@ type EmailCaptureCopy = {
   success: { title: string; body: string };
 };
 
-/**
- * Lightweight email signup (book waitlists, release notices).
- * Until the Google Form has a "List" question, the list name goes in the "First name" answer
- * and the visitor's first name in "Last name", matching how the free-audit form stores its source.
- */
+/** Lightweight email signup (book waitlists, release notices). The list name is saved as the form's Intent. */
 export default function EmailCaptureModal({
   open,
   onClose,
@@ -56,24 +53,12 @@ export default function EmailCaptureModal({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (isDisabled) return;
-    try {
-      setLoading(true);
-      setError(null);
-      const formData = new FormData();
-      formData.append(LEADS_FORM_ENTRIES.firstName, listName);
-      formData.append(LEADS_FORM_ENTRIES.lastName, firstName.trim());
-      formData.append(LEADS_FORM_ENTRIES.email, email.trim());
-      formData.append("fvv", "1");
-      formData.append("draftResponse", "[]");
-      formData.append("pageHistory", "0");
-      // Google Forms doesn't include CORS headers → use no-cors
-      await fetch(LEADS_FORM_URL, { method: "POST", mode: "no-cors", body: formData });
-      setSent(true);
-    } catch (err: unknown) {
-      setError(err instanceof Error && err.message ? err.message : "Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+    setLoading(true);
+    setError(null);
+    const saved = await submitLead({ intent: listName, firstName, email });
+    setLoading(false);
+    if (saved) setSent(true);
+    else setError("Something went wrong. Please try again.");
   }
 
   return (
