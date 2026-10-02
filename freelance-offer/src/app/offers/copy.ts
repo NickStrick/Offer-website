@@ -92,7 +92,8 @@ export type OffersAboutCopy = {
 
 export const CONTACT_EMAIL = "nick@strickerdigital.com";
 
-export const BOOK_CALL_URL = "https://calendly.com/strickerdigital/30-min-website-consult";
+/** Calendly booking page, shown in the "Book a call" pop-up (components/BookCallModal.tsx). */
+export const BOOK_CALL_URL = "https://calendly.com/nickolasstricker/stricker-digital-discussion";
 
 export const CONSENT_TEXT =
   "By providing your information today, you are giving consent for us to contact you by mail, phone, text, or email. We do not sell your personal information, and you can withdraw consent at any time.";

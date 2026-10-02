@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCalendarCheck, faChevronDown, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
-import { BOOK_CALL_URL, CONTACT_EMAIL, contactCopy } from "../offers/copy";
+import { CONTACT_EMAIL, contactCopy } from "../offers/copy";
+import BookCallButton from "./BookCallModal";
 import { submitLead } from "../lib/leads";
 
 export type IntentValue = (typeof contactCopy.intents)[number]["value"];
@@ -116,10 +117,16 @@ export default function IntakeForm({
           .
         </p>
         {isAudit || isRetainer || isSprint ? (
-          <a href={BOOK_CALL_URL} target="_blank" rel="noreferrer" className="btn-gradient mt-8 gap-2">
+          <BookCallButton
+            className="btn-gradient mt-8 gap-2"
+            prefill={{
+              name: `${values.firstName.trim()} ${values.lastName.trim()}`.trim(),
+              email: values.email.trim(),
+            }}
+          >
             <FontAwesomeIcon icon={faCalendarCheck} aria-hidden />
             {contactCopy.success.bookCallText}
-          </a>
+          </BookCallButton>
         ) : null}
       </div>
     );
@@ -128,9 +135,9 @@ export default function IntakeForm({
   return (
     <form onSubmit={handleSubmit} className={`${framed ? "surface-card p-7 md:p-10" : ""} space-y-4`}>
       <div className={`relative ${lockIntent ? "hidden" : ""}`}>
-        <label htmlFor="intent" className="mb-2 block text-sm font-medium text-ink-muted">
+        <labe htmlFor="intent" className="mb-2 block text-sm font-medium text-ink-muted">
           I&apos;d like to
-        </label>
+        </labe>
         <select id="intent" value={values.intent} onChange={set("intent")} className={`${fieldClass} appearance-none pr-10`}>
           <option value="" disabled className="bg-[#181b18]">
             Choose one…
