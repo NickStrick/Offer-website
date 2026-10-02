@@ -47,7 +47,7 @@ return (
 
 export default function Testimonials({
   title = 'Reviews & Testimonials',
-  subtitle = 'This is what our previous clients had to say about us.',
+  subtitle = "Here's what people I've worked with have to say.",
   items = [],
   style = {},
 }: TestimonialsSection) {

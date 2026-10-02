@@ -80,7 +80,7 @@ export default function EnterpriseChecklistPage() {
               <div>
                 <h2 className="text-lg font-semibold">A whiteboard video walkthrough is on the way</h2>
                 <p className="mt-1 text-[15px] leading-relaxed text-ink-muted">
-                  We&apos;ll email you a recorded Excalidraw walkthrough as soon as it&apos;s live. The full checklist
+                  I&apos;ll email you a recorded Excalidraw walkthrough as soon as it&apos;s live. The full checklist
                   and spec sheet are below so you can start now.
                 </p>
               </div>
@@ -118,7 +118,7 @@ export default function EnterpriseChecklistPage() {
           <SectionHeader
             eyebrow="Next steps"
             title="Found gaps? Here's where to go next."
-            subtitle="Sharpen how you explain the fixes, or bring us in to audit and build them."
+            subtitle="Learn to explain the fixes, or bring me in to audit and build them."
           />
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {offerTiers.map((tier) => (

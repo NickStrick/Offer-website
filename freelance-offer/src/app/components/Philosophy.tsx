@@ -7,19 +7,19 @@ import SectionHeader from "./SectionHeader";
 
 const points = [
   {
-    title: "Personal Performance",
+    title: "Get better every day",
     icon: faPersonRunning,
-    description: "Ship small, measure, patch. Skills are built in tight release cycles, not one big launch.",
+    description: "Small steps every day beat one giant leap.",
   },
   {
-    title: "Vocal Authority",
+    title: "Talk like a pro",
     icon: faMicrophoneLines,
-    description: "Presentation is a system too. Pace, pause, and structure get tuned like production code.",
+    description: "Speaking is a skill. I practice it like code, one tweak at a time.",
   },
   {
-    title: "Business Systems",
+    title: "Fix what's broken",
     icon: faDiagramProject,
-    description: "Friction is logged, diagnosed, and fixed with the same rigor as a production bug.",
+    description: "When something breaks, I track it down and fix it for good.",
   },
 ];
 
@@ -29,10 +29,10 @@ export default function Philosophy() {
     <section className="section-pad bg-gradient-purple-black text-white">
       <div className="mx-auto max-w-6xl">
         <SectionHeader
-          eyebrow="The Iteration Loop Philosophy"
+          eyebrow="How I work"
           eyebrowIcon={faArrowsRotate}
-          title="Continuous deployment, applied to everything."
-          subtitle="The same loop that ships reliable software (build, measure, patch, repeat) drives how we improve performance, communication, and the systems behind a business."
+          title="Build. Test. Fix. Repeat."
+          subtitle="That's how great software gets made. I use the same loop for everything: learning skills, speaking better, and growing a business."
         />
 
         <div className="grid gap-5 md:grid-cols-3">

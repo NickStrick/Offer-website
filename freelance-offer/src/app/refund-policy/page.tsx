@@ -46,7 +46,7 @@ export default function RefundPolicyPage() {
       </p>
 
       <h2>The 5-Day Boardroom Gravity &amp; SE Transition Accelerator ($2,500 per seat)</h2>
-      <h3>100% Day-2 Money-Back Guarantee</h3>
+      <h3>Money Back on Day 2</h3>
       <p>
         If you don&apos;t feel your presentation skills have leveled up by the end of day 2 of your cohort, tell us
         before day 3 begins and we will refund your seat in full, on the spot.
@@ -63,11 +63,11 @@ export default function RefundPolicyPage() {
       <p>After day 2 of the cohort, seats are non-refundable.</p>
 
       <h2>The 48-Hour Enterprise System Latency &amp; Conversion Vault ($5,000)</h2>
-      <h3>24-Hour Total Clarity Guarantee</h3>
+      <h3>Clarity or Your Money Back</h3>
       <p>
-        Review your Excalidraw system topology and refactoring spec sheet. If within 24 hours of delivery you
-        don&apos;t feel you received total clarity on your application&apos;s bottlenecks, let us know and we will
-        issue a prompt, 100% refund, no questions asked.
+        Look over your system map and fix list (your Excalidraw system topology and refactoring spec sheet). If your
+        application&apos;s problems aren&apos;t crystal clear within 24 hours of delivery, tell us and we will issue a
+        prompt, 100% refund, no questions asked.
       </p>
       <h3>Cancelling before kickoff</h3>
       <p>

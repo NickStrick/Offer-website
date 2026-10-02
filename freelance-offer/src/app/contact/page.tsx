@@ -43,7 +43,7 @@ export default function ContactPage() {
           <aside className="space-y-5">
             <div className="surface-card p-7">
               <h2 className="text-lg font-semibold">Prefer email?</h2>
-              <p className="mt-2 text-[15px] text-ink-muted">Write to us directly and we&apos;ll reply shortly.</p>
+              <p className="mt-2 text-[15px] text-ink-muted">Write to me directly and I&apos;ll reply soon.</p>
               <a href={`mailto:${CONTACT_EMAIL}`} className="btn-inverted mt-5 w-full gap-2">
                 <FontAwesomeIcon icon={faEnvelope} aria-hidden />
                 {CONTACT_EMAIL}

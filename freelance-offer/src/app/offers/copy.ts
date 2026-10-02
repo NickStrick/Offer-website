@@ -123,27 +123,29 @@ export const checklistCopy = {
   videoReady: checklistVideoReady,
   id: "free-checklist",
   resourcePath: "/resources/enterprise-checklist",
-  tag: "Free Diagnostic",
+  tag: "Free",
   price: "$0",
+  /** The resource's name, shown as a small label (and as the checklist page title). */
   title: "2026 Enterprise Infrastructure Checklist",
+  headline: "Is your app leaking money? Find out free.",
   subtitle:
     checklistVideoReady
-      ? "An over-the-shoulder visual whiteboard walkthrough (Excalidraw) mapping the top 3 architectural flaws, API latency bottlenecks, and checkout form leaks that cost scaling B2B platforms $50k+ in abandoned revenue."
-      : "A visual Excalidraw blueprint and spec sheet mapping the top 3 architectural flaws, API latency bottlenecks, and checkout form leaks that cost scaling B2B platforms $50k+ in abandoned revenue.",
+      ? "Watch me walk through the 3 biggest money leaks I see in growing apps: slow pages, slow servers, and checkout forms that ask too much. Leaks like these can cost a company $50k or more."
+      : "I mapped the 3 biggest money leaks I see in growing apps: slow pages, slow servers, and checkout forms that ask too much. Leaks like these can cost a company $50k or more.",
   highlights: [
     checklistVideoReady
-      ? "60-Second Over-The-Shoulder Excalidraw Video Teardown"
-      : "Excalidraw Blueprint of the Top 3 Architectural Flaws",
-    "Decoupled Next.js / AWS Architecture & Caching Spec Sheet",
-    "Mobile Checkout Friction Audit Protocol (Max 5 Inputs)",
+      ? "A 60-second video where I draw out the 3 biggest problems I find (in Excalidraw)"
+      : "A drawn map of the 3 biggest problems I find (made in Excalidraw)",
+    "A simple plan for a fast, solid setup on Next.js and AWS",
+    "My mobile checkout test: no step should ask for more than 5 things",
   ],
   emailPlaceholder: "Enter your business email...",
-  ctaText: "Get Free Whiteboard Spec",
+  ctaText: "Send me the free checklist",
   loadingText: "Sending…",
   /** Saved as the Google Form "Intent" answer for checklist signups. */
   sourceValue: "2026 Enterprise Checklist",
-  modalTitle: "Get the free whiteboard spec",
-  modalDescription: "Enter your business email and we'll take you straight to the checklist.",
+  modalTitle: "Get the free checklist",
+  modalDescription: "Enter your email and I'll take you straight to the checklist.",
   consent: CONSENT_TEXT,
 };
 
@@ -151,11 +153,11 @@ export const checklistCopy = {
 export const offerLadders: readonly OfferLadder[] = [
   {
     id: "career",
-    badge: "Career & Communication Acceleration",
-    headline: "Master Vocal Authority & Command the Boardroom.",
+    badge: "For engineers",
+    headline: "Speak up. Get heard. Get paid.",
     subheadline:
-      "Self-paced playbooks and live 5-day presentation sprints for technical builders looking to double their leverage and transition into $200k+ Sales Engineering roles.",
-    icp: "Ambitious Software Engineers, Junior SEs, Technical Operators, and Builders.",
+      "You already know how to build. I'll teach you how to explain it, so bosses say yes and companies hire you for $200k+ sales engineer jobs.",
+    icp: "Engineers, junior sales engineers, and builders who want to grow.",
     tiers: [
       {
         id: "communication-masterclass",
@@ -166,13 +168,13 @@ export const offerLadders: readonly OfferLadder[] = [
         price: "$500",
         priceNote: "one-time access",
         features: [
-          "Complete Video Vault: Vocal Command, Power Pause & Rate Pivot Drills",
-          "Technical-to-Commercial Metric Translation Matrix (Converting code to ROI)",
-          "MEDDPICC Enterprise Discovery Playbook & Excalidraw Templates",
+          "Video lessons on speaking with power (my Power Pause and Rate Pivot drills)",
+          "A cheat sheet that turns your tech wins into dollars your boss cares about",
+          "The question playbook top sales engineers use (MEDDPICC), plus whiteboard templates",
         ],
         bonuses: [
-          "Early Access Chapter Drafts of 'The Iteration Loop' Book",
-          "Plug-and-Play Whiteboard Presentation Blueprints",
+          "Sneak-peek chapters of my book, The Iteration Loop",
+          "Ready-to-use whiteboard slides for your next big talk",
         ],
         ctaText: "Enroll in Masterclass ($500)",
         ctaAction: "link",
@@ -182,69 +184,69 @@ export const offerLadders: readonly OfferLadder[] = [
         id: "presentation-sprint",
         variant: "featured",
         tierLabel: "Tier 2",
-        badge: "5-Day Live Cohort / Capped at 10 Seats",
+        badge: "Live for 5 days · Only 10 seats",
         title: "The 5-Day Boardroom Gravity & SE Transition Accelerator",
         price: "$2,500",
         priceNote: "seat",
         features: [
-          "5 Days of Live Interactive Vocal Mechanics & Whiteboard Presentation Drills",
-          "1-on-1 Excalidraw Whiteboard Discovery & MEDDPICC Strategy Audit",
-          "Live Interview & Technical Objection Mock Scenarios",
+          "5 live days of speaking and whiteboard practice, with real feedback",
+          "A 1-on-1 session where we map out your big pitch together",
+          "Practice interviews and tough questions, so nothing surprises you",
         ],
         bonuses: [
-          "Direct Resume & Portfolio Review (Bypassing ATS Filters)",
-          "Lifetime Access to The Boardroom Communication Vault ($500 Value)",
+          "I review your resume and portfolio so real people see it, not just robot filters",
+          "Lifetime access to the full Masterclass ($500 value)",
         ],
         riskReversal: {
-          title: "100% Day-2 Money-Back Guarantee",
-          body: "Refund on the spot if you don't feel your presentation skills have leveled up.",
+          title: "Money back on Day 2",
+          body: "Not feeling better at presenting by Day 2? I'll refund you on the spot.",
         },
         ctaText: "Apply for Next Cohort ($2,500)",
         ctaAction: "modal",
         modal: {
           intent: "sprint",
           title: "Apply for the next cohort",
-          description: "Cohorts are capped at 10 seats. Tell us where you are today and we'll reply with next steps.",
+          description: "Only 10 seats per group. Tell me where you are today and I'll reply with next steps.",
         },
       },
     ],
   },
   {
     id: "enterprise",
-    badge: "B2B Enterprise Architecture & Consulting",
-    headline: "Eradicate System Friction. Protect Business Margins.",
+    badge: "For founders",
+    headline: "Stop losing sales to slow, clunky software.",
     subheadline:
-      "Fixed-scope diagnostic audits and production-grade private portal deployments delivered in 48 hours. Zero open-ended hourly billing.",
-    icp: "B2B SaaS Founders ($1M to $10M ARR), CTOs, and High-Ticket Digital Operators with checkout friction, API latency, or security debt.",
+      "I find the leaks in your checkout and code in 48 hours. You get a clear plan for one fixed price. No surprise hourly bills, ever.",
+    icp: "Founders and tech leaders at companies making $1M to $10M a year.",
     tiers: [
       {
         id: "enterprise-audit",
         variant: "core",
         tierLabel: "Tier 3",
-        badge: "Core B2B Diagnostic / Maximum 2 Slots per Month",
+        badge: "My core audit · Only 2 spots a month",
         title: "The 48-Hour Enterprise System Latency & Conversion Vault",
         price: "$5,000",
         priceNote: "fixed-scope",
         features: [
-          "Complete Checkout, API Latency & Auth Security Audit",
-          "Custom Excalidraw System Topology & Progressive Flow Blueprint",
-          "Developer-Ready Refactoring Spec Sheet (Zero dev management required)",
+          "I check your checkout, your speed, and your login security",
+          "A clear map of your whole system, with the trouble spots circled",
+          "A step-by-step fix list your developers can start on right away",
         ],
         bonuses: [
-          "AWS Caching & FinOps Cost-Reduction Protocol",
-          "30-Minute Live Executive Discovery & Strategy Sync",
-          "30-Day Post-Audit Code Implementation Review",
+          "Ways to shrink your AWS bill",
+          "A 30-minute call with your leaders to plan next steps",
+          "I check your team's fixes for 30 days after",
         ],
         riskReversal: {
-          title: "24-Hour Total Clarity Guarantee",
-          body: "Review your Excalidraw system topology and refactoring spec sheet. If within 24 hours of delivery you don't feel you received total clarity on your application's bottlenecks, let us know and we will issue a prompt, 100% refund, no questions asked.",
+          title: "Clarity or your money back",
+          body: "Look over your map and fix list. If your problems aren't crystal clear within 24 hours, tell me and I'll refund 100%. No questions asked.",
         },
         ctaText: "Apply for $5k Enterprise Audit",
         ctaAction: "modal",
         modal: {
           intent: "audit",
           title: "Apply for the $5k Enterprise Audit",
-          description: "Built for B2B SaaS platforms at $1M+ ARR, with a maximum of 2 audit slots per month.",
+          description: "Built for companies making $1M+ a year. I only take 2 audits a month.",
         },
       },
       {
@@ -256,11 +258,11 @@ export const offerLadders: readonly OfferLadder[] = [
         price: "$50,000",
         priceNote: "full deployment retainer",
         features: [
-          "Full Custom Next.js / AWS Private Client Portal Deployment (\"Digital Vault\")",
-          "Autonomous AI Agent Workflow Integration (n8n / CrewAI)",
-          "Zero-Trust OAuth 2.0, Auth0 Actions & Session Isolation Setup",
-          "Multi-Tenant Data Boundaries, Audit Logs & CIS Compliance",
-          "30-Day Hands-on Engineering & Pre-Sales Implementation Support",
+          "I build your private client portal from scratch (the Digital Vault, on Next.js and AWS)",
+          "AI helpers that handle busywork for your team (n8n and CrewAI)",
+          "Locked-down login security (OAuth 2.0 and Auth0)",
+          "Every customer's data kept safe and separate, with full records (CIS compliance)",
+          "30 days of hands-on help after launch",
         ],
         bonuses: [],
         ctaText: "Inquire for Enterprise Retainer ($50k)",
@@ -277,8 +279,8 @@ export const offerTiers: readonly OfferTier[] = offerLadders.flatMap((ladder) =>
 export const caseStudiesHeader = {
   id: "case-studies",
   eyebrow: "Proof",
-  title: "Case Studies",
-  subtitle: "Architectural friction, the fix, and the metric it moved.",
+  title: "Real work. Real results.",
+  subtitle: "Here's what was broken, what I built, and what changed.",
 };
 
 export const caseStudies: readonly OffersCaseStudy[] = [
@@ -286,38 +288,38 @@ export const caseStudies: readonly OffersCaseStudy[] = [
     id: "redtail-luxe",
     published: true,
     eyebrow: "Checkout Refactor",
-    title: "Refactoring Redtail Luxe Checkout Infrastructure",
+    title: "Fixing Redtail Luxe's checkout",
     image: caseStudyImages.redtailLuxe,
     friction: {
-      label: "The Friction",
-      text: "Monolithic checkout walls causing high user bounce rates on premium watch inventories.",
+      label: "The problem",
+      text: "Shoppers hit one giant wall of a form and left before buying expensive watches.",
     },
     architecture: {
-      label: "The Architecture",
-      text: "Transformed the data collection process into a structured, linear flow restricted to a maximum of 5 inputs per step, paired with zero-latency custom-coded animations.",
+      label: "What I built",
+      text: "I split it into small steps, 5 questions or fewer each, with smooth, fast animations.",
     },
     metric: {
-      label: "The Metric",
-      text: "Secured a 30% lift in completed checkout conversions within the first 30 days of active deployment.",
+      label: "The result",
+      text: "30% more shoppers finished checkout in the first 30 days.",
     },
   },
   {
     id: "trade-show-platform",
     published: true,
     eyebrow: "Enterprise Platform",
-    title: "Scaling a Trade Show Analytics Platform",
+    title: "Helping a huge trade show app grow",
     image: caseStudyImages.tradeShowPlatform,
     friction: {
-      label: "The Friction",
-      text: "Architectural scaling requirements across a 600,000-line enterprise execution engine serving exhibitors and attendees in real time.",
+      label: "The problem",
+      text: "A giant app (600,000 lines of code!) had to work live for exhibitors and visitors.",
     },
     architecture: {
-      label: "The Architecture",
-      text: "Built full-stack direct-messaging matrices, real-time exhibitor directories, and asynchronous webhook delivery layers.",
+      label: "What I built",
+      text: "Live chat, live exhibitor lists, and behind-the-scenes message delivery.",
     },
     metric: {
-      label: "The Metric",
-      text: "Drove a 30% performance optimization and a 22% drop in recorded user friction tickets.",
+      label: "The result",
+      text: "The app ran 30% faster, and complaint tickets dropped 22%.",
     },
   },
   {
@@ -326,9 +328,9 @@ export const caseStudies: readonly OffersCaseStudy[] = [
     eyebrow: "Case Study Slot 3",
     title: "Your next B2B SaaS case study",
     image: caseStudyImages.slot3,
-    friction: { label: "The Friction", text: "What was breaking and what it cost." },
-    architecture: { label: "The Architecture", text: "What we changed in the system." },
-    metric: { label: "The Metric", text: "The number that moved." },
+    friction: { label: "The problem", text: "What was breaking and what it cost." },
+    architecture: { label: "What I built", text: "What I changed in the system." },
+    metric: { label: "The result", text: "The number that moved." },
   },
   {
     id: "slot-4",
@@ -336,17 +338,17 @@ export const caseStudies: readonly OffersCaseStudy[] = [
     eyebrow: "Case Study Slot 4",
     title: "Your next B2B SaaS case study",
     image: caseStudyImages.slot4,
-    friction: { label: "The Friction", text: "What was breaking and what it cost." },
-    architecture: { label: "The Architecture", text: "What we changed in the system." },
-    metric: { label: "The Metric", text: "The number that moved." },
+    friction: { label: "The problem", text: "What was breaking and what it cost." },
+    architecture: { label: "What I built", text: "What I changed in the system." },
+    metric: { label: "The result", text: "The number that moved." },
   },
 ];
 
 /** Headline results shown as a stats band. */
 export const proofMetrics = [
-  { value: "30%", label: "lift in completed checkout conversions" },
-  { value: "22%", label: "raw reduction in user friction tickets" },
-  { value: "48 hrs", label: "from kickoff to delivered audit" },
+  { value: "30%", label: "more shoppers finished checkout" },
+  { value: "22%", label: "fewer \"this is broken\" tickets" },
+  { value: "48 hrs", label: "from kickoff to your finished audit" },
 ];
 
 export type WelcomePageCopy = {
@@ -383,7 +385,7 @@ export const welcomePages: Record<
     steps: [
       "Watch the welcome video above.",
       "Look out for your cohort schedule and calendar invites in your inbox.",
-      "Pick one technical topic you explain often. We'll use it for your first whiteboard session.",
+      "Pick one technical topic you explain often. I'll use it for your first whiteboard session.",
     ],
     nextCta: { text: "Explore the Library", href: "/library" },
   },
@@ -408,17 +410,18 @@ export const welcomePages: Record<
     steps: [
       "Watch the kickoff video above.",
       "Look out for the kickoff agenda and access checklist in your inbox.",
-      "We map the architecture, then build and deploy with 30 days of hands-on engineering support.",
+      "I map the architecture, then build and deploy it with 30 days of hands-on support.",
     ],
-    nextCta: { text: "Contact us", href: contactHref.retainer },
+    nextCta: { text: "Contact me", href: contactHref.retainer },
   },
 };
 
 export const offersCopy = {
   headline: {
-    eyebrow: "Advisory",
-    headlineText: "Diagnostic Systems Strategy & Boardroom Discovery",
-    subheadlineText: "Quantifying technical friction into measurable commercial ROI.",
+    eyebrow: "Offers",
+    headlineText: "Grow your career. Grow your revenue.",
+    subheadlineText:
+      "Pick your path. Engineers: learn to speak so people listen. Founders: find and fix what's costing you sales.",
     ctas: [
       { label: "Apply for the 5-Day Sprint", href: contactHref.sprint },
       { label: "Get the free checklist", href: `#${checklistCopy.id}`, variant: "inverted" as const },
@@ -430,9 +433,9 @@ export const offersCopy = {
       id: "apply",
       ctaText: "Apply for $5k Audit",
       ctaHref: contactHref.audit,
-      title: "Need the architecture handled too?",
+      title: "Want me to look at your app?",
       subtitle:
-        "The $5,000 Enterprise Audit is a fixed-scope, 48-hour diagnostic for B2B SaaS platforms at $1M+ ARR.",
+        "My $5,000 audit finds what's costing you sales in 48 hours. It's built for companies making $1M+ a year.",
       secondaryText: "Get the free checklist",
       secondaryHref: `#${checklistCopy.id}`,
       className: "bg-page",
@@ -440,9 +443,8 @@ export const offersCopy = {
     bottom: {
       ctaText: "Apply for Next Cohort ($2,500)",
       ctaHref: contactHref.sprint,
-      title: "Ready to command the room?",
-      subtitle:
-        "Five days of live practice on vocal command, whiteboard mechanics, and sales discovery.",
+      title: "Ready to own the room?",
+      subtitle: "5 live days. Real practice. Real feedback. You'll walk out talking like a pro.",
       secondaryText: "Apply for $5k Audit",
       secondaryHref: contactHref.audit,
       className: "bg-page",
@@ -451,56 +453,56 @@ export const offersCopy = {
 
   framework: {
     id: "framework",
-    title: "What the enterprise audit covers",
-    subtitle: "Deep diagnostic mechanics, not surface-level marketing tactics.",
+    title: "What I check in your audit",
+    subtitle: "I dig deep into how your app really works, not just how it looks.",
     items: [
       {
         icon: faStopwatch,
-        title: "Latency & Flow Profiling",
+        title: "Speed check",
         description:
-          "We trace application structures and third-party integrations (payment processors, custom webhooks, internal APIs) to locate where server lag or database schemas cause high-intent users to abandon transactions.",
+          "I find the slow spots in your app and the tools it talks to (payments, webhooks, APIs), the ones that make buyers give up and leave.",
       },
       {
         icon: faRoute,
-        title: "Checkout Friction Mapping",
+        title: "Checkout check",
         description:
-          "Shifting complex interactions from overwhelming single-page \"walls of inputs\" into smooth, multi-step linear flows designed to maximize completion rates and data integrity.",
+          "Long forms scare people off. I turn them into short, easy steps so more people finish.",
       },
       {
         icon: faUserShield,
-        title: "Security & AWS Cost Review",
+        title: "Safety and cost check",
         description:
-          "Reviewing identity (OAuth 2.0, MFA, session boundaries) and AWS caching and cost posture so your platform stays secure without slowing checkout or inflating your bill.",
+          "I make sure logins are locked down (OAuth 2.0, MFA) and your AWS bill isn't bigger than it should be.",
       },
     ] satisfies OffersFrameworkItem[],
   },
 
   whoThisIsFor: {
     title: "Who this is for",
-    intro: "Built for the technical people who have to explain the work, and the platforms they run.",
+    intro: "This is for you if…",
     bullets: [
-      "Developers and technical operators moving into sales engineering or client-facing roles",
-      "Engineers who need to present to executives and boardrooms with authority",
-      "Technical leads who want their updates to drive decisions, not questions",
-      "B2B platforms between $1M and $10M ARR with checkout friction or API latency",
-      "Teams that want a fixed-scope answer instead of open-ended hourly billing",
+      "You're an engineer who wants a sales engineer or client-facing job",
+      "You present to bosses and want them to say yes",
+      "You lead a tech team and want your updates to drive decisions",
+      "You run a company making $1M to $10M a year, and checkout feels slow",
+      "You want one fixed price, not surprise hourly bills",
     ],
   },
 
   about: {
-    title: "Learn more about us",
+    title: "Learn more about me",
     cards: {
       left: {
-        title: "Who We Are",
+        title: "Who I Am",
         bodyLines: [
-          "I’m Nick, my career has always sat at the intersection of technical execution and human connection. I began as a game developer building interactive environments, transitioned into a teaching assistant mentoring engineers through complex codebases, and stepped into product management and demo engineering at Expocad—leading live, in-person enterprise software walkthroughs at national trade shows.",
-          "Today, I am the founder of Stricker Digital, owning the technical thread from discovery to architecture and delivery.",
+          "I’ve always loved two things: building tech and helping people. I started out making video games. Then I taught engineers how to work through tricky code. At Expocad, I ran live software demos for big companies at national trade shows.",
+          "Now I run Stricker Digital. I help companies find what’s costing them sales, and I help engineers get heard.",
         ],
       },
       right: {
         title: "Based in Chicago",
         bodyLines: [
-          "Chicago is our base of operations; engagements run remotely with teams anywhere.",
+          "I'm based in Chicago and work with teams anywhere.",
           "Every recommendation is tied to a business metric: conversion, latency, or cost.",
           "You get engineering depth with the communication of a sales engineer.",
         ],
@@ -510,7 +512,7 @@ export const offersCopy = {
 
   testimonials: {
     title: "What clients say",
-    subtitle: "This is what our previous clients had to say about us.",
+    subtitle: "Here's what people I've worked with have to say.",
     items: [
       {
         quote:
@@ -569,44 +571,43 @@ export const offersCopy = {
     title: "Frequently asked questions",
     items: [
       {
-        question: "Is the Enterprise Checklist really free?",
-        answer:
-          "Yes. Enter your business email and you go straight to the checklist and spec sheet. No sales call, no obligation.",
+        question: "Is the checklist really free?",
+        answer: "Yep! Just enter your email and you'll go straight to it. No sales call. No catch.",
       },
       {
         question: "What's the difference between the Masterclass and the Sprint?",
         answer:
-          "The $500 Masterclass is self-paced: the video vault, metric translation matrix, MEDDPICC playbook, and blueprints. The $2,500 Accelerator is a live 5-day cohort (capped at 10 seats) with 1-on-1 coaching, mock interviews, a resume review, and lifetime access to the Masterclass vault.",
+          "The Masterclass ($500) is videos and tools you go through on your own time. The Sprint ($2,500) is 5 live days with me and a small group of 10 or fewer. You practice, I coach you, and you also get 1-on-1 help, practice interviews, a resume review, and the full Masterclass.",
       },
       {
         question: "Who is the Sprint for?",
         answer:
-          "Developers and junior technical operators moving into client-facing or sales engineering roles, and engineers who need to present to leadership with authority.",
+          "Engineers who want to move into sales engineering or client-facing jobs, and anyone who has to present to bosses and wants to nail it.",
       },
       {
         question: "What if the Sprint isn't working for me?",
         answer:
-          "Every cohort has a 100% Day-2 Money-Back Guarantee. If you don't feel your presentation skills have leveled up by day 2, you get a refund on the spot.",
+          "Tell me by the end of Day 2. If you don't feel better at presenting, I'll give you all your money back on the spot.",
       },
       {
-        question: "What does the $5,000 Enterprise Audit include?",
+        question: "What does the $5,000 audit include?",
         answer:
-          "A complete checkout, API latency, and auth security audit, a custom Excalidraw topology and flow blueprint, and a developer-ready refactoring spec sheet. Bonuses: an AWS caching and FinOps protocol, a 30-minute executive strategy sync, and a 30-day post-audit implementation review. One fixed price, delivered in 48 hours, with a maximum of 2 slots per month.",
+          "I check your checkout, your speed, and your login security. You get a map of your system with the trouble spots circled, plus a step-by-step fix list for your developers. Bonuses: ways to shrink your AWS bill, a 30-minute planning call with your leaders, and 30 days of me checking your team's fixes. One price. Done in 48 hours. Only 2 spots a month.",
       },
       {
         question: "Is the audit guaranteed?",
         answer:
-          "Yes. Review your Excalidraw system topology and refactoring spec sheet. If within 24 hours of delivery you don't feel you received total clarity on your application's bottlenecks, let us know and we will issue a prompt, 100% refund, no questions asked.",
+          "Yes! Look over your map and fix list. If your problems aren't crystal clear within 24 hours, tell me and I'll refund 100%. No questions asked.",
       },
       {
         question: "Who writes the code after the audit?",
         answer:
-          "Your internal dev team, using the refactoring spec sheet, and we review their implementation for 30 days after the audit. If you'd rather we build it, the $50,000 retainer covers the full Digital Vault deployment, AI agent workflows, zero-trust security, and 30 days of hands-on support.",
+          "Your developers do, using my fix list, and I check their work for 30 days. Want me to build it for you instead? That's the $50,000 Vault Implementation.",
       },
       {
-        question: "What if we're under $1M ARR?",
+        question: "What if we make less than $1M a year?",
         answer:
-          "Start with the free Enterprise Checklist. It surfaces the highest-impact fixes quickly and tells you whether a full audit is worth it later.",
+          "Start with the free checklist. It shows you the biggest fixes fast, so you'll know if a full audit makes sense later.",
       },
     ] satisfies OffersFAQItem[],
   },
@@ -617,8 +618,8 @@ export type OffersCopy = typeof offersCopy;
 /** /contact intake form. */
 export const contactCopy = {
   eyebrow: "Contact",
-  headline: "Let's Align Your Architecture with Commercial Outcomes.",
-  subheadline: "Tell us what you need and we'll point you to the right starting point.",
+  headline: "Let's grow your revenue together.",
+  subheadline: "Tell me what you need. I read every message and I'll point you to the best next step.",
   intents: [
     { value: "sprint", label: "Apply for the 5-Day Boardroom Gravity & SE Transition Accelerator ($2,500)" },
     { value: "masterclass", label: "Enroll in the Boardroom Communication & Iteration System ($500)" },
@@ -636,7 +637,7 @@ export const contactCopy = {
     { value: "3m-10m", label: "$3M to $10M ARR" },
     { value: "10m-plus", label: "$10M+ ARR" },
   ],
-  underArrNote: "The $5,000 audit is built for platforms at $1M+ ARR. Under that, the free Enterprise Checklist is the faster place to start.",
+  underArrNote: "My $5,000 audit is built for companies making $1M+ a year. Under that, the free checklist is the faster place to start.",
   placeholders: {
     firstName: "First name",
     lastName: "Last name",
@@ -647,8 +648,8 @@ export const contactCopy = {
   },
   submit: { idle: "Send", loading: "Sending…" },
   success: {
-    title: "Thanks, we've got it.",
-    body: "We'll reply by email shortly. If you'd like to reach us directly in the meantime, email",
+    title: "Thanks! Got it.",
+    body: "I'll reply by email soon. Want to reach me right now? Email",
     bookCallText: "Book a call now",
   },
   consent: CONSENT_TEXT,

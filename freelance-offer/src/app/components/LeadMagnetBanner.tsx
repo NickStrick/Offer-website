@@ -106,8 +106,9 @@ export default function LeadMagnetBanner({ className = "bg-page" }: { className?
                 Tier 0 · <span className="text-white">{checklistCopy.price}</span>
               </span>
             </div>
-            <h2 className="mt-5 text-2xl font-semibold md:text-[2rem]" style={{ letterSpacing: "-0.03em", lineHeight: 1.12 }}>
-              {checklistCopy.title}
+            <div className="mt-5 text-xs font-medium uppercase tracking-[0.14em] text-green-400/80">{checklistCopy.title}</div>
+            <h2 className="mt-2 text-2xl font-semibold md:text-[2rem]" style={{ letterSpacing: "-0.03em", lineHeight: 1.12 }}>
+              {checklistCopy.headline}
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">{checklistCopy.subtitle}</p>
             <ul className="mt-6 space-y-3">

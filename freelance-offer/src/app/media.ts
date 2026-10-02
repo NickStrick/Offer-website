@@ -30,7 +30,7 @@ export const videos = {
   /** Homepage — introductory video under the hero. */
   intro: {
     title: "Meet Stricker Digital",
-    caption: "Who we are, who we work with, and how architecture and communication turn into business value.",
+    caption: "Who I am, who I work with, and how architecture and communication turn into revenue growth.",
     src: "",
     published: false,
   },

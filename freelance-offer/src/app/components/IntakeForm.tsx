@@ -101,7 +101,7 @@ export default function IntakeForm({
     });
     setLoading(false);
     if (saved) setSent(true);
-    else setError(`Something went wrong sending the form. Please try again or email us at ${CONTACT_EMAIL}.`);
+    else setError(`Something went wrong sending the form. Please try again or email me at ${CONTACT_EMAIL}.`);
   }
 
   if (sent) {
@@ -135,9 +135,9 @@ export default function IntakeForm({
   return (
     <form onSubmit={handleSubmit} className={`${framed ? "surface-card p-7 md:p-10" : ""} space-y-4`}>
       <div className={`relative ${lockIntent ? "hidden" : ""}`}>
-        <labe htmlFor="intent" className="mb-2 block text-sm font-medium text-ink-muted">
+        <label htmlFor="intent" className="mb-2 block text-sm font-medium text-ink-muted">
           I&apos;d like to
-        </labe>
+        </label>
         <select id="intent" value={values.intent} onChange={set("intent")} className={`${fieldClass} appearance-none pr-10`}>
           <option value="" disabled className="bg-[#181b18]">
             Choose one…

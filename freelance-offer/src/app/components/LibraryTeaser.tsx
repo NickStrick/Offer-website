@@ -36,8 +36,8 @@ export default function LibraryTeaser() {
         <SectionHeader
           eyebrow="The Library & IP"
           eyebrowIcon={faLightbulb}
-          title="Software and ideas, built to last."
-          subtitle="A private portal platform in development, and two books on systems thinking, vocal authority, and stoic execution."
+          title="Books and software I'm building."
+          subtitle="Two books on getting better at anything, and a private client portal. Want a first look? Join the list!"
         />
 
         <div className="grid gap-5 md:grid-cols-2">

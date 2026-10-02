@@ -22,7 +22,7 @@ const defaultBio = [
 /** Founder / portfolio block: headshot, short bio, socials, and links to previous work. */
 export default function HelperBtnGroup({
   reviewsHref = "/#testimonials",
-  title = "Engineering depth, with the communication of a sales engineer.",
+  title = "Hi, I'm Nick!",
   bio = defaultBio,
 }: HelperBtnGroupProps) {
   return (

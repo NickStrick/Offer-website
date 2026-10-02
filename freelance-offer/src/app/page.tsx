@@ -18,12 +18,12 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-page text-white">
       <Headline
-        eyebrow="Architecture, Communication & System Strategy"
-        headlineText="Bridging Deep Systems Architecture to Commercial Business Value."
-        subheadlineText="Fixed-scope diagnostic audits, high-impact technical presentation frameworks, and enterprise-grade software blueprints that eliminate friction and protect margins."
+        eyebrow="Code. Communication. Revenue."
+        headlineText="I find where your software is losing money. Then I help you fix it."
+        subheadlineText="Hi, I'm Nick! I love two things: building software that sells, and helping engineers get heard. Let's grow your revenue, and your career."
         ctas={[
           { label: "Apply for $5k Audit", href: contactHref.audit },
-          { label: checklistCopy.ctaText, href: `#${checklistCopy.id}`, variant: "inverted" },
+          { label: "Get my free checklist", href: `#${checklistCopy.id}`, variant: "inverted" },
         ]}
       />
       <LeadMagnetBanner />

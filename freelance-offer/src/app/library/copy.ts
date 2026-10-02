@@ -22,10 +22,9 @@ export type Book = {
 
 export const libraryCopy = {
   headline: {
-    eyebrow: "Software & Digital IP",
-    headlineText: "Software Engines & the Technical Library",
-    subheadlineText:
-      "The Digital Vault platform, plus upcoming books on systems thinking, vocal authority, and stoic execution.",
+    eyebrow: "Library",
+    headlineText: "Books and software I'm building",
+    subheadlineText: "A private portal for your clients, plus two books about getting better at anything.",
     ctas: [
       { label: "Explore the books", href: "#books" },
       { label: "See the Digital Vault", href: "#digital-vault", variant: "inverted" as const },
@@ -99,6 +98,6 @@ export const libraryCopy = {
     description: "Leave your email and you'll be the first to know. No spam.",
     placeholders: { firstName: "First name (optional)", email: "Email" },
     submit: { idle: "Join the list", loading: "Joining…" },
-    success: { title: "You're on the list.", body: "We'll email you as soon as there's news." },
+    success: { title: "You're on the list.", body: "I'll email you as soon as there's news." },
   },
 };

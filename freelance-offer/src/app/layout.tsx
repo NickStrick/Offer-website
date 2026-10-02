@@ -30,10 +30,10 @@ export const metadata: Metadata = {
     default: "Stricker Digital | Architecture, Communication & System Strategy",
     template: "%s | Stricker Digital",
   },
-  description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into commercial business value.",
+  description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into revenue growth.",
   openGraph: {
     title: "Stricker Digital",
-    description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into commercial business value.",
+    description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into revenue growth.",
     url: "https://www.strickerdigital.com",
     siteName: "Stricker Digital",
     images: [
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Stricker Digital",
-    description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into commercial business value.",
+    description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into revenue growth.",
     images: ["/SDLogocircle.png"],
   },
 };
