@@ -19,8 +19,8 @@ export default function Home() {
     <main className="min-h-screen bg-page text-white">
       <Headline
         eyebrow="Code. Communication. Revenue."
-        headlineText="I find where your software is losing money. Then I help you fix it."
-        subheadlineText="Hi, I'm Nick! I love two things: building software that sells, and helping engineers get heard. Let's grow your revenue, and your career."
+        headlineText="Let's grow your revenue, and your career."
+        subheadlineText="Hi, I'm Nick! I help apps make more money, with smoother checkouts and faster code. And I teach engineers to speak up, so they get heard, hired, and promoted."
         ctas={[
           { label: "Apply for $5k Audit", href: contactHref.audit },
           { label: "Get my free checklist", href: `#${checklistCopy.id}`, variant: "inverted" },
