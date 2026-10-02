@@ -30,7 +30,7 @@ export default function ContactPage() {
     <main className="min-h-screen bg-page text-white">
       <Headline eyebrow={contactCopy.eyebrow} headlineText={contactCopy.headline} subheadlineText={contactCopy.subheadline} />
 
-      <section className="bg-page px-6 pb-28 pt-10 text-white">
+      <section className="bg-page px-6 pb-28 pt-4 text-white">
         <div className="mx-auto grid max-w-6xl items-start gap-10 md:grid-cols-[1.4fr_1fr]">
           {/* useSearchParams requires a Suspense boundary for static rendering */}
           <Suspense fallback={null}>

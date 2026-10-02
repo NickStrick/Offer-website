@@ -6,7 +6,7 @@ import { proofMetrics } from "../offers/copy";
 /** Headline results band (social proof). */
 export default function ProofMetrics({ className = "bg-page" }: { className?: string }) {
   return (
-    <section className={`${className} px-6 pb-8 pt-8 text-white`}>
+    <section className={`${className} px-6 pb-8 pt-4 text-white`}>
       <div className="surface-card mx-auto grid max-w-6xl divide-y divide-white/[0.06] md:grid-cols-3 md:divide-x md:divide-y-0">
         {proofMetrics.map((m, i) => (
           <motion.div
