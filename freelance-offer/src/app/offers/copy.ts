@@ -287,6 +287,7 @@ export const caseStudies: readonly OffersCaseStudy[] = [
       label: "The result",
       text: "The app ran 30% faster and user friction dropped 22%, helping keep its biggest customers renewing.",
     },
+    link: { href: "https://www.expocad.com/", label: "See Expocad" },
   },
   {
     id: "cm-florals",
