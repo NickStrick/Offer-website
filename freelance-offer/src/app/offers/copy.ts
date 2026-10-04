@@ -339,7 +339,7 @@ export const moreWork: readonly MoreWorkItem[] = [
     type: "Community nonprofit",
     description: "A home online for Chicago's LatinX community to find events and connect.",
     image: caseStudyImages.connectingDots,
-    href: "https://connecting-dots-five.vercel.app/",
+    href: "https://www.connectingdotsforlatinx.com/",
   },
   {
     id: "do-well-2-transform",
