@@ -27,13 +27,13 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.strickerdigital.com"),
   // Pages set their own title; the template appends the brand. The homepage uses the default.
   title: {
-    default: "Stricker Digital | Architecture, Communication & System Strategy",
+    default: "Stricker Digital | Turn More Visitors Into Buyers",
     template: "%s | Stricker Digital",
   },
-  description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into revenue growth.",
+  description: "Revenue Leak Audits and done-for-you fixes that turn more of your store or app visitors into paying customers.",
   openGraph: {
     title: "Stricker Digital",
-    description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into revenue growth.",
+    description: "Revenue Leak Audits and done-for-you fixes that turn more of your store or app visitors into paying customers.",
     url: "https://www.strickerdigital.com",
     siteName: "Stricker Digital",
     images: [
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Stricker Digital",
-    description: "Architecture audits, technical communication sprints, and system strategy that turn engineering into revenue growth.",
+    description: "Revenue Leak Audits and done-for-you fixes that turn more of your store or app visitors into paying customers.",
     images: ["/SDLogocircle.png"],
   },
 };

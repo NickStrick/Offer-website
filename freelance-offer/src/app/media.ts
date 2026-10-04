@@ -34,7 +34,7 @@ export const videos = {
     src: "",
     published: false,
   },
-  /** /offers — walkthrough of the free audit and the three tiers. */
+  /** /audits: a short walkthrough of the audit and done-for-you fixes. */
   offers: {
     title: "Which offer is right for you?",
     caption: "A quick walkthrough of the free checklist and each tier of the offer ladder.",
@@ -48,27 +48,9 @@ export const videos = {
     src: "",
     published: false,
   },
-  /** /welcome/communication-masterclass: set as the Stripe Payment Link's after-payment redirect. */
-  welcomeMasterclass: {
-    title: "Welcome to the Boardroom Communication & Iteration System",
-    src: "",
-    published: false,
-  },
-  /** /welcome/presentation-sprint: send to accepted cohort applicants. */
-  welcomeSprint: {
-    title: "Welcome to the 5-Day Boardroom Gravity & SE Transition Accelerator",
-    src: "",
-    published: false,
-  },
   /** /welcome/architecture-audit: set as the Calendly event's after-booking redirect. */
   welcomeAudit: {
-    title: "Welcome! Let’s prepare for your Enterprise Audit",
-    src: "",
-    published: false,
-  },
-  /** /welcome/enterprise-retainer: send to clients once the $50k retainer is signed. */
-  welcomeRetainer: {
-    title: "Welcome! Let’s kick off your Vault implementation",
+    title: "Welcome! Let’s get your audit ready",
     src: "",
     published: false,
   },

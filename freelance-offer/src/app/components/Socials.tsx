@@ -39,7 +39,7 @@ const ICONS: Record<SocialItem['type'], IconDefinition> = {
 };
 const items: SocialItem[] = [
   { type: "linkedin", href: "https://www.linkedin.com/in/nick-stricker/", label: "Linkedin" },
-  { type: "youtube", href: "https://www.youtube.com/@NickStrickerDigital", label: "Youtube" },
+  { type: "youtube", href: "https://www.youtube.com/@NickolasStricker", label: "Youtube" },
   { type: "instagram", href: "https://www.instagram.com/nickolasstricker/", label: "Instagram" },
   { type: "email", href: `mailto:${'nick@strickerdigital.com'}`, label: "email" },
 ];

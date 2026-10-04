@@ -4,18 +4,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faGift, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import Logo from "../../../public/SDLogoTrans.png";
 
-const checklistLink = { href: "/#free-checklist", label: "Free Architecture Checklist" };
-
 const links = [
   { href: "/", label: "Home" },
-  { href: "/offers", label: "Offers" },
+  { href: "/audits", label: "Audits" },
+  { href: "/journey", label: "Journey" },
   { href: "/library", label: "Library" },
   { href: "/contact", label: "Contact" },
 ];
+
+/** Main call to action in the nav. */
+const primaryCta = { href: "/contact?intent=audit", label: "Get your $800 audit" };
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -42,15 +44,8 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href={checklistLink.href}
-            className="ml-1 hidden items-center gap-1.5 rounded-lg px-3 py-2 text-green-400 transition hover:text-green-300 lg:inline-flex"
-          >
-            <FontAwesomeIcon icon={faGift} className="text-xs" aria-hidden />
-            {checklistLink.label}
-          </Link>
-          <Link href="/contact?intent=audit" className="btn-gradient ml-3 !px-4 !py-2 !text-sm">
-            Apply for $5k Audit
+          <Link href={primaryCta.href} className="btn-gradient ml-3 !px-4 !py-2 !text-sm">
+            {primaryCta.label}
           </Link>
         </nav>
 
@@ -76,12 +71,8 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href={checklistLink.href} onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-green-400">
-            <FontAwesomeIcon icon={faGift} className="text-xs" aria-hidden />
-            {checklistLink.label}
-          </Link>
-          <Link href="/contact?intent=audit" onClick={() => setOpen(false)} className="btn-gradient mt-2">
-            Apply for $5k Audit
+          <Link href={primaryCta.href} onClick={() => setOpen(false)} className="btn-gradient mt-2">
+            {primaryCta.label}
           </Link>
         </nav>
       ) : null}

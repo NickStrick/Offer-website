@@ -43,32 +43,21 @@ export type OffersCaseStudy = {
   metric: { label: string; text: string };
 };
 
-export type OfferTier = {
-  id: "communication-masterclass" | "presentation-sprint" | "enterprise-audit" | "enterprise-retainer";
-  /** featured: highlighted career card; core: dominant B2B card; anchor: premium price anchor. */
-  variant: "standard" | "featured" | "core" | "anchor";
-  tierLabel: string;
-  badge: string;
-  title: string;
-  price: string;
-  priceNote: string;
-  features: readonly string[];
-  bonuses: readonly string[];
-  riskReversal?: { title: string; body: string };
-  ctaText: string;
-  /** "link" goes to ctaHref; "modal" opens the application pop-up for `intent`. */
-  ctaAction: "link" | "modal";
-  ctaHref?: string;
-  modal?: { intent: "sprint" | "audit"; title: string; description: string };
-};
-
-export type OfferLadder = {
+/** A service card: the visitor's outcome first, the price second. */
+export type ServiceOffer = {
   id: string;
-  badge: string;
+  eyebrow: string;
+  title: string;
   headline: string;
-  subheadline: string;
-  icp: string;
-  tiers: readonly OfferTier[];
+  subtitle: string;
+  price?: string;
+  priceNote?: string;
+  features: readonly { title: string; text: string }[];
+  guarantee?: { title: string; body: string };
+  ctaText: string;
+  /** Opens the application pop-up for this intent. */
+  intent: "audit" | "fixes";
+  modal: { title: string; description: string };
 };
 
 export type OffersCtaBannerCopy = {
@@ -101,16 +90,11 @@ export const CONSENT_TEXT =
 /** Contact links with the intent dropdown preselected. */
 export const contactHref = {
   audit: "/contact?intent=audit",
-  retainer: "/contact?tier=50k",
-  sprint: "/contact?intent=sprint",
-  masterclass: "/contact?intent=masterclass",
-  betaReader: "/contact?intent=beta-reader",
+  fixes: "/contact?intent=fixes",
+  mentoring: "/contact?intent=mentoring",
+  newsletter: "/contact?intent=newsletter",
   general: "/contact?intent=general",
 };
-
-// Set NEXT_PUBLIC_STRIPE_MASTERCLASS_URL to the Stripe Payment Link for the Masterclass.
-// Until then, the button falls back to the contact form with the Masterclass preselected.
-export const MASTERCLASS_CHECKOUT_URL = process.env.NEXT_PUBLIC_STRIPE_MASTERCLASS_URL || contactHref.masterclass;
 
 /**
  * The whiteboard video isn't recorded yet. Until videos.enterpriseChecklist is published in media.ts,
@@ -155,132 +139,95 @@ export const checklistCopy = {
   consent: CONSENT_TEXT,
 };
 
-/** Two ladders, one per customer profile. */
-export const offerLadders: readonly OfferLadder[] = [
-  {
-    id: "career",
-    badge: "For engineers",
-    headline: "Speak up. Get heard. Get paid.",
-    subheadline:
-      "You already know how to build. I'll teach you how to explain it, so bosses say yes and companies hire you for $200k+ sales engineer jobs.",
-    icp: "Engineers, junior sales engineers, and builders who want to grow.",
-    tiers: [
-      {
-        id: "communication-masterclass",
-        variant: "standard",
-        tierLabel: "Tier 1",
-        badge: "Self-Paced / Digital System",
-        title: "The Boardroom Communication & Iteration System",
-        price: "$500",
-        priceNote: "one-time access",
-        features: [
-          "Video lessons on speaking with power (my Power Pause and Rate Pivot drills)",
-          "A cheat sheet that turns your tech wins into dollars your boss cares about",
-          "The question playbook top sales engineers use (MEDDPICC), plus whiteboard templates",
-        ],
-        bonuses: [
-          "Sneak-peek chapters of my book, The Iteration Loop",
-          "Ready-to-use whiteboard slides for your next big talk",
-        ],
-        ctaText: "Enroll in Masterclass ($500)",
-        ctaAction: "link",
-        ctaHref: MASTERCLASS_CHECKOUT_URL,
-      },
-      {
-        id: "presentation-sprint",
-        variant: "featured",
-        tierLabel: "Tier 2",
-        badge: "Live for 5 days · Only 10 seats",
-        title: "The 5-Day Boardroom Gravity & SE Transition Accelerator",
-        price: "$2,500",
-        priceNote: "seat",
-        features: [
-          "5 live days of speaking and whiteboard practice, with real feedback",
-          "A 1-on-1 session where we map out your big pitch together",
-          "Practice interviews and tough questions, so nothing surprises you",
-        ],
-        bonuses: [
-          "I review your resume and portfolio so real people see it, not just robot filters",
-          "Lifetime access to the full Masterclass ($500 value)",
-        ],
-        riskReversal: {
-          title: "Money back on Day 2",
-          body: "Not feeling better at presenting by Day 2? I'll refund you on the spot.",
-        },
-        ctaText: "Apply for Next Cohort ($2,500)",
-        ctaAction: "modal",
-        modal: {
-          intent: "sprint",
-          title: "Apply for the next cohort",
-          description: "Only 10 seats per group. Tell me where you are today and I'll reply with next steps.",
-        },
-      },
-    ],
+/** The paid audit: the main service. */
+export const auditOffer: ServiceOffer = {
+  id: "audit",
+  eyebrow: "Revenue Leak Audit",
+  title: "Revenue Leak Audit",
+  headline: "Find out exactly why visitors leave without buying.",
+  subtitle: "In 48 hours you'll know what's costing you sales, and exactly what to fix first.",
+  price: "$800",
+  priceNote: "one fixed price, no surprise bills",
+  features: [
+    { title: "A clear picture of your store or app", text: "with every trouble spot circled" },
+    { title: "Your fix list, ranked by money", text: "so you tackle what grows sales first" },
+    { title: "Speed, checkout, and security checked", text: "the three places buyers drop off most" },
+    { title: "A 30-minute call", text: "where we walk through everything together and answer your questions" },
+  ],
+  guarantee: {
+    title: "Clear answers, or your money back",
+    body: "If your problems aren't crystal clear within 24 hours of delivery, you get a full refund. No questions asked.",
   },
-  {
-    id: "enterprise",
-    badge: "For founders",
-    headline: "Stop losing sales to slow, clunky software.",
-    subheadline:
-      "I find the leaks in your checkout and code in 48 hours. You get a clear plan for one fixed price. No surprise hourly bills, ever.",
-    icp: "Founders and tech leaders at companies making $1M to $10M a year.",
-    tiers: [
-      {
-        id: "enterprise-audit",
-        variant: "core",
-        tierLabel: "Tier 3",
-        badge: "My core audit · Only 2 spots a month",
-        title: "The 48-Hour Enterprise System Latency & Conversion Vault",
-        price: "$5,000",
-        priceNote: "fixed-scope",
-        features: [
-          "I check your checkout, your speed, and your login security",
-          "A clear map of your whole system, with the trouble spots circled",
-          "A step-by-step fix list your developers can start on right away",
-        ],
-        bonuses: [
-          "Ways to shrink your AWS bill",
-          "A 30-minute call with your leaders to plan next steps",
-          "I check your team's fixes for 30 days after",
-        ],
-        riskReversal: {
-          title: "Clarity or your money back",
-          body: "Look over your map and fix list. If your problems aren't crystal clear within 24 hours, tell me and I'll refund 100%. No questions asked.",
-        },
-        ctaText: "Apply for $5k Enterprise Audit",
-        ctaAction: "modal",
-        modal: {
-          intent: "audit",
-          title: "Apply for the $5k Enterprise Audit",
-          description: "Built for companies making $1M+ a year. I only take 2 audits a month.",
-        },
-      },
-      {
-        id: "enterprise-retainer",
-        variant: "anchor",
-        tierLabel: "Tier 4",
-        badge: "Full Deployment Retainer",
-        title: "Enterprise AI Agent & Digital Vault Implementation",
-        price: "$50,000",
-        priceNote: "full deployment retainer",
-        features: [
-          "I build your private client portal from scratch (the Digital Vault, on Next.js and AWS)",
-          "AI helpers that handle busywork for your team (n8n and CrewAI)",
-          "Locked-down login security (OAuth 2.0 and Auth0)",
-          "Every customer's data kept safe and separate, with full records (CIS compliance)",
-          "30 days of hands-on help after launch",
-        ],
-        bonuses: [],
-        ctaText: "Inquire for Enterprise Retainer ($50k)",
-        ctaAction: "link",
-        ctaHref: contactHref.retainer,
-      },
-    ],
+  ctaText: "Get your audit",
+  intent: "audit",
+  modal: {
+    title: "Get your $800 Revenue Leak Audit",
+    description: "Tell me about your store or app, and I'll reply soon with next steps and a time for your kickoff.",
   },
-];
+};
 
-/** Every paid tier, in ladder order. */
-export const offerTiers: readonly OfferTier[] = offerLadders.flatMap((ladder) => ladder.tiers);
+/** Done-for-you fixes: the follow-on service after an audit. */
+export const fixOffer: ServiceOffer = {
+  id: "fixes",
+  eyebrow: "Done-for-you fixes",
+  title: "Done-for-you fixes",
+  headline: "Want it fixed for you?",
+  subtitle:
+    "Skip the to-do list. Get a fixed quote and have every fix built, tested, and shipped, so you can get back to running your business.",
+  priceNote: "fixed quote after your audit",
+  features: [
+    { title: "One fixed price", text: "agreed before any work starts" },
+    { title: "Built, tested, and shipped", text: "by a senior full-stack engineer" },
+    { title: "Fixes ranked by money", text: "so your sales grow first" },
+  ],
+  ctaText: "Get a fixed quote",
+  intent: "fixes",
+  modal: {
+    title: "Get a fixed quote",
+    description: "Share your store or app and what you'd like fixed. If you've had an audit, mention it and I'll quote from your fix list.",
+  },
+};
+
+/** "Follow along": YouTube and the weekly notes newsletter. */
+export const journeyCopy = {
+  id: "journey",
+  eyebrow: "Follow along",
+  headline: "Learn to sell and speak with confidence.",
+  subtitle:
+    "I'm documenting everything I learn about communication and sales, and sharing the lessons that work in free videos and weekly emails. You get real lessons, tried in the real world before they reach you.",
+  youtubeUrl: "https://www.youtube.com/@NickolasStricker",
+  youtubeShortsUrl: "https://www.youtube.com/@NickolasStricker/shorts",
+  /** Saved as the waitlist form's "List" answer and as the beehiiv tag. */
+  newsletterListName: "Weekly Notes",
+  newsletterCta: "Get the weekly notes",
+  newsletterModal: {
+    title: "Get the weekly notes",
+    description: "One email a week with what I'm learning about communication, sales, and building a business, plus book updates. No spam.",
+  },
+};
+
+/** Upcoming developer-to-sales-engineer classes (waitlist only for now). */
+export const mentoringCopy = {
+  id: "se-classes",
+  eyebrow: "Coming soon",
+  headline: "Want to move from developer to sales engineer?",
+  subtitle:
+    "I'm turning everything I learn into classes for developers who want to make the jump. Join the waitlist and you'll be first in line when they open.",
+  ctaText: "Join the waitlist",
+  /** Saved as the waitlist form's "List" answer and as the beehiiv tag. */
+  listName: "SE Classes Waitlist",
+  modal: {
+    title: "Join the developer-to-SE waitlist",
+    description: "Leave your email and you'll be the first to know when the classes open.",
+  },
+};
+
+/** Short "Meet Nick" strip on the homepage. */
+export const meetNickCopy = {
+  name: "Hi, I'm Nick!",
+  body:
+    "I've spent 6 years building and fixing online stores and apps, and I love helping businesses turn more visitors into buyers. I'm also learning to sell and speak, and I share every lesson on YouTube as I go. Soon I'll turn what works into classes for developers moving into sales engineering.",
+};
 
 export const caseStudiesHeader = {
   id: "case-studies",
@@ -366,119 +313,78 @@ export type WelcomePageCopy = {
   nextCta: { text: string; href: string };
 };
 
-/** Post-signup pages at /welcome/[offer]. Point Stripe / Calendly redirects here. */
-export const welcomePages: Record<
-  "communication-masterclass" | "presentation-sprint" | "architecture-audit" | "enterprise-retainer",
-  WelcomePageCopy
-> = {
-  "communication-masterclass": {
-    eyebrow: "The Boardroom Communication & Iteration System",
-    title: "You're in. Welcome to the Masterclass.",
-    subtitle: "Here's how to get the most out of it.",
-    video: videos.welcomeMasterclass,
-    steps: [
-      "Check your inbox for your payment confirmation and access details.",
-      "Watch the welcome video above.",
-      "Pick one technical topic you explain often and practice it with each framework.",
-    ],
-    nextCta: { text: "Explore the 5-Day Sprint", href: "/offers#presentation-sprint" },
-  },
-  "presentation-sprint": {
-    eyebrow: "The 5-Day Boardroom Gravity & SE Transition Accelerator",
-    title: "Welcome to the Sprint.",
-    subtitle: "Here's how to get ready for your 5 days.",
-    video: videos.welcomeSprint,
-    steps: [
-      "Watch the welcome video above.",
-      "Look out for your cohort schedule and calendar invites in your inbox.",
-      "Pick one technical topic you explain often. I'll use it for your first whiteboard session.",
-    ],
-    nextCta: { text: "Explore the Library", href: "/library" },
-  },
+/** Post-signup pages at /welcome/[offer]. Point Calendly / checkout redirects here. */
+export const welcomePages: Record<"architecture-audit", WelcomePageCopy> = {
   "architecture-audit": {
-    eyebrow: "The 48-Hour Enterprise System Latency & Conversion Vault",
-    title: "Your kickoff is booked.",
-    subtitle: "A few things to prepare so we get the most out of the call.",
+    eyebrow: "Revenue Leak Audit",
+    title: "Your audit kickoff is booked!",
+    subtitle: "A few quick things to have ready so we get the most out of it.",
     video: videos.welcomeAudit,
     steps: [
       "Watch the short prep video above.",
-      "List the flows that matter most (signup, onboarding, checkout) and any known drop-off points.",
-      "Have recent analytics and a staging or read-only environment ready to share.",
-      "Your topology blueprint, refactoring spec sheet, and FinOps protocol arrive within 48 hours of kickoff, followed by the executive strategy sync and a 30-day post-audit implementation review.",
+      "Write down the pages that matter most (product pages, cart, checkout, signup) and anywhere you think buyers drop off.",
+      "Have your analytics and a way for me to see your store or app (a staging link or a read-only login) ready to share.",
+      "Your map, ranked fix list, and walkthrough call land within 48 hours of kickoff.",
     ],
-    nextCta: { text: "Back to offers", href: "/offers" },
-  },
-  "enterprise-retainer": {
-    eyebrow: "Enterprise AI Agent & Digital Vault Implementation",
-    title: "Welcome aboard. Let's build.",
-    subtitle: "Here's how the implementation kicks off.",
-    video: videos.welcomeRetainer,
-    steps: [
-      "Watch the kickoff video above.",
-      "Look out for the kickoff agenda and access checklist in your inbox.",
-      "I map the architecture, then build and deploy it with 30 days of hands-on support.",
-    ],
-    nextCta: { text: "Contact me", href: contactHref.retainer },
+    nextCta: { text: "See the done-for-you fixes", href: "/audits#fixes" },
   },
 };
 
+/** Copy for the /audits page. */
 export const offersCopy = {
   headline: {
-    eyebrow: "Offers",
-    headlineText: "Grow your career. Grow your revenue.",
+    eyebrow: "Revenue Leak Audit",
+    headlineText: "More sales from the visitors you already have.",
     subheadlineText:
-      "Pick your path. Engineers: learn to speak so people listen. Founders: find and fix what's costing you sales.",
+      "Your store or app might be quietly losing buyers to slow pages and clunky checkouts. Let's find the leaks, fix them, and turn more of your visitors into paying customers.",
     ctas: [
-      { label: "Apply for the 5-Day Sprint", href: contactHref.sprint },
-      { label: "Get the free checklist", href: `#${checklistCopy.id}`, variant: "inverted" as const },
+      { label: "Get your $800 audit", href: "#audit" },
+      { label: "See what's included", href: "#framework", variant: "inverted" as const },
     ],
   },
 
   ctaBanners: {
     middle: {
       id: "apply",
-      ctaText: "Apply for $5k Audit",
+      ctaText: "Get your $800 audit",
       ctaHref: contactHref.audit,
-      title: "Want me to look at your app?",
-      subtitle:
-        "My $5,000 audit finds what's costing you sales in 48 hours. It's built for companies making $1M+ a year.",
+      title: "Ready to find your leaks?",
+      subtitle: "In 48 hours you'll know what's costing you sales, and what to fix first. One fixed price.",
       secondaryText: "Get the free checklist",
-      secondaryHref: `#${checklistCopy.id}`,
+      secondaryHref: "#free-checklist",
       className: "bg-page",
     },
     bottom: {
-      ctaText: "Apply for Next Cohort ($2,500)",
-      ctaHref: contactHref.sprint,
-      title: "Ready to own the room?",
-      subtitle: "5 live days. Real practice. Real feedback. You'll walk out talking like a pro.",
-      secondaryText: "Apply for $5k Audit",
-      secondaryHref: contactHref.audit,
+      ctaText: "Get your $800 audit",
+      ctaHref: contactHref.audit,
+      title: "More buyers are one fix away.",
+      subtitle: "Find the leaks, get them fixed, and watch more visitors turn into customers.",
+      secondaryText: "Get a fixed quote",
+      secondaryHref: contactHref.fixes,
       className: "bg-page",
     },
   } satisfies Record<string, OffersCtaBannerCopy>,
 
   framework: {
     id: "framework",
-    title: "What I check in your audit",
-    subtitle: "I dig deep into how your app really works, not just how it looks.",
+    title: "What your audit checks",
+    subtitle: "A deep look at how your store or app really works, not just how it looks.",
     items: [
       {
         icon: faStopwatch,
         title: "Speed check",
         description:
-          "I find the slow spots in your app and the tools it talks to (payments, webhooks, APIs), the ones that make buyers give up and leave.",
+          "Find the slow spots in your pages and the tools they talk to (payments, plugins, APIs), the ones that make buyers give up and leave.",
       },
       {
         icon: faRoute,
         title: "Checkout check",
-        description:
-          "Long forms scare people off. I turn them into short, easy steps so more people finish.",
+        description: "Long forms scare people off. You get a plan to turn them into short, easy steps so more people finish.",
       },
       {
         icon: faUserShield,
-        title: "Safety and cost check",
-        description:
-          "I make sure logins are locked down (OAuth 2.0, MFA) and your AWS bill isn't bigger than it should be.",
+        title: "Safety check",
+        description: "Make sure logins and payments are locked down, so customers trust your store and you sleep well at night.",
       },
     ] satisfies OffersFrameworkItem[],
   },
@@ -487,11 +393,11 @@ export const offersCopy = {
     title: "Who this is for",
     intro: "This is for you if…",
     bullets: [
-      "You're an engineer who wants a sales engineer or client-facing job",
-      "You present to bosses and want them to say yes",
-      "You lead a tech team and want your updates to drive decisions",
-      "You run a company making $1M to $10M a year, and checkout feels slow",
-      "You want one fixed price, not surprise hourly bills",
+      "You run an online store or software business and want more sales",
+      "Visitors come to your site, but too few of them buy",
+      "Your pages feel slow, or your checkout feels clunky",
+      "You want clear answers and one fixed price, not surprise hourly bills",
+      "You'd love an expert to just fix it for you",
     ],
   },
 
@@ -502,15 +408,15 @@ export const offersCopy = {
         title: "Who I Am",
         bodyLines: [
           "I’ve always loved two things: building tech and helping people. I started out making video games. Then I taught engineers how to work through tricky code. At Expocad, I ran live software demos for big companies at national trade shows.",
-          "Now I run Stricker Digital. I help companies find what’s costing them sales, and I help engineers get heard.",
+          "Now I run Stricker Digital. I help online businesses find what’s costing them sales and fix it, and I share what I learn about communication on YouTube.",
         ],
       },
       right: {
         title: "Based in Chicago",
         bodyLines: [
-          "I'm based in Chicago and work with teams anywhere.",
-          "Every recommendation is tied to a business metric: conversion, latency, or cost.",
-          "You get engineering depth with the communication of a sales engineer.",
+          "I'm based in Chicago and work with businesses anywhere.",
+          "Every recommendation is tied to what grows your sales.",
+          "You get engineering depth with clear, plain-English answers.",
         ],
       },
     },
@@ -572,48 +478,39 @@ export const offersCopy = {
     ] satisfies OffersTestimonialItem[],
   },
 
+
   faq: {
     id: "faq",
     title: "Frequently asked questions",
     items: [
       {
+        question: "What do I get with the $800 audit?",
+        answer:
+          "A clear picture of your store or app with the trouble spots circled, a fix list ranked by what grows sales first, and a 30-minute call to walk through it all together. Speed, checkout, and security are all checked.",
+      },
+      {
+        question: "How fast is it?",
+        answer: "Your audit lands within 48 hours of kickoff, once I can see your store or app.",
+      },
+      {
+        question: "What if it doesn't help?",
+        answer:
+          "If your problems aren't crystal clear within 24 hours of delivery, tell me and you get a full refund. No questions asked.",
+      },
+      {
+        question: "Can you fix the problems for me?",
+        answer:
+          "Yes! After your audit you can get a fixed quote, and I'll build, test, and ship the fixes. You know the price before any work starts.",
+      },
+      {
+        question: "What kinds of businesses is this for?",
+        answer:
+          "Online stores and software businesses of any size. If you have visitors who aren't buying, there's money to find.",
+      },
+      {
         question: "Is the checklist really free?",
-        answer: "Yep! Just enter your email and you'll go straight to it, with the e-book ready to download. No sales call. No catch.",
-      },
-      {
-        question: "What's the difference between the Masterclass and the Sprint?",
         answer:
-          "The Masterclass ($500) is videos and tools you go through on your own time. The Sprint ($2,500) is 5 live days with me and a small group of 10 or fewer. You practice, I coach you, and you also get 1-on-1 help, practice interviews, a resume review, and the full Masterclass.",
-      },
-      {
-        question: "Who is the Sprint for?",
-        answer:
-          "Engineers who want to move into sales engineering or client-facing jobs, and anyone who has to present to bosses and wants to nail it.",
-      },
-      {
-        question: "What if the Sprint isn't working for me?",
-        answer:
-          "Tell me by the end of Day 2. If you don't feel better at presenting, I'll give you all your money back on the spot.",
-      },
-      {
-        question: "What does the $5,000 audit include?",
-        answer:
-          "I check your checkout, your speed, and your login security. You get a map of your system with the trouble spots circled, plus a step-by-step fix list for your developers. Bonuses: ways to shrink your AWS bill, a 30-minute planning call with your leaders, and 30 days of me checking your team's fixes. One price. Done in 48 hours. Only 2 spots a month.",
-      },
-      {
-        question: "Is the audit guaranteed?",
-        answer:
-          "Yes! Look over your map and fix list. If your problems aren't crystal clear within 24 hours, tell me and I'll refund 100%. No questions asked.",
-      },
-      {
-        question: "Who writes the code after the audit?",
-        answer:
-          "Your developers do, using my fix list, and I check their work for 30 days. Want me to build it for you instead? That's the $50,000 Vault Implementation.",
-      },
-      {
-        question: "What if we make less than $1M a year?",
-        answer:
-          "Start with the free checklist. It shows you the biggest fixes fast, so you'll know if a full audit makes sense later.",
+          "Yep! Just enter your email and you'll go straight to it, with the e-book ready to download. No sales call. No catch.",
       },
     ] satisfies OffersFAQItem[],
   },
@@ -624,33 +521,24 @@ export type OffersCopy = typeof offersCopy;
 /** /contact intake form. */
 export const contactCopy = {
   eyebrow: "Contact",
-  headline: "Let's grow your revenue together.",
+  headline: "Let's grow your sales together.",
   subheadline: "Tell me what you need. I read every message and I'll point you to the best next step.",
   intents: [
-    { value: "sprint", label: "Apply for the 5-Day Boardroom Gravity & SE Transition Accelerator ($2,500)" },
-    { value: "masterclass", label: "Enroll in the Boardroom Communication & Iteration System ($500)" },
-    { value: "audit", label: "Apply for the $5k Enterprise Audit" },
-    { value: "retainer", label: "Enterprise AI Agent & Digital Vault Implementation ($50,000)" },
-    { value: "beta-reader", label: "Join \"The Iteration Loop\" Book Beta Reader List" },
-    { value: "general", label: "General Business Inquiry / Keynote Speaking" },
+    { value: "audit", label: "Get a $800 Revenue Leak Audit" },
+    { value: "fixes", label: "Get a fixed quote to fix my store or app" },
+    { value: "mentoring", label: "Join the developer-to-sales-engineer class waitlist" },
+    { value: "newsletter", label: "Get the weekly notes (videos, lessons, and book updates)" },
+    { value: "general", label: "Speaking, or something else" },
   ],
-  roleLabel: "Current role (for your Sprint application)",
-  rolePlaceholder: "e.g. Software Engineer, Solutions Engineer, Tech Lead",
-  arrLabel: "Company ARR",
-  arrOptions: [
-    { value: "under-1m", label: "Under $1M ARR" },
-    { value: "1m-3m", label: "$1M to $3M ARR" },
-    { value: "3m-10m", label: "$3M to $10M ARR" },
-    { value: "10m-plus", label: "$10M+ ARR" },
-  ],
-  underArrNote: "My $5,000 audit is built for companies making $1M+ a year. Under that, the free checklist is the faster place to start.",
+  roleLabel: "Your current role",
+  rolePlaceholder: "e.g. Software Engineer, Tech Lead",
   placeholders: {
     firstName: "First name",
     lastName: "Last name",
-    email: "Work email",
-    company: "Company or website (optional)",
-    message: "What's going on? Share any context that helps (optional)",
-    sprintMessage: "What do you present today, and what do you want to get better at?",
+    email: "Email",
+    company: "Your store or app's website (optional)",
+    message: "What's going on? Share anything that helps (optional)",
+    mentoringMessage: "Where are you in your career, and what do you want help with? (optional)",
   },
   submit: { idle: "Send", loading: "Sending…" },
   success: {

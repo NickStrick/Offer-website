@@ -1,38 +1,46 @@
 'use client';
+import Image from "next/image";
+
 import Footer from "./components/Footer";
 import Headline from "./components/Headline";
 import Testimonals from "./components/Testimonials";
-import Philosophy from "./components/Philosophy";
-import HelperBtnGroup from "./components/HelperBtnGroup";
-import DualOfferLadders from "./components/DualOfferLadders";
+import ServiceOffers from "./components/ServiceOffers";
 import CaseStudies from "./components/CaseStudies";
 import ProofMetrics from "./components/ProofMetrics";
-import LibraryTeaser from "./components/LibraryTeaser";
-import LeadMagnetBanner from "./components/LeadMagnetBanner";
+import MeetNick from "./components/MeetNick";
+import JourneySection from "./components/JourneySection";
+import MentoringWaitlist from "./components/MentoringWaitlist";
 import VideoSection from "./components/Video";
 import { videos } from "./media";
 import CtaBanner from "./offers/components/CtaBanner";
-import { checklistCopy, contactHref, offersCopy } from "./offers/copy";
+import { offersCopy } from "./offers/copy";
+import Pfp from "../../public/face.jpg";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-page text-white">
       <Headline
-        eyebrow="Code. Communication. Revenue."
-        headlineText="Let's grow your revenue, and your career."
-        subheadlineText="Hi, I'm Nick! I help apps make more money, with smoother checkouts and faster code. And I teach engineers to speak up, so they get heard, hired, and promoted."
+        eyebrow="Revenue Leak Audits · Done-for-you fixes"
+        headlineText="More sales from the visitors you already have."
+        subheadlineText="Your store or app might be quietly losing buyers to slow pages and clunky checkouts. Let's find the leaks, fix them, and turn more of your visitors into paying customers."
         ctas={[
-          { label: "Apply for $5k Audit", href: contactHref.audit },
-          { label: "Get my free checklist", href: `#${checklistCopy.id}`, variant: "inverted" },
+          { label: "Get your $800 audit", href: "#audit" },
+          { label: "See what's included", href: "#services", variant: "inverted" },
         ]}
+        intro={
+          <>
+            <Image src={Pfp} alt="" width={36} height={36} className="h-9 w-9 shrink-0 rounded-full object-cover ring-2 ring-green-500/40" />
+            <span>
+              Hi, I&apos;m Nick 👋 Senior full-stack engineer, 6 years building and fixing online stores and apps.
+            </span>
+          </>
+        }
       />
-      <LeadMagnetBanner />
       <VideoSection video={videos.intro} id="intro-video" />
-      <DualOfferLadders />
+      <ServiceOffers />
       <ProofMetrics />
-      <Philosophy />
       <CaseStudies />
-      <LibraryTeaser />
+      <MeetNick />
       <Testimonals {...{
         type: "testimonials",
         title: offersCopy.testimonials.title,
@@ -46,10 +54,10 @@ export default function Home() {
           background: "default",
         },
       }} />
-      <HelperBtnGroup reviewsHref="#testimonials" bio={offersCopy.about.cards.left.bodyLines} />
+      <JourneySection className="bg-page" />
+      <MentoringWaitlist />
       <CtaBanner {...offersCopy.ctaBanners.bottom} />
       <Footer />
     </main>
   );
 }
-

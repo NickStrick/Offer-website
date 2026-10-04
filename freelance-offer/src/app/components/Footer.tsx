@@ -7,11 +7,13 @@ import { faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 import Logo from "../../../public/SDLogoTrans.png";
 import { useLanguage } from "../context/LanguageContext";
-import { CONTACT_EMAIL } from "../offers/copy";
+import { CONTACT_EMAIL, journeyCopy } from "../offers/copy";
+
+const YOUTUBE_URL = journeyCopy.youtubeUrl;
 
 const socials = [
   { href: "https://www.linkedin.com/in/nick-stricker/", label: "LinkedIn", icon: faLinkedin },
-  { href: "https://www.youtube.com/@NickStrickerDigital", label: "YouTube", icon: faYoutube },
+  { href: "https://www.youtube.com/@NickolasStricker", label: "YouTube", icon: faYoutube },
   { href: "https://www.instagram.com/nickolasstricker/", label: "Instagram", icon: faInstagram },
 ];
 
@@ -24,27 +26,28 @@ export default function Footer() {
       title: es ? 'Sitio' : 'Company',
       links: [
         { href: "/", label: es ? 'Inicio' : 'Home' },
-        { href: "/offers", label: es ? 'Ofertas' : 'Offers' },
+        { href: "/audits", label: es ? 'Auditorías' : 'Audits' },
+        { href: "/journey", label: es ? 'Sígueme' : 'Journey' },
         { href: "/library", label: es ? 'Biblioteca' : 'Library' },
         { href: "/contact", label: es ? 'Contacto' : 'Contact' },
         { href: "https://www.nickolasstricker.com", label: es ? 'Portafolio' : 'Portfolio' },
       ],
     },
     {
-      title: es ? 'Ofertas' : 'Offers',
+      title: es ? 'Servicios' : 'Services',
       links: [
-        { href: "/offers#communication-masterclass", label: "Communication System ($500)" },
-        { href: "/offers#presentation-sprint", label: "SE Accelerator Sprint ($2,500)" },
-        { href: "/offers#enterprise-audit", label: "Enterprise Audit ($5,000)" },
-        { href: "/offers#enterprise-retainer", label: "Vault Implementation ($50,000)" },
-        { href: "/library#digital-vault", label: "The Digital Vault" },
+        { href: "/audits#audit", label: "Revenue Leak Audit ($800)" },
+        { href: "/audits#fixes", label: "Done-for-you fixes" },
+        { href: "/contact?intent=audit", label: "Get your audit" },
       ],
     },
     {
-      title: es ? 'Recursos gratis' : 'Free Resources',
+      title: es ? 'Gratis' : 'Free Stuff',
       links: [
-        { href: "/#free-checklist", label: "The 2026 Enterprise Infrastructure Checklist" },
-        { href: "/library#books", label: "\"The Iteration Loop\" Book Beta Waitlist" },
+        { href: "/audits#free-checklist", label: "The 2026 Enterprise Infrastructure Checklist" },
+        { href: "/journey#journey", label: "The weekly notes" },
+        { href: YOUTUBE_URL, label: "Videos on YouTube" },
+        { href: "/journey#se-classes", label: "Developer-to-SE class waitlist" },
       ],
     },
   ];
@@ -58,7 +61,7 @@ export default function Footer() {
             Stricker Digital
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-muted">
-            Architecture, communication, and system strategy for B2B platforms.
+            Revenue Leak Audits and done-for-you fixes that turn more of your visitors into buyers.
           </p>
           <div className="mt-6 flex gap-2">
             {socials.map((s) => (

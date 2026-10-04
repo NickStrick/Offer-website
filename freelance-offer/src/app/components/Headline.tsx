@@ -1,4 +1,5 @@
 'use client';
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,6 +18,8 @@ type HeadlineProps = {
   subheadlineText?: string;
   eyebrow?: string;
   ctas?: HeadlineCta[];
+  /** Small line under the buttons, e.g. a friendly one-line intro. */
+  intro?: ReactNode;
 };
 
 export default function Headline({
@@ -24,6 +27,7 @@ export default function Headline({
   subheadlineText,
   eyebrow = "Stricker Digital",
   ctas,
+  intro,
 }: HeadlineProps) {
   return (
     <section className="relative isolate overflow-hidden bg-page px-6 pt-24 pb-20 md:pt-32 md:pb-28">
@@ -68,6 +72,8 @@ export default function Headline({
             ))}
           </div>
         ) : null}
+
+        {intro ? <div className="mx-auto mt-10 flex max-w-3xl items-center justify-center gap-3 text-sm text-ink-muted">{intro}</div> : null}
       </motion.div>
     </section>
   );

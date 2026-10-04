@@ -43,6 +43,8 @@ function clean(value: unknown, max: number): string {
  * (see `listName` in library/copy.ts). The value is the tag the subscriber gets in beehiiv.
  */
 const BEEHIIV_LIST_TAGS: Record<string, string> = {
+  "Weekly Notes": "Weekly Notes", // journeyCopy.newsletterListName
+  "SE Classes Waitlist": "SE Classes Waitlist", // mentoringCopy.listName
   "Beta Reader: The Iteration Loop": "Iteration Loop Beta",
   "Release Notify: Amor Fati in the Arena": "Amor Fati Release",
 };
@@ -115,7 +117,7 @@ async function subscribeToBeehiiv(email: string, tag: string): Promise<boolean> 
         utm_source: "strickerdigital.com",
         utm_medium: "website",
         utm_campaign: tag,
-        referring_site: "https://www.strickerdigital.com/library",
+        referring_site: "https://www.strickerdigital.com",
       }),
     });
     if (!res.ok) {

@@ -3,22 +3,21 @@
 import Headline from "../components/Headline";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
-import DualOfferLadders from "../components/DualOfferLadders";
+import ServiceOffers from "../components/ServiceOffers";
 import CaseStudies from "../components/CaseStudies";
 import VideoSection from "../components/Video";
-import { videos } from "../media";
 import ProofMetrics from "../components/ProofMetrics";
 import LeadMagnetBanner from "../components/LeadMagnetBanner";
+import { videos } from "../media";
 
-import CtaBanner from "./components/CtaBanner";
-import FAQ from "./components/FAQ";
-import About from "./components/About";
-import WhoThisIsFor from "./components/WhoThisIsFor";
-import Framework from "./components/Framework";
+import CtaBanner from "../offers/components/CtaBanner";
+import FAQ from "../offers/components/FAQ";
+import About from "../offers/components/About";
+import WhoThisIsFor from "../offers/components/WhoThisIsFor";
+import Framework from "../offers/components/Framework";
+import { offersCopy } from "../offers/copy";
 
-import { offersCopy } from "./copy";
-
-export default function OffersPage() {
+export default function AuditsPage() {
   const { ctaBanners } = offersCopy;
 
   return (
@@ -30,14 +29,11 @@ export default function OffersPage() {
         ctas={[...offersCopy.headline.ctas]}
       />
 
-      <LeadMagnetBanner />
+      <VideoSection video={videos.offers} id="audits-video" />
 
-      <VideoSection video={videos.offers} id="offers-video" />
-
-      <DualOfferLadders />
+      <ServiceOffers />
 
       <ProofMetrics />
-
 
       <Framework
         id={offersCopy.framework.id}
@@ -74,6 +70,9 @@ export default function OffersPage() {
       />
 
       <About copy={offersCopy.about} />
+
+      {/* Not ready for an audit yet? The free checklist is the low-commitment way in. */}
+      <LeadMagnetBanner />
 
       <FAQ id={offersCopy.faq.id} title={offersCopy.faq.title} items={offersCopy.faq.items} className="bg-gradient-purple-black" />
 

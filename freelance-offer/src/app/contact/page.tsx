@@ -51,7 +51,7 @@ export default function ContactPage() {
             </div>
             <div className="surface-card p-7">
               <h2 className="text-lg font-semibold">Ready to talk now?</h2>
-              <p className="mt-2 text-[15px] text-ink-muted">Book a short call about the Sprint, the $5k audit, or the retainer.</p>
+              <p className="mt-2 text-[15px] text-ink-muted">Book a short call to talk about your store or app.</p>
               <BookCallButton className="btn-inverted mt-5 w-full gap-2">
                 <FontAwesomeIcon icon={faCalendarCheck} aria-hidden />
                 Book a call

@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCalendarCheck, faChevronDown, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
@@ -11,15 +10,18 @@ import { submitLead } from "../lib/leads";
 
 export type IntentValue = (typeof contactCopy.intents)[number]["value"];
 
-/** ?tier=… links (and older intent names) map onto the current intents. */
+/** ?tier=… links and older intent names (from retired offers) map onto the current intents. */
 const tierToIntent: Record<string, IntentValue> = {
-  "50k": "retainer",
-  retainer: "retainer",
-  "enterprise-retainer": "retainer",
   enterprise: "audit",
   "enterprise-audit": "audit",
   "micro-audit": "audit",
-  cohort: "sprint",
+  "50k": "fixes",
+  retainer: "fixes",
+  "enterprise-retainer": "fixes",
+  sprint: "mentoring",
+  cohort: "mentoring",
+  masterclass: "mentoring",
+  "beta-reader": "newsletter",
 };
 
 const fieldClass =
@@ -37,7 +39,7 @@ export function resolveIntent(intent: string | null, tier: string | null): Inten
 
 /**
  * The intake / application form used on /contact and in the offer pop-ups.
- * Submissions go to the Google Form; fields without their own question ride along in "Last name".
+ * Submissions go through /api/lead to the Messages Google Form.
  */
 export default function IntakeForm({
   initialIntent = "",
@@ -58,7 +60,6 @@ export default function IntakeForm({
     company: "",
     role: "",
     intent: initialIntent as IntentValue | "",
-    arr: "",
     message: "",
   });
   const [loading, setLoading] = useState(false);
@@ -68,24 +69,19 @@ export default function IntakeForm({
   const set = (key: keyof typeof values) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setValues({ ...values, [key]: e.target.value });
 
-  const isAudit = values.intent === "audit";
-  const isRetainer = values.intent === "retainer";
-  const isSprint = values.intent === "sprint";
+  const isMentoring = values.intent === "mentoring";
+  // Service requests get a "Book a call" button on the thank-you screen.
+  const isService = values.intent === "audit" || values.intent === "fixes";
   const isEmailValid = /[^\s@]+@[^\s@]+\.[^\s@]+/.test(values.email.trim());
-  const isDisabled = loading || !values.firstName.trim() || !isEmailValid || !values.intent || (isAudit && !values.arr);
+  const isDisabled = loading || !values.firstName.trim() || !isEmailValid || !values.intent;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (isDisabled) return;
 
     const intentLabel = contactCopy.intents.find((i) => i.value === values.intent)?.label ?? "";
-    const arrLabel = contactCopy.arrOptions.find((o) => o.value === values.arr)?.label ?? "";
-    // Role and ARR have no question of their own on the form, so they lead the Context answer.
-    const context = [
-      values.role.trim() ? `Role: ${values.role.trim()}` : "",
-      arrLabel ? `ARR: ${arrLabel}` : "",
-      values.message.trim(),
-    ]
+    // Role has no question of its own on the form, so it leads the Context answer.
+    const context = [values.role.trim() ? `Role: ${values.role.trim()}` : "", values.message.trim()]
       .filter(Boolean)
       .join(" | ");
 
@@ -116,7 +112,7 @@ export default function IntakeForm({
           </a>
           .
         </p>
-        {isAudit || isRetainer || isSprint ? (
+        {isService ? (
           <BookCallButton
             className="btn-gradient mt-8 gap-2"
             prefill={{
@@ -158,37 +154,12 @@ export default function IntakeForm({
       <input type="email" aria-label={contactCopy.placeholders.email} value={values.email} onChange={set("email")} className={fieldClass} placeholder={contactCopy.placeholders.email} />
       <input aria-label={contactCopy.placeholders.company} value={values.company} onChange={set("company")} className={fieldClass} placeholder={contactCopy.placeholders.company} />
 
-      {isSprint ? (
+      {isMentoring ? (
         <div>
           <label htmlFor="role" className="mb-2 block text-sm font-medium text-ink-muted">
             {contactCopy.roleLabel}
           </label>
           <input id="role" value={values.role} onChange={set("role")} className={fieldClass} placeholder={contactCopy.rolePlaceholder} />
-        </div>
-      ) : null}
-
-      {isAudit ? (
-        <div className="relative">
-          <label htmlFor="arr" className="mb-2 block text-sm font-medium text-ink-muted">
-            {contactCopy.arrLabel}
-          </label>
-          <select id="arr" value={values.arr} onChange={set("arr")} className={`${fieldClass} appearance-none pr-10`}>
-            <option value="" disabled className="bg-[#181b18]">Select your ARR…</option>
-            {contactCopy.arrOptions.map((o) => (
-              <option key={o.value} value={o.value} className="bg-[#181b18]">
-                {o.label}
-              </option>
-            ))}
-          </select>
-          <FontAwesomeIcon icon={faChevronDown} className="pointer-events-none absolute bottom-4 right-4 text-xs text-ink-subtle" aria-hidden />
-          {values.arr === "under-1m" ? (
-            <p className="mt-3 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
-              {contactCopy.underArrNote}{" "}
-              <Link href="/#free-checklist" className="font-semibold underline underline-offset-4">
-                Get the free checklist
-              </Link>
-            </p>
-          ) : null}
         </div>
       ) : null}
 
@@ -198,7 +169,7 @@ export default function IntakeForm({
         onChange={set("message")}
         rows={4}
         className={`${fieldClass} resize-y`}
-        placeholder={isSprint ? contactCopy.placeholders.sprintMessage : contactCopy.placeholders.message}
+        placeholder={isMentoring ? contactCopy.placeholders.mentoringMessage : contactCopy.placeholders.message}
       />
 
       {error ? <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">{error}</div> : null}
@@ -212,7 +183,7 @@ export default function IntakeForm({
   );
 }
 
-/** Application pop-up for a specific offer (Sprint cohort, $5k audit). */
+/** Request pop-up for a specific service (audit, fixed-quote fixes). */
 export function IntakeModal({
   open,
   onClose,

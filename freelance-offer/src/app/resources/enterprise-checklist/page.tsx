@@ -21,7 +21,7 @@ import IconTile from "../../components/IconTile";
 import SectionHeader from "../../components/SectionHeader";
 import { VideoPlayer } from "../../components/Video";
 import { isMediaReady, videos } from "../../media";
-import { checklistCopy, offerTiers } from "../../offers/copy";
+import { auditOffer, checklistCopy, fixOffer } from "../../offers/copy";
 
 // Reached after the email signup; keep it out of search results.
 export const metadata: Metadata = {
@@ -140,22 +140,20 @@ export default function EnterpriseChecklistPage() {
         <div className="mx-auto max-w-6xl">
           <SectionHeader
             eyebrow="Next steps"
-            title="Found gaps? Here's where to go next."
-            subtitle="Learn to explain the fixes, or bring me in to audit and build them."
+            title="Found leaks? Let's fix them."
+            subtitle="Get a full audit of your store or app, or have the fixes done for you."
           />
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {offerTiers.map((tier) => (
+          <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-2">
+            {[auditOffer, fixOffer].map((offer, i) => (
               <Link
-                key={tier.id}
-                href={`/offers#${tier.id}`}
-                className={`surface-card surface-card-hover group flex flex-col p-7 ${
-                  tier.variant === "featured" ? "!border-green-500/50" : ""
-                }`}
+                key={offer.id}
+                href={`/audits#${offer.id}`}
+                className={`surface-card surface-card-hover group flex flex-col p-7 ${i === 0 ? "!border-green-500/50" : ""}`}
               >
-                <div className="font-mono text-xs uppercase tracking-[0.14em] text-ink-subtle">{tier.tierLabel}</div>
-                <h3 className="mt-2 text-lg font-semibold">{tier.title}</h3>
+                <div className="eyebrow">{offer.eyebrow}</div>
+                <h3 className="mt-2 text-lg font-semibold">{offer.headline}</h3>
                 <div className="mt-2 text-sm text-ink-muted">
-                  {tier.price} / {tier.priceNote}
+                  {offer.price ? `${offer.price} / ${offer.priceNote}` : offer.priceNote}
                 </div>
                 <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-green-400">
                   Learn more

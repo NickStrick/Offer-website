@@ -1,7 +1,7 @@
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faBolt, faCloud, faKey, faTableCellsLarge } from "@fortawesome/free-solid-svg-icons";
 
-import { contactHref } from "../offers/copy";
+import { journeyCopy } from "../offers/copy";
 
 export type VaultFeature = {
   icon: IconDefinition;
@@ -60,8 +60,8 @@ export const libraryCopy = {
         description: "Custom engineered infrastructure with no shared attack surface.",
       },
     ] satisfies VaultFeature[],
-    ctaText: "Inquire about a Vault build",
-    ctaHref: contactHref.retainer,
+    ctaText: "Follow the build on YouTube",
+    ctaHref: journeyCopy.youtubeUrl,
   },
 
   books: {

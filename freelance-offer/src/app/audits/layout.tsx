@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 
 // The page itself is a client component, so its title and description live here.
 export const metadata: Metadata = {
-  title: "Offers & Pricing",
-  description: "Career and communication programs for technical builders, plus fixed-price architecture audits and enterprise implementations for B2B platforms.",
+  title: "Revenue Leak Audits",
+  description:
+    "An $800 fixed-price audit that finds what's costing your store or app sales, plus done-for-you fixes at a fixed quote.",
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

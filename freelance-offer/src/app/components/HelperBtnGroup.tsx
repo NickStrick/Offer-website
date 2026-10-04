@@ -26,7 +26,7 @@ export default function HelperBtnGroup({
   bio = defaultBio,
 }: HelperBtnGroupProps) {
   return (
-    <section className="section-pad bg-page text-white">
+    <section id="about" className="section-pad scroll-mt-16 bg-page text-white">
       <motion.div
         className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16"
         initial={{ opacity: 0, y: 24 }}
