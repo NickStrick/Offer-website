@@ -38,16 +38,26 @@ function CaseStudyCard({ study, flip }: { study: OffersCaseStudy; flip: boolean 
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="grid md:grid-cols-2">
-        <div className={`relative aspect-[16/10] bg-black/40 md:aspect-auto md:min-h-full ${flip ? "md:order-2" : ""}`}>
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            sizes="(max-width: 768px) 100vw, 560px"
-            className={`object-cover ${isFallback ? "" : "object-left-top"}`}
-          />
-          {/* Soften the stand-in photo so it sits with the dark theme */}
-          {isFallback ? <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" /> : null}
+        {/* Desktop screenshots keep their wide shape, framed like a browser window and centered beside the text */}
+        <div className={`flex items-center bg-black/30 p-4 md:p-6 ${flip ? "md:order-2" : ""}`}>
+          <div className="w-full overflow-hidden rounded-xl shadow-2xl shadow-black/40 ring-1 ring-white/10">
+            <div aria-hidden className="flex items-center gap-1.5 bg-white/5 px-3 py-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-amber-400/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
+            </div>
+            <div className="relative aspect-[16/10] bg-black/40">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, 560px"
+                className="object-cover object-top"
+              />
+              {/* Soften the stand-in photo so it sits with the dark theme */}
+              {isFallback ? <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" /> : null}
+            </div>
+          </div>
         </div>
 
         <div className="p-7 md:p-10">
