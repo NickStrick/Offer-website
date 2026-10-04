@@ -32,7 +32,7 @@ export default function ContactPage() {
     <main className="min-h-screen bg-page text-white">
       <Headline eyebrow={contactCopy.eyebrow} headlineText={contactCopy.headline} subheadlineText={contactCopy.subheadline} />
 
-      <section className="bg-page px-6 pb-28 pt-4 text-white">
+      <section id="message" className="scroll-mt-24 bg-page px-6 pb-28 pt-4 text-white">
         <div className="mx-auto grid max-w-6xl items-start gap-10 md:grid-cols-[1.4fr_1fr]">
           {/* useSearchParams requires a Suspense boundary for static rendering */}
           <Suspense fallback={null}>
@@ -71,7 +71,7 @@ export default function ContactPage() {
       </section>
 
       {/* The one full About section on the site; the small "Hi, I'm Nick!" cards elsewhere link here. */}
-      <HelperBtnGroup reviewsHref="#testimonials" bio={offersCopy.about.cards.left.bodyLines} />
+      <HelperBtnGroup reviewsHref="#testimonials" connectHref="#message" bio={offersCopy.about.cards.left.bodyLines} />
 
       <Testimonials
         {...{

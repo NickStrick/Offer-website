@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare, faCertificate, faFolderOpen, faLocationDot, faSeedling, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare, faCertificate, faFolderOpen, faLocationDot, faPaperPlane, faSeedling, faStar } from "@fortawesome/free-solid-svg-icons";
 
 import Pfp from "../../../public/face.jpg";
 import Socials from "./Socials";
@@ -13,6 +13,8 @@ type HelperBtnGroupProps = {
   title?: string;
   /** Pass an empty list to show just the photo, title, and links (no description). */
   bio?: readonly string[];
+  /** In-page anchor (e.g. "#message") for a "Connect" button that smooth-scrolls to the contact form. */
+  connectHref?: string;
 };
 
 const defaultBio = [
@@ -25,6 +27,7 @@ export default function HelperBtnGroup({
   reviewsHref = "/#testimonials",
   title = "Hi, I'm Nick!",
   bio = defaultBio,
+  connectHref,
 }: HelperBtnGroupProps) {
   return (
     <section id="about" className="section-pad scroll-mt-16 bg-page text-white">
@@ -71,6 +74,22 @@ export default function HelperBtnGroup({
           <Socials />
 
           <div className="mt-8 flex flex-wrap gap-3">
+            {connectHref ? (
+              <a
+                href={connectHref}
+                onClick={(e) => {
+                  const target = document.querySelector(connectHref);
+                  if (!target) return;
+                  e.preventDefault();
+                  target.scrollIntoView({ behavior: "smooth", block: "start" });
+                  history.replaceState(null, "", connectHref);
+                }}
+                className="btn-gradient gap-2 !px-5 !py-2.5 !text-sm"
+              >
+                <FontAwesomeIcon icon={faPaperPlane} aria-hidden />
+                Connect
+              </a>
+            ) : null}
             <Link href="https://www.nickolasstricker.com/projects" target="_blank" className="btn-inverted gap-2 !px-5 !py-2.5 !text-sm">
               <FontAwesomeIcon icon={faFolderOpen} aria-hidden />
               Previous Projects
