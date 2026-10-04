@@ -123,6 +123,12 @@ export const checklistCopy = {
   videoReady: checklistVideoReady,
   id: "free-checklist",
   resourcePath: "/resources/enterprise-checklist",
+  /**
+   * The Canva e-book. Put the PDF at public/resources/2026-enterprise-infrastructure-checklist.pdf;
+   * the checklist page shows its download button automatically once the file is there.
+   */
+  ebookPath: "/resources/2026-enterprise-infrastructure-checklist.pdf",
+  ebookDownloadName: "Stricker Digital - 2026 Enterprise Infrastructure Checklist.pdf",
   tag: "Free",
   price: "$0",
   /** The resource's name, shown as a small label (and as the checklist page title). */
@@ -131,7 +137,7 @@ export const checklistCopy = {
   subtitle:
     checklistVideoReady
       ? "Watch me walk through the 3 biggest money leaks I see in growing apps: slow pages, slow servers, and checkout forms that ask too much. Leaks like these can cost a company $50k or more."
-      : "I mapped the 3 biggest money leaks I see in growing apps: slow pages, slow servers, and checkout forms that ask too much. Leaks like these can cost a company $50k or more.",
+      : "My free e-book maps the 3 biggest money leaks I see in growing apps: slow pages, slow servers, and checkout forms that ask too much. Leaks like these can cost a company $50k or more.",
   highlights: [
     checklistVideoReady
       ? "A 60-second video where I draw out the 3 biggest problems I find (in Excalidraw)"
@@ -572,7 +578,7 @@ export const offersCopy = {
     items: [
       {
         question: "Is the checklist really free?",
-        answer: "Yep! Just enter your email and you'll go straight to it. No sales call. No catch.",
+        answer: "Yep! Just enter your email and you'll go straight to it, with the e-book ready to download. No sales call. No catch.",
       },
       {
         question: "What's the difference between the Masterclass and the Sprint?",

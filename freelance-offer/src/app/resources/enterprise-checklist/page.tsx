@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
   faCircleCheck,
   faClock,
+  faFilePdf,
+  faDownload,
   faLayerGroup,
   faMobileScreen,
   faServer,
@@ -65,13 +69,32 @@ const sections = [
 
 export default function EnterpriseChecklistPage() {
   const video = videos.enterpriseChecklist;
+  // Only offer the download once the PDF is actually in /public (checked at build time).
+  const ebookReady = existsSync(join(process.cwd(), "public", checklistCopy.ebookPath));
 
   return (
     <main className="min-h-screen bg-page text-white">
       <Headline eyebrow={checklistCopy.tag} headlineText={checklistCopy.title} subheadlineText={checklistCopy.subtitle} />
 
       <section className="bg-page px-6 pb-20">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-4xl space-y-6">
+          {ebookReady ? (
+            <div className="surface-card flex flex-col items-start gap-5 !border-green-500/40 p-6 sm:flex-row sm:items-center md:p-8">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-green-500/30 bg-green-500/10 text-2xl text-green-400">
+                <FontAwesomeIcon icon={faFilePdf} aria-hidden />
+              </span>
+              <div className="flex-1">
+                <h2 className="text-xl font-semibold">Your free e-book is ready!</h2>
+                <p className="mt-1 text-[15px] leading-relaxed text-ink-muted">
+                  Download it, then use the checklist below to test your own app.
+                </p>
+              </div>
+              <a href={checklistCopy.ebookPath} download={checklistCopy.ebookDownloadName} className="btn-gradient gap-2">
+                <FontAwesomeIcon icon={faDownload} aria-hidden />
+                Download the e-book (PDF)
+              </a>
+            </div>
+          ) : null}
           {isMediaReady(video) ? (
             <VideoPlayer video={video} />
           ) : (
