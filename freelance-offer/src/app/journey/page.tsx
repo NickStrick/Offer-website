@@ -6,6 +6,7 @@ import JourneySection from "../components/JourneySection";
 import Philosophy from "../components/Philosophy";
 import MentoringWaitlist from "../components/MentoringWaitlist";
 import LibraryTeaser from "../components/LibraryTeaser";
+import MeetNick from "../components/MeetNick";
 import { journeyCopy } from "../offers/copy";
 
 export default function JourneyPage() {
@@ -24,6 +25,7 @@ export default function JourneyPage() {
       <Philosophy />
       <MentoringWaitlist />
       <LibraryTeaser />
+      <MeetNick />
       <Footer />
     </main>
   );

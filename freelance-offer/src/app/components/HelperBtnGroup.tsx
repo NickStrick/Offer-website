@@ -11,6 +11,7 @@ import Socials from "./Socials";
 type HelperBtnGroupProps = {
   reviewsHref?: string;
   title?: string;
+  /** Pass an empty list to show just the photo, title, and links (no description). */
   bio?: readonly string[];
 };
 
@@ -53,13 +54,15 @@ export default function HelperBtnGroup({
             About
           </div>
           <h2 className="display-title mt-4">{title}</h2>
-          <div className="mt-6 space-y-4">
-            {bio.map((line) => (
-              <p key={line} className="lead-text">
-                {line}
-              </p>
-            ))}
-          </div>
+          {bio.length ? (
+            <div className="mt-6 space-y-4">
+              {bio.map((line) => (
+                <p key={line} className="lead-text">
+                  {line}
+                </p>
+              ))}
+            </div>
+          ) : null}
           <div className="mt-6 flex items-center gap-2 text-sm text-ink-subtle">
             <FontAwesomeIcon icon={faLocationDot} aria-hidden />
             Nick Stricker · Founder · Chicago, IL

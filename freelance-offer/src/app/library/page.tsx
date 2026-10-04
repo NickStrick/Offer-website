@@ -1,6 +1,7 @@
 'use client';
 import Headline from "../components/Headline";
 import Footer from "../components/Footer";
+import MeetNick from "../components/MeetNick";
 
 import DigitalVault from "./components/DigitalVault";
 import BookLibrary from "./components/BookLibrary";
@@ -20,6 +21,7 @@ export default function LibraryPage() {
 
       <DigitalVault />
       <BookLibrary />
+      <MeetNick />
 
       <Footer />
     </main>

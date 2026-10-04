@@ -8,11 +8,11 @@ import CaseStudies from "../components/CaseStudies";
 import VideoSection from "../components/Video";
 import ProofMetrics from "../components/ProofMetrics";
 import LeadMagnetBanner from "../components/LeadMagnetBanner";
+import MeetNick from "../components/MeetNick";
 import { videos } from "../media";
 
 import CtaBanner from "../offers/components/CtaBanner";
 import FAQ from "../offers/components/FAQ";
-import About from "../offers/components/About";
 import WhoThisIsFor from "../offers/components/WhoThisIsFor";
 import Framework from "../offers/components/Framework";
 import { offersCopy } from "../offers/copy";
@@ -69,7 +69,7 @@ export default function AuditsPage() {
         }}
       />
 
-      <About copy={offersCopy.about} />
+      <MeetNick />
 
       {/* Not ready for an audit yet? The free checklist is the low-commitment way in. */}
       <LeadMagnetBanner />

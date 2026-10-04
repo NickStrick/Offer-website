@@ -14,7 +14,7 @@ export default function MeetNick({ className = "bg-page" }: { className?: string
   return (
     <section className={`${className} px-6 py-16 text-white`}>
       <motion.div
-        className="surface-card mx-auto flex max-w-4xl flex-col items-center gap-7 p-7 text-center md:flex-row md:items-start md:p-9 md:text-left"
+        className="surface-card mx-auto flex max-w-4xl flex-col items-center gap-7 p-7 text-center md:flex-row md:items-center md:p-9 md:text-left"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -23,9 +23,9 @@ export default function MeetNick({ className = "bg-page" }: { className?: string
         <Image
           src={Pfp}
           alt="Nick Stricker"
-          width={112}
-          height={112}
-          className="h-28 w-28 shrink-0 rounded-full object-cover ring-2 ring-green-500/40"
+          width={224}
+          height={224}
+          className="h-56 w-56 shrink-0 rounded-full object-cover ring-2 ring-green-500/40"
         />
         <div>
           <h2 className="text-2xl font-semibold">{meetNickCopy.name}</h2>
@@ -35,7 +35,7 @@ export default function MeetNick({ className = "bg-page" }: { className?: string
               <FontAwesomeIcon icon={faYoutube} aria-hidden />
               Watch on YouTube
             </a>
-            <Link href="/audits#about" className="btn-inverted gap-2 !px-5 !py-2.5 !text-sm">
+            <Link href="/contact#about" className="btn-inverted gap-2 !px-5 !py-2.5 !text-sm">
               Read my story
               <FontAwesomeIcon icon={faArrowRight} className="text-xs" aria-hidden />
             </Link>

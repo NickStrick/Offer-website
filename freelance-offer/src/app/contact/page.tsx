@@ -7,8 +7,10 @@ import { faCalendarCheck, faEnvelope, faLocationDot } from "@fortawesome/free-so
 import Headline from "../components/Headline";
 import Footer from "../components/Footer";
 import Socials from "../components/Socials";
+import HelperBtnGroup from "../components/HelperBtnGroup";
+import Testimonials from "../components/Testimonials";
 import IntakeForm, { resolveIntent } from "../components/IntakeForm";
-import { CONTACT_EMAIL, contactCopy } from "../offers/copy";
+import { CONTACT_EMAIL, contactCopy, offersCopy } from "../offers/copy";
 import BookCallButton, { BookCallModal } from "../components/BookCallModal";
 
 /** /contact?book=1 opens the booking calendar straight away (handy for links in emails and DMs). */
@@ -67,6 +69,25 @@ export default function ContactPage() {
           </aside>
         </div>
       </section>
+
+      {/* The one full About section on the site; the small "Hi, I'm Nick!" cards elsewhere link here. */}
+      <HelperBtnGroup reviewsHref="#testimonials" bio={offersCopy.about.cards.left.bodyLines} />
+
+      <Testimonials
+        {...{
+          type: "testimonials",
+          title: offersCopy.testimonials.title,
+          subtitle: offersCopy.testimonials.subtitle,
+          items: offersCopy.testimonials.items,
+          style: {
+            variant: "carousel",
+            columns: 3,
+            showQuoteIcon: true,
+            rounded: "xl",
+            background: "default",
+          },
+        }}
+      />
 
       <Footer />
     </main>
