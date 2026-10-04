@@ -41,6 +41,18 @@ export type OffersCaseStudy = {
   friction: { label: string; text: string };
   architecture: { label: string; text: string };
   metric: { label: string; text: string };
+  /** Optional link to the live project. */
+  link?: { href: string; label: string };
+};
+
+/** A smaller project shown in the "More sites I've built" row. */
+export type MoreWorkItem = {
+  id: string;
+  name: string;
+  type: string;
+  description: string;
+  image: ImageMedia;
+  href: string;
 };
 
 /** A service card: the visitor's outcome first, the price second. */
@@ -240,60 +252,109 @@ export const caseStudies: readonly OffersCaseStudy[] = [
   {
     id: "redtail-luxe",
     published: true,
-    eyebrow: "Checkout Refactor",
+    eyebrow: "Luxury watch store · Checkout rebuild",
     title: "Fixing Redtail Luxe's checkout",
     image: caseStudyImages.redtailLuxe,
     friction: {
       label: "The problem",
-      text: "Shoppers hit one giant wall of a form and left before buying expensive watches.",
+      text: "Their Wix site looked great, but buyers kept leaving. Reviews were buried, and checkout was one big wall of confusing boxes.",
     },
     architecture: {
       label: "What I built",
-      text: "I split it into small steps, 5 questions or fewer each, with smooth, fast animations.",
+      text: "I moved reviews and their story to the top, so shoppers trusted them faster. Then I rebuilt checkout into short, simple steps, with 5 questions or fewer on each screen.",
     },
     metric: {
       label: "The result",
-      text: "30% more shoppers finished checkout in the first 30 days.",
+      text: "30% more shoppers finished checkout, month over month.",
     },
+    link: { href: "https://www.redtailluxe.com/", label: "See the live store" },
   },
   {
     id: "trade-show-platform",
     published: true,
-    eyebrow: "Enterprise Platform",
-    title: "Helping a huge trade show app grow",
+    eyebrow: "Enterprise trade show platform",
+    title: "Helping a huge trade show app run faster",
     image: caseStudyImages.tradeShowPlatform,
     friction: {
       label: "The problem",
-      text: "A giant app (600,000 lines of code!) had to work live for exhibitors and visitors.",
+      text: "A giant app (600,000 lines of code!) used live at trade shows felt slow, and users kept getting stuck.",
     },
     architecture: {
       label: "What I built",
-      text: "Live chat, live exhibitor lists, and behind-the-scenes message delivery.",
+      text: "A live attendee dashboard with chat, exhibitor search, and calendar sync. I traced every data request from start to finish and fixed the slow ones.",
     },
     metric: {
       label: "The result",
-      text: "The app ran 30% faster, and complaint tickets dropped 22%.",
+      text: "The app ran 30% faster and user friction dropped 22%, helping keep its biggest customers renewing.",
     },
   },
   {
-    id: "slot-3",
-    published: false,
-    eyebrow: "Case Study Slot 3",
-    title: "Your next B2B SaaS case study",
-    image: caseStudyImages.slot3,
-    friction: { label: "The problem", text: "What was breaking and what it cost." },
-    architecture: { label: "What I built", text: "What I changed in the system." },
-    metric: { label: "The result", text: "The number that moved." },
+    id: "cm-florals",
+    published: true,
+    eyebrow: "Local florist · Online store",
+    title: "Giving a 45-year florist an online store",
+    image: caseStudyImages.cmFlorals,
+    friction: {
+      label: "The problem",
+      text: "A florist with 45 years of experience needed new customers to find her, order online, and ask about custom flowers.",
+    },
+    architecture: {
+      label: "What I built",
+      text: "A custom online store with easy inquiry forms, built in 4 weeks on Next.js and AWS.",
+    },
+    metric: {
+      label: "The result",
+      text: "One easy place for customers to shop and reach out, built just the way she pictured it.",
+    },
+    link: { href: "https://www.cmfloralsandgifts.com/", label: "See the live store" },
   },
   {
-    id: "slot-4",
-    published: false,
-    eyebrow: "Case Study Slot 4",
-    title: "Your next B2B SaaS case study",
-    image: caseStudyImages.slot4,
-    friction: { label: "The problem", text: "What was breaking and what it cost." },
-    architecture: { label: "What I built", text: "What I changed in the system." },
-    metric: { label: "The result", text: "The number that moved." },
+    id: "grand-wood-and-glass",
+    published: true,
+    eyebrow: "Woodworking & glass studio · Online store",
+    title: "Taking a craft studio's work online",
+    image: caseStudyImages.grandWood,
+    friction: {
+      label: "The problem",
+      text: "A woodworking and glass company needed a way to sell online and bring in requests for custom pieces.",
+    },
+    architecture: {
+      label: "What I built",
+      text: "A custom online store with lead capture for custom orders, built in 4 weeks on Next.js and AWS.",
+    },
+    metric: {
+      label: "The result",
+      text: "One place for customers to shop, see the craft up close, and ask for custom work.",
+    },
+    link: { href: "https://www.grandwoodandglass.com/", label: "See the live store" },
+  },
+];
+
+/** Smaller projects, shown as a compact row under the case studies. */
+export const moreWork: readonly MoreWorkItem[] = [
+  {
+    id: "connecting-dots",
+    name: "Connecting Dots LatinX",
+    type: "Community nonprofit",
+    description: "A home online for Chicago's LatinX community to find events and connect.",
+    image: caseStudyImages.connectingDots,
+    href: "https://connecting-dots-five.vercel.app/",
+  },
+  {
+    id: "do-well-2-transform",
+    name: "Do Well 2 Transform",
+    type: "Coaching business",
+    description: "A clean landing page for a coaching and hypnosis practice.",
+    image: caseStudyImages.doWell,
+    href: "https://dowell2transform.com/",
+  },
+  {
+    id: "claroflow",
+    name: "ClaroFlow",
+    type: "SaaS landing page",
+    description: "A fast, sleek landing page for a workflow tool built for remote teams.",
+    image: caseStudyImages.claroflow,
+    href: "https://claro-flow.vercel.app/",
   },
 ];
 

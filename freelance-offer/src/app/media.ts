@@ -29,10 +29,11 @@ export type ImageMedia = {
 export const videos = {
   /** Homepage — introductory video under the hero. */
   intro: {
-    title: "Meet Stricker Digital",
-    caption: "Who I am, who I work with, and how architecture and communication turn into revenue growth.",
-    src: "",
-    published: false,
+    title: "What you'll find here",
+    caption: "A quick hello, from Nick.",
+    // YouTube: "Welcome to my channel, I'm Nick!" (rel=0 keeps suggested videos to this channel)
+    src: "https://www.youtube.com/embed/qInhbf1h5vk?rel=0",
+    published: true,
   },
   /** /audits: a short walkthrough of the audit and done-for-you fixes. */
   offers: {
@@ -58,17 +59,40 @@ export const videos = {
 
 export const caseStudyImages = {
   redtailLuxe: {
-    src: "/case-studies/redtail-luxe.jpg",
-    alt: "Redtail Luxe multi-step checkout flow",
-    published: false,
+    src: "/case-studies/redtailluxe.jpg",
+    alt: "Redtail Luxe luxury watch store",
+    published: true,
   },
   tradeShowPlatform: {
-    src: "/case-studies/trade-show-platform.jpg",
-    alt: "Trade show analytics platform exhibitor directory",
-    published: false,
+    src: "/case-studies/Expocad.png",
+    alt: "Expocad trade show platform event dashboard",
+    published: true,
   },
-  slot3: { src: "", alt: "", published: false },
-  slot4: { src: "", alt: "", published: false },
+  cmFlorals: {
+    src: "/case-studies/CMF.png",
+    alt: "CM Florals online store homepage",
+    published: true,
+  },
+  grandWood: {
+    src: "/case-studies/Grand.png",
+    alt: "Grand Wood and Glass online store homepage",
+    published: true,
+  },
+  connectingDots: {
+    src: "/case-studies/connectingdots.jpg",
+    alt: "Connecting Dots LatinX community website",
+    published: true,
+  },
+  doWell: {
+    src: "/case-studies/doWell.png",
+    alt: "Do Well 2 Transform coaching website",
+    published: true,
+  },
+  claroflow: {
+    src: "/case-studies/claroflow.png",
+    alt: "ClaroFlow SaaS landing page",
+    published: true,
+  },
 } satisfies Record<string, ImageMedia>;
 
 export const isMediaReady = (m: { src: string; published: boolean }) => m.published && m.src.length > 0;

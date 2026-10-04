@@ -3,6 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowUpRightFromSquare,
   faChartLine,
   faDiagramProject,
   faFolderOpen,
@@ -11,7 +12,7 @@ import {
 
 import SectionHeader from "./SectionHeader";
 import { imageOrFallback, isMediaReady, showMediaPlaceholders } from "../media";
-import { caseStudies, caseStudiesHeader, type OffersCaseStudy } from "../offers/copy";
+import { caseStudies, caseStudiesHeader, moreWork, type OffersCaseStudy } from "../offers/copy";
 
 const rowIcons = {
   friction: faTriangleExclamation,
@@ -43,7 +44,7 @@ function CaseStudyCard({ study, flip }: { study: OffersCaseStudy; flip: boolean 
             alt={image.alt}
             fill
             sizes="(max-width: 768px) 100vw, 560px"
-            className="object-cover"
+            className={`object-cover ${isFallback ? "" : "object-left-top"}`}
           />
           {/* Soften the stand-in photo so it sits with the dark theme */}
           {isFallback ? <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" /> : null}
@@ -76,6 +77,12 @@ function CaseStudyCard({ study, flip }: { study: OffersCaseStudy; flip: boolean 
               </div>
             ))}
           </dl>
+          {study.link ? (
+            <a href={study.link.href} target="_blank" rel="noreferrer" className="btn-inverted mt-6 gap-2 !px-5 !py-2.5 !text-sm">
+              {study.link.label}
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-xs" aria-hidden />
+            </a>
+          ) : null}
         </div>
       </div>
     </motion.article>
@@ -99,6 +106,36 @@ export default function CaseStudies({ className = "bg-gradient-purple-black" }: 
         <div className="grid gap-6">
           {visible.map((study, i) => (
             <CaseStudyCard key={study.id} study={study} flip={i % 2 === 1} />
+          ))}
+        </div>
+
+        <h3 className="mt-16 text-center text-xl font-semibold">More sites I&apos;ve built</h3>
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {moreWork.map((item, i) => (
+            <motion.a
+              key={item.id}
+              href={item.href}
+              target="_blank"
+              rel="noreferrer"
+              className="surface-card surface-card-hover group flex flex-col overflow-hidden"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.08 }}
+            >
+              <div className="relative aspect-[16/10] bg-black/40">
+                <Image src={item.image.src} alt={item.image.alt} fill sizes="(max-width: 768px) 100vw, 380px" className="object-cover object-top" />
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <div className="eyebrow">{item.type}</div>
+                <h4 className="mt-2 text-lg font-semibold">{item.name}</h4>
+                <p className="mt-2 flex-1 text-[15px] leading-relaxed text-ink-muted">{item.description}</p>
+                <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-green-400">
+                  See the live site
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-xs" aria-hidden />
+                </span>
+              </div>
+            </motion.a>
           ))}
         </div>
       </div>

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faCirclePlay, faImage } from "@fortawesome/free-solid-svg-icons";
 
+import SectionHeader from "./SectionHeader";
 import { isMediaReady, showVideoPlaceholders, type VideoMedia } from "../media";
 
 const isFile = (src: string) => /\.(mp4|webm|mov)(\?.*)?$/i.test(src);
@@ -58,7 +59,7 @@ export function VideoPlayer({ video }: { video: VideoMedia }) {
 export default function VideoSection({
   video,
   id,
-  className = "bg-gradient-black-dark",
+  className = "bg-page",
 }: {
   video: VideoMedia;
   id?: string;
@@ -67,16 +68,9 @@ export default function VideoSection({
   if (!isMediaReady(video) && !showVideoPlaceholders) return null;
 
   return (
-    <section id={id} className={`${className} px-6 py-16 text-white`}>
+    <section id={id} className={`${className} scroll-mt-16 px-6 pb-20 pt-4 text-white`}>
       <div className="mx-auto max-w-4xl">
-        <header className="mb-8 text-center">
-          <div className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-green-400">
-            <FontAwesomeIcon icon={faCirclePlay} aria-hidden />
-            Watch
-          </div>
-          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight">{video.title}</h2>
-          {video.caption ? <p className="mt-3 text-lg text-zinc-300">{video.caption}</p> : null}
-        </header>
+        <SectionHeader eyebrow="Watch" eyebrowIcon={faCirclePlay} title={video.title} subtitle={video.caption} className="!mb-10" />
         <VideoPlayer video={video} />
       </div>
     </section>
