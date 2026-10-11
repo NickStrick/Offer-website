@@ -13,7 +13,7 @@ import MentoringWaitlist from "./components/MentoringWaitlist";
 import VideoSection from "./components/Video";
 import { videos } from "./media";
 import CtaBanner from "./offers/components/CtaBanner";
-import { offersCopy } from "./offers/copy";
+import { AUDIT_PRICE, offersCopy } from "./offers/copy";
 import Pfp from "../../public/face.jpg";
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
         headlineText="More sales from the visitors you already have."
         subheadlineText="Your store or app might be quietly losing buyers to slow pages and clunky checkouts. Let's find the leaks, fix them, and turn more of your visitors into paying customers."
         ctas={[
-          { label: "Get your $800 audit", href: "#audit" },
+          { label: `Get your ${AUDIT_PRICE} audit`, href: "#audit" },
           { label: "See what's included", href: "#services", variant: "inverted" },
         ]}
         intro={

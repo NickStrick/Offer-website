@@ -64,6 +64,10 @@ export type ServiceOffer = {
   subtitle: string;
   price?: string;
   priceNote?: string;
+  /** Struck-through "was" price shown next to a discounted price. */
+  regularPrice?: string;
+  /** Small badge above the price, e.g. a limited-time note. */
+  priceBadge?: string;
   features: readonly { title: string; text: string }[];
   guarantee?: { title: string; body: string };
   ctaText: string;
@@ -92,6 +96,12 @@ export type OffersAboutCopy = {
 };
 
 export const CONTACT_EMAIL = "nick@strickerdigital.com";
+
+/** Founding price for the first 10 audit clients. Once those spots are filled, set AUDIT_PRICE back to
+ *  AUDIT_REGULAR_PRICE: the struck-through price and founding badge then hide on their own. */
+export const AUDIT_REGULAR_PRICE: string = "$800";
+export const AUDIT_PRICE: string = "$400";
+export const AUDIT_FOUNDING_NOTE = "Founding price for my first 10 clients";
 
 /** Calendly booking page, shown in the "Book a call" pop-up (components/BookCallModal.tsx). */
 export const BOOK_CALL_URL = "https://calendly.com/nickolasstricker/stricker-digital-discussion";
@@ -158,7 +168,9 @@ export const auditOffer: ServiceOffer = {
   title: "Revenue Leak Audit",
   headline: "Find out exactly why visitors leave without buying.",
   subtitle: "In 48 hours you'll know what's costing you sales, and exactly what to fix first.",
-  price: "$800",
+  price: AUDIT_PRICE,
+  regularPrice: AUDIT_PRICE !== AUDIT_REGULAR_PRICE ? AUDIT_REGULAR_PRICE : undefined,
+  priceBadge: AUDIT_PRICE !== AUDIT_REGULAR_PRICE ? AUDIT_FOUNDING_NOTE : undefined,
   priceNote: "one fixed price, no surprise bills",
   features: [
     { title: "A clear picture of your store or app", text: "with every trouble spot circled" },
@@ -173,7 +185,7 @@ export const auditOffer: ServiceOffer = {
   ctaText: "Get your audit",
   intent: "audit",
   modal: {
-    title: "Get your $800 Revenue Leak Audit",
+    title: `Get your ${AUDIT_PRICE} Revenue Leak Audit`,
     description: "Tell me about your store or app, and I'll reply soon with next steps and a time for your kickoff.",
   },
 };
@@ -290,24 +302,44 @@ export const caseStudies: readonly OffersCaseStudy[] = [
     link: { href: "https://www.expocad.com/", label: "See Expocad" },
   },
   {
-    id: "cm-florals",
+    id: "copper-fox-collective",
     published: true,
     eyebrow: "Local florist · Online store",
     title: "Giving a 45-year florist an online store",
-    image: caseStudyImages.cmFlorals,
+    image: caseStudyImages.copperFox,
     friction: {
       label: "The problem",
       text: "A florist with 45 years of experience needed new customers to find her, order online, and ask about custom flowers.",
     },
     architecture: {
       label: "What I built",
-      text: "A custom online store with easy inquiry forms, built in 4 weeks on Next.js and AWS.",
+      text: "A custom online store with easy inquiry forms, built in 4 weeks on Next.js and AWS. When she grew into her new Copper Fox Collective brand, the site grew right along with her.",
     },
     metric: {
       label: "The result",
       text: "One easy place for customers to shop and reach out, built just the way she pictured it.",
     },
-    link: { href: "https://www.cmfloralsandgifts.com/", label: "See the live store" },
+    link: { href: "https://www.copperfoxcollective.com/", label: "See the live store" },
+  },
+  {
+    id: "chelles-fiber-crafts",
+    published: true,
+    eyebrow: "Fiber arts shop · Custom online store",
+    title: "Building a fiber arts shop its own store",
+    image: caseStudyImages.chellesCrafts,
+    friction: {
+      label: "The problem",
+      text: "A local fiber arts business needed a real online store to show off its handmade goods, keep track of stock, and take payments safely.",
+    },
+    architecture: {
+      label: "What I built",
+      text: "A custom store built from the ground up in 4 weeks, with product pages, a shopping cart, inventory tracking, and secure checkout. I handled all of it, front to back.",
+    },
+    metric: {
+      label: "The result",
+      text: "The shop now sells online 24/7, and the owner runs products and stock herself.",
+    },
+    link: { href: "https://www.chellescrafts.com/", label: "See the live store" },
   },
   {
     id: "grand-wood-and-glass",
@@ -400,7 +432,7 @@ export const offersCopy = {
     subheadlineText:
       "Your store or app might be quietly losing buyers to slow pages and clunky checkouts. Let's find the leaks, fix them, and turn more of your visitors into paying customers.",
     ctas: [
-      { label: "Get your $800 audit", href: "#audit" },
+      { label: `Get your ${AUDIT_PRICE} audit`, href: "#audit" },
       { label: "See what's included", href: "#framework", variant: "inverted" as const },
     ],
   },
@@ -408,7 +440,7 @@ export const offersCopy = {
   ctaBanners: {
     middle: {
       id: "apply",
-      ctaText: "Get your $800 audit",
+      ctaText: `Get your ${AUDIT_PRICE} audit`,
       ctaHref: contactHref.audit,
       title: "Ready to find your leaks?",
       subtitle: "In 48 hours you'll know what's costing you sales, and what to fix first. One fixed price.",
@@ -417,7 +449,7 @@ export const offersCopy = {
       className: "bg-page",
     },
     bottom: {
-      ctaText: "Get your $800 audit",
+      ctaText: `Get your ${AUDIT_PRICE} audit`,
       ctaHref: contactHref.audit,
       title: "More buyers are one fix away.",
       subtitle: "Find the leaks, get them fixed, and watch more visitors turn into customers.",
@@ -499,7 +531,7 @@ export const offersCopy = {
         quote:
           "Took an idea a created what I imagined just by him understanding what my business needed through our conversations. I loved the visual accents, instant awareness to the Customer of toggles and info points that he included.",
         name: "Carole Murray",
-        role: "Founder of CM Florals",
+        role: "Founder of Copper Fox Collective (formerly CM Florals)",
         avatarUrl: carolePhoto.src,
       },
       {
@@ -546,10 +578,19 @@ export const offersCopy = {
     title: "Frequently asked questions",
     items: [
       {
-        question: "What do I get with the $800 audit?",
+        question: `What do I get with the ${AUDIT_PRICE} audit?`,
         answer:
           "A clear picture of your store or app with the trouble spots circled, a fix list ranked by what grows sales first, and a 30-minute call to walk through it all together. Speed, checkout, and security are all checked.",
       },
+      // Only asked while the founding price is on
+      ...(AUDIT_PRICE !== AUDIT_REGULAR_PRICE
+        ? [
+            {
+              question: `Why is the audit ${AUDIT_PRICE} right now?`,
+              answer: `It's a founding price for my first 10 audit clients. You get the full audit for less, and I get to grow my list of happy customers. Once those 10 spots are filled, the price goes back to ${AUDIT_REGULAR_PRICE}.`,
+            },
+          ]
+        : []),
       {
         question: "How fast is it?",
         answer: "Your audit lands within 48 hours of kickoff, once I can see your store or app.",
@@ -586,7 +627,7 @@ export const contactCopy = {
   headline: "Let's grow your sales together.",
   subheadline: "Tell me what you need. I read every message and I'll point you to the best next step.",
   intents: [
-    { value: "audit", label: "Get a $800 Revenue Leak Audit" },
+    { value: "audit", label: `Get a ${AUDIT_PRICE} Revenue Leak Audit` },
     { value: "fixes", label: "Get a fixed quote to fix my store or app" },
     { value: "mentoring", label: "Join the developer-to-sales-engineer class waitlist" },
     { value: "newsletter", label: "Get the weekly notes (videos, lessons, and book updates)" },

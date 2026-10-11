@@ -60,8 +60,19 @@ function ServiceCard({
       <h3 className="mt-6 text-2xl font-semibold leading-snug">{offer.headline}</h3>
       <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">{offer.subtitle}</p>
 
+      {offer.priceBadge ? (
+        <div className="mt-6 inline-flex rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-amber-300">
+          {offer.priceBadge}
+        </div>
+      ) : null}
       {offer.price ? (
-        <div className="mt-6 flex flex-wrap items-baseline gap-x-2">
+        <div className={`${offer.priceBadge ? "mt-3" : "mt-6"} flex flex-wrap items-baseline gap-x-2`}>
+          {offer.regularPrice ? (
+            <span className="text-2xl font-medium text-ink-subtle line-through">
+              <span className="sr-only">Regularly </span>
+              {offer.regularPrice}
+            </span>
+          ) : null}
           <span className="text-5xl font-semibold text-white" style={{ letterSpacing: "-0.04em" }}>
             {offer.price}
           </span>
@@ -110,7 +121,7 @@ function ServiceCard({
   );
 }
 
-/** The two services: the $800 Revenue Leak Audit and done-for-you fixes. */
+/** The two services: the Revenue Leak Audit and done-for-you fixes. */
 export default function ServiceOffers({ className = "bg-page" }: { className?: string }) {
   const [requesting, setRequesting] = useState<ServiceOffer | null>(null);
 

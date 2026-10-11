@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
+import { AUDIT_PRICE } from "../offers/copy";
 import Logo from "../../../public/SDLogoTrans.png";
 
 const links = [
@@ -17,7 +18,7 @@ const links = [
 ];
 
 /** Main call to action in the nav. */
-const primaryCta = { href: "/contact?intent=audit", label: "Get your $800 audit" };
+const primaryCta = { href: "/contact?intent=audit", label: `Get your ${AUDIT_PRICE} audit` };
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);

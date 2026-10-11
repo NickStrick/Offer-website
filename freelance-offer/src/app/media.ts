@@ -68,10 +68,16 @@ export const caseStudyImages = {
     alt: "Expocad trade show platform event dashboard",
     published: true,
   },
-  cmFlorals: {
+  copperFox: {
     src: "/case-studies/CMF.png",
-    alt: "CM Florals online store homepage",
+    alt: "Copper Fox Collective online flower shop homepage",
     published: true,
+  },
+  chellesCrafts: {
+    src: "/case-studies/chelles-crafts.png",
+    alt: "Chelle's Fiber Crafts online store homepage",
+    // Flip to true once the screenshot is in public/case-studies
+    published: false,
   },
   grandWood: {
     src: "/case-studies/Grand.png",
