@@ -77,7 +77,13 @@ export default function EmbeddedCheckoutPanel({ productId }: { productId: string
 
         const stripe = window.Stripe(publishableKey, { betas: ["custom_checkout_payment_form_1"] });
         const checkout = stripe.initCheckoutFormSdk({ clientSecret, appearance });
-        const form = checkout.createForm({ layout: "expanded" });
+        const form = checkout.createForm({
+          layout: "expanded",
+          // One-tap buttons at the top: Apple Pay and Google Pay only. Apple Pay still only appears on Apple devices.
+          expressCheckout: {
+            paymentMethods: { applePay: "always", googlePay: "always", amazonPay: "never", link: "never", paypal: "never", klarna: "never" },
+          },
+        });
         form.mount(containerRef.current);
         unmount = () => form.destroy();
 
