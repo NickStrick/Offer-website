@@ -7,7 +7,7 @@ import { faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 import Logo from "../../../public/SDLogoTrans.png";
 import { useLanguage } from "../context/LanguageContext";
-import { AUDIT_PRICE, CONTACT_EMAIL, journeyCopy } from "../offers/copy";
+import { AUDIT_CHECKOUT_PATH, AUDIT_PRICE, CONTACT_EMAIL, journeyCopy } from "../offers/copy";
 
 const YOUTUBE_URL = journeyCopy.youtubeUrl;
 
@@ -38,7 +38,7 @@ export default function Footer() {
       links: [
         { href: "/audits#audit", label: `Revenue Leak Audit (${AUDIT_PRICE})` },
         { href: "/audits#fixes", label: "Done-for-you fixes" },
-        { href: "/contact?intent=audit", label: "Get your audit" },
+        { href: AUDIT_CHECKOUT_PATH, label: "Get your audit" },
       ],
     },
     {

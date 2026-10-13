@@ -71,6 +71,8 @@ export type ServiceOffer = {
   features: readonly { title: string; text: string }[];
   guarantee?: { title: string; body: string };
   ctaText: string;
+  /** When set, the main button goes straight to checkout and the pop-up becomes a "questions first" link. */
+  checkoutHref?: string;
   /** Opens the application pop-up for this intent. */
   intent: "audit" | "fixes";
   modal: { title: string; description: string };
@@ -110,6 +112,9 @@ export const CONSENT_TEXT =
   "By providing your information today, you are giving consent for us to contact you by mail, phone, text, or email. We do not sell your personal information, and you can withdraw consent at any time.";
 
 /** Contact links with the intent dropdown preselected. */
+/** On-site Stripe checkout for the audit (see offers/products.ts). */
+export const AUDIT_CHECKOUT_PATH = "/checkout/audit";
+
 export const contactHref = {
   audit: "/contact?intent=audit",
   fixes: "/contact?intent=fixes",
@@ -183,6 +188,7 @@ export const auditOffer: ServiceOffer = {
     body: "If your problems aren't crystal clear within 24 hours of delivery, you get a full refund. No questions asked.",
   },
   ctaText: "Get your audit",
+  checkoutHref: AUDIT_CHECKOUT_PATH,
   intent: "audit",
   modal: {
     title: `Get your ${AUDIT_PRICE} Revenue Leak Audit`,
@@ -441,7 +447,7 @@ export const offersCopy = {
     middle: {
       id: "apply",
       ctaText: `Get your ${AUDIT_PRICE} audit`,
-      ctaHref: contactHref.audit,
+      ctaHref: AUDIT_CHECKOUT_PATH,
       title: "Ready to find your leaks?",
       subtitle: "In 48 hours you'll know what's costing you sales, and what to fix first. One fixed price.",
       secondaryText: "Get the free checklist",
@@ -450,7 +456,7 @@ export const offersCopy = {
     },
     bottom: {
       ctaText: `Get your ${AUDIT_PRICE} audit`,
-      ctaHref: contactHref.audit,
+      ctaHref: AUDIT_CHECKOUT_PATH,
       title: "More buyers are one fix away.",
       subtitle: "Find the leaks, get them fixed, and watch more visitors turn into customers.",
       secondaryText: "Get a fixed quote",

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -108,14 +109,30 @@ function ServiceCard({
       ) : null}
 
       <div className="mt-auto">
-        <button
-          type="button"
-          onClick={() => onRequest(offer)}
-          className={`${featured ? "btn-gradient" : "btn-inverted"} mt-8 w-full gap-2`}
-        >
-          {offer.ctaText}
-          <FontAwesomeIcon icon={faArrowRight} className="text-sm" aria-hidden />
-        </button>
+        {offer.checkoutHref ? (
+          <>
+            <Link href={offer.checkoutHref} className={`${featured ? "btn-gradient" : "btn-inverted"} mt-8 w-full gap-2`}>
+              {offer.ctaText}
+              <FontAwesomeIcon icon={faArrowRight} className="text-sm" aria-hidden />
+            </Link>
+            <button
+              type="button"
+              onClick={() => onRequest(offer)}
+              className="mt-3 w-full text-center text-sm text-ink-muted underline-offset-4 transition hover:text-white hover:underline"
+            >
+              Questions first? Send me a message
+            </button>
+          </>
+        ) : (
+          <button
+            type="button"
+            onClick={() => onRequest(offer)}
+            className={`${featured ? "btn-gradient" : "btn-inverted"} mt-8 w-full gap-2`}
+          >
+            {offer.ctaText}
+            <FontAwesomeIcon icon={faArrowRight} className="text-sm" aria-hidden />
+          </button>
+        )}
       </div>
     </motion.div>
   );
