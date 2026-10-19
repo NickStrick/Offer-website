@@ -6,7 +6,8 @@ import { faArrowRight, faCalendarCheck, faChevronDown, faCircleCheck } from "@fo
 
 import { CONTACT_EMAIL, contactCopy } from "../offers/copy";
 import BookCallButton from "./BookCallModal";
-import { submitLead } from "../lib/leads";
+import { botGuardFrom, submitLead } from "../lib/leads";
+import BotGuardFields from "./BotGuardFields";
 
 export type IntentValue = (typeof contactCopy.intents)[number]["value"];
 
@@ -75,7 +76,7 @@ export default function IntakeForm({
   const isEmailValid = /[^\s@]+@[^\s@]+\.[^\s@]+/.test(values.email.trim());
   const isDisabled = loading || !values.firstName.trim() || !isEmailValid || !values.intent;
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (isDisabled) return;
 
@@ -94,6 +95,7 @@ export default function IntakeForm({
       email: values.email,
       website: values.company,
       context,
+      ...botGuardFrom(e.currentTarget),
     });
     setLoading(false);
     if (saved) setSent(true);
@@ -129,7 +131,7 @@ export default function IntakeForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`${framed ? "surface-card p-7 md:p-10" : ""} space-y-4`}>
+    <form onSubmit={handleSubmit} className={`${framed ? "surface-card p-7 md:p-10" : ""} relative space-y-4`}>
       <div className={`relative ${lockIntent ? "hidden" : ""}`}>
         <label htmlFor="intent" className="mb-2 block text-sm font-medium text-ink-muted">
           I&apos;d like to
@@ -179,6 +181,7 @@ export default function IntakeForm({
         {loading ? null : <FontAwesomeIcon icon={faArrowRight} className="text-sm" aria-hidden />}
       </button>
       <p className="text-center text-xs leading-relaxed text-ink-subtle">{contactCopy.consent}</p>
+      <BotGuardFields />
     </form>
   );
 }

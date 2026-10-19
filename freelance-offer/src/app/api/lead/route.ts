@@ -142,6 +142,53 @@ async function subscribeToBeehiiv(email: string, tag: string): Promise<boolean> 
   }
 }
 
+/**
+ * Silent bot protection. Anything that trips these gets a fake { ok: true } so bots think they
+ * got through, and nothing is forwarded to Google Forms or beehiiv.
+ */
+
+/** Hidden "honeypot" keys a real visitor never fills in. ("website" is a real field, so it isn't one of these.) */
+const HONEYPOT_KEYS = ["hp_field", "website_hp"] as const;
+
+/** Submissions faster than this after the form rendered (body._ts, ms since epoch) are bots. */
+const MIN_FILL_MS = 1500;
+
+/**
+ * Canonical form of an email for spam checks: lower-cased, "+alias" removed, and for Gmail the dots
+ * removed too (Gmail ignores them), so "U.w.Ani+x@gmail.com" and "uwani@gmail.com" match.
+ */
+function canonicalEmail(email: string): string {
+  const [rawLocal, rawDomain = ""] = email.toLowerCase().split("@");
+  const domain = rawDomain === "googlemail.com" ? "gmail.com" : rawDomain;
+  let local = rawLocal.split("+")[0];
+  if (domain === "gmail.com") local = local.replace(/\./g, "");
+  return `${local}@${domain}`;
+}
+
+/**
+ * The Gmail "dot trick" (u.w.ani.saj.u.w1.9.9@gmail.com) lets one inbox look like thousands of addresses.
+ * Flags more than 3 dots, or a dot-heavy local part (2+ dots and over 25% dots). A single dot, like
+ * "jane.doe" or "a.b", is always fine.
+ */
+function hasDotSpam(email: string): boolean {
+  const local = email.toLowerCase().split("@")[0].split("+")[0];
+  const dots = (local.match(/\./g) ?? []).length;
+  return dots > 3 || (dots >= 2 && dots / local.length > 0.25);
+}
+
+/** Why a submission looks automated, or null if it looks human. */
+function botReason(body: Record<string, unknown>, email: string): string | null {
+  if (HONEYPOT_KEYS.some((key) => typeof body[key] === "string" && (body[key] as string).trim() !== "")) {
+    return "honeypot";
+  }
+  const renderedAt = Number(body._ts);
+  if (body._ts !== undefined && Number.isFinite(renderedAt) && Date.now() - renderedAt < MIN_FILL_MS) {
+    return "too fast";
+  }
+  if (hasDotSpam(email)) return "dotted email";
+  return null;
+}
+
 export async function POST(request: Request) {
   let body: Record<string, unknown>;
   try {
@@ -156,6 +203,12 @@ export async function POST(request: Request) {
 
   if (!lead.intent || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) {
     return NextResponse.json({ ok: false, error: "Missing intent or valid email" }, { status: 400 });
+  }
+
+  const blocked = botReason(body, lead.email);
+  if (blocked) {
+    console.warn("Lead dropped as likely bot:", blocked, canonicalEmail(lead.email));
+    return NextResponse.json({ ok: true });
   }
 
   // Book waitlist signups go to the Waitlist form and beehiiv; everything else to the Messages form.

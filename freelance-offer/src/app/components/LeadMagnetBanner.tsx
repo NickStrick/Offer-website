@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCheck, faChalkboard, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 import { checklistCopy } from "../offers/copy";
-import { submitLead } from "../lib/leads";
+import { botGuardFrom, submitLead } from "../lib/leads";
+import BotGuardFields from "./BotGuardFields";
 
 /** Email capture for the free checklist. Saves the lead, then sends them to the checklist page. */
 export function ChecklistForm() {
@@ -15,18 +16,18 @@ export function ChecklistForm() {
   const [loading, setLoading] = useState(false);
   const isValid = /[^\s@]+@[^\s@]+\.[^\s@]+/.test(email.trim());
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!isValid || loading) return;
     setLoading(true);
-    const saved = await submitLead({ intent: checklistCopy.sourceValue, email });
+    const saved = await submitLead({ intent: checklistCopy.sourceValue, email, ...botGuardFrom(e.currentTarget) });
     // Never block the visitor from the resource if the lead save fails.
     if (!saved) console.error("Checklist signup could not be saved");
     router.push(checklistCopy.resourcePath);
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+    <form onSubmit={handleSubmit} className="relative flex flex-col gap-3">
       <input
         type="email"
         required
@@ -40,6 +41,7 @@ export function ChecklistForm() {
         {loading ? checklistCopy.loadingText : checklistCopy.ctaText}
         {loading ? null : <FontAwesomeIcon icon={faArrowRight} className="text-sm" aria-hidden />}
       </button>
+      <BotGuardFields />
     </form>
   );
 }

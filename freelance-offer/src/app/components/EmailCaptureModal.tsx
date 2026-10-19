@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 import { CONSENT_TEXT } from "../offers/copy";
-import { submitLead } from "../lib/leads";
+import { botGuardFrom, submitLead } from "../lib/leads";
+import BotGuardFields from "./BotGuardFields";
 
 const inputClass =
   "mt-1 w-full rounded-xl border border-zinc-300 p-2 pt-4 pb-4 text-black focus:border-green-500 focus:outline-none shadow-md";
@@ -50,12 +51,12 @@ export default function EmailCaptureModal({
 
   const isDisabled = loading || !/[^\s@]+@[^\s@]+\.[^\s@]+/.test(email.trim());
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (isDisabled) return;
     setLoading(true);
     setError(null);
-    const saved = await submitLead({ intent: listName, firstName, email });
+    const saved = await submitLead({ intent: listName, firstName, email, ...botGuardFrom(e.currentTarget) });
     setLoading(false);
     if (saved) setSent(true);
     else setError("Something went wrong. Please try again.");
@@ -102,7 +103,7 @@ export default function EmailCaptureModal({
                   {heading ?? copy.title}
                 </h4>
                 <p className="mt-2 text-center text-gray-600">{copy.description}</p>
-                <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+                <form onSubmit={handleSubmit} className="relative mt-5 space-y-4">
                   <input
                     type="text"
                     aria-label={copy.placeholders.firstName}
@@ -124,6 +125,7 @@ export default function EmailCaptureModal({
                     {loading ? copy.submit.loading : copy.submit.idle}
                   </button>
                   <p className="text-center text-xs text-gray-500">{CONSENT_TEXT}</p>
+                  <BotGuardFields />
                 </form>
               </>
             )}
