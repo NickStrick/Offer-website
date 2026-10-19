@@ -151,7 +151,7 @@ async function subscribeToBeehiiv(email: string, tag: string): Promise<boolean> 
 const HONEYPOT_KEYS = ["hp_field", "website_hp"] as const;
 
 /** Submissions faster than this after the form rendered (body._ts, ms since epoch) are bots. */
-const MIN_FILL_MS = 3000;
+const MIN_FILL_MS = 1500;
 
 /**
  * Canonical form of an email for spam checks: lower-cased, "+alias" removed, and for Gmail the dots
