@@ -26,7 +26,7 @@ export default function Footer() {
       title: es ? 'Sitio' : 'Company',
       links: [
         { href: "/", label: es ? 'Inicio' : 'Home' },
-        { href: "/audits", label: es ? 'Auditorías' : 'Audits' },
+        { href: "/audits", label: es ? 'Servicios' : 'Services' },
         { href: "/journey", label: es ? 'Sígueme' : 'Journey' },
         { href: "/library", label: es ? 'Biblioteca' : 'Library' },
         { href: "/contact", label: es ? 'Contacto' : 'Contact' },
@@ -36,9 +36,10 @@ export default function Footer() {
     {
       title: es ? 'Servicios' : 'Services',
       links: [
-        { href: "/audits#audit", label: `Revenue Leak Audit (${AUDIT_PRICE})` },
-        { href: "/audits#fixes", label: "Done-for-you fixes" },
-        { href: AUDIT_CHECKOUT_PATH, label: "Get your audit" },
+        { href: "/audits#audit", label: `48-Hour Blueprint (${AUDIT_PRICE})` },
+        { href: "/audits#fractional", label: "Fractional Solutions Architect" },
+        { href: "/audits#fixes", label: "Systems Refactor" },
+        { href: AUDIT_CHECKOUT_PATH, label: "Get your Blueprint" },
       ],
     },
     {
@@ -61,7 +62,7 @@ export default function Footer() {
             Stricker Digital
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-muted">
-            Revenue Leak Audits and done-for-you fixes that turn more of your visitors into buyers.
+            Simple systems, clear demos, and more sales for software companies and online stores.
           </p>
           <div className="mt-6 flex gap-2">
             {socials.map((s) => (

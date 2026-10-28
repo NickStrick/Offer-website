@@ -21,7 +21,7 @@ import IconTile from "../../components/IconTile";
 import SectionHeader from "../../components/SectionHeader";
 import { VideoPlayer } from "../../components/Video";
 import { isMediaReady, videos } from "../../media";
-import { auditOffer, checklistCopy, fixOffer } from "../../offers/copy";
+import { auditOffer, checklistCopy, fixOffer, fractionalOffer } from "../../offers/copy";
 
 // Reached after the email signup; keep it out of search results.
 export const metadata: Metadata = {
@@ -141,16 +141,16 @@ export default function EnterpriseChecklistPage() {
           <SectionHeader
             eyebrow="Next steps"
             title="Found leaks? Let's fix them."
-            subtitle="Get a full audit of your store or app, or have the fixes done for you."
+            subtitle="Get your whole system mapped in a Blueprint, keep me on your team, or have the fixes done for you."
           />
-          <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-2">
-            {[auditOffer, fixOffer].map((offer, i) => (
+          <div className="mx-auto grid max-w-5xl gap-5 md:grid-cols-3">
+            {[auditOffer, fractionalOffer, fixOffer].map((offer, i) => (
               <Link
                 key={offer.id}
                 href={`/audits#${offer.id}`}
                 className={`surface-card surface-card-hover group flex flex-col p-7 ${i === 0 ? "!border-green-500/50" : ""}`}
               >
-                <div className="eyebrow">{offer.eyebrow}</div>
+                <div className="eyebrow">{offer.title}</div>
                 <h3 className="mt-2 text-lg font-semibold">{offer.headline}</h3>
                 <div className="mt-2 text-sm text-ink-muted">
                   {offer.price ? `${offer.price} / ${offer.priceNote}` : offer.priceNote}

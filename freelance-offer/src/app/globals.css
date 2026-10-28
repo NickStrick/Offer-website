@@ -646,6 +646,35 @@ paint-order: stroke fill;
   .bg-page { background-color: var(--page); }
   .bg-surface { background-color: var(--surface); }
   .border-line { border-color: var(--line); }
+  /* Whiteboard card: a slightly uneven hand-drawn border with an offset "second stroke" */
+  .sketch-card {
+    position: relative;
+    background: var(--card);
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
+    border-radius: 18px 14px 20px 12px / 12px 20px 14px 18px;
+  }
+  .sketch-card::after {
+    content: "";
+    position: absolute;
+    inset: 5px -5px -5px 5px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px 20px 12px 18px / 18px 12px 20px 14px;
+    pointer-events: none;
+    z-index: -1;
+  }
+  /* Handwritten margin note */
+  .hand-note {
+    font-family: var(--font-hand), cursive;
+    @apply text-2xl leading-tight text-amber-300;
+  }
+  /* Brush-stroke underline for one key word in a headline */
+  .ink-underline {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M3 14 C 60 6, 120 4, 180 8 S 270 12, 297 6' stroke='%2322c55e' stroke-width='6' fill='none' stroke-linecap='round' opacity='0.85'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 0.32em;
+    padding-bottom: 0.08em;
+  }
   /* Faint engineering grid, faded at the edges */
   .grid-backdrop {
     background-image:

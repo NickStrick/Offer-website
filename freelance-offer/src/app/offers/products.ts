@@ -35,14 +35,14 @@ export const products = {
   audit: {
     id: "audit",
     provider: "stripe",
-    name: "Revenue Leak Audit",
-    description: "Find out exactly why visitors leave without buying. Delivered within 48 hours of kickoff.",
+    name: "48-Hour Blueprint",
+    description: "Your whole app or store on one page, with a fix list ranked by money. Delivered within 48 hours of kickoff.",
     price: AUDIT_PRICE,
     includes: auditOffer.features.map((f) => `${f.title}, ${f.text}`),
     guarantee: auditOffer.guarantee,
     success: {
       title: "You're in! Let's book your kickoff.",
-      subtitle: "Payment received. Pick a time for your kickoff call, and your audit starts there.",
+      subtitle: "Payment received. Pick a time for your kickoff call, and your Blueprint starts there.",
       steps: [
         "Book your kickoff call below. It takes 30 seconds.",
         ...welcomePages["architecture-audit"].steps.filter((step) => !/^Watch\b/.test(step)),

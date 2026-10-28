@@ -1,6 +1,6 @@
 /** A lead as sent from any site form to /api/lead (which forwards it to the Google Form). */
 export type Lead = {
-  /** Which form or offer this came from, e.g. "Get a Revenue Leak Audit". */
+  /** Which form or offer this came from, e.g. "Get a 48-Hour Blueprint". */
   intent: string;
   email: string;
   firstName?: string;

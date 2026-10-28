@@ -11,14 +11,14 @@ import Logo from "../../../public/SDLogoTrans.png";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/audits", label: "Audits" },
+  { href: "/audits", label: "Services" },
   { href: "/journey", label: "Journey" },
   { href: "/library", label: "Library" },
   { href: "/contact", label: "Contact" },
 ];
 
 /** Main call to action in the nav. */
-const primaryCta = { href: AUDIT_CHECKOUT_PATH, label: `Get your ${AUDIT_PRICE} audit` };
+const primaryCta = { href: AUDIT_CHECKOUT_PATH, label: `Get your ${AUDIT_PRICE} Blueprint` };
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);

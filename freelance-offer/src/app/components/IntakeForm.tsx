@@ -17,8 +17,8 @@ const tierToIntent: Record<string, IntentValue> = {
   "enterprise-audit": "audit",
   "micro-audit": "audit",
   "50k": "fixes",
-  retainer: "fixes",
-  "enterprise-retainer": "fixes",
+  retainer: "fractional",
+  "enterprise-retainer": "fractional",
   sprint: "mentoring",
   cohort: "mentoring",
   masterclass: "mentoring",
@@ -72,7 +72,7 @@ export default function IntakeForm({
 
   const isMentoring = values.intent === "mentoring";
   // Service requests get a "Book a call" button on the thank-you screen.
-  const isService = values.intent === "audit" || values.intent === "fixes";
+  const isService = values.intent === "audit" || values.intent === "fixes" || values.intent === "fractional";
   const isEmailValid = /[^\s@]+@[^\s@]+\.[^\s@]+/.test(values.email.trim());
   const isDisabled = loading || !values.firstName.trim() || !isEmailValid || !values.intent;
 

@@ -73,8 +73,10 @@ export type ServiceOffer = {
   ctaText: string;
   /** When set, the main button goes straight to checkout and the pop-up becomes a "questions first" link. */
   checkoutHref?: string;
+  /** When true, the main button opens the Calendly booking pop-up instead. */
+  bookCall?: boolean;
   /** Opens the application pop-up for this intent. */
-  intent: "audit" | "fixes";
+  intent: "audit" | "fixes" | "fractional";
   modal: { title: string; description: string };
 };
 
@@ -117,6 +119,7 @@ export const AUDIT_CHECKOUT_PATH = "/checkout/audit";
 
 export const contactHref = {
   audit: "/contact?intent=audit",
+  fractional: "/contact?intent=fractional",
   fixes: "/contact?intent=fixes",
   mentoring: "/contact?intent=mentoring",
   newsletter: "/contact?intent=newsletter",
@@ -166,45 +169,69 @@ export const checklistCopy = {
   consent: CONSENT_TEXT,
 };
 
-/** The paid audit: the main service. */
+/** Tier 1, the paid entry offer: the 48-Hour Blueprint (id stays "audit" so links and checkout keep working). */
 export const auditOffer: ServiceOffer = {
   id: "audit",
-  eyebrow: "Revenue Leak Audit",
-  title: "Revenue Leak Audit",
-  headline: "Find out exactly why visitors leave without buying.",
-  subtitle: "In 48 hours you'll know what's costing you sales, and exactly what to fix first.",
+  eyebrow: "Start here",
+  title: "48-Hour Blueprint",
+  headline: "See your whole system on one page.",
+  subtitle: "In 48 hours you'll see what's slowing you down, what's costing you sales, and exactly what to fix first.",
   price: AUDIT_PRICE,
   regularPrice: AUDIT_PRICE !== AUDIT_REGULAR_PRICE ? AUDIT_REGULAR_PRICE : undefined,
   priceBadge: AUDIT_PRICE !== AUDIT_REGULAR_PRICE ? AUDIT_FOUNDING_NOTE : undefined,
   priceNote: "one fixed price, no surprise bills",
   features: [
-    { title: "A clear picture of your store or app", text: "with every trouble spot circled" },
-    { title: "Your fix list, ranked by money", text: "so you tackle what grows sales first" },
-    { title: "Speed, checkout, and security checked", text: "the three places buyers drop off most" },
-    { title: "A 30-minute call", text: "where we walk through everything together and answer your questions" },
+    { title: "A hand-drawn map of your app or store", text: "made in Excalidraw, with every trouble spot circled" },
+    { title: "Speed, checkout, and setup checked", text: "including the parts that are built too big" },
+    { title: "Your demo and sales flow reviewed", text: "so buyers understand you faster" },
+    { title: "Your fix list, ranked by money", text: "plus a 30-minute call to walk through it together" },
   ],
   guarantee: {
     title: "Clear answers, or your money back",
     body: "If your problems aren't crystal clear within 24 hours of delivery, you get a full refund. No questions asked.",
   },
-  ctaText: "Get your audit",
+  ctaText: "Get your Blueprint",
   checkoutHref: AUDIT_CHECKOUT_PATH,
   intent: "audit",
   modal: {
-    title: `Get your ${AUDIT_PRICE} Revenue Leak Audit`,
+    title: `Get your ${AUDIT_PRICE} Blueprint`,
     description: "Tell me about your store or app, and I'll reply soon with next steps and a time for your kickoff.",
   },
 };
 
-/** Done-for-you fixes: the follow-on service after an audit. */
+/** Tier 2: ongoing part-time architect + pre-sales partner. Booked through a call. */
+export const fractionalOffer: ServiceOffer = {
+  id: "fractional",
+  eyebrow: "Ongoing partner",
+  title: "Fractional Solutions Architect",
+  headline: "A part-time architect who can also sell.",
+  subtitle:
+    "I join your team a few hours a week. I help your engineers build the simple version, and help your sales team explain it so buyers say yes.",
+  price: "From $5k",
+  priceNote: "per month",
+  features: [
+    { title: "Weekly calls with your team", text: "to plan what to build and what to skip" },
+    { title: "I join big demos and sales calls", text: "and turn tech talk into buyer words" },
+    { title: "Your system stays on one map", text: "updated as you grow" },
+  ],
+  ctaText: "Book a call",
+  bookCall: true,
+  intent: "fractional",
+  modal: {
+    title: "Talk about a Fractional Solutions Architect",
+    description: "Tell me about your team and what's getting stuck. I'll reply with a time to talk.",
+  },
+};
+
+/** Tier 3: the build. Fixed quote, usually after a Blueprint. (id stays "fixes" for existing links.) */
 export const fixOffer: ServiceOffer = {
   id: "fixes",
-  eyebrow: "Done-for-you fixes",
-  title: "Done-for-you fixes",
+  eyebrow: "Done for you",
+  title: "Systems Refactor",
   headline: "Want it fixed for you?",
   subtitle:
-    "Skip the to-do list. Get a fixed quote and have every fix built, tested, and shipped, so you can get back to running your business.",
-  priceNote: "fixed quote after your audit",
+    "Skip the to-do list. I build, test, and ship the fixes from your Blueprint, from a faster checkout to a full rebuild on Next.js and AWS.",
+  priceNote: "fixed quote · big rebuilds from $10k",
   features: [
     { title: "One fixed price", text: "agreed before any work starts" },
     { title: "Built, tested, and shipped", text: "by a senior full-stack engineer" },
@@ -214,7 +241,7 @@ export const fixOffer: ServiceOffer = {
   intent: "fixes",
   modal: {
     title: "Get a fixed quote",
-    description: "Share your store or app and what you'd like fixed. If you've had an audit, mention it and I'll quote from your fix list.",
+    description: "Share your store or app and what you'd like fixed. If you've had a Blueprint, mention it and I'll quote from your fix list.",
   },
 };
 
@@ -255,8 +282,9 @@ export const mentoringCopy = {
 /** Short "Meet Nick" strip on the homepage. */
 export const meetNickCopy = {
   name: "Hi, I'm Nick!",
+  tagline: "The Shifu Builder",
   body:
-    "I've spent 6 years building and fixing online stores and apps, and I love helping businesses turn more visitors into buyers. I'm also learning to sell and speak, and I share every lesson on YouTube as I go. Soon I'll turn what works into classes for developers moving into sales engineering.",
+    "I'm a full-stack engineer who learned to sell. 6 years of building apps and stores, 2,500 cold calls, and live demos for big companies. I make tech simple, so it's easy to build and easy to buy. I share every lesson on YouTube as I go.",
 };
 
 export const caseStudiesHeader = {
@@ -401,7 +429,7 @@ export const moreWork: readonly MoreWorkItem[] = [
 export const proofMetrics = [
   { value: "30%", label: "more shoppers finished checkout" },
   { value: "22%", label: "fewer \"this is broken\" tickets" },
-  { value: "48 hrs", label: "from kickoff to your finished audit" },
+  { value: "48 hrs", label: "from kickoff to your finished Blueprint" },
 ];
 
 export type WelcomePageCopy = {
@@ -416,15 +444,15 @@ export type WelcomePageCopy = {
 /** Post-signup pages at /welcome/[offer]. Point Calendly / checkout redirects here. */
 export const welcomePages: Record<"architecture-audit", WelcomePageCopy> = {
   "architecture-audit": {
-    eyebrow: "Revenue Leak Audit",
-    title: "Your audit kickoff is booked!",
+    eyebrow: "48-Hour Blueprint",
+    title: "Your Blueprint kickoff is booked!",
     subtitle: "A few quick things to have ready so we get the most out of it.",
     video: videos.welcomeAudit,
     steps: [
       "Watch the short prep video above.",
       "Write down the pages that matter most (product pages, cart, checkout, signup) and anywhere you think buyers drop off.",
       "Have your analytics and a way for me to see your store or app (a staging link or a read-only login) ready to share.",
-      "Your map, ranked fix list, and walkthrough call land within 48 hours of kickoff.",
+      "Your hand-drawn map, ranked fix list, and walkthrough call land within 48 hours of kickoff.",
     ],
     nextCta: { text: "See the done-for-you fixes", href: "/audits#fixes" },
   },
@@ -433,12 +461,12 @@ export const welcomePages: Record<"architecture-audit", WelcomePageCopy> = {
 /** Copy for the /audits page. */
 export const offersCopy = {
   headline: {
-    eyebrow: "Revenue Leak Audit",
-    headlineText: "More sales from the visitors you already have.",
+    eyebrow: "Blueprint · Fractional Architect · Refactor",
+    headlineText: "Draw it. Simplify it. Sell it.",
     subheadlineText:
-      "Your store or app might be quietly losing buyers to slow pages and clunky checkouts. Let's find the leaks, fix them, and turn more of your visitors into paying customers.",
+      "Your app or store is probably more tangled than it needs to be, and that's costing you speed and sales. Let's map it on one page, cut what you don't need, and make it easy to buy.",
     ctas: [
-      { label: `Get your ${AUDIT_PRICE} audit`, href: "#audit" },
+      { label: `Get your ${AUDIT_PRICE} Blueprint`, href: "#audit" },
       { label: "See what's included", href: "#framework", variant: "inverted" as const },
     ],
   },
@@ -446,19 +474,19 @@ export const offersCopy = {
   ctaBanners: {
     middle: {
       id: "apply",
-      ctaText: `Get your ${AUDIT_PRICE} audit`,
+      ctaText: `Get your ${AUDIT_PRICE} Blueprint`,
       ctaHref: AUDIT_CHECKOUT_PATH,
-      title: "Ready to find your leaks?",
-      subtitle: "In 48 hours you'll know what's costing you sales, and what to fix first. One fixed price.",
+      title: "Ready to see it all on one page?",
+      subtitle: "In 48 hours you'll know what's slowing you down, what's costing you sales, and what to fix first. One fixed price.",
       secondaryText: "Get the free checklist",
       secondaryHref: "#free-checklist",
       className: "bg-page",
     },
     bottom: {
-      ctaText: `Get your ${AUDIT_PRICE} audit`,
+      ctaText: `Get your ${AUDIT_PRICE} Blueprint`,
       ctaHref: AUDIT_CHECKOUT_PATH,
-      title: "More buyers are one fix away.",
-      subtitle: "Find the leaks, get them fixed, and watch more visitors turn into customers.",
+      title: "Simple wins. Let's find yours.",
+      subtitle: "Draw it out, cut the extra, and watch more visitors turn into customers.",
       secondaryText: "Get a fixed quote",
       secondaryHref: contactHref.fixes,
       className: "bg-page",
@@ -467,8 +495,8 @@ export const offersCopy = {
 
   framework: {
     id: "framework",
-    title: "What your audit checks",
-    subtitle: "A deep look at how your store or app really works, not just how it looks.",
+    title: "What your Blueprint checks",
+    subtitle: "A deep look at how your app or store really works, not just how it looks.",
     items: [
       {
         icon: faStopwatch,
@@ -478,13 +506,15 @@ export const offersCopy = {
       },
       {
         icon: faRoute,
-        title: "Checkout check",
-        description: "Long forms scare people off. You get a plan to turn them into short, easy steps so more people finish.",
+        title: "Buyer path check",
+        description:
+          "Long checkouts, confusing signups, and demos full of tech talk all scare buyers off. You get a plan to make each step short and clear.",
       },
       {
         icon: faUserShield,
-        title: "Safety check",
-        description: "Make sure logins and payments are locked down, so customers trust your store and you sleep well at night.",
+        title: "Setup check",
+        description:
+          "I look for the parts that are built too big, cost too much, or aren't locked down, and show you the simpler, safer way.",
       },
     ] satisfies OffersFrameworkItem[],
   },
@@ -493,11 +523,11 @@ export const offersCopy = {
     title: "Who this is for",
     intro: "This is for you if…",
     bullets: [
-      "You run an online store or software business and want more sales",
-      "Visitors come to your site, but too few of them buy",
-      "Your pages feel slow, or your checkout feels clunky",
+      "You run a growing software company, and building new things keeps getting slower",
+      "Your demos make sense to engineers, but buyers go quiet",
+      "You run an online store, and shoppers leave at checkout or on slow pages",
+      "Nobody on your team can draw how all the pieces fit together",
       "You want clear answers and one fixed price, not surprise hourly bills",
-      "You'd love an expert to just fix it for you",
     ],
   },
 
@@ -508,7 +538,8 @@ export const offersCopy = {
         title: "Who I Am",
         bodyLines: [
           "I’ve always loved two things: building tech and helping people. I started out making video games. Then I taught engineers how to work through tricky code. At Expocad, I ran live software demos for big companies at national trade shows.",
-          "Now I run Stricker Digital. I help online businesses find what’s costing them sales and fix it, and I share what I learn about communication on YouTube.",
+          "Then I made 2,500 cold calls for my own business. That’s where I learned to stay calm, listen, and explain tech in plain words.",
+          "Now I run Stricker Digital as The Shifu Builder. I practice three things every day: simple systems, calm communication, and daily reps. I help software companies and online stores get simple, fast, and easy to buy, and I share every lesson on YouTube.",
         ],
       },
       right: {
@@ -584,22 +615,22 @@ export const offersCopy = {
     title: "Frequently asked questions",
     items: [
       {
-        question: `What do I get with the ${AUDIT_PRICE} audit?`,
+        question: `What do I get with the ${AUDIT_PRICE} Blueprint?`,
         answer:
-          "A clear picture of your store or app with the trouble spots circled, a fix list ranked by what grows sales first, and a 30-minute call to walk through it all together. Speed, checkout, and security are all checked.",
+          "A hand-drawn map of your app or store with every trouble spot circled, a fix list ranked by what grows sales first, and a 30-minute call to walk through it all together. Speed, checkout, setup, and your sales flow are all checked.",
       },
       // Only asked while the founding price is on
       ...(AUDIT_PRICE !== AUDIT_REGULAR_PRICE
         ? [
             {
-              question: `Why is the audit ${AUDIT_PRICE} right now?`,
-              answer: `It's a founding price for my first 10 audit clients. You get the full audit for less, and I get to grow my list of happy customers. Once those 10 spots are filled, the price goes back to ${AUDIT_REGULAR_PRICE}.`,
+              question: `Why is the Blueprint ${AUDIT_PRICE} right now?`,
+              answer: `It's a founding price for my first 10 Blueprint clients. You get the full Blueprint for less, and I get to grow my list of happy customers. Once those 10 spots are filled, the price goes back to ${AUDIT_REGULAR_PRICE}.`,
             },
           ]
         : []),
       {
         question: "How fast is it?",
-        answer: "Your audit lands within 48 hours of kickoff, once I can see your store or app.",
+        answer: "Your Blueprint lands within 48 hours of kickoff, once I can see your app or store.",
       },
       {
         question: "What if it doesn't help?",
@@ -609,12 +640,17 @@ export const offersCopy = {
       {
         question: "Can you fix the problems for me?",
         answer:
-          "Yes! After your audit you can get a fixed quote, and I'll build, test, and ship the fixes. You know the price before any work starts.",
+          "Yes! After your Blueprint you can get a fixed quote, and I'll build, test, and ship the fixes. You know the price before any work starts.",
+      },
+      {
+        question: "What's a Fractional Solutions Architect?",
+        answer:
+          "It's me, on your team a few hours a week. I help plan what to build (and what to skip), keep your system simple, and join big demos and sales calls to explain your product in plain words. It starts at $5k a month.",
       },
       {
         question: "What kinds of businesses is this for?",
         answer:
-          "Online stores and software businesses of any size. If you have visitors who aren't buying, there's money to find.",
+          "Growing software companies and online stores. If building feels slow, demos fall flat, or visitors aren't buying, there's money to find.",
       },
       {
         question: "Is the checklist really free?",
@@ -630,11 +666,12 @@ export type OffersCopy = typeof offersCopy;
 /** /contact intake form. */
 export const contactCopy = {
   eyebrow: "Contact",
-  headline: "Let's grow your sales together.",
+  headline: "Let's make it simple.",
   subheadline: "Tell me what you need. I read every message and I'll point you to the best next step.",
   intents: [
-    { value: "audit", label: `Get a ${AUDIT_PRICE} Revenue Leak Audit` },
-    { value: "fixes", label: "Get a fixed quote to fix my store or app" },
+    { value: "audit", label: `Get a ${AUDIT_PRICE} 48-Hour Blueprint` },
+    { value: "fractional", label: "Talk about a Fractional Solutions Architect" },
+    { value: "fixes", label: "Get a fixed quote to fix my app or store" },
     { value: "mentoring", label: "Join the developer-to-sales-engineer class waitlist" },
     { value: "newsletter", label: "Get the weekly notes (videos, lessons, and book updates)" },
     { value: "general", label: "Speaking, or something else" },

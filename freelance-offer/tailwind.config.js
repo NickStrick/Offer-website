@@ -8,6 +8,7 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-geist-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+        hand: ["var(--font-hand)", "cursive"],
       },
       colors: {
         darkish: "#0f0f0f", // optional

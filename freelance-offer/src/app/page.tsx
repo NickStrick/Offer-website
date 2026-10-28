@@ -2,7 +2,10 @@
 import Image from "next/image";
 
 import Footer from "./components/Footer";
-import Headline from "./components/Headline";
+import SplitHero from "./components/SplitHero";
+import AudienceScenarios from "./components/AudienceScenarios";
+import BlueprintFlow from "./components/BlueprintFlow";
+import PillarStories from "./components/PillarStories";
 import Testimonals from "./components/Testimonials";
 import ServiceOffers from "./components/ServiceOffers";
 import CaseStudies from "./components/CaseStudies";
@@ -10,36 +13,31 @@ import ProofMetrics from "./components/ProofMetrics";
 import MeetNick from "./components/MeetNick";
 import JourneySection from "./components/JourneySection";
 import MentoringWaitlist from "./components/MentoringWaitlist";
-import VideoSection from "./components/Video";
 import { videos } from "./media";
 import CtaBanner from "./offers/components/CtaBanner";
-import { AUDIT_PRICE, offersCopy } from "./offers/copy";
+import { offersCopy } from "./offers/copy";
 import Pfp from "../../public/face.jpg";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-page text-white">
-      <Headline
-        eyebrow="Revenue Leak Audits · Done-for-you fixes"
-        headlineText="More sales from the visitors you already have."
-        subheadlineText="Your store or app might be quietly losing buyers to slow pages and clunky checkouts. Let's find the leaks, fix them, and turn more of your visitors into paying customers."
-        ctas={[
-          { label: `Get your ${AUDIT_PRICE} audit`, href: "#audit" },
-          { label: "See what's included", href: "#services", variant: "inverted" },
-        ]}
+      <SplitHero
+        video={videos.intro}
         intro={
           <>
             <Image src={Pfp} alt="" width={36} height={36} className="h-9 w-9 shrink-0 rounded-full object-cover ring-2 ring-green-500/40" />
             <span>
-              Hi, I&apos;m Nick 👋 Senior full-stack engineer, 6 years building and fixing online stores and apps.
+              Hi, I&apos;m Nick 👋 Full-stack engineer, 2,500 cold calls, and live demos for big companies.
             </span>
           </>
         }
       />
-      <VideoSection video={videos.intro} id="intro-video" />
+      <AudienceScenarios />
+      <BlueprintFlow />
       <ServiceOffers />
       <ProofMetrics />
       <CaseStudies />
+      <PillarStories />
       <MeetNick />
       <Testimonals {...{
         type: "testimonials",

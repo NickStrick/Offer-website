@@ -41,7 +41,7 @@ export default function TermsPage() {
           notes newsletter.
         </li>
         <li>
-          <strong>Consulting services</strong>, including the Revenue Leak Audit and done-for-you fixes.
+          <strong>Consulting services</strong>, including the 48-Hour Blueprint (formerly the Revenue Leak Audit), Fractional Solutions Architect retainers, and Systems Refactor projects.
         </li>
         <li>
           <strong>Waitlists</strong> for upcoming classes. Joining a waitlist is free and doesn&apos;t commit you to

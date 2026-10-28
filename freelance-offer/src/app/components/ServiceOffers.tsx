@@ -3,18 +3,29 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import {
   faArrowRight,
+  faCalendarCheck,
   faCheck,
+  faHandshake,
   faMagnifyingGlassChart,
+  faPenRuler,
   faScrewdriverWrench,
   faShieldHalved,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 
 import SectionHeader from "./SectionHeader";
+import BookCallButton from "./BookCallModal";
 import { IntakeModal } from "./IntakeForm";
-import { auditOffer, fixOffer, type ServiceOffer } from "../offers/copy";
+import { auditOffer, fixOffer, fractionalOffer, type ServiceOffer } from "../offers/copy";
+
+const tierIcons: Record<ServiceOffer["intent"], IconDefinition> = {
+  audit: faPenRuler,
+  fractional: faHandshake,
+  fixes: faScrewdriverWrench,
+};
 
 function ServiceCard({
   offer,
@@ -46,7 +57,7 @@ function ServiceCard({
             featured ? "border-green-500/40 bg-green-500/10 text-green-400" : "border-white/10 bg-white/[0.03] text-amber-300"
           }`}
         >
-          <FontAwesomeIcon icon={featured ? faMagnifyingGlassChart : faScrewdriverWrench} aria-hidden />
+          <FontAwesomeIcon icon={tierIcons[offer.intent]} aria-hidden />
         </div>
         <div
           className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.12em] ${
@@ -58,7 +69,8 @@ function ServiceCard({
         </div>
       </div>
 
-      <h3 className="mt-6 text-2xl font-semibold leading-snug">{offer.headline}</h3>
+      <div className="mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-ink-muted">{offer.title}</div>
+      <h3 className="mt-2 text-2xl font-semibold leading-snug">{offer.headline}</h3>
       <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">{offer.subtitle}</p>
 
       {offer.priceBadge ? (
@@ -74,7 +86,7 @@ function ServiceCard({
               {offer.regularPrice}
             </span>
           ) : null}
-          <span className="text-5xl font-semibold text-white" style={{ letterSpacing: "-0.04em" }}>
+          <span className="text-4xl font-semibold text-white xl:text-5xl" style={{ letterSpacing: "-0.04em" }}>
             {offer.price}
           </span>
           {offer.priceNote ? <span className="text-sm text-ink-subtle">/ {offer.priceNote}</span> : null}
@@ -123,6 +135,20 @@ function ServiceCard({
               Questions first? Send me a message
             </button>
           </>
+        ) : offer.bookCall ? (
+          <>
+            <BookCallButton className={`${featured ? "btn-gradient" : "btn-inverted"} mt-8 w-full gap-2`}>
+              <FontAwesomeIcon icon={faCalendarCheck} className="text-sm" aria-hidden />
+              {offer.ctaText}
+            </BookCallButton>
+            <button
+              type="button"
+              onClick={() => onRequest(offer)}
+              className="mt-3 w-full text-center text-sm text-ink-muted underline-offset-4 transition hover:text-white hover:underline"
+            >
+              Rather write first? Send me a message
+            </button>
+          </>
         ) : (
           <button
             type="button"
@@ -138,7 +164,7 @@ function ServiceCard({
   );
 }
 
-/** The two services: the Revenue Leak Audit and done-for-you fixes. */
+/** The three tiers: the 48-Hour Blueprint, the Fractional Solutions Architect, and the Systems Refactor. */
 export default function ServiceOffers({ className = "bg-page" }: { className?: string }) {
   const [requesting, setRequesting] = useState<ServiceOffer | null>(null);
 
@@ -148,13 +174,14 @@ export default function ServiceOffers({ className = "bg-page" }: { className?: s
         <SectionHeader
           eyebrow="How I can help"
           eyebrowIcon={faMagnifyingGlassChart}
-          title="Find the leaks. Fix the leaks. Grow your sales."
-          subtitle="Two simple ways to turn more of your visitors into paying customers."
+          title="Draw it. Simplify it. Sell it."
+          subtitle="Start with a Blueprint. Then keep me on your team, or have me build the fixes for you."
         />
 
-        <div className="mx-auto grid max-w-5xl grid-cols-1 items-stretch gap-8 md:grid-cols-[1.15fr_1fr]">
+        <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-3">
           <ServiceCard offer={auditOffer} featured index={0} onRequest={setRequesting} />
-          <ServiceCard offer={fixOffer} featured={false} index={1} onRequest={setRequesting} />
+          <ServiceCard offer={fractionalOffer} featured={false} index={1} onRequest={setRequesting} />
+          <ServiceCard offer={fixOffer} featured={false} index={2} onRequest={setRequesting} />
         </div>
       </div>
 

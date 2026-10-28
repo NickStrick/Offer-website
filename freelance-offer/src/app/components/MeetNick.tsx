@@ -29,6 +29,7 @@ export default function MeetNick({ className = "bg-page" }: { className?: string
         />
         <div>
           <h2 className="text-2xl font-semibold">{meetNickCopy.name}</h2>
+          <div className="font-hand text-2xl text-amber-300">{meetNickCopy.tagline}</div>
           <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">{meetNickCopy.body}</p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row md:justify-start">
             <a href={journeyCopy.youtubeUrl} target="_blank" rel="noreferrer" className="btn-inverted gap-2 !px-5 !py-2.5 !text-sm">

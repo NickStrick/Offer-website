@@ -21,7 +21,7 @@ export default function Framework({
   return (
     <section id={id} className={`${className} section-pad scroll-mt-16 text-white`}>
       <div className="mx-auto max-w-6xl">
-        <SectionHeader eyebrow="Systems auditing" eyebrowIcon={faMagnifyingGlassChart} title={title} subtitle={subtitle} />
+        <SectionHeader eyebrow="What I look at" eyebrowIcon={faMagnifyingGlassChart} title={title} subtitle={subtitle} />
 
         <div className="grid gap-5 md:grid-cols-3">
           {items.map((item) => (

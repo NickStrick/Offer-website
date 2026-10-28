@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Caveat, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -18,6 +18,13 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+// Handwritten notes for the Excalidraw / whiteboard look.
+const caveat = Caveat({
+  variable: "--font-hand",
+  subsets: ["latin"],
+  weight: ["500", "700"],
+});
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -27,13 +34,13 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.strickerdigital.com"),
   // Pages set their own title; the template appends the brand. The homepage uses the default.
   title: {
-    default: "Stricker Digital | Turn More Visitors Into Buyers",
+    default: "Stricker Digital | Simple Systems. Clear Demos. More Sales.",
     template: "%s | Stricker Digital",
   },
-  description: "Revenue Leak Audits and done-for-you fixes that turn more of your store or app visitors into paying customers.",
+  description: "Nick Stricker, The Shifu Builder: simple systems, clear demos, and more sales for software companies and online stores.",
   openGraph: {
     title: "Stricker Digital",
-    description: "Revenue Leak Audits and done-for-you fixes that turn more of your store or app visitors into paying customers.",
+    description: "Nick Stricker, The Shifu Builder: simple systems, clear demos, and more sales for software companies and online stores.",
     url: "https://www.strickerdigital.com",
     siteName: "Stricker Digital",
     images: [
@@ -50,7 +57,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Stricker Digital",
-    description: "Revenue Leak Audits and done-for-you fixes that turn more of your store or app visitors into paying customers.",
+    description: "Nick Stricker, The Shifu Builder: simple systems, clear demos, and more sales for software companies and online stores.",
     images: ["/SDLogocircle.png"],
   },
 };
@@ -68,7 +75,7 @@ export default function RootLayout({
       </head>
       
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} antialiased`}
       ><LanguageProvider>
         <Navbar />
         <main className="overflow-hidden">{children}</main>

@@ -51,7 +51,7 @@ export const videos = {
   },
   /** /welcome/architecture-audit: set as the Calendly event's after-booking redirect. */
   welcomeAudit: {
-    title: "Welcome! Let’s get your audit ready",
+    title: "Welcome! Let’s get your Blueprint ready",
     src: "",
     published: false,
   },

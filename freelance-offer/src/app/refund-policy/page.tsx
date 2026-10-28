@@ -39,7 +39,7 @@ export default function RefundPolicyPage() {
         there is nothing to refund.
       </p>
 
-      <h2>Revenue Leak Audit ({AUDIT_PRICE})</h2>
+      <h2>48-Hour Blueprint ({AUDIT_PRICE})</h2>
       <h3>Clear Answers, or Your Money Back</h3>
       <p>
         Look over your map and ranked fix list. If your store&apos;s or app&apos;s problems aren&apos;t crystal clear
